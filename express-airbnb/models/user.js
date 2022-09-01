@@ -26,7 +26,12 @@ const userSchema = new mongoose.Schema({
     aboutMe: {
         type: String,
         default: " "
+    },
+    image: {
+        type: String,
+        default: " "
     }
+
 },
 { timestamps: true }
 )
