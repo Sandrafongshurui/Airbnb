@@ -1,6 +1,4 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema;
-
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -17,7 +15,7 @@ const userSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        default: "male"
+        default: "male",        
     },
     password: {
         type: String,
