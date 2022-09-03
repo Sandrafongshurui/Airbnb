@@ -1,0 +1,47 @@
+{
+    "name": "Apt Linda Vista Lagoa - Rio",
+    "description": "Quarto com vista para a Lagoa Rodrigo de Freitas, cartão postal do Rio de Janeiro. Linda Vista.  1 Quarto e 1 banheiro  Amplo, arejado, vaga na garagem. Prédio com piscina, sauna e playground.  Fácil acesso, próximo da praia e shoppings.",
+    "property_type": "Apartment",
+    "accommodates": 2,
+    "bedrooms": 1,
+    "beds": 1,
+    "bathrooms": {
+      "$numberDecimal": "2.0"
+    },
+    "amenities": [
+      "TV",
+      "Cable TV",
+      "Internet",
+      "Wifi",
+      "Air conditioning",
+      "Pool",
+      "Kitchen",
+      "Free parking on premises",
+      "Doorman",
+      "Gym",
+      "Elevator",
+      "Buzzer/wireless intercom",
+      "Family/kid friendly",
+      "Washer",
+      "Essentials",
+      "24-hour check-in"
+    ],
+    "price": {
+      "$numberDecimal": "701.00"
+    },
+    "images": {
+      "picture_url": "https://a0.muscache.com/im/pictures/59c516bd-c7c3-4dae-8625-aff5f55ece53.jpg?aki_policy=large"
+    },
+    "address": {
+      "street": "Rio de Janeiro, Rio de Janeiro, Brazil",
+      "country": "Brazil",
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          -43.205047082633435,
+          -22.971950988341874
+        ],
+        "is_location_exact": true
+      }
+    }
+  }
