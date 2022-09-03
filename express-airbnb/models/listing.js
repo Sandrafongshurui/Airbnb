@@ -31,6 +31,10 @@ const listingSchema = new mongoose.Schema(
       type: Schema.Types.Decimal128,
       //required: true
     },
+    bathrooms_Num: {
+      type: Number
+      //required: true
+    },
     amenities: [
       {
         type: String,
@@ -41,27 +45,19 @@ const listingSchema = new mongoose.Schema(
       type: Schema.Types.Decimal128,
       required: true,
     },
-    images: [
+    images_url: [
       {
-        type: Object,
+        type: String,
         required: true,
       },
     ],
-    address: {
-      address: { type: String, default: "" },//this is only exposed to customer after reservation
-      street: { type: String, default: "" },
-      state: { type: String, default: "" },
-      country: { type: String, default: "" },
-      postal_code: { type: String, default: "" },
-      location: {
-        coordinates: [
-          {
-            type: Schema.Types.Mixed,
-            default: "",
-          },
-        ],
-      },
-    },
+    state: { type: String, default: "" },
+    postal_code: { type: String, default: "" },
+    real_address: { type: String, default: "" },//this is only exposed to customer after reservation
+    street: { type: String, default: "" },
+    country: { type: String, default: "" },
+    longtitude:{ type: Schema.Types.Decimal128, default: 0},
+    latitude:{ type: Schema.Types.Decimal128, default: 0},
     unavailable_dates: [
       {
         type: Date,

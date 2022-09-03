@@ -3,15 +3,16 @@ const listingController = require('../controllers/listings/listing_controller')
 
 const router = express.Router()
 
-//http://localhost:8000/api/v1/rooms/
-router.get('/', authMiddleware, listingController.listListings)
-router.get('/:listing_id', authMiddleware, listingController.showListing)
+//http://localhost:8000/api/v1/
+router.get('/', listingController.listListings)
+router.get('/rooms/:listing_id', listingController.showListing)
 
 //create, edit, delete each listing
-router.get('/:user_id/hosting/listings', authMiddleware, listingController.profile)
-router.post('/:user_id/hosting/', authMiddleware, listingController.profile)
-router.patch('/:user_id/hosting/:listing_id', authMiddleware, listingController.profile)
-router.delete('/:user_id/hosting/:listing_id', authMiddleware, listingController.profile)
+//http://localhost:8000/api/v1/users/
+router.get('/:user_id/listings', listingController.listUserListings)
+router.post('/:user_id/listing', listingController.createListing)
+router.patch('/:user_id/:listing_id', listingController.updateListing)
+router.delete('/:user_id/:listing_id',listingController.deleteListing)
 
 
 module.exports = router

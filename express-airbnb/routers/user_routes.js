@@ -1,5 +1,6 @@
 const express = require('express')
 const userController = require('../controllers/user_controller')
+const bookingController = require('../controllers/booking_controller')
 const authMiddleware = require('../middlewares/authmiddleware')
 
 const router = express.Router()
@@ -7,12 +8,17 @@ const router = express.Router()
 //http://localhost:8000/api/v1/users/
 router.post('/register', userController.register)
 router.post('/login', userController.login)
-router.post('/logout', authMiddleware, userController.logout)
+router.post('/logout', userController.logout)
 
-//http://localhost:8000/api/v1/users/:user_id
-router.get('/:user_id/profile', authMiddleware, userController.profile)//authMiddleware is used for any route that needs authentication
-router.get('/:user_id/trips', authMiddleware, bookingController.profile)//see user upcoming trips
-router.get('/:user_id/book/:listing_id', authMiddleware, bookingController.createBooking)//see user upcoming trips
+//add authMiddleware is used for any route that needs authentication
+router.get('/:user_id/profile', userController.showProfile)
+router.patch('/:user_id/profile', userController.editProfile)
+router.delete('/:user_id/profile', userController.deleteProfile)
+
+router.get('/:user_id/trips', bookingController.showTrips)//see user upcoming trips
+router.patch('/:user_id/trip/:listing_id', bookingController.editTrip)
+router.delete('/:user_id/trip/:listing_id', bookingController.deleteTrip)
+router.post('/:user_id/book/:listing_id',bookingController.bookTrip)
 
 
 module.exports = router
