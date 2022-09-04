@@ -13,7 +13,7 @@ const listingController = {
             }else{
                 listings = await listingModel.find({})
             }
-           
+            console.log(listing)
             res.json(listings)
             
         } catch (error) {
@@ -31,6 +31,7 @@ const listingController = {
             if (!listing) {
                 return res.status(404).json()
             }
+            console.log(listing)
             return res.json(listing)
             
         } catch (error) {
@@ -39,13 +40,14 @@ const listingController = {
         }
 
     },
-    listUserListings:async  (req, res) => {
+    listUserListings: async  (req, res) => {
         const userId = req.params.user_id//taken from FE <link> to
         try {
             const userListings = await listingModel.find({created_by: userId})
             if (!userListings) {
                 return res.status(404).json()
             }
+            console.log(userListings)
             return res.json(userListings)
             
         } catch (error) {
@@ -54,9 +56,8 @@ const listingController = {
         }
 
     },
-    createListing:async  (req, res) => {
-        try {
-            
+    createListing: async  (req, res) => {
+        try {     
             let userId = req.params.user_id
             //ftech api to convert country/postal code to get long lat in FE
             const listing = await listingModel.create({
@@ -68,22 +69,31 @@ const listingController = {
             if (!listing ) {
                 return res.status(404).json()
             }
-            return res.json(listing)
+            console.log("created sucessfully")
+            return res.status(201).send("Listing Created Successfully")
+
         } catch (error) {
             res.status(500)
             return res.json({error: "failed to create listing"})
         }
 
     },
-    updateListing:async  (req, res) => {
+    updateListing: async  (req, res) => {
         //const userId = req.params.user_id//taken from FE <link> to
-        const userId = req.params.user_id//taken from FE <link> to
+        const listingId = req.params.listing_id//taken from FE <link> to
+        let listing = null
         try {
-            const userListings = await findById(req.body)
-            if (!userListings) {
-                return res.status(404).json()
-            }
-            return res.json(userListings)
+            listing = await listingModel.findByIdAndUpdate(
+                {_id : listingId},
+                {$set:{ ...req.body }},
+                {new: true}
+            )
+            // if (!listing) {
+            //     res.status(404).json()
+            //     return res.json({})
+            // }
+            console.log(listing)
+            return res.status(201).send("Listing Updated Successfully")
             
         } catch (error) {
             res.status(500)
@@ -93,15 +103,17 @@ const listingController = {
     },
     
     deleteListing:async  (req, res) => {
+         //const userId = req.params.user_id//taken from FE <link> to
+         const listingId = req.params.listing_id//taken from FE <link> to
+         let listing = null
         try {
+            listing = await listingModel.findByIdAndDelete(listingId)
             
         } catch (error) {
             res.status(500)
             return res.json({error: "failed to delete listing"})
         }
-
     }
-
     
 }
 

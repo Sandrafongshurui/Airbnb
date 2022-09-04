@@ -28,11 +28,7 @@ const listingSchema = new mongoose.Schema(
       //required: true
     },
     bathrooms: {
-      type: Schema.Types.Decimal128,
-      //required: true
-    },
-    bathrooms_Num: {
-      type: Number
+      type: Schema.Types.Mixed, 
       //required: true
     },
     amenities: [
@@ -42,26 +38,47 @@ const listingSchema = new mongoose.Schema(
       },
     ],
     price: {
-      type: Schema.Types.Decimal128,
-      required: true,
+      type: Schema.Types.Mixed, 
+      //required: true,
     },
     images_url: [
       {
         type: String,
-        required: true,
+        //required: true,
       },
     ],
-    state: { type: String, default: "" },
-    postal_code: { type: String, default: "" },
-    real_address: { type: String, default: "" },//this is only exposed to customer after reservation
-    street: { type: String, default: "" },
-    country: { type: String, default: "" },
-    longtitude:{ type: Schema.Types.Decimal128, default: 0},
-    latitude:{ type: Schema.Types.Decimal128, default: 0},
+    address_1: { 
+      type: Schema.Types.Mixed, 
+      default: "" 
+    }, 
+    address_2: { //this is only exposed to customer after reservation
+      type: String, 
+      default: "" 
+    },
+    postal_code: { 
+      type: String, 
+      default: "" 
+    },
+    state: { 
+      type: String, 
+      default: "" 
+    },
+    country: { 
+      type: String, 
+      default: "" 
+    },
+    longtitude: { 
+      type: Schema.Types.Mixed, 
+      default: 0 
+    },
+    latitude: { 
+      type: Schema.Types.Mixed, 
+      default: 0 
+    },
     unavailable_dates: [
       {
         type: Date,
-      },
+      }
     ],
     created_by: {
       type: Schema.Types.ObjectId,
@@ -72,4 +89,6 @@ const listingSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = listingSchema
+const Listings = mongoose.model("yourlisting", listingSchema);
+
+module.exports = Listings;
