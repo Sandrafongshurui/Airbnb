@@ -28,13 +28,16 @@ const userController = {
         }
 
     },
-    showProfile: (req, res) => {
+    showProfile: async (req, res) => {
+
         try {
-            
+            const user = await userModel.findById({_id: req.params.user_id})
+            return res.json(user)
         } catch (error) {
             res.status(500)
             return res.json({error: "failed to show profile"})
         }
+     
 
     },
     editProfile: (req, res) => {

@@ -18,7 +18,7 @@ app.use(cors({
 }))
 
 app.use('/api/v1', listingRouter)
-app.use('/api/v1/users', userRouter)
+app.use('/api/v1/user', userRouter)
 
 app.listen(port, async () => {
     try {

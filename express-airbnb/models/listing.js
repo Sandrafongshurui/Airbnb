@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const listingSchema = new mongoose.Schema(
-  {
+const listingSchema = new mongoose.Schema({
     name: {
       type: String,
-      //required: true
+      required: true,
     },
     description: {
       type: String,
@@ -28,7 +27,7 @@ const listingSchema = new mongoose.Schema(
       //required: true
     },
     bathrooms: {
-      type: Schema.Types.Mixed, 
+      type: Schema.Types.Decimal128,
       //required: true
     },
     amenities: [
@@ -38,7 +37,7 @@ const listingSchema = new mongoose.Schema(
       },
     ],
     price: {
-      type: Schema.Types.Mixed, 
+      type: Schema.Types.Decimal128,
       //required: true,
     },
     images_url: [
@@ -47,48 +46,49 @@ const listingSchema = new mongoose.Schema(
         //required: true,
       },
     ],
-    address_1: { 
-      type: Schema.Types.Mixed, 
-      default: "" 
-    }, 
-    address_2: { //this is only exposed to customer after reservation
-      type: String, 
-      default: "" 
+    address_1: {
+      type: String,
+      // default: "",
     },
-    postal_code: { 
-      type: String, 
-      default: "" 
+    address_2: {
+      //this is only exposed to customer after reservation
+      type: String,
+      // default: "",
     },
-    state: { 
-      type: String, 
-      default: "" 
+    postal_code: {
+      type: String,
+      // default: "",
     },
-    country: { 
-      type: String, 
-      default: "" 
+    state: {
+      type: String,
+      // default: "",
     },
-    longtitude: { 
-      type: Schema.Types.Mixed, 
-      default: 0 
+    country: {
+      type: String,
+      // default: "",
     },
-    latitude: { 
-      type: Schema.Types.Mixed, 
-      default: 0 
+    longtitude: {
+      type: Schema.Types.Decimal128,
+      // default: 0,
+    },
+    latitude: {
+      type: Schema.Types.Decimal128,
+      // default: 0,
     },
     unavailable_dates: [
       {
         type: Date,
-      }
+      },
     ],
     created_by: {
       type: Schema.Types.ObjectId,
       ref: "User",
       default: mongoose.Types.ObjectId("630f9ca501b6bed58f47cee6"), //harry potter user
-    },
-  },
-  { timestamps: true }
+    }
+},
+{ timestamps: true }
 );
 
-const Listings = mongoose.model("yourlisting", listingSchema);
+const Listing = mongoose.model("yourlisting", listingSchema);
 
-module.exports = Listings;
+module.exports = Listing;

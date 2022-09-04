@@ -5,7 +5,7 @@ const router = express.Router()
 
 //http://localhost:8000/api/v1/
 router.get('/', listingController.listListings)
-router.get('/rooms/:listing_id', listingController.showListing)
+router.get('/listings/:listing_id', listingController.showListing)
 
 
 module.exports = router
