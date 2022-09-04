@@ -1,10 +1,8 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 
-const connStr= `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_HOST}.pufdenf.mongodb.net`
+const connStr= `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_HOST}.pufdenf.mongodb.net/`
 
-
-const port = process.env.PORT || 3000
 
 const connectDb = async()  => {
     try {

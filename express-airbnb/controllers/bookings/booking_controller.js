@@ -1,4 +1,4 @@
-const bookingsModel = require('../models/booking')
+const bookingsModel = require('../../models/booking')
 
 const bookingController = {
     showTrips: (req, res) => {
@@ -10,7 +10,7 @@ const bookingController = {
         }
 
     },
-    editTrips: (req, res) => {
+    editTrip: (req, res) => {
         try {
             
         } catch (error) {
@@ -39,3 +39,5 @@ const bookingController = {
     }
    
 }
+
+module.exports = bookingController

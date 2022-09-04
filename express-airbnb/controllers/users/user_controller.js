@@ -1,6 +1,6 @@
-const userModel = require('../models/user')
+const userModel = require('../../models/user')
 
-const userControler = {
+const userController = {
     register: (req, res) => {
         try {
             
@@ -56,3 +56,5 @@ const userControler = {
 
     },
 }
+
+module.exports = userController
