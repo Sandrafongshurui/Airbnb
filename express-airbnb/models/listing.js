@@ -33,7 +33,24 @@ const listingSchema = new mongoose.Schema({
     amenities: [
       {
         type: String,
-        //required: true
+        enum: [
+        "TV",
+        "Cable TV",
+        "Internet",
+        "Wifi",
+        "Air conditioning",
+        "Pool",
+        "Kitchen",
+        "Free parking on premises",
+        "Doorman",
+        "Gym",
+        "Elevator",
+        "Buzzer/wireless intercom",
+        "Family/kid friendly",
+        "Washer",
+        "Essentials",
+        "24-hour check-in"
+        ],
       },
     ],
     price: {

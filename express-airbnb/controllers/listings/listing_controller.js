@@ -1,4 +1,5 @@
 const listingModel = require("../../models/listing");
+const bookingModel = require('../../models/booking')
 
 const listingController = {
   listListings: async (req, res) => {
@@ -10,21 +11,20 @@ const listingController = {
         console.log("has body");
         //find country/state/city that match the req.body, put in an array
         listings = await listingModel.find({ country: req.body.filterValue });
-        if (!listing) {
-          return res.status(404).json();
+        if (listings.length === 0) {//find returns array
+          return res.status(404).json({error: "No search results"});
         }
         return res.json(listings);
       } else {
         console.log("get lists");
         listings = await listingModel.find().limit(20);
-        if (!listing) {
-          return res.status(404).json();
+        if (listings.length === 0) {//find returns array
+          return res.status(404).json({ error: "failed to list listings" });
         }
         return res.json(listings);
       }
-    } catch (error) {
-      res.status(500);
-      return res.json({ error: "failed to list listings" });
+    } catch (error) {    
+      return res.status(500).json({ error: "failed to list listings" });
     }
   },
   showListing: async (req, res) => {
@@ -33,29 +33,22 @@ const listingController = {
       const listing = await listingModel
         .findById({ _id: listingId })
         .select("-__v");
-      if (!listing) {
-        return res.status(404).json();
-      }
       return res.json(listing);
     } catch (error) {
-      res.status(500);
-      return res.json({ error: "failed to show listing" });
+      return res.status(500).json({ error: "failed to show listing" });
     }
   },
-  showHostListings: async (req, res) => {
+  listHostListings: async (req, res) => {
     //taken from res.locals.userAuth, verrified at login 
     //const userId = res.locals.userAuth.userId; 
     const userId = "630f9ca501b6bed58f47cee6"; 
     try {
-      const userListings = await listingModel.find({ created_by: userId }).limit(20);
-      if (!userListings) {
-        return res.status(404).json();
-      }
+      const userListings = await listingModel.find({ created_by: userId });
       console.log(userListings);
       return res.json(userListings);
     } catch (error) {
-      res.status(500);
-      return res.json({ error: "failed to list user listings" });
+      
+      return res.status(500).json({ error: "failed to list user listings" });
     }
   },
   createListing: async (req, res) => {

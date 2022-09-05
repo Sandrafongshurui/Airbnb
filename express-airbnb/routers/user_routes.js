@@ -19,12 +19,14 @@ router.patch('/profile', userController.editProfile)
 router.delete('/profile', userController.deleteProfile)
 
 router.get('/trips', bookingController.showTrips)//see user upcoming trips
-router.patch('/trip/:listing_id', bookingController.editTrip)
-router.delete('/trip/:listing_id', bookingController.deleteTrip)
-router.post('/book/:listing_id',bookingController.bookTrip)
+router.patch('/trip/:booking_id', bookingController.editTrip)
+router.patch('/trip/:booking_id', bookingController.editTrip)
+router.delete('/trip/:booking_id', bookingController.deleteTrip)
+router.post('/book/:booking_id',bookingController.bookTrip)
 
-//create, edit, delete each listing
-router.get('/listings', listingController.showHostListings)
+//get,create, edit, delete each listing
+router.get('/listings', listingController.listHostListings)
+router.get('/listing/:listing_id', bookingController.showListingBookings)
 router.post('/listing', listingController.createListing)
 router.patch('/listing/:listing_id', listingController.editListing)
 router.delete('/listing/:listing_id',listingController.deleteListing)
