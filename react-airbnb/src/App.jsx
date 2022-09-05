@@ -8,7 +8,7 @@ function App() {
         <div className="App">
             <h1>Welcome to React Router!</h1>
             <Routes>
-                <Route path="/listings" element={<Listing />} />
+                <Route path="/listing" element={<Listing />} />
 
                 {/* <Route path="/listings/:listing_id" element={<Listing />} /> */}
             </Routes>

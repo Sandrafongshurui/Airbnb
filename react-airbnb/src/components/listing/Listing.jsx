@@ -27,7 +27,6 @@ const Listing = () => {
 
     return (
         <div>
-            Main Listing
             <ListingImg />
             <ListingDesNReserve />
             <ListingCal />
