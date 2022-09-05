@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
+import "./ListingCal.css";
 
 const ListingCal = () => {
     const [startDate, setStartDate] = useState(new Date());
@@ -19,8 +20,8 @@ const ListingCal = () => {
     };
 
     return (
-        <div>
-            <p>ListingCal</p>
+        <div className="container text-center">
+            <p>Select your Dates:</p>
             <DateRangePicker
                 ranges={[selectionRange]}
                 minDate={new Date()}
@@ -28,6 +29,8 @@ const ListingCal = () => {
                 onChange={handleSelect}
                 months={2}
                 direction="horizontal"
+                staticRanges={[]}
+                inputRanges={[]}
             />
         </div>
     );
