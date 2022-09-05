@@ -8,27 +8,34 @@ const listingSchema = new mongoose.Schema({
     },
     description: {
       type: String,
-      //required: true
+      //required: true,
+      default:"No description"
     },
     property_type: {
       type: String,
       //required: true
+      default:"Property type is Private"
     },
     accommodates: {
       type: Number,
-      //required: true
+      required: true,
+      default:0
+
     },
     bedrooms: {
       type: Number,
-      //required: true
+      required: true,
+      default:0
     },
     beds: {
       type: Number,
-      //required: true
+      required: true,
+      default:0
     },
     bathrooms: {
-      type: Schema.Types.Decimal128,
-      //required: true
+      type: Schema.Types.Mixed,
+      required: true,
+      default:"-"
     },
     amenities: [
       {
@@ -51,46 +58,50 @@ const listingSchema = new mongoose.Schema({
         "Essentials",
         "24-hour check-in"
         ],
+        default:"No amenities"
       },
     ],
     price: {
-      type: Schema.Types.Decimal128,
-      //required: true,
+      type: Schema.Types.Mixed,
+      required: true,
+      default:"-"
     },
     images_url: [
       {
         type: String,
-        //required: true,
-      },
+        required: true,
+        default:"-"
+      },     
     ],
     address_1: {
       type: String,
-      // default: "",
+      //required: true,
+      default:"-"
     },
     address_2: {
       //this is only exposed to customer after reservation
       type: String,
-      // default: "",
+      default:"-"
     },
     postal_code: {
       type: String,
-      // default: "",
+      default:"-"
     },
     state: {
       type: String,
-      // default: "",
+      default:"-"
     },
     country: {
       type: String,
-      // default: "",
+      default:"-"
     },
     longtitude: {
-      type: Schema.Types.Decimal128,
-      // default: 0,
+      type: Schema.Types.Mixed,
+      default:"-"
     },
     latitude: {
-      type: Schema.Types.Decimal128,
-      // default: 0,
+      type: Schema.Types.Mixed,
+      default:"-"
     },
     unavailable_dates: [
       {
@@ -106,6 +117,6 @@ const listingSchema = new mongoose.Schema({
 { timestamps: true }
 );
 
-const Listing = mongoose.model("yourlisting", listingSchema);
+const Listing = mongoose.model("Listing", listingSchema);
 
 module.exports = Listing;
