@@ -9,25 +9,23 @@ import ListingCal from "./listingCal/ListingCal";
 import ListingMap from "./listingMap/ListingMap";
 
 const Listing = () => {
-    // const params = useParams();
+    const params = useParams();
+    const [listing, setListing] = useState(null);
 
-    // // calling the backend API
-    // const fetchApi = async () => {
-    //     // MAKE API CALL TO BACKEND HERE
-    //     const data = await axios.get("");
-    //     return data;
-    // };
-
-    // // Backend API is called upon component mounting
-    // useEffect(() => {
-    //     (async () => {
-    //         const data = await fetchApi();
-    //     })();
-    // }, []);
+    useEffect(() => {
+        const fetchApi = async () => {
+            const res = await fetch(
+                `http://localhost:8000/api/v1/listings/${params.listingID}`
+            );
+            const data = await res.json();
+            setListing(data);
+        };
+        fetchApi();
+    }, []);
 
     return (
         <div>
-            <ListingImg />
+            {listing && <ListingImg data={listing} />}
             <ListingDesNReserve />
             <ListingCal />
             <ListingHostInfo />
