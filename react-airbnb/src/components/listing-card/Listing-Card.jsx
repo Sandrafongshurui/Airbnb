@@ -1,23 +1,26 @@
 import style from "./listing-card.module.css";
+import React, { useEffect, useState} from 'react'
 import SwiperCore, { Pagination } from "swiper/core";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {useNavigate} from "react-router-dom";
 
+
 SwiperCore.use([Pagination]);
 
-
-function ListingCard({ listing }) {
+function ListingCard(props) {
+    const { _id, name, price, images_url } = props.data
+    console.log(props.data)
 
     const navigate = useNavigate();
 
-    const handleClickListing = (listing_id = 1) => {
-        navigate(`/listing/1`)
+    const handleClickListing = () => {
+        navigate(`/listing-details/${ _id }`)
     }
 
     const renderImages = () => {
-        if (listing) {
-            return listing.images_url.map(url => {
+        if (props.data) {
+            return images_url.map (url => {
                 return (
                     <SwiperSlide key={url} className={style.listingImagesBox}>
                         <img className={style.listingImages} src={url} alt="" />
@@ -26,8 +29,7 @@ function ListingCard({ listing }) {
             })
         }
     }
-
-        if (!listing) {
+        if (!props.data) {
             return <></>;
         }
 
@@ -46,16 +48,16 @@ function ListingCard({ listing }) {
             </div>
 
             <div className={'ms-2 mt-2 d-flex justify-content-between'}>
-                <strong>{listing.name}</strong>
+                <strong>{ name }</strong>
             </div>
 
             <div>
-                <strong className={'ms-2 me-2'}>${listing.price.$numberDecimal} SGD</strong>
+                <strong className={'ms-2 me-2'}>${price.$numberDecimal} SGD</strong>
                 <span>night</span>
             </div>
 
         </div>
     )
-  }
+}
 
 export default ListingCard;

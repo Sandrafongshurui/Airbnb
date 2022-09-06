@@ -20,8 +20,7 @@ function App() {
         <Route path="/listings" element={<HostListings />} />
         <Route path="/listings/:listingID" element={<BookingHistory />} />
         <Route path="/listing" element={<Listing />} />
-
-        {/* <Route path="/listings/:listing_id" element={<Listing />} /> */}
+        <Route path="/listing-details/:listingID" element={<Listing />} />
       </Routes>
 
     </div>

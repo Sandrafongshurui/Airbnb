@@ -7,6 +7,7 @@ import ListingDesNReserve from "./listingDesNReserve/ListingDesNReserve";
 import ListingHostInfo from "./listingHostInfo/ListingHostInfo";
 import ListingCal from "./listingCal/ListingCal";
 import ListingMap from "./listingMap/ListingMap";
+import SiteHeader from "../partials/siteHeaders/SiteHeaders";
 
 const Listing = () => {
     // const params = useParams();
@@ -27,6 +28,8 @@ const Listing = () => {
 
     return (
         <div>
+            <SiteHeader /> 
+
             <ListingImg />
             <ListingDesNReserve />
             <ListingCal />
