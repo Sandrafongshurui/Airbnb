@@ -58,9 +58,7 @@ const bookingController = {
         return res.status(404).json({error:"No booking exists"});
       }
     console.log(booking.listing.unavailable_dates)
-    //console.log(booking.checkin_date)
     const arrayOfDates = booking.listing.unavailable_dates
-     //remove the unavailable dates of this booking, from its listing
     arrayOfDates.forEach((element, idx )=> {
         console.log(element[0].toString(), booking.checkin_date.toString())
         if(element[0].toString() == booking.checkin_date.toString()){
