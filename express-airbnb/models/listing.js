@@ -1,79 +1,122 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const listingSchema = new mongoose.Schema(
-  {
+const listingSchema = new mongoose.Schema({
     name: {
       type: String,
-      //required: true
+      required: true,
     },
     description: {
       type: String,
-      //required: true
+      //required: true,
+      default:"No description"
     },
     property_type: {
       type: String,
       //required: true
+      default:"Property type is Private"
     },
     accommodates: {
       type: Number,
-      //required: true
+      required: true,
+      default:0
+
     },
     bedrooms: {
       type: Number,
-      //required: true
+      required: true,
+      default:0
     },
     beds: {
       type: Number,
-      //required: true
+      required: true,
+      default:0
     },
     bathrooms: {
-      type: Schema.Types.Decimal128,
-      //required: true
+      type: Schema.Types.Mixed,
+      required: true,
+      default:"-"
     },
     amenities: [
       {
         type: String,
-        //required: true
+        enum: [
+        "TV",
+        "Cable TV",
+        "Internet",
+        "Wifi",
+        "Air conditioning",
+        "Pool",
+        "Kitchen",
+        "Free parking on premises",
+        "Doorman",
+        "Gym",
+        "Elevator",
+        "Buzzer/wireless intercom",
+        "Family/kid friendly",
+        "Washer",
+        "Essentials",
+        "24-hour check-in"
+        ],
+        default:"No amenities"
       },
     ],
     price: {
-      type: Schema.Types.Decimal128,
+      type: Schema.Types.Mixed,
       required: true,
+      default:"-"
     },
-    images: [
+    images_url: [
       {
-        type: Object,
+        type: String,
         required: true,
-      },
+        default:"-"
+      },     
     ],
-    address: {
-      address: { type: String, default: "" },//this is only exposed to customer after reservation
-      street: { type: String, default: "" },
-      state: { type: String, default: "" },
-      country: { type: String, default: "" },
-      postal_code: { type: String, default: "" },
-      location: {
-        coordinates: [
-          {
-            type: Schema.Types.Mixed,
-            default: "",
-          },
-        ],
-      },
+    address_1: {
+      type: String,
+      //required: true,
+      default:"-"
+    },
+    address_2: {
+      //this is only exposed to customer after reservation
+      type: String,
+      default:"-"
+    },
+    postal_code: {
+      type: String,
+      default:"-"
+    },
+    state: {
+      type: String,
+      default:"-"
+    },
+    country: {
+      type: String,
+      default:"-"
+    },
+    longtitude: {
+      type: Schema.Types.Mixed,
+      default:"-"
+    },
+    latitude: {
+      type: Schema.Types.Mixed,
+      default:"-"
     },
     unavailable_dates: [
-      {
+      [{
         type: Date,
-      },
+      }]
     ],
     created_by: {
       type: Schema.Types.ObjectId,
       ref: "User",
       default: mongoose.Types.ObjectId("630f9ca501b6bed58f47cee6"), //harry potter user
-    },
-  },
-  { timestamps: true }
+    }
+},
+{ timestamps: true }
 );
 
-module.exports = mongoose.model("myListing", listingSchema);
+const Listing = mongoose.model("Listing", listingSchema);
+
+module.exports = Listing;

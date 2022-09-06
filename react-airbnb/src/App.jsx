@@ -1,19 +1,33 @@
-import "./App.css";
-import { Routes, Route, Link } from "react-router-dom";
-import React from "react";
+import { Routes, Route, Navigate } from 'react-router-dom';
+import React from 'react';
+import './App.css';
+import Home from "./pages/home/home";
+import HostListings from './pages/hostListings/hostListings';
+import CreateListings from "./pages/createListings/createListings"
+import BookingHistory from "./pages/bookingHistory/bookingHistory"
 import Listing from "./components/listing/Listing";
 
-function App() {
-    return (
-        <div className="App">
-            <h1>Welcome to React Router!</h1>
-            <Routes>
-                <Route path="/listing" element={<Listing />} />
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-                {/* <Route path="/listings/:listing_id" element={<Listing />} /> */}
-            </Routes>
-        </div>
-    );
+function App() {
+  return (
+
+    <div className="app">
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/create" element={<CreateListings />} />
+        <Route path="/listings" element={<HostListings />} />
+        <Route path="/listings/:listingID" element={<BookingHistory />} />
+        <Route path="/listing" element={<Listing />} />
+
+        {/* <Route path="/listings/:listing_id" element={<Listing />} /> */}
+      </Routes>
+
+    </div>
+
+
+  );
 }
 
 export default App;
