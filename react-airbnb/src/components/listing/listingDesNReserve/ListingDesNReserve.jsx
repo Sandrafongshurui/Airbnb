@@ -27,6 +27,7 @@ const ListingDesNReserve = (props) => {
                             value={noOfGuests}
                             onChange={handleGuests}
                             min={1}
+                            max={15}
                         ></input>
                     </div>
                 </div>
