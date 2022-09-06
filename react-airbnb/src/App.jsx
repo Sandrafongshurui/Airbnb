@@ -10,6 +10,7 @@ import Listing from "./components/listing/Listing";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
+
     return (
         <div className="app">
             <Routes>
@@ -27,6 +28,7 @@ function App() {
             </Routes>
         </div>
     );
+
 }
 
 export default App;
