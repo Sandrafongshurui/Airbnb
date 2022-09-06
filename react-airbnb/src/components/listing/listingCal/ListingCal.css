@@ -4,3 +4,11 @@
     max-width: 800px;
     margin: auto;
 }
+
+h3 {
+    text-align: left;
+    margin-top: 3rem;
+    max-width: 800px;
+    margin: auto;
+    padding-bottom: 15px;
+}

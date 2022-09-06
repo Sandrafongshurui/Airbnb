@@ -2,6 +2,8 @@ import React from "react";
 import "./ListingHostInfo.css";
 
 const ListingHostInfo = () => {
+    // pass in props here for hosting info?
+
     return (
         <div className="ListingHostInfo">
             <h3>ListingHostInfo</h3>

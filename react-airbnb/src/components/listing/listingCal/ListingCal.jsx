@@ -21,7 +21,7 @@ const ListingCal = () => {
 
     return (
         <div className="container text-center">
-            <p>Select your Dates:</p>
+            <h3>Select your Dates:</h3>
             <DateRangePicker
                 ranges={[selectionRange]}
                 minDate={new Date()}
@@ -29,7 +29,6 @@ const ListingCal = () => {
                 onChange={handleSelect}
                 months={2}
                 direction="horizontal"
-                staticRanges={[]}
                 inputRanges={[]}
             />
         </div>
