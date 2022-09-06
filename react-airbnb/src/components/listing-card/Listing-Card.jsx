@@ -19,8 +19,8 @@ function ListingCard({ listing }) {
         if (listing) {
             return listing.images_url.map(url => {
                 return (
-                    <SwiperSlide key={url} className={style.houseImagesBox}>
-                    <img className={style.listingImages} src={url} alt="" />
+                    <SwiperSlide key={url} className={style.listingImagesBox}>
+                        <img className={style.listingImages} src={url} alt="" />
                     </SwiperSlide>
                 )
             })
@@ -45,12 +45,12 @@ function ListingCard({ listing }) {
                 </Swiper>
             </div>
 
-            <div className={'mt-2 d-flex justify-content-between'}>
+            <div className={'ms-2 mt-2 d-flex justify-content-between'}>
                 <strong>{listing.name}</strong>
             </div>
 
             <div>
-                <strong className={'me-2'}>${listing.price.$numberDecimal} SGD</strong>
+                <strong className={'ms-2 me-2'}>${listing.price.$numberDecimal} SGD</strong>
                 <span>night</span>
             </div>
 
