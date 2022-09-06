@@ -13,9 +13,10 @@ const ListingDesNReserve = (props) => {
                 <div className="container text-center">
                     <div className="row">
                         <div className="col">Description</div>
-                        <div className="col">Price / Night</div>
-
-                        <button>Reserve</button>
+                        <div className="col">
+                            Price / Night
+                            <button>Reserve</button>
+                        </div>
                     </div>
                 </div>
             </div>
