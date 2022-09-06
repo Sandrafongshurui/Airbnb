@@ -15,9 +15,7 @@ const createListings = async () => {
   } catch (error) {
     console.log(`---->`,error);
   }
-    
-
-   
+       
 };
 
 const renameField = async () => {

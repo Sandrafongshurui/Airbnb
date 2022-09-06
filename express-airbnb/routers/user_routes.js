@@ -21,7 +21,7 @@ router.delete('/profile', userController.deleteProfile)
 router.get('/trips', bookingController.showTrips)//see user upcoming trips
 router.patch('/trip/:booking_id', bookingController.editTrip)
 router.delete('/trip/:booking_id', bookingController.deleteTrip)
-router.post('/book/:booking_id',bookingController.bookTrip)
+router.post('/book/:listing_id',bookingController.bookTrip)
 
 //get,create, edit, delete each listing
 router.get('/listings', listingController.listHostListings)//returns []
