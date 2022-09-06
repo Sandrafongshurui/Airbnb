@@ -1,8 +1,8 @@
 const bookingModel = require("../../models/booking");
 const listingModel = require("../../models/listing");
 const dateMethods = require("../../utils/dateMethods");
-const luxon = require("luxon")
-const DateTime = luxon.DateTime
+const luxon = require("luxon");
+const DateTime = luxon.DateTime;
 
 const bookingController = {
   showListingBookings: async (req, res) => {
@@ -12,10 +12,10 @@ const bookingController = {
     try {
       const ListingBookings = await bookingModel.find({ listing: listingId });
       console.log(ListingBookings);
-      return res.status(201).json(ListingBookings);s
+      return res.status(201).json(ListingBookings);
+      s;
     } catch (error) {
-     
-      return  res.status(500).json({ error: "failed to get listing bookings" });
+      return res.status(500).json({ error: "failed to get listing bookings" });
     }
   },
   showTrips: async (req, res) => {
@@ -24,8 +24,8 @@ const bookingController = {
       const trips = await bookingModel
         .find({ booked_by: userId })
         .populate({ path: "listing" });
-        console.log(trips)
-        return res.json(trips)
+      console.log(trips);
+      return res.json(trips);
     } catch (error) {
       res.status(500);
       return res.json({ error: "failed to list listings" });
@@ -39,40 +39,44 @@ const bookingController = {
         { $set: { ...req.body } },
         { new: true }
       );
-      if(!booking ){
-        return res.status(404).json({error:"Booking not found "});
+      if (!booking) {
+        return res.status(404).json({ error: "Booking not found " });
       }
-      console.log(booking );
-      return res.status(201).send("Booking Updated Successfully, a notification has been sent to the host");
+      console.log(booking);
+      return res
+        .status(201)
+        .send(
+          "Booking Updated Successfully, a notification has been sent to the host"
+        );
     } catch (error) {
-      
       return res.status(500).json({ error: "failed to update Booking" });
     }
   },
   deleteTrip: async (req, res) => {
     const bookingId = req.params.booking_id; //taken from FE <link> to
-    console.log(bookingId)
+    console.log(bookingId);
     try {
-    const booking = await bookingModel.findById(bookingId).populate({ path: "listing" });
-    if(!bookingId){
-        return res.status(404).json({error:"No booking exists"});
+      const booking = await bookingModel.findById(bookingId).populate("listing", "unavailable_dates");
+      if (!bookingId) {
+        return res.status(404).json({ error: "No booking exists" });
       }
-    console.log(booking.listing.unavailable_dates)
-    const arrayOfDates = booking.listing.unavailable_dates
-    arrayOfDates.forEach((element, idx )=> {
-        console.log(element[0].toString(), booking.checkin_date.toString())
-        if(element[0].toString() == booking.checkin_date.toString()){
-            console.log("same date", idx)
-            arrayOfDates.splice(idx,1)            
-        }
-    });
-    console.log(arrayOfDates)
-    console.log(booking)
-    //booking.delete
-    
-      return res.status(201).json("booking deleted Successfully");
+      console.log( booking.listing.unavailable_dates)
+
+      let datesToRemove = booking.listing.unavailable_dates.filter(element=> {
+       return element[0].toString() == booking.checkin_date.toString()
+      });
+     console.log(datesToRemove)
+      const listing = await listingModel.findByIdAndUpdate(
+        { _id: booking.listing },
+        {$pull : {unavailable_dates : datesToRemove[0]}},
+        {new: true}
+      );
+      console.log(listing.unavailable_dates);
+      console.log(booking);
+      //booking.delete
+
+       return res.status(201).json("booking deleted Successfully");
     } catch (error) {
-      
       return res.status(500).json({ error: "failed to delete booking" });
     }
   },
