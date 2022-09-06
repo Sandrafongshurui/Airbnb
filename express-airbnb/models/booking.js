@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const bookingSchema = new mongoose.Schema({
-  Booked_By: {
+  booked_by: {
     type: Schema.Types.ObjectId,
     ref: "User",
     //default: mongoose.Types.ObjectId("630f9ca501b6bed58f47cee5"), //mickey mouse user

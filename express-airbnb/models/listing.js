@@ -104,9 +104,9 @@ const listingSchema = new mongoose.Schema({
       default:"-"
     },
     unavailable_dates: [
-      {
+      [{
         type: Date,
-      },
+      }]
     ],
     created_by: {
       type: Schema.Types.ObjectId,

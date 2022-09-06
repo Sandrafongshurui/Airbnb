@@ -90,12 +90,11 @@ const listingController = {
   },
 
   deleteListing: async (req, res) => {
-    //const userId = req.params.user_id//taken from FE <link> to
     const listingId = req.params.listing_id; //taken from FE <link> to
     console.log(listingId)
     try {
      const listing = await listingModel.findByIdAndDelete(listingId);
-     //const bookings = await bookingModel.deleteMany({listing : listingId})
+     await bookingModel.deleteMany({listing : listingId})
      console.log(listing)
      if(!listing){
         return res.status(404).json({error:"No listing exists"});
