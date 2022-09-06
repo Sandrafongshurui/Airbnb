@@ -1,4 +1,6 @@
 .listingCal {
     display: flex;
     margin-top: 3rem;
+    max-width: 800px;
+    margin: auto;
 }
