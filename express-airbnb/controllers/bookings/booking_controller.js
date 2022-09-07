@@ -53,35 +53,27 @@ const bookingController = {
     }
   },
   deleteTrip: async (req, res) => {
-    const bookingId = req.params.booking_id; //taken from FE <link> to
-    console.log(bookingId);
+    const bookingId = req.params.booking_id; //taken from FE <link> 
+    let booking = null
     try {
-      const booking = await bookingModel.findById(bookingId).populate("listing", "unavailable_dates");
-      if (!bookingId) {
-        return res.status(404).json({ error: "No booking exists" });
-      }
-      console.log( booking.listing.unavailable_dates)
-
-      let datesToRemove = booking.listing.unavailable_dates.filter(element=> {
+      booking = await bookingModel.findById(bookingId).populate("listing");
+      let idx = booking.listing.unavailable_dates.findIndex(element=> {
        return element[0].toString() == booking.checkin_date.toString()
       });
-     console.log(datesToRemove)
       const listing = await listingModel.findByIdAndUpdate(
-        { _id: booking.listing },
-        {$pull : {unavailable_dates : datesToRemove[0]}},
+        { _id: booking.listing._id },
+        {$pull : {unavailable_dates : booking.listing.unavailable_dates[idx]}},
         {new: true}
       );
-      console.log(listing.unavailable_dates);
-      console.log(booking);
-      //booking.delete
-
-       return res.status(201).json("booking deleted Successfully");
+      console.log("------->",listing);
+      await bookingModel.findByIdAndDelete(bookingId)
+      return res.status(201).json("booking deleted Successfully");
     } catch (error) {
       return res.status(500).json({ error: "failed to delete booking" });
     }
   },
   bookTrip: async (req, res) => {
-    //const listingId = "631631c51ae686c7ccd8a920"
+    //const listingId = "6316fda9d2571d6d3e58aef6"
     const listingId = req.params.listing_id; //take from FE link\
     const booked_by = "630f9ca501b6bed58f47cee5"; //take from res.local auth?
     const dateRangeArray = dateMethods.getDatesInRange(
@@ -96,20 +88,11 @@ const bookingController = {
         listing: listingId,
         booked_by,
       });
-      if (!booking) {
-        return res.status(404).json();
-      }
-    } catch (error) {
-      return res.status(500).json({ error: "Error with booking information" });
-    }
-
-    try {
       const listing = await listingModel.findOneAndUpdate(
         { _id: listingId },
         { $push: { unavailable_dates: dateRangeArray } },
         { new: true }
       );
-      console.log(listing);
       if (!listing) {
         return res.status(404).send("Unable to find listing");
       }
