@@ -5,18 +5,16 @@ const listingController = {
   listListings: async (req, res) => {
     let listings = null;
     try {
-      //incomplete
-      //has filter
-      if (req.body.filterValue) {
-        console.log("has body");
+      if (req.query.country) {
+        console.log(req.query.country);
         //find country/state/city that match the req.body, put in an array
-        listings = await listingModel.find({ country: req.body.filterValue });
+        listings = await listingModel.find({ country: req.query.country });
         return res.json(listings);
       } else {
         console.log("get lists");
-        listings = await listingModel.find().limit(20);
+        listings = await listingModel.find({}).limit(20)
         if (listings.length === 0) {//find returns array
-          return res.status(404).json({ error: "failed to list listings" });
+          return res.status(404).json({ error: "no listing results" });
         }
         return res.json(listings);
       }
@@ -30,10 +28,14 @@ const listingController = {
       const listing = await listingModel
         .findById({ _id: listingId })
         .select("-__v");
-      return res.json(listing);
+        if(!listing){
+          return res.status(404).json({ error: "No such listing" });
+        }
+        return res.json(listing);
     } catch (error) {
       return res.status(500).json({ error: "failed to show listing" });
     }
+    
   },
   listHostListings: async (req, res) => {
     //taken from res.locals.userAuth, verrified at login 
@@ -77,11 +79,7 @@ const listingController = {
         { _id: listingId },
         { $set: { ...req.body } },
         { new: true }
-      );
-      if(!listing){
-        return res.status(404).json({error:"Listing not found, check that you listed a listing ID"});
-      }
-      console.log(listing);
+      );   
       return res.status(201).send("Listing Updated Successfully");
     } catch (error) {
       
