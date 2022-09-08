@@ -13,7 +13,6 @@ const bookingController = {
       const ListingBookings = await bookingModel.find({ listing: listingId });
       console.log(ListingBookings);
       return res.status(201).json(ListingBookings);
-      s;
     } catch (error) {
       return res.status(500).json({ error: "failed to get listing bookings" });
     }

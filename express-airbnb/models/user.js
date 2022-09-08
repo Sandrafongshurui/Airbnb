@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
-    firstName: {
+    firstname: {
         type: String,
         required: true
     },
-    lastName: {
+    lastname: {
         type: String,
         required: true
     },
@@ -15,19 +15,19 @@ const userSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        default: "male",        
+        required: true,           
     },
     password: {
         type: String,
         required: true
     },
-    aboutMe: {
+    about_Me: {
         type: String,
-        default: " "
+        default: "-"
     },
     image: {
         type: String,
-        default: " "
+        default: "-"
     }
 
 },
