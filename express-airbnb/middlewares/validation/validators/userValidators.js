@@ -9,8 +9,8 @@ const userValidator = {
 }),
     register: yup.object({
       body: yup.object({
-        firstname: yup.string().min(3, "Mininum 4 characters").required("First Name is required"),
-        lastname: yup.string().min(2, "Mininum 2 characters").required("Last Name is required"),
+        first_name: yup.string().min(3, "Mininum 4 characters").required("First Name is required"),
+        last_name: yup.string().min(2, "Mininum 2 characters").required("Last Name is required"),
         gender: yup.string().required("Gender is required"),
         email: yup
           .string()
@@ -24,7 +24,7 @@ const userValidator = {
           .string()
           .required("Confirm password is required")
           .oneOf([yup.ref("password")], "Your passwords do not match."),
-        aboutMe: yup.string(),
+        about_me: yup.string(),
         image: yup.string(),
       })
     }),
