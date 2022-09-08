@@ -23,7 +23,7 @@ app.use('/api/v1/user', userRouter)
 
 app.listen(port, async () => {
     try {
-        await mongoose.connect(connStr, { dbName: MONGO_DB })
+        await mongoose.connect(connStr, { dbName: `${process.env.MONGO_DB}` })
     } catch(err) {
         console.log(`Failed to connect to DB`)
         process.exit(1)
