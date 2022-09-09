@@ -47,17 +47,18 @@ const userController = {
     }
 
     // generate JWT and return as response
-    //backend still need knowledge of this token, to change the schema obj to plain js object
-    //even with signature  jwt does not solve confidentiality, it only ensures that is not tempered with
+    //even with signature  jwt does not solve confidentiality,it only ensures that is not tempered with
     //we can be sure that the pay load is the original sender details, signature is used to verify that its is authentic
     //secret is set in every server, so any server can check its authentication
-
-    //store the info from your get user into the token
+    //change the schema obj to plain js object
     const userData = {
       email: user.email,
-      firstName: user.first_name,
+      firstName: user.firstname,
     };
 
+
+    //gnerate the token, that will pass to FE, afte the login req then set in local with this token
+    //token will pass back to BE through post/patch and go through authmiddleware to routes that requires authorization
     const token = jwt.sign(
       {
         exp: Math.floor(Date.now() / 1000) + 60 * 60, // 1 hour
@@ -66,7 +67,7 @@ const userController = {
       process.env.JWT_SECRET
     );
     //go try in the jwt.io past ein encoded to see wad you get backk
-    //get from post man cos it will res.json there
+    //get from post man cos it will res.json there it will an {}, token : encryptions
 
     return res.json({ token });
   },
@@ -95,18 +96,8 @@ const userController = {
     } catch (err) {
       return res.status(500).json({ error: "failed to get user" });
     }
-
-    //only return the non sensitive data
-    const userData = {
-      firstName: user.first_name,
-      lastName: user.last_name,
-      email: user.email,
-      gender: user.gender,
-      aboutMe: user.about_me,
-      image: user.image,
-    };
-
-    return res.json(userData);
+    console.log(user)
+    return res.json(user);
   },
   editProfile: async (req, res) => {
     let user = null;
@@ -131,17 +122,7 @@ const userController = {
       return res.status(500).json({ error: "failed to get user" });
     }
 
-    //only return the non sensitive data
-    const userData = {
-      firstName: user.first_name,
-      lastName: user.last_name,
-      email: user.email,
-      gender: user.gender,
-      aboutMe: user.about_me,
-      image: user.image,
-    };
-
-    return res.json(userData);
+    return res.status(200).json({ error: "Profile edited" });
   },
 
   deleteProfile: async (req, res) => {
@@ -160,6 +141,8 @@ const userController = {
       res.status(500);
       return res.json({ error: "failed to delete profile" });
     }
+
+    return res.status(200).json({ error: "Profile deleted" });
   },
 };
 

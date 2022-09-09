@@ -1,5 +1,5 @@
 
-
+// returns a function
 const validationMiddleware = (schema) => async (req, res, next) => {
     console.log(req.query)
     console.log(req.body)
