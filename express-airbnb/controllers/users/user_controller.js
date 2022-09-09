@@ -4,10 +4,9 @@ const jwt = require("jsonwebtoken");
 
 const userController = {
   register: async (req, res) => {
-    const validatedValues = req.body;
 
     try {
-      const user = await userModel.findOne({ email: validatedValues.email });
+      const user = await userModel.findOne({ email: req.body.email });
       if (user) {
         return res.status(409).json({ error: "email exists" });
       }
@@ -16,10 +15,12 @@ const userController = {
     }
 
     const passHash = await bcrypt.hash(req.body.password, 10);
-    const user = { ...req.body, password: passHash };
 
     try {
-      await userModel.create(user);
+      await userModel.create({
+        ...req.body,
+        password:passHash
+      });
       return res.status(201).json("New User Created");
     } catch (err) {
       console.log(err);
@@ -71,32 +72,35 @@ const userController = {
 
     return res.json({ token });
   },
-  logout: (req, res) => {
-    // let user = null;
-    // let userAuth = res.locals.userAuth; //this is where the token is saved
+  logout: async (req, res) => {
+     let user = null;
+     let userAuth = res.locals.userAuth; //this is where the token is saved
 
-    // try {
-    // if(userAuth)
-    
-    // } catch (error) {
-    //   res.status(500);
-    //   return res.json({ error: "failed to logout" });
-    // }
+    try {
+      user = await userModel.find({_id: "631b7175a1827ff2c9860d90"})
+      if (!user) {
+        return res.status(404).json({ error: "user does not exsits" });
+      }
+      return res.status(200).json({ error: "Successfully logout" });
+  } catch (error) {
+    res.status(500);
+    return res.json({ error: "failed to delete logout" });
+  }
   },
   showProfile: async (req, res) => {
     let user = null;
     let userAuth = res.locals.userAuth; //this is where the token is saved
 
     //this is redundant, security, defence indepth
-    if (!userAuth) {
-      console.log(userAuth);
-      return res.status(401).json();
-    }
+    // if (!userAuth) {
+    //   console.log(userAuth);
+    //   return res.status(401).json();
+    // }
 
     try {
-      user = await userModel.findOne({ email: userAuth.data.email }); //cos the userAuth email is in a data opbject, when signed token at login
+      user = await userModel.findOne({ _id: "631b7175a1827ff2c9860d90" }); //cos the userAuth email is in a data opbject, when signed token at login
       if (!user) {
-        return res.status(404).json();
+        return res.status(404).json({ error: "user does not exsits" });
       }
       console.log(user)
       return res.json(user);
@@ -110,40 +114,42 @@ const userController = {
     let userAuth = res.locals.userAuth; //this is where the token is saved
 
     //this is redundant, security, defence indepth
-    if (!userAuth) {
-      console.log(userAuth);
-      return res.status(401).json();
-    }
+    // if (!userAuth) {
+    //   console.log(userAuth);
+    //   return res.status(401).json();
+    // }
 
     try {
       user = await userModel.findOneAndUpdate(
-        {email: userAuth.data.email },
+        {_id: "631b7175a1827ff2c9860d90" },
         {$set: {...req.body}},
         {new: true}
         ); 
       if (!user) {
         return res.status(404).json({ error: "User does not exists" });
       }
-      return res.status(200).json({ error: "Profile edited" });
+      return res.status(200).json("Profile edited" );
     } catch (err) {
       return res.status(500).json({ error: "failed to get user" });
     }
 
     
   },
-
   deleteProfile: async (req, res) => {
     let user = null;
     let userAuth = res.locals.userAuth; //this is where the token is saved
 
     //this is redundant, security, defence indepth
-    if (!userAuth) {
-      console.log(userAuth);
-      return res.status(401).json();
-    }
+    // if (!userAuth) {
+    //   console.log(userAuth);
+    //   return res.status(401).json();
+    // }
 
     try {
-        user = await userModel.findOneAndDelete({email: userAuth.days})
+        user = await userModel.findOneAndDelete({_id: "631b7175a1827ff2c9860d90"})
+        if (!user) {
+          return res.status(404).json({ error: "user does not exsits" });
+        }
         return res.status(200).json({ error: "Profile deleted" });
     } catch (error) {
       res.status(500);
