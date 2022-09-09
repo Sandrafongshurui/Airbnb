@@ -11,11 +11,11 @@ const validators = {
   createListing: yup.object({
     body: yup.object({
       name: yup.string().required(),
-      description: yup.string().required(),
+      description: yup.string().required("description is required"),
       property_type: yup
         .string()
         .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field "),
-      accommodates: yup.number().required().min(1, "Min value 0."),
+      accommodates: yup.number().required().min(1, "Min value 1."),
       bedrooms: yup.number().required(),
       beds: yup.number().required(),
       bathrooms: yup.number().required(),
@@ -46,9 +46,9 @@ const validators = {
   }),
   createBooking: yup.object({
     body: yup.object({
-      checkin_date: yup.date().required(),
-      checkout_date: yup.date().required(),
-      total_guests: yup.number().required().min(1).max(10)
+      checkin_date: yup.date("Date to be in yyyy-mm-dd format").required(),
+      checkout_date: yup.date("Date to be in yyyy-mm-dd format").required(),
+      total_guests: yup.number().required().min(1, "Min value 1.").max(10)
     }),
   }),
 

@@ -20,12 +20,13 @@ const userController = {
 
     try {
       await userModel.create(user);
+      return res.status(201).json("New User Created");
     } catch (err) {
       console.log(err);
       return res.status(500).json({ error: "failed to register user" });
     }
 
-    return res.status(201).json("New User Created");
+    
   },
   login: async (req, res) => {
     let errMsg = "user email or password is incorrect";
@@ -52,8 +53,7 @@ const userController = {
     //secret is set in every server, so any server can check its authentication
     //change the schema obj to plain js object
     const userData = {
-      email: user.email,
-      firstName: user.firstname,
+      userId: user._id
     };
 
 
@@ -72,11 +72,16 @@ const userController = {
     return res.json({ token });
   },
   logout: (req, res) => {
-    try {
-    } catch (error) {
-      res.status(500);
-      return res.json({ error: "failed to logout" });
-    }
+    // let user = null;
+    // let userAuth = res.locals.userAuth; //this is where the token is saved
+
+    // try {
+    // if(userAuth)
+    
+    // } catch (error) {
+    //   res.status(500);
+    //   return res.json({ error: "failed to logout" });
+    // }
   },
   showProfile: async (req, res) => {
     let user = null;
@@ -93,11 +98,12 @@ const userController = {
       if (!user) {
         return res.status(404).json();
       }
+      console.log(user)
+      return res.json(user);
     } catch (err) {
       return res.status(500).json({ error: "failed to get user" });
     }
-    console.log(user)
-    return res.json(user);
+   
   },
   editProfile: async (req, res) => {
     let user = null;
@@ -118,11 +124,12 @@ const userController = {
       if (!user) {
         return res.status(404).json({ error: "User does not exists" });
       }
+      return res.status(200).json({ error: "Profile edited" });
     } catch (err) {
       return res.status(500).json({ error: "failed to get user" });
     }
 
-    return res.status(200).json({ error: "Profile edited" });
+    
   },
 
   deleteProfile: async (req, res) => {
@@ -137,12 +144,13 @@ const userController = {
 
     try {
         user = await userModel.findOneAndDelete({email: userAuth.days})
+        return res.status(200).json({ error: "Profile deleted" });
     } catch (error) {
       res.status(500);
       return res.json({ error: "failed to delete profile" });
     }
 
-    return res.status(200).json({ error: "Profile deleted" });
+   
   },
 };
 
