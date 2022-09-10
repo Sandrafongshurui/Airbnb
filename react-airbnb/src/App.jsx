@@ -15,12 +15,14 @@ function App() {
         <div className="app">
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/create" element={<CreateListings />} />
-                <Route path="/listings" element={<HostListings />} />
+
+                <Route path="/user/listing/create" element={<CreateListings />} />
+                <Route path="/user/listing" element={<HostListings />} />
                 <Route
-                    path="/listings/:listingID"
+                    path="/users/listings/:listingID"
                     element={<BookingHistory />}
                 />
+
                 <Route
                     path="/listing-details/:listingID"
                     element={<Listing />}
