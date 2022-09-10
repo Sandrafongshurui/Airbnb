@@ -19,7 +19,7 @@ function App() {
                 <Route path="/user/listing/create" element={<CreateListings />} />
                 <Route path="/user/listing" element={<HostListings />} />
                 <Route
-                    path="/users/listings/:listingID"
+                    path="/user/listings/:listingID"
                     element={<BookingHistory />}
                 />
 

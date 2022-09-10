@@ -18,7 +18,7 @@ function HostListings() {
                 <Button onClick={() => navigate('/user/listing/create')}>Create</Button>
             </div>
 
-            <ListListings />
+            <ListListings isHost={ true }/>
 
         </div>
 

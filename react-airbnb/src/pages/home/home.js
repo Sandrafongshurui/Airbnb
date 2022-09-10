@@ -11,7 +11,7 @@ function Home() {
         <SiteHeader />
 
         <div className={'container-xxl mt-4'}>
-            <ListListings />
+            <ListListings isHost={ false }/>
         </div>
 
         <Footer />

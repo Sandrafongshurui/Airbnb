@@ -15,7 +15,12 @@ function ListingCard(props) {
     const navigate = useNavigate();
 
     const handleClickListing = () => {
-        navigate(`/listing-details/${ _id }`)
+        if(props.isHost) {
+            navigate(`/user/listings/${ _id }`)
+        } else {
+            navigate(`/listing-details/${ _id }`)
+        }
+       
     }
 
     const renderImages = () => {

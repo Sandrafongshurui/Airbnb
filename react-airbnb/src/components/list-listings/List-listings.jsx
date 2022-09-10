@@ -3,7 +3,7 @@ import style from './list-listings.module.css'
 import React, { useState, useEffect } from "react" 
 import axios from "axios"
 
-function ListListings () {
+function ListListings ({isHost}) {
     const [listings, setListings] = useState([])
 
     useEffect(() => {
@@ -20,7 +20,7 @@ function ListListings () {
         return listings.slice(0, 15).map(listing => {
             return (
                 <div className={'mt-2 me-3'}>
-                    <ListingCard data = { listing }/>
+                     <ListingCard isHost={ isHost } data = { listing }/>
                 </div>
             )
         })
