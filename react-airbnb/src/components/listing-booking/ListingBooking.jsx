@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import ListingImg from "./listingImg/ListingImg";
-import ListingHostInfo from "./listingHostInfo/ListingHostInfo";
-import ListingForm from "./listingForm/ListingForm";
-import ListingMap from "./listingMap/ListingMap";
+import BookingImg from "./bookingImg/BookingImg";
+import BookingHostInfo from "./bookingHostInfo/BookingHostInfo";
+import BookingForm from "./bookingForm/BookingForm";
+import BookingMap from "./bookingMap/BookingMap";
 import SiteHeader from "../partials/siteHeaders/SiteHeaders";
 import Footer from "../partials/footer/Footer";
 
-const Listing = () => {
+const ListingBooking = () => {
     const params = useParams();
     const [listing, setListing] = useState(null);
 
@@ -27,13 +27,13 @@ const Listing = () => {
     return (
         <div>
             <SiteHeader />
-            {listing && <ListingImg data={listing} />}
-            {listing && <ListingForm data={listing} />}
-            {listing && <ListingHostInfo data={listing} />}
-            <ListingMap />
+            {listing && <BookingImg data={listing} />}
+            {listing && <BookingForm data={listing} />}
+            {listing && <BookingHostInfo data={listing} />}
+            <BookingMap />
             <Footer />
         </div>
     );
 };
 
-export default Listing;
+export default ListingBooking;

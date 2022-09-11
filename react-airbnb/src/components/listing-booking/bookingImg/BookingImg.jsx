@@ -1,10 +1,10 @@
 import React from "react";
-import "./ListingImg.css";
+import "./BookingImg.css";
 
-const ListingImg = (props) => {
+const BookingImg = (props) => {
     return (
-        <div className="listingImg">
-            <h3>ListingImg</h3>
+        <div className="BookingImg">
+            <h3>BookingImg</h3>
             <img
                 src={props.data.images_url[0]}
                 layout="fill"
@@ -15,4 +15,4 @@ const ListingImg = (props) => {
     );
 };
 
-export default ListingImg;
+export default BookingImg;

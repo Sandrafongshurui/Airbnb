@@ -2,9 +2,9 @@ import React, { useState, useNavigate } from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
-import "./ListingForm.css";
+import "./BookingForm.css";
 
-const ListingForm = (props) => {
+const BookingForm = (props) => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [noOfGuests, setNoOfGuests] = useState(1);
@@ -50,8 +50,8 @@ const ListingForm = (props) => {
     console.log("test: ", test);
 
     return (
-        <div className="listing-form">
-            <h3>ListingForm</h3>
+        <div className="booking-form">
+            <h3>BookingForm</h3>
 
             <div className="container text-center">
                 <div className="row">
@@ -99,4 +99,4 @@ const ListingForm = (props) => {
     );
 };
 
-export default ListingForm;
+export default BookingForm;
