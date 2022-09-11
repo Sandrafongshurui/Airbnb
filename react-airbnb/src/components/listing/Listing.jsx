@@ -27,8 +27,7 @@ const Listing = () => {
     return (
         <div>
             {listing && <ListingImg data={listing} />}
-            <ListingDesNReserve />
-            <ListingCal />
+            <ListingForm />
             <ListingHostInfo />
             <ListingMap />
         </div>
