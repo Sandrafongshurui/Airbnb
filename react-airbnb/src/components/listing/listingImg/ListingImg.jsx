@@ -2,8 +2,6 @@ import React from "react";
 import "./ListingImg.css";
 
 const ListingImg = (props) => {
-    // const displayView = props.showViewButton ? true : false
-
     return (
         <div className="listingImg">
             <h3>ListingImg</h3>
