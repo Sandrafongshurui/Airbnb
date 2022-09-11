@@ -22,7 +22,7 @@ function CreateListings() {
             beds: 0,
             bedrooms: 0,
             bathrooms: 0,
-            address: '',
+            address_1: '',
             postalCode: '',
             description: ''
         }
@@ -38,49 +38,84 @@ function CreateListings() {
             await Promise.all([...images].map(image => loadImageFromFile(image)))
         )
     }
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
-        const name = e.target.elements['name'].value;
-        const price = e.target.elements['price'].value;
-        const beds = e.target.elements['beds'].value;
-        const bedrooms = e.target.elements['bedrooms'].value;
-        const bathrooms = e.target.elements['bathrooms'].value;
-        const address_1 = e.target.elements['address_1'].value;
-        const postal_code = e.target.elements['postal_code'].value;
-        const description = e.target.elements['description'].value;
+    // const handleFormSubmit = async (e) => {
+    //     e.preventDefault();
+    //     const name = e.target.elements['name'].value;
+    //     const price = e.target.elements['price'].value;
+    //     const beds = e.target.elements['beds'].value;
+    //     const bedrooms = e.target.elements['bedrooms'].value;
+    //     const bathrooms = e.target.elements['bathrooms'].value;
+    //     const address_1 = e.target.elements['address_1'].value;
+    //     const postal_code = e.target.elements['postal_code'].value;
+    //     const description = e.target.elements['description'].value;
 
-        axios({
-            method: 'post',
-            url: 'http://localhost:8000/api/v1',
-            data: JSON.stringify({
-                name,
-                price,
-                beds,
-                bedrooms,
-                bathrooms,
-                address_1,
-                postal_code,
-                description,
-                images_url: selectedImages
-            })
+    //     // try {
+    //     //     const response = await axios.post('http://localhost:8000/api/v1/user/listing', defaultValues)
+    //     //     console.log(response)
+    //     //     toast.success(
+    //     //         "Edit animal successful",
+    //     //         {
+    //     //             position: toast.POSITION.TOP_CENTER
+    //     //         }
+    //     //     )
+    //     // } catch(error) {
+    //     //     toast.error(
+    //     //         error.message,
+    //     //         {
+    //     //             position: toast.POSITION.TOP_CENTER
+    //     //         }
+    //     //     )
+    //     // }
 
-        })
-        .then(jsonResponse => {
-            // displaying success message
-            toast.success("Create listing successful",
-            {position: toast.POSITION.TOP_CENTER})
+    // axios.post({
+    //         url: 'http://localhost:8000/api/v1/user/listing',
+    //         data: JSON.stringify({
+    //             name,
+    //             price,
+    //             beds,
+    //             bedrooms,
+    //             bathrooms,
+    //             address_1,
+    //             postal_code,
+    //             description,
+    //             images_url: selectedImages
+    //         })
 
-            // redirect to users hosting listing page
-            navigate("/users/listings")
-        })
-        .catch(err => {
-            toast.error(err.message,
-            {position: toast.POSITION.TOP_CENTER})
-        })
-    }
+    //     })
+    //     .then(jsonResponse => {
+    //         // displaying success message
+    //         toast.success("Create listing successful",
+    //         {position: toast.POSITION.TOP_CENTER})
 
-    const test = (data) => {
-        console.log(data);
+    //         // redirect to users hosting listing page
+    //         // navigate("/user/listing")
+    //     })
+    //     .catch(err => {
+    //         toast.error(err.message,
+    //         {position: toast.POSITION.TOP_CENTER})
+    //     })
+    // }
+
+    const test = async(data) => {
+        try {
+            const response = await axios.post('http://localhost:8000/api/v1/user/listing', data)
+            console.log(response)
+            toast.success(
+                "Edit animal successful",
+                {
+                    position: toast.POSITION.TOP_CENTER
+                }
+            )
+            navigate("/user/listing")
+            
+        } catch(error) {
+            toast.error(
+                error.message,
+                {
+                    position: toast.POSITION.TOP_CENTER
+                }
+            )
+        }
     }
 
     return (
@@ -172,15 +207,15 @@ function CreateListings() {
                             />
                             
                             <Controller
-                                name="address"
+                                name="address_1"
                                 control={control}
-                                render={({ field }) => <TextField {...field} required name={'address_1'} label={'Address'} className={'mb-2'} variant={'standard'} fullWidth />}
+                                render={({ field }) => <TextField {...field} required name={'address_1'} label={'Address_1'} className={'mb-2'} variant={'standard'} fullWidth />}
                             />
                             
                             <Controller
                                 name="postalCode"
                                 control={control}
-                                render={({ field }) => <TextField {...field} required name={'postal_code'} label={'Post code'} className={'mb-2'} variant={'standard'} fullWidth />}
+                                render={({ field }) => <TextField {...field} required name={'postalCode'} label={'Post code'} className={'mb-2'} variant={'standard'} fullWidth />}
                             />
                         </div>
 
