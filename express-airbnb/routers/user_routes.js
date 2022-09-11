@@ -26,7 +26,7 @@ router.delete('/profile', userController.deleteProfile)// returns 201
 router.get('/trips', bookingController.showTrips)//returns []
 router.patch('/trip/:booking_id',validation(listingValidators.params_id),validation(listingValidators.createBooking), bookingController.editTrip)// returns 201
 router.delete('/trip/:booking_id', validation(listingValidators.params_id), bookingController.deleteTrip)// returns 201
-router.post('/book/:listing_id', validation(listingValidators.params_id), validation(listingValidators.createBooking),validation(listingValidators.createBooking), bookingController.bookTrip)// returns 201
+router.post('/book/:listing_id', validation(listingValidators.params_id), validation(listingValidators.createBooking), bookingController.bookTrip)// returns 201
 
 //get,create, edit, delete each listing
 router.get('/listings', listingController.listHostListings)//returns []

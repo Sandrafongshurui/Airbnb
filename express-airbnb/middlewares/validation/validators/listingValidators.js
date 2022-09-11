@@ -38,17 +38,22 @@ const validators = {
 
   params_id: yup.object({
     params: yup.object({
-      listing_id: yup
+      _id: yup
         .string()
         .required()
         .matches(/^([A-Za-z]|[0-9])+$/, "Only alphabets and numbers for listing Id"),
+      // booking_id: yup
+      //   .string()
+      //   .required()
+      //   .matches(/^([A-Za-z]|[0-9])+$/, "Only alphabets and numbers for listing Id"),
     }),
   }),
   createBooking: yup.object({
     body: yup.object({
       checkin_date: yup.date("Date to be in yyyy-mm-dd format").required(),
       checkout_date: yup.date("Date to be in yyyy-mm-dd format").required(),
-      total_guests: yup.number().required().min(1, "Min value 1.").max(10)
+      total_guests: yup.number().required().min(1, "Min value 1.").max(10),
+      total_price: yup.number().required().min(1, "Min value 1."),
     }),
   }),
 
