@@ -14,12 +14,19 @@ const bookingSchema = new mongoose.Schema({
   },
   checkin_date: {
     type: Date,
+    required: true,
   },
   checkout_date: {
     type: Date,
+    required: true,
   },
   total_guests: {
     type: Number,
+    required: true,
+  },
+  total_price: {
+    type: Schema.Types.Mixed,
+    required: true,
   },
 },{timestamp:true});
 

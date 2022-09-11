@@ -8,7 +8,7 @@ const listingSchema = new mongoose.Schema({
     },
     description: {
       type: String,
-      //required: true,
+      required: true,
       default:"No description"
     },
     property_type: {
@@ -69,13 +69,13 @@ const listingSchema = new mongoose.Schema({
     images_url: [
       {
         type: String,
-        required: true,
+        //required: true,
         default:"-"
       },     
     ],
     address_1: {
       type: String,
-      //required: true,
+      required: true,
       default:"-"
     },
     address_2: {
@@ -84,15 +84,18 @@ const listingSchema = new mongoose.Schema({
       default:"-"
     },
     postal_code: {
-      type: String,
+      type: Number,
+      required: true,
       default:"-"
     },
     state: {
       type: String,
+      required: true,
       default:"-"
     },
     country: {
       type: String,
+      required: true,
       default:"-"
     },
     longtitude: {

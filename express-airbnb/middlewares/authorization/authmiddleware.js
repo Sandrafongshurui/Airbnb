@@ -29,7 +29,8 @@ const authMiddleware = (req, res, next) => {
     }
 
     // set global var userAuth if JWT is valid
-    const verified = jwt.verify(token, process.env.JWT_SECRET)//check to see if it got tampered with
+    //check to see if it got tampered with by comparing secret and the token(encryption involves the token)
+    const verified = jwt.verify(token, process.env.JWT_SECRET)
 
     if (verified) {
         res.locals.userAuth = verified//replace the userAuth or set it

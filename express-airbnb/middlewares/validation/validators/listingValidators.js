@@ -21,7 +21,7 @@ const validators = {
       bathrooms: yup.number().required(),
       amenities: yup.string(),
       price: yup.number().required(),
-      images_url: yup.string().required(),
+      images_url: yup.string(),
       address_1: yup.string().required(),
       address_2: yup.string(),
       postal_code: yup.number().required(),
@@ -42,10 +42,6 @@ const validators = {
         .string()
         .required()
         .matches(/^([A-Za-z]|[0-9])+$/, "Only alphabets and numbers for listing Id"),
-      // booking_id: yup
-      //   .string()
-      //   .required()
-      //   .matches(/^([A-Za-z]|[0-9])+$/, "Only alphabets and numbers for listing Id"),
     }),
   }),
   createBooking: yup.object({
