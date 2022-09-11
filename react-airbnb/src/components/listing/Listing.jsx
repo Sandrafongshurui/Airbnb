@@ -3,11 +3,11 @@ import { Routes, Route, Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import ListingImg from "./listingImg/ListingImg";
-import ListingDesNReserve from "./listingDesNReserve/ListingDesNReserve";
 import ListingHostInfo from "./listingHostInfo/ListingHostInfo";
-import ListingCal from "./listingCal/ListingCal";
+import ListingForm from "./listingForm/ListingForm";
 import ListingMap from "./listingMap/ListingMap";
 import SiteHeader from "../partials/siteHeaders/SiteHeaders";
+import Footer from "../partials/footer/Footer";
 
 const Listing = () => {
     const params = useParams();
@@ -26,10 +26,12 @@ const Listing = () => {
 
     return (
         <div>
+            <SiteHeader />
             {listing && <ListingImg data={listing} />}
-            <ListingForm />
-            <ListingHostInfo />
+            {listing && <ListingForm data={listing} />}
+            {listing && <ListingHostInfo data={listing} />}
             <ListingMap />
+            <Footer />
         </div>
     );
 };
