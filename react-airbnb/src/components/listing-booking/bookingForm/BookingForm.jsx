@@ -61,21 +61,19 @@ const BookingForm = (props) => {
     const dates = Array.from(datesBetween(startDate, endDate));
     const noOfNights = dates.length - 1;
     const pricePerNight = props.data.price["$numberDecimal"].toLocaleString();
-    const totalCost = new Intl.NumberFormat("en-US", {
+    const totalPrice = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
         maximumFractionDigits: 2,
     }).format(noOfNights * pricePerNight);
-    // const totalPrice = totalCost.format(noOfNights * pricePerNight);
-    console.log("test: ", totalCost);
 
     return (
         <form
-            onSubmit={handleSubmit(totalCost)}
+            onSubmit={handleSubmit(totalPrice)}
             className={"container-fluid p-0"}
         >
             <div className={"container-xxl mt-4"}>
-                <h3>BookingForm</h3>
+                <h4>BookingForm</h4>
 
                 <div className="container text-center">
                     <div className="row">
@@ -92,11 +90,7 @@ const BookingForm = (props) => {
                                 ].toLocaleString()}{" "}
                                 / Night
                             </p>
-                            <p>Total cost: {totalCost} </p>
-                            <button className="reserve" type={"submit"}>
-                                Reserve
-                            </button>
-                            <br />
+                            <p>Total cost: {totalPrice} </p>
                             No of Guests:
                             <input
                                 type="number"
@@ -105,6 +99,10 @@ const BookingForm = (props) => {
                                 min={1}
                                 max={props.data.accommodates}
                             ></input>
+                            <button className="reserve" type={"submit"}>
+                                Reserve
+                            </button>
+                            <br />
                         </div>
                     </div>
                 </div>
