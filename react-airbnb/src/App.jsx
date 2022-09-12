@@ -6,6 +6,8 @@ import HostListings from "./pages/hostListings/hostListings";
 import CreateListings from "./pages/createListings/createListings";
 import BookingHistory from "./pages/bookingHistory/bookingHistory";
 import Listing from "./components/listing/Listing";
+import Login from "./components/login/Login";
+import NavBar from './components/partials/navbar/NavBar';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -13,8 +15,10 @@ function App() {
 
     return (
         <div className="app">
+            <NavBar />
+
             <Routes>
-                <Route path="/" element={<Home />} />
+                {/* <Route path="/" element={<Home />} />
                 <Route path="/create" element={<CreateListings />} />
                 <Route path="/listings" element={<HostListings />} />
                 <Route
@@ -24,7 +28,8 @@ function App() {
                 <Route
                     path="/listing-details/:listingID"
                     element={<Listing />}
-                />
+                /> */}
+                 
             </Routes>
         </div>
     );
