@@ -7,6 +7,7 @@ import CreateListings from "./pages/createListings/createListings";
 import BookingHistory from "./pages/bookingHistory/bookingHistory";
 import Listing from "./components/listing/Listing";
 import Login from "./components/login/Login";
+import NavBar from './components/partials/navbar/NavBar';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -14,6 +15,8 @@ function App() {
 
     return (
         <div className="app">
+            <NavBar />
+
             <Routes>
                 {/* <Route path="/" element={<Home />} />
                 <Route path="/create" element={<CreateListings />} />
@@ -26,7 +29,7 @@ function App() {
                     path="/listing-details/:listingID"
                     element={<Listing />}
                 /> */}
-                 <Route path="/login" element={<Login />} />
+                 
             </Routes>
         </div>
     );
