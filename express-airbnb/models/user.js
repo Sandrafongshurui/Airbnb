@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
     },
     about_me: {
         type: String,
+        required: true,
         default: "-"
     },
     image: {

@@ -36,7 +36,7 @@ const userValidator = {
         .string()
         .required()
         .oneOf([yup.ref("password")], "Your passwords do not match."),
-      about_me: yup.string(),
+      about_me: yup.string().required(),
       image: yup.string(),
     }),
   }),

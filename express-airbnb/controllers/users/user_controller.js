@@ -19,6 +19,7 @@ const userController = {
     try {
       await userModel.create({
         ...req.body,
+        confirmpassword:passHash,
         password:passHash
       });
       return res.status(201).json("New User Created");
@@ -32,6 +33,7 @@ const userController = {
   login: async (req, res) => {
     let errMsg = "user email or password is incorrect";
     let user = null;
+    console.log(req.body)
 
     try {
       user = await userModel.findOne({ email: req.body.email });
