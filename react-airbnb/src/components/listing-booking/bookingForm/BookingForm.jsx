@@ -74,7 +74,7 @@ const BookingForm = (props) => {
             toast.success("Reserve is successful", {
                 position: toast.POSITION.TOP_CENTER,
             });
-            navigate("/user/listing");
+            navigate(`/users/trips`);
         } catch (error) {
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
