@@ -4,23 +4,16 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
 import { useNavigate } from "react-router-dom";
 import "./BookingForm.css";
-
-import {
-    Button,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Paper,
-    Select,
-    TextField,
-} from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const BookingForm = (props) => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [noOfGuests, setNoOfGuests] = useState(1);
     const [totalCost, setTotalCost] = useState(0);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     // an variable obj to store the start and end date
     const selectionRange = {
@@ -69,6 +62,24 @@ const BookingForm = (props) => {
             total_guests: noOfGuests,
             total_costs: totalCost,
         });
+    };
+
+    const test = async (data) => {
+        try {
+            const response = await axios.post(
+                "http://localhost:8000/api/v1/user/listing",
+                data
+            );
+            console.log(response);
+            toast.success("Reserve is successful", {
+                position: toast.POSITION.TOP_CENTER,
+            });
+            navigate("/user/listing");
+        } catch (error) {
+            toast.error(error.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });
+        }
     };
 
     return (
