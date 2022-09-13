@@ -54,21 +54,13 @@ const BookingForm = (props) => {
         setNoOfGuests(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log({
-            checkin_date: startDate,
-            checkout_date: endDate,
-            total_guests: noOfGuests,
-            total_costs: totalCost,
-        });
-    };
 
-    const test = async (data) => {
         try {
             const response = await axios.post(
                 "http://localhost:8000/api/v1/user/listing",
-                data
+                e
             );
             console.log(response);
             toast.success("Reserve is successful", {
@@ -80,7 +72,32 @@ const BookingForm = (props) => {
                 position: toast.POSITION.TOP_CENTER,
             });
         }
+
+        console.log({
+            checkin_date: startDate,
+            checkout_date: endDate,
+            total_guests: noOfGuests,
+            total_costs: totalCost,
+        });
     };
+
+    // const test = async (data) => {
+    //     try {
+    //         const response = await axios.post(
+    //             "http://localhost:8000/api/v1/user/listing",
+    //             data
+    //         );
+    //         console.log(response);
+    //         toast.success("Reserve is successful", {
+    //             position: toast.POSITION.TOP_CENTER,
+    //         });
+    //         navigate(`/users/trips`);
+    //     } catch (error) {
+    //         toast.error(error.message, {
+    //             position: toast.POSITION.TOP_CENTER,
+    //         });
+    //     }
+    // };
 
     return (
         <form onSubmit={handleSubmit} className={"container-fluid p-0"}>
