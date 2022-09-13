@@ -8,7 +8,7 @@ const userController = {
     try {
       const user = await userModel.findOne({ email: req.body.email });
       if (user) {
-        return res.status(409).json({ error: "email exists" });
+        return res.status(409).json({ error: "Email already exists" });
       }
     } catch (err) {
       return res.status(500).json({ error: "failed to get user" });
@@ -31,7 +31,7 @@ const userController = {
     
   },
   login: async (req, res) => {
-    let errMsg = "user email or password is incorrect";
+    let errMsg = "User email or password is incorrect";
     let user = null;
     console.log(req.body)
 

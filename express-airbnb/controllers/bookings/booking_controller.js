@@ -12,7 +12,7 @@ const bookingController = {
     let listingBookings = null
 
     try {
-      listingBookings = await bookingModel.find({ listing: listingId });
+      listingBookings = await bookingModel.find({ listing: listingId }).populate({ path: "booked_by" });
       console.log(listingBookings);
       if(!listingBookings){
         return res.status(404).json({ error: "no bookings results" });

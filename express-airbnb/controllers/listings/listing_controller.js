@@ -16,7 +16,7 @@ const listingController = {
         return res.json(listings);
       } else {
         console.log("get lists");
-        listings = await listingModel.find({}).limit(20);
+        listings = await listingModel.find({}).sort([['createdAt', -1]]);
         if (listings.length === 0) {
           //find returns array
           return res.status(404).json({ error: "no listing results" });
