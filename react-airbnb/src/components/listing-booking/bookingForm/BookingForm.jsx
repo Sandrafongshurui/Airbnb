@@ -6,10 +6,21 @@ import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "./BookingForm.css";
 
+import {
+    Button,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    TextField,
+} from "@mui/material";
+
 const BookingForm = (props) => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [noOfGuests, setNoOfGuests] = useState(1);
+    const [totalCost, setTotalCost] = useState(0);
     // const navigate = useNavigate();
 
     // an variable obj to store the start and end date
@@ -23,6 +34,28 @@ const BookingForm = (props) => {
     const handleSelect = (ranges) => {
         setStartDate(ranges.selection.startDate);
         setEndDate(ranges.selection.endDate);
+
+        // getting the startDate and endDate and push into array
+        const datesBetween = require("dates-between");
+        const dates = Array.from(
+            datesBetween(ranges.selection.startDate, ranges.selection.endDate)
+        );
+
+        // getting number of nights between startDate and endDate
+        const noOfNights = dates.length - 1;
+
+        // calculation of total price based on no. of nights
+        const pricePerNight =
+            props.data.price["$numberDecimal"].toLocaleString();
+
+        const totalPrice = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            maximumFractionDigits: 2,
+        }).format(noOfNights * pricePerNight);
+
+        setTotalCost(noOfNights * Number(pricePerNight));
+        console.log("props.data.price: ", props.data.price);
     };
 
     // to set no of guests state upon selecting the no of guests
@@ -45,7 +78,7 @@ const BookingForm = (props) => {
     });
 
     useEffect(() => {
-        console.log(errors);
+        console.log("errors: ", errors);
     }, [errors]);
 
     // handles on click of reserve button
@@ -57,19 +90,26 @@ const BookingForm = (props) => {
     // console.log("selectionRange.endDate: ", selectionRange.endDate);
     // console.log("selectionRange.startDate: ", selectionRange.startDate);
 
-    const datesBetween = require("dates-between");
-    const dates = Array.from(datesBetween(startDate, endDate));
-    const noOfNights = dates.length - 1;
-    const pricePerNight = props.data.price["$numberDecimal"].toLocaleString();
-    const totalPrice = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-        maximumFractionDigits: 2,
-    }).format(noOfNights * pricePerNight);
+    // // getting the startDate and endDate and push into array
+    // const datesBetween = require("dates-between");
+    // const dates = Array.from(datesBetween(startDate, endDate));
+
+    // // getting number of nights between startDate and endDate
+    // const noOfNights = dates.length - 1;
+
+    // // calculation of total price based on no. of nights
+    // const pricePerNight = props.data.price["$numberDecimal"].toLocaleString();
+    // const totalPrice = new Intl.NumberFormat("en-US", {
+    //     style: "currency",
+    //     currency: "USD",
+    //     maximumFractionDigits: 2,
+    // }).format(noOfNights * pricePerNight);
 
     return (
         <form
-            onSubmit={handleSubmit(totalPrice)}
+            onSubmit={handleSubmit((booking) =>
+                console.log("booking: ", booking)
+            )}
             className={"container-fluid p-0"}
         >
             <div className={"container-xxl mt-4"}>
@@ -82,24 +122,44 @@ const BookingForm = (props) => {
                             <p>{props.data.description}</p>
                         </div>
                         <div className="col">
-                            <div className="pricing"></div>
-                            <p>
-                                $
-                                {props.data.price[
-                                    "$numberDecimal"
-                                ].toLocaleString()}{" "}
-                                / Night
-                            </p>
-                            <p>Total cost: {totalPrice} </p>
+                            <div className="pricing">
+                                <input
+                                    {...register("total_price")}
+                                    type="hidden"
+                                    value={totalCost}
+                                ></input>
+                                <label>
+                                    <p>
+                                        $
+                                        {props.data.price[
+                                            "$numberDecimal"
+                                        ].toLocaleString()}{" "}
+                                        / Night
+                                    </p>
+                                    {/* <p>Total price: {totalPrice}</p>
+                                    <Controller
+                                        name="total_price"
+                                        control={control}
+                                        render={({ field }) => (
+                                            <TextField
+                                                {...field}
+                                                name={"total_price"}
+                                                value={totalPrice}
+                                            />
+                                        )}
+                                    /> */}
+                                </label>
+                            </div>
                             No of Guests:
                             <input
+                                {...register("total_guest")}
                                 type="number"
                                 value={noOfGuests}
                                 onChange={handleGuests}
                                 min={1}
                                 max={props.data.accommodates}
                             ></input>
-                            <button className="reserve" type={"submit"}>
+                            <button className="reserve" type="submit">
                                 Reserve
                             </button>
                             <br />
@@ -108,7 +168,11 @@ const BookingForm = (props) => {
                 </div>
 
                 <div className="container text-center data-picker">
-                    <h3>Select your Dates:</h3>
+                    <h4>Select your Dates:</h4>
+                    {/* <Controller
+                        // name="checkin_date"
+                        control={control}
+                        render={({ onChange, value }) => ( */}
                     <DateRangePicker
                         ranges={[selectionRange]}
                         minDate={new Date()}
@@ -118,6 +182,20 @@ const BookingForm = (props) => {
                         direction="horizontal"
                         inputRanges={[]}
                     />
+                    {/* )}
+                    /> */}
+                    {/* <div>
+                        <TextField
+                            variant="standard"
+                            type="date"
+                            fullWidth
+                            InputProps={{ disableUnderline: true }}
+                            onChange={(e) => {
+                                setCheckOut(e.target.value);
+                            }}
+                            value={checkOut}
+                        />
+                    </div> */}
                 </div>
             </div>
         </form>
