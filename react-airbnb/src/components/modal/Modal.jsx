@@ -25,14 +25,14 @@ const Portal = (props) => {
 
   //creates the portal, 1st param modal content,
   //2nd param is a dom element the portal is created at
-  console.log(props.children)//children points to the elements inside Portal component
+  //console.log(props.children)//children points to the elements inside Portal component
   return createPortal(props.children, element);
 };
 
 // A modal component which will be used by other components / pages just by changing the {children}
 const Modal = (props) => {
  const  { children, open } = props
- console.log(children)//children points to the elements inside Modal Component
+ //console.log(children)//children points to the elements inside Modal Component
   return (
     <Portal>
       {open && (      

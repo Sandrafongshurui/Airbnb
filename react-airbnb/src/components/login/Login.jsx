@@ -3,19 +3,25 @@ import React, { useState, useCallback } from "react";
 import Modal from "../modal/Modal";
 import { TextField, Container, Button, Box } from "@mui/material";
 import "bootstrap";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
-
+//{resolver: yupResolver(schema)}
 const Login = (props) => {
+  //actual input names
+  const defaultValues = {
+    email: "",
+    password : ""
+  };
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({defaultValues});
+ 
   //use toggle is a memomized funtion, so it only renders whens setOpen is called
   //ie if on username change, by right rerenders whole component, but memomized, so it wont
   const [open, setOpen] = useState(true);
-  const [formData, setFormData] = useState();
+  //const [formData, setFormData] = useState();
   console.log(open);
 
   // const headerOptions = {
@@ -23,22 +29,28 @@ const Login = (props) => {
   //   Authorization: "Bearer " + didToken,
   // }
 
-  const onSubmit = async () => {
-    // const magic = new Magic(process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY);
-    //const didToken = await magic.auth.loginWithMagicLink({ email });
+  const onSubmit = async (data) => {
+    console.log("send data:", data);
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/api/v1/user/login",
+        data
+      );
+      console.log("Server Respond:", res);
+      console.log("token", res.data.token);
+      
+      if (res.status === 200 || res.status === 201) {
+        //close the portal, site header change to token bearer name
+        setOpen(false)
 
-    const res = await axios.post(
-      "http://localhost:8000/api/v1/login",
-      formData
-    );
-    console.log(res);
+      } 
 
-    // if (res.status === 200) {
-    //   // redirect
-    //   Router.push("/");
-    // } else {
-    //   // display an error
-    // }
+    } catch (error) {
+      console.log(error)
+      // display an error
+      console.log(error.response.data.error)
+    }
+
   };
 
   return (
@@ -61,43 +73,61 @@ const Login = (props) => {
             </button>
           </div>
           <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Box mb={2}>
-                <TextField
-                  variant="outlined"
-                  label="email"
-                  fullWidth
-                  autoComplete="email"
-                  autoFocus
-                  {...register("email", {
-                    required: "Required field",
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Invalid email address",
-                    },
-                  })}
-                  error={!!errors?.email}
-                  helperText={errors?.email ? errors.email.message : null}
-                />
+            <form  onSubmit={handleSubmit(onSubmit)}>
+              <Box mb={3}>
+                <Controller
+                  name="email"//actual input
+                  control={control}//take place of the register RHF
+                  rules={{ 
+                  required: "Required field",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Invalid email address",
+                  }, }}
+                  render={({//takes a function and rturn a react element
+                    field: { onChange, value},
+                    fieldState: {isDirty, error },//this error will be displyed in formstate errors
+                  }) => (
+                    <TextField
+                    onChange={onChange} // send value to hook form
+                    value={value}
+                    label={"email"}//label in the box
+                    variant="outlined"
+                    fullWidth
+                    autoComplete="password"
+                    autoFocus
+                    error={!!error}//convert obj into a bool
+                    helperText={error ? error.message : null}
+                    />
+                  )}
+                />              
               </Box>
-              <Box mb={2}>
-                <TextField
-                  variant="outlined"
-                  label="password"
-                  fullWidth
-                  autoComplete="password"
-                  autoFocus
-                  {...register("password", {
-                    required: "Required field",
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Invalid email address",
-                    },
-                  })}
-                  error={!!errors?.email}
-                  helperText={errors?.email ? errors.email.message : null}
+              <Box mb={3}>
+                <Controller
+                  name="password"//actual input
+                  control={control}//take place of the register RHF
+                  rules={{ 
+                  required: "Required field",
+                  minLength: {value: 4, message: "Mininum 4 chracters"}
+                  }}
+                  render={({//takes a function and rturn a react element
+                    field: { onChange, value},
+                    fieldState: {isDirty, error },//this error will be displyed in formstate errors
+                  }) => (
+                    <TextField
+                    onChange={onChange} // send value to hook form
+                    value={value}
+                    label={"password"}//label in the box
+                    variant="outlined"
+                    fullWidth
+                    autoComplete="password"
+                    autoFocus
+                    error={!!error}//convert obj into a bool
+                    helperText={error ? error.message : null}
+                    />
+                  )}              
                 />
-              </Box>
+              </Box>                           
               <Button
                 type="submit"
                 variant="contained"
