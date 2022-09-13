@@ -31,7 +31,7 @@ export default class SiteHeader extends Component{
                 </div>
 
                 <div className='header__right'>
-                    <span class="material-symbols-outlined" onClick={this.toggleNav}> account_circle </span>
+                    <span className="material-symbols-outlined" onClick={this.toggleNav}> account_circle </span>
                     {
                         this.state.navState &&
                         <div className="rightPop">

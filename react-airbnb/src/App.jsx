@@ -6,8 +6,10 @@ import HostListings from "./pages/hostListings/hostListings";
 import CreateListings from "./pages/createListings/createListings";
 import BookingHistory from "./pages/bookingHistory/bookingHistory";
 import Listing from "./components/listing/Listing";
+import EditListing from "./pages/editListings/editListings";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import ListingBookingHistory from "./pages/bookingHistory/bookingHistory";
 
 function App() {
 
@@ -16,11 +18,15 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
 
-                <Route path="/user/listing/create" element={<CreateListings />} />
-                <Route path="/user/listing" element={<HostListings />} />
+                <Route path="/users/listings" element={<HostListings />} />
+                <Route path="/users/listings/create" element={<CreateListings />} />
                 <Route
-                    path="/user/listings/:listingID"
-                    element={<BookingHistory />}
+                    path="/users/listings/:listingID"
+                    element={<ListingBookingHistory />}
+                />
+                <Route
+                    path="/users/listings/:listingID/edit"
+                    element={<EditListing />}
                 />
 
                 <Route

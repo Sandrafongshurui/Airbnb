@@ -13,6 +13,8 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "date-fns": "^2.29.2",
+    "datejs": "^1.0.0-rc3",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-date-range": "^1.4.0",
