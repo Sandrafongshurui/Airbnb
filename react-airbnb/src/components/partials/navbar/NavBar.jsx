@@ -19,7 +19,7 @@ const NavBar = () => {
         <div>
             <nav className="navbar navbar-expand-lg bg-light">
                 <div className="container-fluid">
-                    <Link to="/" className='navbar-brand'>Animals Shelter</Link>
+                    {/* <Link to="/" className='navbar-brand'>Animals Shelter</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -30,7 +30,7 @@ const NavBar = () => {
                             <li className="nav-link"><Link to="/login">Login</Link></li>
                         </ul>
                     
-                    </div>
+                    </div> */}
                     <button onClick={() => setOpenLogin(true)}>
                         login
                     </button>

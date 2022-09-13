@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
-// import useToggle from "../../useToggle";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import Modal from "../modal/Modal";
 import { TextField, Container, Button, Box } from "@mui/material";
 import "bootstrap";
@@ -7,6 +8,19 @@ import { Controller, useForm } from "react-hook-form";
 import axios from "axios";
 //{resolver: yupResolver(schema)}
 const Login = (props) => {
+
+   // form validation rules
+   const validationSchema = yup.object().shape({
+    email: yup
+    .string()
+    .email("Valid email is required")
+    .required(),
+  password: yup
+    .string()
+    .min(4, "Mininum 4 characters")
+    .required(),
+  });
+
   //actual input names
   const defaultValues = {
     email: "",
@@ -16,7 +30,7 @@ const Login = (props) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({defaultValues});
+  } = useForm({ resolver: yupResolver(validationSchema), defaultValues});
  
   //use toggle is a memomized funtion, so it only renders whens setOpen is called
   //ie if on username change, by right rerenders whole component, but memomized, so it wont
@@ -55,12 +69,6 @@ const Login = (props) => {
 
   return (
     <div className="Login">
-      {/* <h1>Hello CodeSandbox</h1>
-      <button type="button" onClick={openModal}>
-        Open Modal
-      </button> */}
-      {/* A modal component which will be used by other components / pages */}
-
       <Modal open={open}>
         <Box justifyContent="center" alignItems="center">
           <div className="modal-header">
@@ -78,12 +86,12 @@ const Login = (props) => {
                 <Controller
                   name="email"//actual input
                   control={control}//take place of the register RHF
-                  rules={{ 
-                  required: "Required field",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Invalid email address",
-                  }, }}
+                  // rules={{ 
+                  // required: "Required field",
+                  // pattern: {
+                  //   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  //   message: "Invalid email address",
+                  // }, }}
                   render={({//takes a function and rturn a react element
                     field: { onChange, value},
                     fieldState: {isDirty, error },//this error will be displyed in formstate errors
@@ -94,7 +102,7 @@ const Login = (props) => {
                     label={"email"}//label in the box
                     variant="outlined"
                     fullWidth
-                    autoComplete="password"
+                    autoComplete="email"
                     autoFocus
                     error={!!error}//convert obj into a bool
                     helperText={error ? error.message : null}
@@ -106,10 +114,10 @@ const Login = (props) => {
                 <Controller
                   name="password"//actual input
                   control={control}//take place of the register RHF
-                  rules={{ 
-                  required: "Required field",
-                  minLength: {value: 4, message: "Mininum 4 chracters"}
-                  }}
+                  // rules={{ 
+                  // required: "Required field",
+                  // minLength: {value: 4, message: "Mininum 4 chracters"}
+                  // }}
                   render={({//takes a function and rturn a react element
                     field: { onChange, value},
                     fieldState: {isDirty, error },//this error will be displyed in formstate errors
