@@ -1,50 +1,65 @@
-import { useState } from 'react'
-import {Link} from 'react-router-dom'
-import Login from "../../login/Login"
-import Register from "../../register/Register"
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import Login from "../../login/Login";
+import Register from "../../register/Register";
+import logo from "../../../assets/images/house.png";
 
 const NavBar = () => {
-    const [openLogin, setOpenLogin] = useState(false);
-    const [openRegister, setOpenRegister] = useState(false);
-    console.log(openLogin)
+  const [navState, setNavState] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
+  const [openRegister, setOpenRegister] = useState(false);
+  console.log(openLogin);
 
-    const handleLoginToggle = (value) => {
-        setOpenLogin(value)
-    }
-    const handleRegisterToggle = (value) => {
-        setOpenRegister(value)
-    }
+  const navStateToggle = () => {
+    setNavState((prevState) => !prevState);
+  };
+  const handleLoginToggle = (value) => {
+    setOpenLogin(value);
+  };
+  const handleRegisterToggle = (value) => {
+    setOpenRegister(value);
+  };
+  const handleOpenRegister = () => {
+    setOpenRegister(true);
+    navStateToggle();
+  };
+  const handleOpenLogin = () => {
+    setOpenLogin(true);
+    navStateToggle();
+  };
 
-    return (
-        <div>
-            <nav className="navbar navbar-expand-lg bg-light">
-                <div className="container-fluid">
-                    {/* <Link to="/" className='navbar-brand'>Animals Shelter</Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li className="nav-link"><Link to="/">Animals</Link></li>
-                            <li className="nav-link"><Link to="/register">Register</Link></li>
-                            <li className="nav-link"><Link to="/login">Login</Link></li>
-                        </ul>
-                    
-                    </div> */}
-                    <button onClick={() => setOpenLogin(true)}>
-                        login
-                    </button>
-                    <button onClick={() => setOpenRegister(true)}>
-                        register
-                    </button>
-                                        
-                </div>
-            </nav>
-            {openLogin && (<Login toggle={handleLoginToggle}/>)}
-            {openRegister && (<Register toggle={handleRegisterToggle}/>)}
+  return (
+    <div>
+      <div className="header">
+        <Link to="/">
+          <img className="header__icon" src={logo} alt=" Airbnb" />
+        </Link>
+
+        <div className="header__center">
+          <input type="text" />
         </div>
-        
-    )
-}
 
-export default NavBar
+        <div className="header__right">
+          <span className="material-symbols-outlined" onClick={navStateToggle}>
+            {" "}
+            account_circle{" "}
+          </span>
+          {navState && (
+            <div className="rightPop">
+              <p className="rightPopText" onClick={handleOpenRegister}>
+                Register
+              </p>
+              <p className="rightPopText" onClick={handleOpenLogin}>
+                Login
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+      {openLogin && <Login toggle={handleLoginToggle} />}
+      {openRegister && <Register toggle={handleRegisterToggle} />}
+    </div>
+  );
+};
+
+export default NavBar;

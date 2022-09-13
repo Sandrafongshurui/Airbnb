@@ -35,6 +35,7 @@ const Login = (props) => {
   //use toggle is a memomized funtion, so it only renders whens setOpen is called
   //ie if on username change, by right rerenders whole component, but memomized, so it wont
   const [open, setOpen] = useState(true);
+  const [catchError, setCatchError] = useState(null);
   //const [formData, setFormData] = useState();
   console.log(open);
 
@@ -45,6 +46,7 @@ const Login = (props) => {
 
   const onSubmit = async (data) => {
     console.log("send data:", data);
+    setCatchError(null)
     try {
       const res = await axios.post(
         "http://localhost:8000/api/v1/user/login",
@@ -56,13 +58,13 @@ const Login = (props) => {
       if (res.status === 200 || res.status === 201) {
         //close the portal, site header change to token bearer name
         setOpen(false)
-
       } 
 
     } catch (error) {
       console.log(error)
       // display an error
       console.log(error.response.data.error)
+      setCatchError(error.response.data.error)
     }
 
   };
@@ -70,6 +72,7 @@ const Login = (props) => {
   return (
     <div className="Login">
       <Modal open={open}>
+      {catchError && ( <div><h4 style={{color: "red", textAlign: "center"}}>{catchError}</h4></div>)}  
         <Box justifyContent="center" alignItems="center">
           <div className="modal-header">
             <h1 className="ms-4">Login</h1>
@@ -86,12 +89,6 @@ const Login = (props) => {
                 <Controller
                   name="email"//actual input
                   control={control}//take place of the register RHF
-                  // rules={{ 
-                  // required: "Required field",
-                  // pattern: {
-                  //   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  //   message: "Invalid email address",
-                  // }, }}
                   render={({//takes a function and rturn a react element
                     field: { onChange, value},
                     fieldState: {isDirty, error },//this error will be displyed in formstate errors
@@ -114,10 +111,6 @@ const Login = (props) => {
                 <Controller
                   name="password"//actual input
                   control={control}//take place of the register RHF
-                  // rules={{ 
-                  // required: "Required field",
-                  // minLength: {value: 4, message: "Mininum 4 chracters"}
-                  // }}
                   render={({//takes a function and rturn a react element
                     field: { onChange, value},
                     fieldState: {isDirty, error },//this error will be displyed in formstate errors
@@ -145,7 +138,7 @@ const Login = (props) => {
                 Login
               </Button>
             </form>
-          </div>
+          </div>          
         </Box>
       </Modal>
     </div>
