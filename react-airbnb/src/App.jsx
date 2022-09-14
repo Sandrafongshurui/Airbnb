@@ -16,16 +16,29 @@ function App() {
     return (
         <div className="app">
             <Routes>
-                <Route path="/" element={<Home />} />
 
-                <Route path="/users/listings" element={<HostListings />} />
-                <Route path="/users/listings/create" element={<CreateListings />} />
-                <Route
-                    path="/users/listings/:listingID"
-                    element={<ListingBookingHistory />}
+                <Route 
+                    path="/" 
+                    element={<Home />} 
                 />
+
+                <Route 
+                    path="/users/my/listings" 
+                    element={<HostListings />} 
+                />
+
+                <Route 
+                    path="/users/my/listings/create" 
+                    element={<CreateListings />} 
+                />
+
                 <Route
-                    path="/users/listings/:listingID/edit"
+                    path="/users/my/listings/:listingID"
+                    element={<BookingHistory />}
+                />
+
+                <Route
+                    path="/users/my/listings/:listingID/edit"
                     element={<EditListing />}
                 />
 
@@ -33,6 +46,7 @@ function App() {
                     path="/listing-details/:listingID"
                     element={<Listing />}
                 />
+                
             </Routes>
         </div>
     );

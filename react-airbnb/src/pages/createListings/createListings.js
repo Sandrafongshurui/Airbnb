@@ -30,7 +30,7 @@ function CreateListings() {
             description: ''
         }
     });
-    
+
     console.log(errors)
 
     const handleSelectImage = async (e) => {
@@ -46,7 +46,7 @@ function CreateListings() {
         }))
     }
 
-    const test = async(data) => {
+    const handleFormSubmit = async(data) => {
         try {
             const response = await axios.post('http://localhost:8000/api/v1/user/listing', data)
             console.log(response)
@@ -56,7 +56,7 @@ function CreateListings() {
                     position: toast.POSITION.TOP_CENTER
                 }
             )
-            navigate("/user/listing")
+            navigate("/users/my/listings")
             
         } catch(error) {
             toast.error(
@@ -70,7 +70,7 @@ function CreateListings() {
 
     return (
 
-        <form onSubmit={handleSubmit(test)} className={'container-fluid p-0'}>
+        <form onSubmit={handleSubmit(handleFormSubmit)} className={'container-fluid p-0'}>
 
             <SiteHeader />
             
@@ -106,34 +106,21 @@ function CreateListings() {
                 <h4>Basic info</h4>
 
                 <Paper className={style.photoBox + ' d-flex align-items-center justify-content-center'}>
+
                     <div className={'row w-100 mt-2'}>
+
                         <div className={'col-5'}>
 
-                            {/* <Controller
-                                name="name"
-                                control={control}
-                                render={({ field }) => 
-                                    <TextField 
-                                        {...register("name", { required: true, maxLength: 20, pattern: /^[A-Za-z]+$/i })}
-                                        {errors.name && errors.name.type === "required" && <span>This is required</span>}
-                                        {errors.name && errors.name.type === "maxLength" && <span>Max length exceeded</span> }
-                                        {errors.name?.type === "pattern" && (
-                                            <p>Alphabetical characters only</p>
-                                        )}
-                                        {...field} required className={'mb-2'} name={'name'} label={'Name:'} variant={'standard'} fullWidth
-                                    />
-                                }
-                            /> */}
-
                             <Controller
-                                name ="name" //actual input
-                                control={control} //take place of the register RHF
+                                name ="name" 
+                                control={control} 
                                 rules={{
                                     required: {value:true, message:"Name is required"},
                                     maxLength: {value:20,message:"Max length exceeded"},
                                     pattern: {value: /^[A-Za-z]+$/i, message:"Alphabetical characters only"}
                                 }}
-                                render={({field}) => (
+                                render={({field}) => 
+                                    (
                                         <TextField
                                             className={'mb-2'}
                                             label={'Name'}
@@ -141,9 +128,9 @@ function CreateListings() {
                                             fullWidth
                                             error={errors.name ? true : false} 
                                             {...field}
-                                            helperText={errors.name ? "Name is required": ""}
+                                            helperText={errors.name && <p>{errors.name.message}</p>}
                                         />
-                                        )}
+                                    )}
                             />
 
                             <Controller
@@ -183,14 +170,23 @@ function CreateListings() {
                             />
 
                             <Controller
-                                name="state"
-                                control={control}
-                                render={({ field }) => 
-                                    <TextField 
-                                    {...register("state", { required: true, maxLength: 20 })} 
-                                    {...field} required className={'mb-2'} name={'state'} label={'State'} variant={'standard'} fullWidth
-                                    />
-                                }
+                                name ="state" 
+                                control={control} 
+                                rules={{
+                                    pattern: {value: /^[A-Za-z]+$/i, message:"Alphabetical characters only"}
+                                }}
+                                render={({field}) => 
+                                    (
+                                        <TextField
+                                            className={'mb-2'}
+                                            label={'State'}
+                                            variant={'standard'}
+                                            fullWidth
+                                            error={errors.state ? true : false} 
+                                            {...field}
+                                            helperText={errors.state && <p>{errors.state.message}</p>}
+                                        />
+                                    )}
                             />
 
                         </div>
@@ -201,7 +197,8 @@ function CreateListings() {
                                 name="price"
                                 control={control}
                                 render={({ field }) => 
-                                    <TextField {...register("price", { required: true, min:1, max: 100 })} 
+                                    <TextField 
+                                        {...register("price", { required: true, min:1, max: 100 })} 
                                         {...field} required name={'price'} type={'number'} className={'mb-2'} label={'Price:'} variant={'standard'} fullWidth
                                     />
                                 }
@@ -212,7 +209,8 @@ function CreateListings() {
                                 control={control}
                                 render={({ field }) => 
                                     <TextField 
-                                        {...field} required name={'address_1'} label={'Address_1'} className={'mb-2'} variant={'standard'} fullWidth 
+                                        {...field} 
+                                        required name={'address_1'} label={'Address_1'} className={'mb-2'} variant={'standard'} fullWidth 
                                     />
                                 }
                             />
@@ -222,11 +220,12 @@ function CreateListings() {
                                 control={control}
                                 render={({ field }) => 
                                     <TextField 
-                                        {...field} required name={'address_2'} label={'Address_2'} className={'mb-2'} variant={'standard'} fullWidth 
+                                        {...field} 
+                                        required name={'address_2'} label={'Address_2'} className={'mb-2'} variant={'standard'} fullWidth 
                                     />
                                 }
                             />
-
+                            
                             <Controller
                                 name="country"
                                 control={control}
@@ -234,12 +233,10 @@ function CreateListings() {
                                     <TextField {...field} required name={'country'} label={'Country'} className={'mb-2'} select variant={'standard'} fullWidth>
                                         <MenuItem value={1}>Singapore</MenuItem>
                                         <MenuItem value={2}>China</MenuItem>
-                                        <MenuItem value={3}>England</MenuItem>
-                                       
+                                        <MenuItem value={3}>India</MenuItem>
                                     </TextField>
                                 )}
                             />
-                             {/* <CountrySelect control={control}/> */}
 
                             <Controller
                                 name="postalCode"
@@ -249,6 +246,7 @@ function CreateListings() {
                                     />
                                 }
                             />
+
                         </div>
 
                         <div className={'col-12 mb-4'}>

@@ -16,7 +16,7 @@ function EditListing() {
     const [listing, setListing] = useState(null)
     const [selectedImages, setSelectedImages] = useState([]);
 
-    const { register, control, handleSubmit, setValue, formState: { errors } } = useForm({
+    const { reset,register, control, handleSubmit, getValues, setValue, formState: { errors } } = useForm({
         defaultValues: {
             name: '',
             price: 0,
@@ -26,30 +26,31 @@ function EditListing() {
             address_1: '',
             address_2: '',
             country: '',
-            postalCode: '',
+            state:'',
+            postal_code: '',
             description: ''
         }
     });
 
-    const [formData, setFormData] = useState({
-        name: '',
-        price: 0,
-        beds: 0,
-        bedrooms: 0,
-        bathrooms: 0,
-        address_1: '',
-        address_2: '',
-        country: '',
-        postalCode: '',
-        description: ''
-    })
-
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`)
+            const res = await fetch(`http://localhost:8000/api/v1/listings/${params.listingID}`)
             const data = await res.json()
+            console.log(data)
             setListing(data)
-            setFormData(data)
+            reset({
+                name: data.name,
+                price: data.price,
+                beds: data.beds,
+                bedrooms: data.bedrooms,
+                bathrooms: data.bathrooms,
+                address_1: data.address_1,
+                address_2: data.address_2,
+                country: data.country,
+                state:data.state,
+                postal_code: data.postal_code,
+                description: data.description
+            })
         }
         fetchApi()
     }, [params])
@@ -59,13 +60,6 @@ function EditListing() {
             setSelectedImages(listing.images_url);
         }
     }, [listing]);
-
-    function handleInputChange(e) {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        })
-    }
 
     const handleSelectImage = async (e) => {
             const images = e.target.files;
@@ -85,28 +79,27 @@ function EditListing() {
     function handleFormSubmit(e) {
         e.preventDefault()
         fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`, {
-        method: 'PATCH',
-        body: JSON.stringify(formData),
-        headers: {
-            'Content-type': 'application/json',
-        },
+            method: 'PATCH',
+            body: JSON.stringify(getValues()),
+            headers: {
+                'Content-type': 'application/json',
+            },
         })
 
         .then(response => {
-            return response.json()
-        })
-
-        .then(jsonResponse => {
             toast.success("Edit successfully",
             { position: toast.POSITION.TOP_CENTER })
-            navigate('/user/listing')
+            navigate('/users/my/listings')
         })
 
         .catch(err => {
-            toast.error(err.message,
-            {position: toast.POSITION.TOP_CENTER})
+            toast.error(err.message, {position: toast.POSITION.TOP_CENTER})
         })
     }
+
+    // const test = async(data) => {
+    //     console.log(data);
+    // }
 
     return (
 
@@ -132,7 +125,7 @@ function EditListing() {
                 </p>
 
                 {
-                    selectedImages?.length < 1 && (
+                    (
                         <Paper className={style.photoBox + ' d-flex align-items-center justify-content-center'}>
                             <Button component={'label'}>
                                 Upload Photo
@@ -152,17 +145,25 @@ function EditListing() {
 
                             <Controller
                                 name="name"
-                                Value={formData.name}
+                                // Value={formData.name}
                                 control={control}
-                                render={({ field }) => 
-                                    <TextField {...register("name", { required: true, maxLength: 20, pattern: /^[A-Za-z]+$/i })} 
-                                    {...field} required className={'mb-2'} name={'name'} label={'Name:'} variant={'standard'} fullWidth/>
-                                }
+                                render={({field}) => 
+                                    (
+                                        <TextField
+                                            className={'mb-2'}
+                                            label={'Name'}
+                                            variant={'standard'}
+                                            fullWidth
+                                            error={errors.name ? true : false} 
+                                            {...field}
+                                            helperText={errors.name && <p>{errors.name.message}</p>}
+                                        />
+                                    )}
                             />
                             
                             <Controller
                                 name="beds"
-                                value={formData.beds}
+                                // value={formData.beds}
                                 control={control}
                                 render={({ field }) => (
                                     <TextField {...field} required name={'beds'} label={'How many beds can guest use?'} className={'mb-2'} select variant={'standard'} fullWidth>
@@ -175,7 +176,6 @@ function EditListing() {
 
                             <Controller
                                 name="bedrooms"
-                                value={formData.bedrooms}
                                 control={control}
                                 render={({ field }) => (
                                     <TextField {...field} required name={'bedrooms'} label={'How many bedrooms can guests use?'} className={'mt-2'} select variant={'standard'} fullWidth>
@@ -188,7 +188,6 @@ function EditListing() {
 
                             <Controller
                                 name="bathrooms"
-                                value={formData.bathrooms}
                                 control={control}
                                 render={({ field }) => (
                                     <TextField {...field} required name={'bathrooms'} label={'No of bathrooms'} className={'mb-2'} select variant={'standard'} fullWidth>
@@ -201,9 +200,22 @@ function EditListing() {
 
                             <Controller
                                 name="state"
-                                value={formData.state}
                                 control={control}
-                                render={({ field }) => <TextField {...register("state", { required: true, maxLength: 20 })} {...field} required className={'mb-2'} name={'state'} label={'State'} variant={'standard'} fullWidth/>}
+                                rules={{
+                                    pattern: {value: /^[A-Za-z]+$/i, message:"Alphabetical characters only"}
+                                }}
+                                render={({field}) => 
+                                    (
+                                        <TextField
+                                            className={'mb-2'}
+                                            label={'State'}
+                                            variant={'standard'}
+                                            fullWidth
+                                            error={errors.state ? true : false} 
+                                            {...field}
+                                            helperText={errors.state && <p>{errors.state.message}</p>}
+                                        />
+                                    )}
                             />
 
                         </div>
@@ -212,28 +224,24 @@ function EditListing() {
                         <div className={'col-5'}>
                             <Controller
                                 name="price"
-                                value={formData.price}
                                 control={control}
                                 render={({ field }) => <TextField {...register("price", { required: true, min:1, max: 100 })} {...field} required name={'price'} type={'number'} className={'mb-2'} label={'Price:'} variant={'standard'} fullWidth/>}
                             />
                             
                             <Controller
                                 name="address_1"
-                                value={formData.address_1}
                                 control={control}
                                 render={({ field }) => <TextField {...field} required name={'address_1'} label={'Address_1'} className={'mb-2'} variant={'standard'} fullWidth />}
                             />
 
                             <Controller
                                 name="address_2"
-                                value={formData.address_2}
                                 control={control}
                                 render={({ field }) => <TextField {...field} required name={'address_2'} label={'Address_2'} className={'mb-2'} variant={'standard'} fullWidth />}
                             />
 
                             <Controller
                                 name="country"
-                                value={formData.country}
                                 control={control}
                                 render={({ field }) => (
                                     <TextField {...field} required name={'country'} label={'Country'} className={'mb-2'} select variant={'standard'} fullWidth>
@@ -245,17 +253,15 @@ function EditListing() {
                             />
                             
                             <Controller
-                                name="postalCode"
-                                value={formData.postalCode}
+                                name="postal_code"
                                 control={control}
-                                render={({ field }) => <TextField {...field} required name={'postalCode'} label={'Post code'} className={'mb-2'} variant={'standard'} fullWidth />}
+                                render={({ field }) => <TextField {...field} required name={'postal_code'} label={'Post code'} className={'mb-2'} variant={'standard'} fullWidth />}
                             />
                         </div>
 
                         <div className={'col-12 mb-4'}>
                             <Controller
                                 name="description"
-                                value={formData.description}
                                 control={control}
                                 render={({ field }) => <TextField {...field} name={'description'} required label={'Descriptions:'} fullWidth variant={'standard'}/>}
                             />
@@ -273,6 +279,7 @@ function EditListing() {
     
         </form>
     )
+
 
 }
 

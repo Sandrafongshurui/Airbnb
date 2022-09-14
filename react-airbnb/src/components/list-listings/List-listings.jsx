@@ -11,7 +11,7 @@ function ListListings ({isHost}) {
             const res = await fetch('http://localhost:8000/api/v1')
             const data = await res.json()
             setListings(data)
-            console.log(data)
+            // console.log(data)
         }
         fetchApi()
     }, [])

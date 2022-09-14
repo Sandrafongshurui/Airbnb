@@ -1,39 +1,9 @@
 import React from "react";
-
-import { TextField, Autocomplete } from "@mui/material";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 import { Controller } from "react-hook-form";
 
-export default function CountrySelect({ onChange, control }) {
-    return (
-        <Controller
-        as={
-            <Autocomplete
-                options={countries}
-                getOptionLabel={option => option.label}
-                renderOption={option => (
-                    <span>
-                        {countryToFlag(option.code)}
-                        {option.label}
-                    </span>
-                )}
-                renderInput={params => (
-                    <TextField
-                    {...params}
-                    label="Choose a country"
-                    variant="outlined"
-                    />
-                )}
-            />
-        }
-        onChange={([, data]) => data}
-        name="country"
-        control={control}
-        defaultValue={{ code: "AF", label: "Afghanistan", phone: "93" }}
-        />
-    );
-    }
-
-    function countryToFlag(isoCode) {
+function countryToFlag(isoCode) {
     return typeof String.fromCodePoint !== "undefined"
         ? isoCode
             .toUpperCase()
@@ -42,6 +12,46 @@ export default function CountrySelect({ onChange, control }) {
             )
         : isoCode;
     }
+
+export default function CountrySelect({ onChange, control }) {
+    return (
+        <Controller
+            as={
+                <Autocomplete
+                    options={countries}
+
+                    getOptionLabel={option => option.label}
+
+                    renderOption={option => (
+                        <React.Fragment>
+                            <span> {countryToFlag(option.code)} </span>
+                            {option.label}
+                        </React.Fragment>
+                    )}
+
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            variant="standard"
+                            label="Choose a country"
+                            inputProps={{
+                                ...params.inputProps,
+                                autoComplete: "disabled"
+                            }}
+                        />
+                    )}
+                />
+            }
+            onChange={([event, data]) => data || { label: "" }}
+            name="country"
+            control={control}
+            defaultValue={{ code: "AF", label: "Afghanistan", phone: "93" }}
+
+            // render={(field) => <p>From CountrySelect</p>}
+        
+        />
+    );
+}
 
     const countries = [
     { code: "AD", label: "Andorra", phone: "376" },
