@@ -19,7 +19,7 @@ router.post('/logout', userController.logout)// returns 201
 
 
 //add authMiddleware is used for any route that needs authentication
-router.get('/profile', userController.showProfile)//returns {}
+router.get('/profile', authMiddleware, userController.showProfile)//returns {}
 router.patch('/profile', validation(userValidators.register), userController.editProfile)// returns 201
 router.delete('/profile', userController.deleteProfile)// returns 201
 

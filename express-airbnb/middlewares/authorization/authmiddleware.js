@@ -34,7 +34,7 @@ const authMiddleware = (req, res, next) => {
 
     if (verified) {
         res.locals.userAuth = verified//replace the userAuth or set it
-        console.log(verified)
+        console.log("veriredfied", verified)
         next()
         return
     }

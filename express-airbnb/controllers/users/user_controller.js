@@ -56,7 +56,8 @@ const userController = {
     //secret is set in every server, so any server can check its authentication
     //change the schema obj to plain js object
     const userData = {
-      userId: user._id
+      userId: user._id,
+      username: user.firstname 
     };
 
 
@@ -75,32 +76,32 @@ const userController = {
     return res.json({ token });
   },
   logout: async (req, res) => {
-     let user = null;
-     let userAuth = res.locals.userAuth; //this is where the token is saved
+  //    let user = null;
+  //    let userAuth = res.locals.userAuth; //this is where the token is saved
 
-    try {
-      user = await userModel.find({_id: "631b7175a1827ff2c9860d90"})
-      if (!user) {
-        return res.status(404).json({ error: "user does not exsits" });
-      }
-      return res.status(200).json({ error: "Successfully logout" });
-  } catch (error) {
-    res.status(500);
-    return res.json({ error: "failed to delete logout" });
-  }
+  //   try {
+  //     user = await userModel.find({_id: "631b7175a1827ff2c9860d90"})
+  //     if (!user) {
+  //       return res.status(404).json({ error: "user does not exsits" });
+  //     }
+  //     return res.status(200).json({ error: "Successfully logout" });
+  // } catch (error) {
+  //   res.status(500);
+  //   return res.json({ error: "failed to delete logout" });
+  // }
   },
   showProfile: async (req, res) => {
     let user = null;
-    let userAuth = res.locals.userAuth; //this is where the token is saved
-
+    let userAuth = res.locals.userAuth.data.userId; //this is where the token is saved
+    console.log( "----->",  userAuth)
     //this is redundant, security, defence indepth
-    // if (!userAuth) {
-    //   console.log(userAuth);
-    //   return res.status(401).json();
-    // }
+    if (!userAuth) {
+      console.log(userAuth);
+      return res.status(401).json();
+    }
 
     try {
-      user = await userModel.findOne({ _id: "631b7175a1827ff2c9860d90" }); //cos the userAuth email is in a data opbject, when signed token at login
+      user = await userModel.findOne({ _id: "630f9ca501b6bed58f47cee6" }); //cos the userAuth email is in a data opbject, when signed token at login
       if (!user) {
         return res.status(404).json({ error: "user does not exsits" });
       }
