@@ -21,9 +21,6 @@ import {
     Select,
     TextField,
 } from "@mui/material";
-import style from "./createListings.module.css";
-import { toast } from "react-toastify";
-import axios from "axios";
 
 function CreateListings() {
     const navigate = useNavigate();

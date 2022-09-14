@@ -5,7 +5,6 @@ import Home from "./pages/home/home";
 import HostListings from "./pages/hostListings/hostListings";
 import CreateListings from "./pages/createListings/createListings";
 import BookingHistory from "./pages/bookingHistory/bookingHistory";
-import Listing from "./components/listing/Listing";
 import EditListing from "./pages/editListings/editListings";
 import ListingBooking from "./components/listing-booking/ListingBooking";
 import Trips from "./components/trips/Trips";
@@ -17,19 +16,13 @@ function App() {
     return (
         <div className="app">
             <Routes>
-                <Route 
-                    path="/" 
-                    element={<Home />} 
-                />
+                <Route path="/" element={<Home />} />
 
-                <Route 
-                    path="/users/my/listings" 
-                    element={<HostListings />} 
-                />
+                <Route path="/users/my/listings" element={<HostListings />} />
 
-                <Route 
-                    path="/users/my/listings/create" 
-                    element={<CreateListings />} 
+                <Route
+                    path="/users/my/listings/create"
+                    element={<CreateListings />}
                 />
 
                 <Route
@@ -48,7 +41,6 @@ function App() {
                 />
 
                 <Route path="/user/trips" element={<Trips />} />
-
             </Routes>
         </div>
     );
