@@ -26,7 +26,8 @@ function CreateListings() {
             address_1: '',
             address_2: '',
             country: '',
-            postalCode: '',
+            state:'',
+            postal_code: '',
             description: ''
         }
     });
@@ -239,10 +240,10 @@ function CreateListings() {
                             />
 
                             <Controller
-                                name="postalCode"
+                                name="postal_code"
                                 control={control}
                                 render={({ field }) => 
-                                    <TextField {...field} required name={'postalCode'} label={'Post code'} className={'mb-2'} variant={'standard'} fullWidth 
+                                    <TextField {...field} required name={'postal_code'} label={'Postal code'} className={'mb-2'} variant={'standard'} fullWidth 
                                     />
                                 }
                             />
