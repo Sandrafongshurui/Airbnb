@@ -1,6 +1,6 @@
 .modal-wrapper {
   position: fixed;
-  z-index: 1;
+  z-index: 100;
   left: 0;
   top: 0;
   width: 100%;
@@ -26,12 +26,15 @@
 .close-button {
   background-color: white;
   border: none;
-  font-size: 50px;
+  font-size: xx-large;
+  margin-bottom: 0.5em;
+  float: right;
+  /* font-size: 50px;
   color: #ff8686;
   float: right;
-  font-weight: bold;
-  height: 50%;
-  padding: 0;;
+  font-weight: bold; */
+  /* height: 50%; */
+  /* padding: 0;; */
 }
 
 .close-button :hover,
@@ -41,3 +44,7 @@
   cursor: pointer;
 }
 
+.login-page-div{
+  height: 600px;
+  display: flex;
+}

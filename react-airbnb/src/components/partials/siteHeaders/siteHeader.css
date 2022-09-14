@@ -1,12 +1,16 @@
+
+
 .header {
     margin-top: 1rem;
+    padding-bottom: 1em;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     background-color: white;
-    /* z-index: 0; */
+    box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.151);
+    z-index: 2;
     width: 100%;
 }
 
