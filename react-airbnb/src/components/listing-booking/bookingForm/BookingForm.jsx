@@ -14,6 +14,12 @@ const BookingForm = (props) => {
     const [noOfGuests, setNoOfGuests] = useState(1);
     const [totalCost, setTotalCost] = useState(0);
     const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        checkin_date: startDate,
+        checkout_date: endDate,
+        total_guests: noOfGuests,
+        total_costs: totalCost,
+    });
 
     // an variable obj to store the start and end date
     const selectionRange = {
@@ -49,10 +55,17 @@ const BookingForm = (props) => {
         setTotalCost(noOfNights * Number(pricePerNight));
     };
 
-    // to set no of guests state upon selecting the no of guests
+    // set no of guests state upon selecting the no of guests
     const handleGuests = (e) => {
         setNoOfGuests(e.target.value);
     };
+
+    // const handleChange = (e) => {
+    //     setFormData({
+    //         ...formData,
+    //         [e.target.name]: e.target.value,
+    //     });
+    // };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -60,25 +73,28 @@ const BookingForm = (props) => {
         try {
             const response = await axios.post(
                 "http://localhost:8000/api/v1/user/listing",
-                e
+                formData,
+                {
+                    headers: { "Content-Type": "multipart/form-data" },
+                }
             );
             console.log(response);
             toast.success("Reserve is successful", {
                 position: toast.POSITION.TOP_CENTER,
             });
-            navigate(`/users/trips`);
+            navigate(`/user/trips`);
         } catch (error) {
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
             });
         }
 
-        console.log({
-            checkin_date: startDate,
-            checkout_date: endDate,
-            total_guests: noOfGuests,
-            total_costs: totalCost,
-        });
+        // console.log({
+        //     checkin_date: startDate,
+        //     checkout_date: endDate,
+        //     total_guests: noOfGuests,
+        //     total_costs: totalCost,
+        // });
     };
 
     return (
@@ -113,6 +129,7 @@ const BookingForm = (props) => {
                                 min={1}
                                 max={props.data.accommodates}
                             ></input>
+                            <br />
                             <button className="reserve" type="submit">
                                 Reserve
                             </button>

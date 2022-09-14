@@ -6,6 +6,7 @@ import HostListings from "./pages/hostListings/hostListings";
 import CreateListings from "./pages/createListings/createListings";
 import BookingHistory from "./pages/bookingHistory/bookingHistory";
 import ListingBooking from "./components/listing-booking/ListingBooking";
+import Trips from "./components/trips/Trips";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -29,6 +30,8 @@ function App() {
                     path="/listing-details/:listingID"
                     element={<ListingBooking />}
                 />
+
+                <Route path="/user/trips" element={<Trips />} />
             </Routes>
         </div>
     );
