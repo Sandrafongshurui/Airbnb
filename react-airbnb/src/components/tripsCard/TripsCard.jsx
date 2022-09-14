@@ -37,10 +37,22 @@ const TripsCard = (props) => {
             </div>
 
             <div>
+                <span>Checkin date: </span>
                 <strong className={"ms-2 me-2"}>
-                    ${props.data.listing.price.$numberDecimal} SGD
+                    {props.data.checkin_date}
                 </strong>
-                <span>night</span>
+            </div>
+            <div>
+                <span>Checkout date: </span>
+                <strong className={"ms-2 me-2"}>
+                    {props.data.checkout_date}
+                </strong>
+            </div>
+            <div>
+                <span>Total Price: </span>
+                <strong className={"ms-2 me-2"}>
+                    ${props.data.listing.total_price} SGD
+                </strong>
             </div>
         </div>
     );
