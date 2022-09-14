@@ -7,16 +7,16 @@ import CreateListings from "./pages/createListings/createListings";
 import BookingHistory from "./pages/bookingHistory/bookingHistory";
 import Listing from "./components/listing/Listing";
 import EditListing from "./pages/editListings/editListings";
+import ListingBooking from "./components/listing-booking/ListingBooking";
+import Trips from "./components/trips/Trips";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import ListingBookingHistory from "./pages/bookingHistory/bookingHistory";
 
 function App() {
-
     return (
         <div className="app">
             <Routes>
-
                 <Route 
                     path="/" 
                     element={<Home />} 
@@ -44,13 +44,14 @@ function App() {
 
                 <Route
                     path="/listing-details/:listingID"
-                    element={<Listing />}
+                    element={<ListingBooking />}
                 />
-                
+
+                <Route path="/user/trips" element={<Trips />} />
+
             </Routes>
         </div>
     );
-
 }
 
 export default App;
