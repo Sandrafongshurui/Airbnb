@@ -12,19 +12,6 @@ import style from "./createListings.module.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-import {
-    Button,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Paper,
-    Select,
-    TextField,
-} from "@mui/material";
-import style from "./createListings.module.css";
-import { toast } from "react-toastify";
-import axios from "axios";
-
 function CreateListings() {
     const navigate = useNavigate();
     const [selectedImages, setSelectedImages] = useState([]);
@@ -41,7 +28,6 @@ function CreateListings() {
             beds: 0,
             bedrooms: 0,
             bathrooms: 0,
-
             address_1: "",
             address_2: "",
             country: "",
@@ -52,10 +38,6 @@ function CreateListings() {
     });
 
     console.log(errors);
-
-    useEffect(() => {
-        console.log(errors);
-    }, [errors]);
 
     const handleSelectImage = async (e) => {
         const images = e.target.files;
@@ -72,44 +54,28 @@ function CreateListings() {
         );
     };
 
-    const handleFormSubmit = async (data) => {
+    const handleFormSubmit = async(data) => {
         try {
-            const response = await axios.post(
-                "http://localhost:8000/api/v1/user/listing",
-                data
-            );
-            console.log(response);
-            toast.success("Create listing successful", {
-                position: toast.POSITION.TOP_CENTER,
-            });
-            navigate("/users/my/listings");
-        } catch (error) {
-            toast.error(error.message, {
-                position: toast.POSITION.TOP_CENTER,
-            });
-
-            await Promise.all(
-                [...images].map((image) => loadImageFromFile(image))
-            );
+            const response = await axios.post('http://localhost:8000/api/v1/user/listing', data)
+            console.log(response)
+            toast.success(
+                "Create listing successful",
+                {
+                    position: toast.POSITION.TOP_CENTER
+                }
+            )
+            navigate("/users/my/listings")
+            
+        } catch(error) {
+            toast.error(
+                error.message,
+                {
+                    position: toast.POSITION.TOP_CENTER
+                }
+            )
         }
+    }
 
-        const test = async (data) => {
-            try {
-                const response = await axios.post(
-                    "http://localhost:8000/api/v1/user/listing",
-                    data
-                );
-                console.log(response);
-                toast.success("Edit animal successful", {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-                navigate("/user/listing");
-            } catch (error) {
-                toast.error(error.message, {
-                    position: toast.POSITION.TOP_CENTER,
-                });
-            }
-        };
 
         return (
             <form
@@ -448,6 +414,6 @@ function CreateListings() {
             </form>
         );
     };
-}
+
 
 export default CreateListings;

@@ -5,7 +5,6 @@ import Home from "./pages/home/home";
 import HostListings from "./pages/hostListings/hostListings";
 import CreateListings from "./pages/createListings/createListings";
 import BookingHistory from "./pages/bookingHistory/bookingHistory";
-import Listing from "./components/listing/Listing";
 import EditListing from "./pages/editListings/editListings";
 import ListingBooking from "./components/listing-booking/ListingBooking";
 import Trips from "./components/trips/Trips";
