@@ -7,19 +7,21 @@ import "./BookingForm.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const BookingForm = (props) => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [noOfGuests, setNoOfGuests] = useState(1);
-    const [totalCost, setTotalCost] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        checkin_date: startDate,
-        checkout_date: endDate,
-        total_guests: noOfGuests,
-        total_costs: totalCost,
+        checkin_date: "",
+        checkout_date: "",
+        total_guests: "",
+        total_price: "",
     });
+    const params = useParams();
 
     // an variable obj to store the start and end date
     const selectionRange = {
@@ -46,13 +48,13 @@ const BookingForm = (props) => {
         const pricePerNight =
             props.data.price["$numberDecimal"].toLocaleString();
 
-        const totalPrice = new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-            maximumFractionDigits: 2,
-        }).format(noOfNights * pricePerNight);
+        // const totalPrice = new Intl.NumberFormat("en-US", {
+        //     style: "currency",
+        //     currency: "USD",
+        //     maximumFractionDigits: 2,
+        // }).format(noOfNights * pricePerNight);
 
-        setTotalCost(noOfNights * Number(pricePerNight));
+        setTotalPrice(noOfNights * Number(pricePerNight));
     };
 
     // set no of guests state upon selecting the no of guests
@@ -60,23 +62,23 @@ const BookingForm = (props) => {
         setNoOfGuests(e.target.value);
     };
 
-    // const handleChange = (e) => {
-    //     setFormData({
-    //         ...formData,
-    //         [e.target.name]: e.target.value,
-    //     });
-    // };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        console.log("handleSubmit: ", handleSubmit);
+
         try {
             const response = await axios.post(
-                "http://localhost:8000/api/v1/user/listing",
-                formData,
+                `http://localhost:8000/api/v1/user/book/${params.listingID}`,
                 {
-                    headers: { "Content-Type": "multipart/form-data" },
+                    checkin_date: startDate,
+                    checkout_date: endDate,
+                    total_guests: noOfGuests,
+                    total_price: totalPrice,
                 }
+                // {
+                //     headers: { "Content-Type": "multipart/form-data" },
+                // }
             );
             console.log(response);
             toast.success("Reserve is successful", {
@@ -88,13 +90,6 @@ const BookingForm = (props) => {
                 position: toast.POSITION.TOP_CENTER,
             });
         }
-
-        // console.log({
-        //     checkin_date: startDate,
-        //     checkout_date: endDate,
-        //     total_guests: noOfGuests,
-        //     total_costs: totalCost,
-        // });
     };
 
     return (
@@ -118,7 +113,7 @@ const BookingForm = (props) => {
                                         ].toLocaleString()}{" "}
                                         / Night
                                     </p>
-                                    <p>Total price: ${totalCost}</p>
+                                    <p>Total price: ${totalPrice}</p>
                                 </label>
                             </div>
                             No of Guests:
