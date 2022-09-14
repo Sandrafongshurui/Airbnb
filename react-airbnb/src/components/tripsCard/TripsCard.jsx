@@ -1,38 +1,49 @@
 import style from "./TripsCard.module.css";
+import SwiperCore, { Pagination } from "swiper/core";
+import { Swiper, SwiperSlide } from "swiper/react";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const TripsCard = (props) => {
     // const { _id, name, price, images_url } = props.data;
     console.log("props.data: ", props.data);
 
-    // const navigate = useNavigate();
+    const renderTrips = () => {
+        if (props.data) {
+            return props.data.listing.images_url.map((url) => {
+                return (
+                    <SwiperSlide key={url} className={style.listingImagesBox}>
+                        <img className={style.listingImages} src={url} alt="" />
+                    </SwiperSlide>
+                );
+            });
+        }
+    };
 
-    // const handleClickListing = () => {
-    //     if (props.isHost) {
-    //         navigate(`/user/listings/${_id}`);
-    //     } else {
-    //         navigate(`/listing-details/${_id}`);
-    //     }
-    // };
+    if (!props.data) {
+        return <></>;
+    }
 
-    // const renderImages = () => {
-    //     if (props.data) {
-    //         return images_url.map((url) => {
-    //             return (
-    //                 <SwiperSlide key={url} className={style.listingImagesBox}>
-    //                     <img className={style.listingImages} src={url} alt="" />
-    //                 </SwiperSlide>
-    //             );
-    //         });
-    //     }
-    // };
+    return (
+        <div className={style.tripsCard}>
+            <div>
+                <Swiper modules={[Pagination]} pagination={{ clickable: true }}>
+                    {renderTrips()}
+                </Swiper>
+            </div>
 
-    // if (!props.data) {
-    //     return <></>;
-    // }
+            <div className={"ms-2 mt-2 d-flex justify-content-between"}>
+                <strong>{props.data.listing.name}</strong>
+            </div>
 
-    return <div>Tests</div>;
+            <div>
+                <strong className={"ms-2 me-2"}>
+                    ${props.data.listing.price.$numberDecimal} SGD
+                </strong>
+                <span>night</span>
+            </div>
+        </div>
+    );
 };
 
 export default TripsCard;
