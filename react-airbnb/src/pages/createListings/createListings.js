@@ -12,16 +12,6 @@ import style from "./createListings.module.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-import {
-    Button,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Paper,
-    Select,
-    TextField,
-} from "@mui/material";
-
 function CreateListings() {
     const navigate = useNavigate();
     const [selectedImages, setSelectedImages] = useState([]);
