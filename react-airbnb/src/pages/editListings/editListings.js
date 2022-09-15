@@ -32,6 +32,11 @@ function EditListing() {
         }
     });
 
+    const headerOptions = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('user_token')}`
+    };
+
     useEffect(() => {
         const fetchApi = async () => {
             const res = await fetch(`http://localhost:8000/api/v1/listings/${params.listingID}`)
@@ -51,6 +56,7 @@ function EditListing() {
                 postal_code: data.postal_code,
                 description: data.description
             })
+           
         }
         fetchApi()
     }, [params])
@@ -81,9 +87,7 @@ function EditListing() {
         fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`, {
             method: 'PATCH',
             body: JSON.stringify(getValues()),
-            headers: {
-                'Content-type': 'application/json',
-            },
+            headers: headerOptions,
         })
 
         .then(response => {
@@ -97,15 +101,15 @@ function EditListing() {
         })
     }
 
-    // const test = async(data) => {
-    //     console.log(data);
-    // }
+    const handleCancel = (e) => {
+        navigate("/users/my/listings")
+    }
 
     return (
 
         <form onSubmit={handleFormSubmit} className={'container-fluid p-0'}>
 
-            <SiteHeader />
+            {/* <SiteHeader /> */}
             
             {/* select photo and upload it */}
             <div className={'container-xxl mt-4'}>
@@ -270,7 +274,7 @@ function EditListing() {
                 </Paper>
 
                 <div className={'mt-2 d-flex justify-content-end'}>
-                    <Button variant={'contained'} className={'me-2'} color={'inherit'}>Cancel</Button>
+                    <Button onClick={ handleCancel } variant={'contained'} className={'me-2'} color={'inherit'}>Cancel</Button>
                     <Button type={'submit'} variant={'contained'} color={'primary'}>Confirm</Button>
                 </div>
             </div>

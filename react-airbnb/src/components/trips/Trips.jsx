@@ -8,10 +8,16 @@ import TripsCard from "../tripsCard/TripsCard";
 const Trips = () => {
     const [trips, setTrips] = useState([]);
 
+      //sandra
+  const headerOptions = {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${localStorage.getItem('user_token')}`
+  };
+
     useEffect(() => {
         const fetchApi = async () => {
             const response = await axios.get(
-                "http://localhost:8000/api/v1/user/trips"
+                "http://localhost:8000/api/v1/user/trips", {headers: headerOptions}
             );
             const data = await response.data;
             setTrips(data);

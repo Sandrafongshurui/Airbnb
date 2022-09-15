@@ -1,22 +1,32 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import React from "react";
+import React, { createContext, useState } from "react";
 import "./App.css";
 import Home from "./pages/home/home";
+import ShowProfile from "./pages/showProfile/showProfile";
 import HostListings from "./pages/hostListings/hostListings";
 import CreateListings from "./pages/createListings/createListings";
 import BookingHistory from "./pages/bookingHistory/bookingHistory";
 import EditListing from "./pages/editListings/editListings";
 import ListingBooking from "./components/listing-booking/ListingBooking";
 import Trips from "./components/trips/Trips";
+import SiteHeader from "./components/partials/siteHeaders/SiteHeaders";
+import Auth from "./components/auth/Auth";
+import Protected from "./pages/protected/protected";
+import "bootstrap/dist/css/bootstrap.min.css";
+import LoginPage from "./pages/login/LoginPage";
+import RegisterPage from "./pages/register/RegisterPage";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import ListingBookingHistory from "./pages/bookingHistory/bookingHistory";
 
-function App() {
+const App = () => {
     return (
         <div className="app">
+            <SiteHeader />
+
             <Routes>
                 <Route path="/" element={<Home />} />
+
+                <Route path="/users/profile" element={<ShowProfile />} />
 
                 <Route path="/users/my/listings" element={<HostListings />} />
 
@@ -41,9 +51,17 @@ function App() {
                 />
 
                 <Route path="/user/trips" element={<Trips />} />
+
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+
+                <Route
+                    path="/protected"
+                    element={<Auth component={Protected} />}
+                />
             </Routes>
         </div>
     );
-}
+};
 
 export default App;

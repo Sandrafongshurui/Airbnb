@@ -10,6 +10,7 @@ const app = express()
 const port = process.env.PORT || 8000
 const connStr = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_HOST}.pufdenf.mongodb.net/`
 
+
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
@@ -22,7 +23,7 @@ app.use('/api/v1/user', userRouter)
 
 app.listen(port, async () => {
     try {
-        await mongoose.connect(connStr, { dbName: process.env.MONGO_DB})
+        await mongoose.connect(connStr, { dbName: process.env.MONGO_DB })
     } catch(err) {
         console.log(`Failed to connect to DB`)
         process.exit(1)
