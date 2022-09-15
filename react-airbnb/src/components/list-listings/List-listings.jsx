@@ -6,9 +6,14 @@ import React, { useState, useEffect } from "react"
 function ListListings ({isHost}) {
     const [listings, setListings] = useState([])
 
+    const headerOptions = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('user_token')}`
+    };
+
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await fetch('http://localhost:8000/api/v1')
+            const res = await fetch('http://localhost:8000/api/v1', {headers : headerOptions})
             const data = await res.json()
             setListings(data)
         }

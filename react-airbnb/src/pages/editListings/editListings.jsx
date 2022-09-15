@@ -39,7 +39,7 @@ function EditListing() {
 
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await fetch(`http://localhost:8000/api/v1/listings/${params.listingID}`)
+            const res = await fetch(`http://localhost:8000/api/v1/listings/${params.listingID}`,{headers:headerOptions})
             const data = await res.json()
             console.log(data)
             setListing(data)
@@ -56,7 +56,6 @@ function EditListing() {
                 postal_code: data.postal_code,
                 description: data.description
             })
-           
         }
         fetchApi()
     }, [params])

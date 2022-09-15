@@ -16,14 +16,15 @@ function ListingBookingHistory() {
     "Content-Type": "application/json",
     "Authorization": `Bearer ${localStorage.getItem('user_token')}`
 };
+
   useEffect(() => {
     const fetchApi = async () => {
-        const res = await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`)
+        const res = await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`, {headers:headerOptions})
         const data = await res.json()
         console.log(data)
         setHistory(data)
     }
-    fetchApi(headerOptions)
+    fetchApi()
 }, [params])
 
 
@@ -49,7 +50,7 @@ function ListingBookingHistory() {
       return (
         <TableRow key={item._id}>
           <TableCell>{index}</TableCell>
-          <TableCell>{item.booked_by}</TableCell>
+          <TableCell>{item.booked_by.firstname}</TableCell>
           <TableCell>
             {moment(item.checkin_date).format(`DD/MM/YYYY`)}-
             {moment(item.checkout_date).format(`DD/MM/YYYY`)}
@@ -63,7 +64,7 @@ function ListingBookingHistory() {
   return (
     <div className={'container-fluid p-0'}>
 
-      {/* <SiteHeader /> */}
+      <SiteHeader />
 
       <div className={'container mt-4'}>
 
