@@ -1,0 +1,7 @@
+.listings-container {
+    display: flex;
+    gap: 2em;
+    flex-flow: row wrap;
+    justify-content: center;
+    flex-direction: column;
+}
