@@ -26,7 +26,7 @@ const Trips = () => {
 
     return (
         <div className={"mt-2 me-3"}>
-            <SiteHeader />
+            {/* <SiteHeader /> */}
             <div className={"d-flex flex-wrap"}>{renderTrips}</div>
             <Footer />
         </div>
