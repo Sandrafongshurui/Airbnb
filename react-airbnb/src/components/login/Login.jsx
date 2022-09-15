@@ -29,7 +29,7 @@ const Login = (props) => {
         localStorage.setItem("user_token", res.data.token);
         //close the portal, site header change to token bearer name
         setOpen(false);
-        navigate(location.pathname);
+        //navigate(location.pathname);
       }
     } catch (error) {
       console.log(error);
