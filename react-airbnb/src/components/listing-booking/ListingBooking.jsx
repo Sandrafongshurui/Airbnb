@@ -26,7 +26,7 @@ const ListingBooking = () => {
 
     return (
         <div>
-            <SiteHeader />
+            {/* <SiteHeader /> */}
             {listing && <BookingImg data={listing} />}
             {listing && <BookingForm data={listing} />}
             {listing && <BookingHostInfo data={listing} />}
