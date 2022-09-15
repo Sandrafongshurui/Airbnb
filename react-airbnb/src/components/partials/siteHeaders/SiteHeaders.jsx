@@ -16,6 +16,7 @@ const SiteHeader = () => {
   const [openRegister, setOpenRegister] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   console.log("open siteheader ")
+
   const checkAuth = () => {
     const token = localStorage.getItem("user_token");
     if(token){

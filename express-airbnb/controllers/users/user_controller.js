@@ -19,7 +19,6 @@ const userController = {
     try {
       await userModel.create({
         ...req.body,
-        confirmpassword:passHash,
         password:passHash
       });
       return res.status(201).json("New User Created");
@@ -114,17 +113,17 @@ const userController = {
   },
   editProfile: async (req, res) => {
     let user = null;
-    let userAuth = res.locals.userAuth; //this is where the token is saved
+    let userAuth = res.locals.userAuth.data.userId; //this is where the token is saved
 
     //this is redundant, security, defence indepth
-    // if (!userAuth) {
-    //   console.log(userAuth);
-    //   return res.status(401).json();
-    // }
+    if (!userAuth) {
+      console.log(userAuth);
+      return res.status(401).json();
+    }
 
     try {
       user = await userModel.findOneAndUpdate(
-        {_id: "631b7175a1827ff2c9860d90" },
+        {_id: userAuth },
         {$set: {...req.body}},
         {new: true}
         ); 
@@ -140,13 +139,13 @@ const userController = {
   },
   deleteProfile: async (req, res) => {
     let user = null;
-    let userAuth = res.locals.userAuth; //this is where the token is saved
+    let userAuth = res.locals.userAuth.data.userId; //this is where the token is saved
 
     //this is redundant, security, defence indepth
-    // if (!userAuth) {
-    //   console.log(userAuth);
-    //   return res.status(401).json();
-    // }
+    if (!userAuth) {
+      console.log(userAuth);
+      return res.status(401).json();
+    }
 
     try {
         user = await userModel.findOneAndDelete({_id: "631b7175a1827ff2c9860d90"})
