@@ -10,19 +10,23 @@ SwiperCore.use([Pagination]);
 function ListingCard(props) {
     const { _id, name, price, images_url } = props.data;
     console.log(props.data);
-
     const navigate = useNavigate();
 
     const handleClickListing = () => {
-
         if(props.isHost) {
             navigate(`/users/my/listings/${ _id }`)
-
         } else {
             navigate(`/listing-details/${_id}`);
         }
     };
 
+    const checkPriceType = () => {
+        if(props.data){
+            return price.$numberDecimal
+            ? price["$numberDecimal"].toLocaleString()
+            : price.toLocaleString();
+        }
+    }
     const renderImages = () => {
         if (props.data) {
             return images_url.map((url) => {
@@ -35,7 +39,8 @@ function ListingCard(props) {
         }
     };
     if (!props.data) {
-        return <></>;
+        return <>
+        </>;
     }
 
     return (
@@ -54,12 +59,11 @@ function ListingCard(props) {
 
             <div>
                 <strong className={"ms-2 me-2"}>
-                    ${price.$numberDecimal} SGD
+                    ${checkPriceType(price)} SGD
                 </strong>
                 <span>night</span>
             </div>
         </div>
     );
 }
-
 export default ListingCard;

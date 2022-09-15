@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import React,{createContext, useState} from "react";
 import "./App.css";
 import Home from "./pages/home/home";
+import ShowProfile from "./pages/showProfile/showProfile";
 import HostListings from "./pages/hostListings/hostListings";
 import CreateListings from "./pages/createListings/createListings";
 import BookingHistory from "./pages/bookingHistory/bookingHistory";
@@ -27,6 +28,11 @@ const App = () => {
                 <Route 
                     path="/" 
                     element={<Home />} 
+                />
+
+                <Route 
+                    path="/users/profile" 
+                    element={<ShowProfile />} 
                 />
 
                 <Route 

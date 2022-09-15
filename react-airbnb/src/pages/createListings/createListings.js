@@ -76,13 +76,18 @@ function CreateListings() {
         }
     }
 
+    const handleCancel = (e) => {
+        navigate("/users/my/listings")
+    }
+
+
 
         return (
             <form
                 onSubmit={handleSubmit(handleFormSubmit)}
                 className={"container-fluid p-0"}
             >
-                <SiteHeader />
+                {/* <SiteHeader /> */}
 
                 {/* select photo and upload it */}
 
@@ -394,6 +399,7 @@ function CreateListings() {
 
                     <div className={"mt-2 d-flex justify-content-end"}>
                         <Button
+                            onClick={handleCancel}
                             variant={"contained"}
                             className={"me-2"}
                             color={"inherit"}
