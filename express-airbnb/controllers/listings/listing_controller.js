@@ -46,8 +46,8 @@ const listingController = {
   },
   listHostListings: async (req, res) => {
     //taken from res.locals.userAuth, verrified at login
-    //const userId = res.locals.userAuth.userId;
-    const userId = "630f9ca501b6bed58f47cee6";//this is harry
+    const userId = res.locals.userAuth.data.userId;
+    //const userId = "630f9ca501b6bed58f47cee6";//this is harry
     let userListings = null;
 
     try {
@@ -61,8 +61,8 @@ const listingController = {
     }
   },
   createListing: async (req, res) => {
-    //const userId = res.locals.userAuth.userId; //taken from res.locals.userAuth, verrified at login
-    const userId = "630f9ca501b6bed58f47cee6";
+    const userId = res.locals.userAuth.data.userId; //taken from res.locals.userAuth, verrified at login
+    //const userId = "630f9ca501b6bed58f47cee6";
     let listing = null;
 
     try {

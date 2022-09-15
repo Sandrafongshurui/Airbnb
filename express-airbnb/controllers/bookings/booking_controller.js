@@ -6,8 +6,6 @@ const DateTime = luxon.DateTime;
 
 const bookingController = {
   showListingBookings: async (req, res) => {
-    //taken from res.locals.userAuth, verrified at login
-    //const userId = res.locals.userAuth.userId;
     const listingId = req.params.listing_id; //taken from FE <link> to
     let listingBookings = null
 
@@ -24,7 +22,8 @@ const bookingController = {
 
   },
   showTrips: async (req, res) => {
-    const userId = "630f9ca501b6bed58f47cee5"; //take from res.local auth?
+    const userId = res.locals.userAuth.data.userId
+    //const userId = "630f9ca501b6bed58f47cee5"; //take from res.local auth?
     let trips = null
 
     try {
@@ -97,7 +96,8 @@ const bookingController = {
   bookTrip: async (req, res) => {
     //const listingId = "6316fda9d2571d6d3e58aef6"
     const listingId = req.params.listing_id; //take from FE link\
-    const booked_by = "630f9ca501b6bed58f47cee5"; //take from res.local auth?
+    const booked_by = res.locals.userAuth.data.userId
+    //const booked_by = "630f9ca501b6bed58f47cee5"; //take from res.local auth?
     let booking = null
     let listing = null
     const dateRangeArray = dateMethods.getDatesInRange(
