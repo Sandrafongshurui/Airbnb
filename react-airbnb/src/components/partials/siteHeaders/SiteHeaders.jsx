@@ -55,6 +55,7 @@ const SiteHeader = () => {
   const handleOpenLogin = () => {
     if(location.pathname !== "/login")
     {
+<<<<<<< HEAD
         setOpenLogin(true);
         setOpenRegister(false);       
     }else{
@@ -73,6 +74,49 @@ const SiteHeader = () => {
       console.log("log out");
       navStateToggle()
       navigate("/");
+=======
+        return (
+            <div className='header'>
+
+                <Link to='/'>
+                    <img
+                        className="header__icon"
+                        src={logo}
+                        alt=" Airbnb"
+                    />
+                </Link>
+
+                <div className='header__center'>
+                    <input type="text"/>
+                </div>
+
+                <div className='header__right'>
+                    <span className="material-symbols-outlined" onClick={this.toggleNav}> account_circle </span>
+                    {
+                        this.state.navState &&
+                        <div className="rightPop">
+                            <p className="rightPopText">Register</p>
+                            <p className="rightPopText">Login</p>
+                        </div>
+                    }
+
+                </div>
+
+                {/* token? */}
+                {/*  {
+                        token ? (
+                                <li className="nav-link"><Link to="/profile">Profile</Link></li>
+                            ) : (
+                                <>
+                                    <li className="nav-link"><Link to="/register">Register</Link></li>
+                                    <li className="nav-link"><Link to="/login">Login</Link></li>
+                                </>
+                            )
+                        } */}
+
+            </div>
+        )
+>>>>>>> 6d3183e33cc3350c6ea751c7639ca2442e500723
     }
   };
 

@@ -15,10 +15,10 @@ function HostListings() {
         <div className={'container-xxl mt-4'}>
         
             <div className={'mt-2'}>
-                <Button onClick={() => navigate('/create')}>Create</Button>
+                <Button onClick={() => navigate('/users/my/listings/create')}>Create</Button>
             </div>
 
-            <ListListings />
+            <ListListings isHost={ true }/>
 
         </div>
 
