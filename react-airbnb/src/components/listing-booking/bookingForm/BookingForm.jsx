@@ -62,7 +62,7 @@ const BookingForm = (props) => {
 
     // calculation of total price based on no. of nights
     const pricePerNight =
-      // props.data.price["$numberDecimal"].toLocaleString();
+       //props.data.price["$numberDecimal"].toLocaleString();
       checkPriceType();//sandra
 
     // const totalPrice = new Intl.NumberFormat("en-US", {
