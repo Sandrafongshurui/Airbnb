@@ -1,4 +1,4 @@
-import LoginForm from "../../components/login/login-form/LoginForm";
+import RegisterForm from "../../components/register/register-form/RegisterForm";
 import "../../components/modal/Modal.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import React, { useState } from "react";
@@ -14,17 +14,14 @@ const LoginPage = () => {
     setCatchError(null);
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/login",
+        "http://localhost:8000/api/v1/user/register",
         data
       );
       console.log("Server Respond:", res);
-      console.log("token", res.data.token);
 
       if (res.status === 200 || res.status === 201) {
-        // store the token into localstorage / cookie
-        localStorage.setItem("user_token", res.data.token);
         //navigate to home
-        if (location.pathname === "/login") {
+        if (location.pathname === "/Register") {
           navigate("/");
         }
       }
@@ -47,7 +44,7 @@ const LoginPage = () => {
             </div>
           )}
           {/* --------insert component here------------- */}
-          <LoginForm data={onSubmit} />
+          <RegisterForm data={onSubmit} />
         </div>
       </div>
     </div>

@@ -15,6 +15,12 @@ import { useNavigate } from "react-router-dom";
 function Protected(props) {
   const navigate = useNavigate();
 
+  // const headerOptions = {
+  //   "Content-Type": "application/json",
+  //   Authorization: "Bearer " + didToken,
+  // }
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/");
@@ -35,7 +41,7 @@ function Protected(props) {
           >
             <Button component={"label"}>
               Upload Photo
-              <input accept={"image/jpeg, image/png"} type={"file"} hidden />
+              <input accept={"image/jpeg, image/png"} type={"file"} />
             </Button>
           </Paper>
         </div>

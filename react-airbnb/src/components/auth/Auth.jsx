@@ -14,14 +14,14 @@ const Auth = (props) => {
     return <Navigate to={"/login"} />;
   }
 
-  // check if token expired, in unit 2 is like the max time thing in session yes?
+  // check if token expired, in unit 2 is like the max time thing in session
   // if expired, purge localstorage, redirect to login
   const user = jwt_decode(token);
   console.log(user)
   const now = DateTime.now().toUnixInteger();
 
-  //check expire date with luxon...why not just purge it and make ne wone?
-  //this exp is issued with the token.....so we cant change it?
+
+  //this exp is issued with the token.....so we cant change it
   if (user.exp < now) {
     localStorage.removeItem("user_token");
     return <Navigate to={"/login"} />;

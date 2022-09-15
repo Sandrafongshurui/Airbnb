@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField, Button, Box } from "@mui/material";
 import "bootstrap";
 import { Controller, useForm } from "react-hook-form";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+
+
 
 const LoginForm = (props) => {
-  let navigate = useNavigate();
-  const [open, setOpen] = useState(true);
-  const [catchError, setCatchError] = useState(null);
   // form validation rules
   const validationSchema = yup.object().shape({
     email: yup.string().email("Valid email is required").required(),
@@ -25,41 +22,16 @@ const LoginForm = (props) => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm({ resolver: yupResolver(validationSchema), defaultValues });
 
   const onSubmit = async (data) => {
-    console.log("send data:", data);
-    setCatchError(null);
-    try {
-      const res = await axios.post(
-        "http://localhost:8000/api/v1/user/login",
-        data
-      );
-      console.log("Server Respond:", res);
-      console.log("token", res.data.token);
-
-      if (res.status === 200 || res.status === 201) {
-        // store the token into localstorage / cookie
-        localStorage.setItem("user_token", res.data.token);
-        //close the portal, site header change to token bearer name
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
-      // display an error
-      console.log(error.response.data.error);
-      setCatchError(error.response.data.error);
-    }
+    console.log("From loginform:", data);
+    props.data(data);
   };
 
   return (
-    <div className="p-3 mb-2">
-      {catchError && (
-        <div>
-          <h4 style={{ color: "red", textAlign: "center" }}>{catchError}</h4>
-        </div>
-      )}
+    <div>
       <div>
         <h1 className="text-center pb-3 m-0 mb-3">Login</h1>
       </div>
@@ -70,12 +42,10 @@ const LoginForm = (props) => {
             control={control} //take place of the register RHF
             render={({
               //takes a function and rturn a react element
-              field: { onChange, value },
-              fieldState: { isDirty, error }, //this error will be displyed in formstate errors
+              field,
+              fieldState: { error }, //this error will be displyed takes over form state errors
             }) => (
               <TextField
-                onChange={onChange} // send value to hook form
-                value={value}
                 label={"email"} //label in the box
                 variant="outlined"
                 fullWidth
@@ -83,6 +53,7 @@ const LoginForm = (props) => {
                 autoFocus
                 error={!!error} //convert obj into a bool
                 helperText={error ? error.message : null}
+                {...field}
               />
             )}
           />
@@ -93,12 +64,10 @@ const LoginForm = (props) => {
             control={control} //take place of the register RHF
             render={({
               //takes a function and rturn a react element
-              field: { onChange, value },
-              fieldState: { isDirty, error }, //this error will be displyed in formstate errors
+              field,
+              fieldState: { error }, //this error will be displyed takes over form state errors
             }) => (
               <TextField
-                onChange={onChange} // send value to hook form
-                value={value}
                 label={"password"} //label in the box
                 variant="outlined"
                 fullWidth
@@ -106,6 +75,7 @@ const LoginForm = (props) => {
                 autoFocus
                 error={!!error} //convert obj into a bool
                 helperText={error ? error.message : null}
+                {...field}
               />
             )}
           />

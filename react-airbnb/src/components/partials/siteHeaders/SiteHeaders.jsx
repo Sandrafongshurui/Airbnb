@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Login from "../../login/Login";
@@ -8,15 +8,28 @@ import "./siteHeader.css";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const SiteHeader = () => {
-    let username = ""
-    const location = useLocation();
+  let username = "username"
+  const location = useLocation();
   const navigate = useNavigate();
   const [navState, setNavState] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const [openRegister, setOpenRegister] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
+  console.log("open siteheader ")
+  const checkAuth = () => {
+    const token = localStorage.getItem("user_token");
+    if(token){
+        setIsAuth(true)
+        console.log(token)
+    }else{
+        setIsAuth(false);
+    }
+  };
 
-  console.log(openLogin);
+  // useEffect(() => {
+  //   checkAuth() 
+  //   console.log("use effect, check auth")
+  // }, []);
 
   const navStateToggle = () => {
     setNavState((prevState) => !prevState);
@@ -29,34 +42,29 @@ const SiteHeader = () => {
     setOpenRegister(value);
   };
   const handleOpenRegister = () => {
-    if(location.pathname !== "/login")
+    if(location.pathname !== "/register")
     {
         setOpenRegister(true);
         setOpenLogin(false);      
+    }else{
+      navigate("/register")
     }
     navStateToggle();
+    
   };
   const handleOpenLogin = () => {
     if(location.pathname !== "/login")
     {
         setOpenLogin(true);
         setOpenRegister(false);       
+    }else{
+      navigate("/login")
     }
     navStateToggle();
-
+    
   };
-  const checkAuth = () => {
-    const token = localStorage.getItem("user_token");
-    if(token){
-        setIsAuth(true)
-        console.log(token)
-        username = token.username
-    }else{
-        setIsAuth(false);
-   
-    }
 
-  };
+ 
 
   const handleLogout = () => {
     const token = localStorage.getItem("user_token");
@@ -81,7 +89,7 @@ const SiteHeader = () => {
         </div>
 
         <div className="header__right">
-           {/* {isAuth && (<p>Welcome back {username} </p>)} */}
+           {isAuth && (<p style={{marginRight: "2em", marginBottom: "0"}}> {username} </p>)}
           <span className="material-symbols-outlined" onClick={navStateToggle}>
             {" "}
             account_circle{" "}
@@ -115,7 +123,7 @@ const SiteHeader = () => {
         </div>
       </div>
       {openLogin && <Login toggle={handleLoginToggle} />}
-      {openRegister && <Register toggle={handleRegisterToggle} />}
+      {openRegister && <Register toggle={handleRegisterToggle} />}    
     </div>
   );
 };
