@@ -32,10 +32,6 @@ const userValidator = {
         .string()
         .min(4, "Mininum 4 characters")
         .required(),
-      confirmpassword: yup
-        .string()
-        .required()
-        .oneOf([yup.ref("password")], "Your passwords do not match."),
       about_me: yup.string().required(),
       image: yup.string(),
     }),

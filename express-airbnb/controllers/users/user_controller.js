@@ -19,7 +19,6 @@ const userController = {
     try {
       await userModel.create({
         ...req.body,
-        confirmpassword:passHash,
         password:passHash
       });
       return res.status(201).json("New User Created");
