@@ -5,6 +5,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import React, { useEffect, useState } from "react";
 import EditTrip from "../editTrip/EditTrip";
 import DelTrip from "../delTrip/DelTrip";
+import { Link } from "react-router-dom";
 
 const TripsCard = (props) => {
     // const { _id, name, price, images_url } = props.data;
@@ -34,12 +35,20 @@ const TripsCard = (props) => {
                 </Swiper>
             </div>
 
-            <div className="edit">
-                <EditTrip />
-            </div>
-
-            <div className="delete">
-                <DelTrip />
+            {/* TO FIX THIS PART */}
+            <div className="container text-center">
+                <div className="row">
+                    <div className="col">
+                        <div className="edit">
+                            <button onClick={EditTrip}>Edit trip</button>
+                        </div>
+                    </div>
+                    <div className="col">
+                        <div className="delete">
+                            <button onClick={DelTrip}>Delete trip</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div className={"ms-2 mt-2 d-flex justify-content-between"}>
