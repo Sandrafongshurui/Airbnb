@@ -3,6 +3,8 @@ import SwiperCore, { Pagination } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import React, { useEffect, useState } from "react";
+import EditTrip from "../editTrip/EditTrip";
+import DelTrip from "../delTrip/DelTrip";
 
 const TripsCard = (props) => {
     // const { _id, name, price, images_url } = props.data;
@@ -30,6 +32,14 @@ const TripsCard = (props) => {
                 <Swiper modules={[Pagination]} pagination={{ clickable: true }}>
                     {renderTrips()}
                 </Swiper>
+            </div>
+
+            <div className="edit">
+                <EditTrip />
+            </div>
+
+            <div className="delete">
+                <DelTrip />
             </div>
 
             <div className={"ms-2 mt-2 d-flex justify-content-between"}>

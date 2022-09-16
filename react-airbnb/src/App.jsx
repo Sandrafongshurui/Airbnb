@@ -14,6 +14,7 @@ import Auth from "./components/auth/Auth";
 import Protected from "./pages/protected/protected";
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
+import EditTrip from "./components/editTrip/EditTrip";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -52,6 +53,7 @@ const App = () => {
                 />
 
                 <Route path="/user/trips" element={<Trips />} />
+                <Route path="/user/trip/:booking_id" element={<EditTrip />} />
 
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
