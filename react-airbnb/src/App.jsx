@@ -12,10 +12,11 @@ import Trips from "./components/trips/Trips";
 import SiteHeader from "./components/partials/siteHeaders/SiteHeaders";
 import Auth from "./components/auth/Auth";
 import Protected from "./pages/protected/protected";
-import "bootstrap/dist/css/bootstrap.min.css";
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
+import { ToastContainer } from "react-toastify";
 
+import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
@@ -60,6 +61,8 @@ const App = () => {
                     element={<Auth component={Protected} />}
                 />
             </Routes>
+
+            <ToastContainer />
         </div>
     );
 };
