@@ -37,20 +37,28 @@ const TripsCard = (props) => {
     const checkIn = props.data.checkin_date;
     const checkDate = isCurrentDate > checkIn;
 
+    //sandra
+    const headerOptions = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("user_token")}`,
+    };
+
     // to handle delete of booking
     const handleDelete = async (e) => {
         e.preventDefault();
+        console.log("handleDelete: ");
 
         try {
             const response = await axios.delete(
-                `http://localhost:8000/api/v1/user/trip/${params.booking_id}`
+                `http://localhost:8000/api/v1/user/trip/${props.data._id}`,
+                { headers: headerOptions }
             );
 
             console.log(response);
             toast.success("Successfully deleted", {
                 position: toast.POSITION.TOP_CENTER,
             });
-            // navigate(`/user/trips`);
+            navigate(`/users/my/trips`);
         } catch (error) {
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
