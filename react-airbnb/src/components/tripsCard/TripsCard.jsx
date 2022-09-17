@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import SwiperCore, { Pagination } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import EditTrip from "../editTrip/EditTrip";
-import { Link } from "react-router-dom";
-import axios from "axios";
-
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+import axios from "axios";
 import style from "./TripsCard.module.css";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const TripsCard = (props) => {
     // const { _id, name, price, images_url } = props.data;
     console.log("props.data: ", props.data);
-    // const params = useParams();
+    const navigate = useNavigate();
+    const params = useParams();
     // const [booking, setBooking] = useState(null);
-    // console.log("params: ", params);
+    console.log("props.data._id: ", props.data._id);
+    console.log("params.booking_id: ", params.booking_id);
+    console.log("newDate: ", new Date());
 
     const renderTrips = () => {
         if (props.data) {
@@ -31,25 +31,33 @@ const TripsCard = (props) => {
         }
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
+    const currentDate = new Date();
+    const isCurrentDate = currentDate.toISOString();
+    const checkIn = props.data.checkin_date;
+    const checkDate = isCurrentDate > checkIn;
+    console.log("isCurrentDate: ", isCurrentDate);
+    console.log("checkIn: ", checkIn);
+    console.log("checkDate: ", checkDate);
 
-    //     try {
-    //         const response = await axios.delete(
-    //             `http://localhost:8000/api/v1/user/trip/${params.booking_id}`
-    //         );
+    const handleDelete = async (e) => {
+        e.preventDefault();
 
-    //         console.log(response);
-    //         // toast.success("Reserve is successful", {
-    //         //     position: toast.POSITION.TOP_CENTER,
-    //         // });
-    //         // navigate(`/user/trips`);
-    //     } catch (error) {
-    //         toast.error(error.message, {
-    //             position: toast.POSITION.TOP_CENTER,
-    //         });
-    //     }
-    // };
+        try {
+            const response = await axios.delete(
+                `http://localhost:8000/api/v1/user/trip/${params.booking_id}`
+            );
+
+            console.log(response);
+            toast.success("Successfully deleted", {
+                position: toast.POSITION.TOP_CENTER,
+            });
+            // navigate(`/user/trips`);
+        } catch (error) {
+            toast.error(error.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });
+        }
+    };
 
     if (!props.data) {
         return <></>;
@@ -64,20 +72,26 @@ const TripsCard = (props) => {
             </div>
 
             {/* TO FIX THIS PART */}
-            <div className="container text-center">
-                <div className="row">
-                    <div className="col">
-                        <div className="edit">
-                            <button onClick={EditTrip}>Edit trip</button>
+            {!checkDate ? (
+                <div className="container text-center">
+                    <div className="row">
+                        <div className="col">
+                            <div className="edit">
+                                <button onClick={EditTrip}>Edit trip</button>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col">
-                        <div className="delete">
-                            <button>Delete trip</button>
+                        <div className="col">
+                            <div className="delete">
+                                <button onClick={handleDelete}>
+                                    Delete trip
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            ) : (
+                <h6>Past trip</h6>
+            )}
 
             <div className={"ms-2 mt-2 d-flex justify-content-between"}>
                 <strong>{props.data.listing.name}</strong>
@@ -98,7 +112,7 @@ const TripsCard = (props) => {
             <div>
                 <span>Total Price: </span>
                 <strong className={"ms-2 me-2"}>
-                    ${props.data.listing.total_price} SGD
+                    ${props.data.total_price} SGD
                 </strong>
             </div>
         </div>
