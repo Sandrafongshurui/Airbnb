@@ -56,12 +56,12 @@ function CreateListings() {
 
     const handleFormSubmit = async(data) => {
         try {
-            const response = await axios.post('http://localhost:8000/api/v1/user/listing', data)
+            const response = await axios.post('https://ourairbnb.herokuapp.com/api/v1/user/listing', data)
             console.log(response)
             toast.success(
                 "Create listing successful",
                 {
-                    position: toast.POSITION.TOP_CENTER
+                    position: toast.POSITION.BOTTOM_CENTER
                 }
             )
             navigate("/users/my/listings")

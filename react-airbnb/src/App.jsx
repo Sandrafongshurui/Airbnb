@@ -3,6 +3,7 @@ import React, { createContext, useState } from "react";
 import "./App.css";
 import Home from "./pages/home/home";
 import ShowProfile from "./pages/showProfile/showProfile";
+import EditProfile from "./pages/editProfile/editProfile"
 import HostListings from "./pages/hostListings/hostListings";
 import CreateListings from "./pages/createListings/createListings";
 import BookingHistory from "./pages/bookingHistory/bookingHistory";
@@ -27,30 +28,18 @@ const App = () => {
 
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
 
-                {/* <Route path="/users/profile" element={<ShowProfile />} /> */}
+                <Route path="/users/my/profile" element={<ShowProfile />} />
+                <Route path="/users/my/profile/edit" element={<EditProfile />} />
 
                 <Route path="/users/my/listings" element={<HostListings />} />
+                <Route path="/users/my/listings/create" element={<CreateListings />} />
+                <Route path="/users/my/listings/:listingID" element={<BookingHistory />}/>
+                <Route path="/users/my/listings/:listingID/edit" element={<EditListing />}/>
 
-                <Route
-                    path="/users/my/listings/create"
-                    element={<CreateListings />}
-                />
-
-                <Route
-                    path="/users/my/listings/:listingID"
-                    element={<BookingHistory />}
-                />
-
-                <Route
-                    path="/users/my/listings/:listingID/edit"
-                    element={<EditListing />}
-                />
-
-                <Route
-                    path="/listing-details/:listingID"
-                    element={<ListingBooking />}
-                />
+                <Route path="/listing-details/:listingID" element={<ListingBooking />}/>
 
                 <Route
                     path="/users/my/trips"
@@ -62,14 +51,8 @@ const App = () => {
                 />
                 <Route path="/user/trip/:booking_id" element={<EditTrip />} />
 
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-
-                <Route
-                    path="/protected"
-                    element={<Auth component={Protected} />}
-                />
-            </Routes>
+                <Route path="/protected" element={<Auth component={Trips} />}/>
+            </Routes>  
 
             <ToastContainer />
         </div>

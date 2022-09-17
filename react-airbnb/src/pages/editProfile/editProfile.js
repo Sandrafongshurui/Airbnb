@@ -9,11 +9,10 @@ import {Button,MenuItem,Paper,TextField} from "@mui/material";
 import style from '../createListings/createListings.module.css';
 import { toast } from 'react-toastify'
 
-function EditListing() {
+function EditProfile() {
     const navigate = useNavigate()
     const params = useParams()
-    const [listing, setListing] = useState(null)
-    const [selectedImages, setSelectedImages] = useState([]);
+    const [profile, setProfile] = useState(null)
 
     const { reset,register, control, handleSubmit, getValues, setValue, formState: { errors } } = useForm({
         defaultValues: {
@@ -38,51 +37,23 @@ function EditListing() {
 
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/listings/${params.listingID}`,{headers:headerOptions})
+            const res = await fetch(`http://localhost:8000/api/v1/user/profile`, {headers:headerOptions})
             const data = await res.json()
             console.log(data)
-            setListing(data)
+            setProfile(data)
             reset({
-                name: data.name,
-                price: data.price,
-                beds: data.beds,
-                bedrooms: data.bedrooms,
-                bathrooms: data.bathrooms,
-                address_1: data.address_1,
-                address_2: data.address_2,
-                country: data.country,
-                state:data.state,
-                postal_code: data.postal_code,
-                description: data.description
+                firstname: data.firstname,
+                lastname: data.lastname,
+                gender: data.gender,
+                about_me: data.about_me,
             })
         }
         fetchApi()
-    }, [params])
-
-    useEffect(() => {
-        if (listing) {
-            setSelectedImages(listing.images_url);
-        }
-    }, [listing]);
-
-    const handleSelectImage = async (e) => {
-            const images = e.target.files;
-            let newImages = await Promise.all([...images].map(image => loadImageFromFile(image)));
-            console.log(newImages)
-            setSelectedImages(
-                [...selectedImages, ...newImages]
-            )
-        }
-
-    const handleDeleteImage = (image) => {
-        setSelectedImages(selectedImages.filter(item => {
-            return item !== image;
-        }))
-    }
+    }, [])
 
     function handleFormSubmit(e) {
         e.preventDefault()
-        fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, {
+        fetch(`http://localhost:8000/api/v1/user/profile`, {
             method: 'PATCH',
             body: JSON.stringify(getValues()),
             headers: headerOptions,
@@ -90,61 +61,29 @@ function EditListing() {
 
         .then(response => {
             toast.success("Edit successfully",
-            { position: toast.POSITION.TOP_CENTER })
-            navigate('/users/my/listings')
+            { position: toast.POSITION.BOTTOM_CENTER })
+            navigate('/users/my/profile')
         })
 
         .catch(err => {
-            toast.error(err.message, {position: toast.POSITION.TOP_CENTER})
+            toast.error(err.message, {position: toast.POSITION.BOTTOM_CENTER})
         })
     }
 
     const handleCancel = (e) => {
-        navigate("/users/my/listings")
+        navigate("/users/my/profile")
     }
 
     return (
 
         <form onSubmit={handleFormSubmit} className={'container-fluid p-0'}>
 
-            {/* <SiteHeader /> */}
-            
-            {/* select photo and upload it */}
             <div className={'container-xxl mt-4'}>
-                <h4>Add photos to your listing</h4>
-                
-                {selectedImages?.map(image => {
-                    return (
-                    <div style={{width: '200px', marginRight: '20px', display: 'flex', flexDirection: 'column'}}>
-                        <img  src={image} key={image} width={'200px'}/>
-                        <Button onClick={() => handleDeleteImage(image)} color={'error'}>Delete</Button>
-                    </div>
-                    )
-                })}
-
-                <p className={'text-secondary'}>
-                Tips: png/jpeg only
-                </p>
-
-                {
-                    (
-                        <Paper className={style.photoBox + ' d-flex align-items-center justify-content-center'}>
-                            <Button component={'label'}>
-                                Upload Photo
-                                <input onChange={handleSelectImage} name={'file'} multiple accept={'image/jpeg, image/png'} type={'file'} hidden/>
-                            </Button>
-                        </Paper>
-                    )
-                }
-            </div>
-
-            <div className={'container-xxl mt-4'}>
-                <h4>Basic info</h4>
+                <h4>Edit my profile</h4>
 
                 <Paper className={style.photoBox + ' d-flex align-items-center justify-content-center'}>
                     <div className={'row w-100 mt-2'}>
                         <div className={'col-5'}>
-
                             <Controller
                                 name="name"
                                 // Value={formData.name}
@@ -285,4 +224,4 @@ function EditListing() {
 
 }
 
-export default EditListing
+export default EditProfile
