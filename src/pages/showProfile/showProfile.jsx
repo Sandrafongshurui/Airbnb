@@ -87,7 +87,7 @@ function ShowProfile() {
                                         </div>
 
                                         <div className="col-md-6">
-                                            <p>{ profile.about_me ? "Nothing added yet":""}</p>
+                                            <p>{ profile.about_me }</p>
                                         </div>
 
                                     </div>

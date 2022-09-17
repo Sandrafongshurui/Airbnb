@@ -352,11 +352,10 @@ function CreateListings() {
                                             variant={"standard"}
                                             fullWidth
                                         >
-                                            <MenuItem value={1}>
-                                                Singapore
-                                            </MenuItem>
-                                            <MenuItem value={2}>China</MenuItem>
-                                            <MenuItem value={3}>India</MenuItem>
+                                            <MenuItem value={"Singapore"}>Singapore</MenuItem>
+                                            <MenuItem value={"Canada"}>Canada</MenuItem>
+                                            <MenuItem value={"Brazil"}>Brazil</MenuItem>
+                                            <MenuItem value={"Malaysia"}>Malaysia</MenuItem>
                                         </TextField>
                                     )}
                                 />
