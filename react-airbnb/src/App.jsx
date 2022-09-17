@@ -52,7 +52,15 @@ const App = () => {
                     element={<ListingBooking />}
                 />
 
-                <Route path="/user/trips" element={<Trips />} />
+                <Route
+                    path="/user/my/trips"
+                    element={
+                        <>
+                            <Trips />
+                            <Auth component={Protected} />
+                        </>
+                    }
+                />
                 <Route path="/user/trip/:booking_id" element={<EditTrip />} />
 
                 <Route path="/login" element={<LoginPage />} />

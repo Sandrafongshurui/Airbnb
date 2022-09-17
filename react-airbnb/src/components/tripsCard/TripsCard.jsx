@@ -16,8 +16,8 @@ const TripsCard = (props) => {
     const params = useParams();
     // const [booking, setBooking] = useState(null);
     console.log("props.data._id: ", props.data._id);
+    console.log("params: ", params);
     console.log("params.booking_id: ", params.booking_id);
-    console.log("newDate: ", new Date());
 
     const renderTrips = () => {
         if (props.data) {
@@ -31,14 +31,13 @@ const TripsCard = (props) => {
         }
     };
 
+    // compare dates to determine if its past trip or not
     const currentDate = new Date();
     const isCurrentDate = currentDate.toISOString();
     const checkIn = props.data.checkin_date;
     const checkDate = isCurrentDate > checkIn;
-    console.log("isCurrentDate: ", isCurrentDate);
-    console.log("checkIn: ", checkIn);
-    console.log("checkDate: ", checkDate);
 
+    // to handle delete of booking
     const handleDelete = async (e) => {
         e.preventDefault();
 
@@ -90,11 +89,19 @@ const TripsCard = (props) => {
                     </div>
                 </div>
             ) : (
-                <h6>Past trip</h6>
+                <strong>Past trip</strong>
             )}
 
             <div className={"ms-2 mt-2 d-flex justify-content-between"}>
+                <span>Listing: </span>
                 <strong>{props.data.listing.name}</strong>
+            </div>
+
+            <div>
+                <span>Location: </span>
+                <strong className={"ms-2 me-2"}>
+                    {props.data.listing.state}
+                </strong>
             </div>
 
             <div>
