@@ -53,11 +53,10 @@ const App = () => {
                 />
 
                 <Route
-                    path="/user/my/trips"
+                    path="/users/my/trips"
                     element={
                         <>
-                            <Trips />
-                            <Auth component={Protected} />
+                            <Auth component={Trips} />
                         </>
                     }
                 />

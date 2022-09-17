@@ -105,7 +105,7 @@ const BookingForm = (props) => {
             toast.success("Successfully reserved!", {
                 position: toast.POSITION.TOP_CENTER,
             });
-            navigate(`/user/my/trips`);
+            navigate(`/users/my/trips`);
         } catch (error) {
             console.log(error.response); //sandra
             console.log(error.response.data.message); //sandra

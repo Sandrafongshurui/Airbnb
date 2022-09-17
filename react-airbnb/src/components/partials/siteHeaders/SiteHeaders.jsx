@@ -101,7 +101,7 @@ const SiteHeader = () => {
                                 <p
                                     className="rightPopText"
                                     onClick={() => {
-                                        navigate("user/my/trips");
+                                        navigate("users/my/trips");
                                     }}
                                 >
                                     My trips
