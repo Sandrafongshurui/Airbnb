@@ -44,8 +44,8 @@ const App = () => {
                 <Route path="/user/trips" element={<Trips />} />
                 <Route path="/user/trip/:booking_id" element={<EditTrip />} />
 
-                <Route path="/protected" element={<Auth component={Protected} />}/>
-            </Routes>
+                <Route path="/protected" element={<Auth component={Trips} />}/>
+            </Routes>  
 
             <ToastContainer />
         </div>
