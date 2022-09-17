@@ -3,6 +3,7 @@ import React, { createContext, useState } from "react";
 import "./App.css";
 import Home from "./pages/home/home";
 import ShowProfile from "./pages/showProfile/showProfile";
+import EditProfile from "./pages/editProfile/editProfile"
 import HostListings from "./pages/hostListings/hostListings";
 import CreateListings from "./pages/createListings/createListings";
 import BookingHistory from "./pages/bookingHistory/bookingHistory";
@@ -29,6 +30,7 @@ const App = () => {
                 <Route path="/" element={<Home />} />
 
                 <Route path="/users/my/profile" element={<ShowProfile />} />
+                <Route path="/users/my/profile/edit" element={<EditProfile />} />
 
                 <Route path="/users/my/listings" element={<HostListings />} />
 

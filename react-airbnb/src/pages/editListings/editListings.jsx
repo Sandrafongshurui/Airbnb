@@ -1,4 +1,3 @@
-import SiteHeader from "../../components/partials/siteHeaders/SiteHeaders";
 import Footer from "../../components/partials/footer/Footer";
 import { loadImageFromFile } from "../createListings/utils";
 

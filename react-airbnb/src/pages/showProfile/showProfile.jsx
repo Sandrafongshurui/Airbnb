@@ -2,7 +2,7 @@ import ProfileImg from "../../assets/images/profile.svg"
 import style from "./showProfile.module.css"
 
 import React, {useEffect, useState} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 
 function ShowProfile() {
 
@@ -51,12 +51,12 @@ function ShowProfile() {
                         </div>
 
                         <div className="col-md-6 ms-2">
-
                             <div className={style.profileHead}>
-
+                                
                                 <h4>Welcome Back, { profile.lastname }</h4>
 
                                     <div className="profileDetails mt-4">
+
                                         <div className="row justify-content-between">
 
                                         <div className="col-md-4">
@@ -91,17 +91,13 @@ function ShowProfile() {
                                             <p>{ profile.about_me ? "Nothing added yet":""}</p>
                                         </div>
 
-
-                                        </div>
-
-
                                     </div>
-
                                 </div>
+                            </div>
                         </div>
 
-                        <div className="col-md-2 me-2 ">
-                                <input type="submit" className={style.profileEditBtn} value="Edit" />
+                        <div className="col-md-2 ms-2 mt-2">
+                            <Link to={`/users/my/profile/edit`} className='card-link'>EDIT</Link>
                         </div>
                     </div>
 
