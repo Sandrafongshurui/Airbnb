@@ -27,8 +27,7 @@ const App = () => {
             <SiteHeader />
 
             <Routes>
-                {/* <Route path="/" element={<Home />} /> */}
-                <Route path="/Airbnb-react" element={<Home />} />
+                <Route path="/" element={<Home />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
 
