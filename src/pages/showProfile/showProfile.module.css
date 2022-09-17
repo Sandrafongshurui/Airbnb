@@ -1,12 +1,13 @@
 .mainContainer {
     padding-top: 2rem;
-    height: 80vh; 
+    height: 80vh;
     display:flex;
     justify-content:center;
 }
 
 .profileContainer {
     height:60%;
+    min-height: 200px; 
     display: flex;
     justify-content:center;
     margin: 10px;
