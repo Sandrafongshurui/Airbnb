@@ -39,7 +39,7 @@ function EditListing() {
 
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await fetch(`http://localhost:8000/api/v1/listings/${params.listingID}`,{headers:headerOptions})
+            const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/listings/${params.listingID}`,{headers:headerOptions})
             const data = await res.json()
             console.log(data)
             setListing(data)
@@ -83,7 +83,7 @@ function EditListing() {
 
     function handleFormSubmit(e) {
         e.preventDefault()
-        fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`, {
+        fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, {
             method: 'PATCH',
             body: JSON.stringify(getValues()),
             headers: headerOptions,

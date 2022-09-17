@@ -1,69 +1,92 @@
-// import SiteHeader from "../../components/partials/siteHeaders/SiteHeaders";
-// import Footer from "../../components/partials/footer/Footer";
-// import {useNavigate} from 'react-router-dom';
-// import ProfileImg from "../../assets/images/profile.svg"
-// import style from "./showProfile.module.css"
+import ProfileImg from "../../assets/images/profile.svg"
+import style from "./showProfile.module.css"
 
-// function ShowProfile() {
-//     const navigate = useNavigate();
+import React, {useEffect, useState} from 'react';
+import {useNavigate, useParams} from "react-router-dom";
+
+function ShowProfile() {
+
+    const navigate = useNavigate();
+    const params = useParams()
+    const [profile, setProfile] = useState([]);
     
-//     return (
-//     <div className={'container-fluid p-0'}>
-//         <SiteHeader />
+    return (
+        <div className={style.mainContainer}>
 
-//         <>
-//             <div className="container profile">
+            <>
 
-//                 <form method= "">
+                <div className={style.profileContainer}>
+                    <div class="row justify-content-between">
 
-//                     <div className="row">
+                        <div class="col-md-2">
+                            <div className={style.imageBox}>
+                                    <div className="row">
+                                        <img className={style.avatarImage} src={ ProfileImg } alt=""/>
+                                    </div>
+                            </div>
+                        </div>
 
-//                         <div className="col-md-2" >
-//                             <img className={style.avatarImage} src={ ProfileImg } alt=""/>
-//                         </div>
+                        <div className="col-md-6 ms-2">
 
-//                         <div className="col-md-6 ms-2">
+                            <div className={style.profileHead}>
 
-//                             <div className={style.profileHead}>
+                                <h4>Welcome Back, XXX</h4>
 
-//                                 <h4>Welcome Back</h4>
+                                    <div className="profileDetails mt-4">
+                                        <div className="row justify-content-between">
 
-//                                 <div className="row">
+                                        <div className="col-md-4">
+                                            <h6>First Name</h6>                                     
+                                        </div>
 
-//                                     <div className="col-md-2">
-//                                         <label>Name</label>                                       
-//                                     </div>
+                                        <div className="col-md-6">
+                                            <p>Test</p>
+                                        </div>
 
-//                                     <div className="col-md-6">
-//                                         <p>test</p>
-//                                     </div>
-                            
-//                                 </div>
+                                        <div className="col-md-4">
+                                            <h6>Last Name</h6>                                     
+                                        </div>
 
-//                             </div>
+                                        <div className="col-md-6">
+                                            <p>Test</p>
+                                        </div>
 
-//                         </div>
+                                        <div className="col-md-4">
+                                            <h6>Gender</h6>                                     
+                                        </div>
+
+                                        <div className="col-md-6">
+                                            <p>Test</p>
+                                        </div>
+
+                                        <div className="col-md-4">
+                                            <h6>About me</h6>                                     
+                                        </div>
+
+                                        <div className="col-md-6">
+                                            <p>Test</p>
+                                        </div>
 
 
-//                         <div className="col-md-2 ms-2">
-//                             <input type="submit" className={style.profileEditBtn} value="Edit Profile" />
-//                         </div>
-                    
-//                     </div>
+                                        </div>
 
-//                 </form>
 
-//             </div>
+                                    </div>
 
-        
-        
-        
-//         </>
+                                </div>
+                        </div>
 
-        
-//         <Footer />
+                        <div className="col-md-2 me-2 ">
+                                <input type="submit" className={style.profileEditBtn} value="Edit" />
+                        </div>
+                    </div>
 
-//     </div>
-//     )
-// }
-// export default ShowProfile;
+                        
+                </div>
+
+            </>
+            
+        </div>
+    )
+}
+export default ShowProfile;
