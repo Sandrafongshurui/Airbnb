@@ -9,7 +9,22 @@ function ShowProfile() {
     const navigate = useNavigate();
     const params = useParams()
     const [profile, setProfile] = useState([]);
+
+    const headerOptions = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('user_token')}`
+    };
     
+    useEffect(() => {
+        const fetchApi = async () => {
+            const res = await fetch(`http://localhost:8000/api/v1/user/profile`, {headers:headerOptions})
+            const data = await res.json()
+            console.log(data)
+            setProfile(data)
+        }
+        fetchApi()
+    }, [])
+
     return (
         <div className={style.mainContainer}>
 
@@ -23,6 +38,15 @@ function ShowProfile() {
                                     <div className="row">
                                         <img className={style.avatarImage} src={ ProfileImg } alt=""/>
                                     </div>
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link disabled">Reset Password</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link disabled">Delete account</a>
+                                        </li>
+                                    
+                                    </ul>
                             </div>
                         </div>
 
@@ -30,7 +54,7 @@ function ShowProfile() {
 
                             <div className={style.profileHead}>
 
-                                <h4>Welcome Back, XXX</h4>
+                                <h4>Welcome Back, { profile.lastname }</h4>
 
                                     <div className="profileDetails mt-4">
                                         <div className="row justify-content-between">
@@ -40,7 +64,7 @@ function ShowProfile() {
                                         </div>
 
                                         <div className="col-md-6">
-                                            <p>Test</p>
+                                            <p>{profile.firstname}</p>
                                         </div>
 
                                         <div className="col-md-4">
@@ -48,7 +72,7 @@ function ShowProfile() {
                                         </div>
 
                                         <div className="col-md-6">
-                                            <p>Test</p>
+                                            <p>{ profile.lastname }</p>
                                         </div>
 
                                         <div className="col-md-4">
@@ -56,7 +80,7 @@ function ShowProfile() {
                                         </div>
 
                                         <div className="col-md-6">
-                                            <p>Test</p>
+                                            <p>{ profile.gender }</p>
                                         </div>
 
                                         <div className="col-md-4">
@@ -64,7 +88,7 @@ function ShowProfile() {
                                         </div>
 
                                         <div className="col-md-6">
-                                            <p>Test</p>
+                                            <p>{ profile.about_me ? "Nothing added yet":""}</p>
                                         </div>
 
 
