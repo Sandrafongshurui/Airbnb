@@ -10,14 +10,9 @@ import style from "./TripsCard.module.css";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const TripsCard = (props) => {
-    // const { _id, name, price, images_url } = props.data;
-    console.log("props.data: ", props.data);
     const navigate = useNavigate();
     const params = useParams();
-    // const [booking, setBooking] = useState(null);
-    console.log("props.data._id: ", props.data._id);
-    console.log("params: ", params);
-    console.log("params.booking_id: ", params.booking_id);
+    const [trip, setTrip] = useState(null);
 
     const renderTrips = () => {
         if (props.data) {
@@ -43,10 +38,13 @@ const TripsCard = (props) => {
         Authorization: `Bearer ${localStorage.getItem("user_token")}`,
     };
 
+    const refreshPage = () => {
+        window.location.reload(false);
+    };
+
     // to handle delete of booking
     const handleDelete = async (e) => {
         e.preventDefault();
-        console.log("handleDelete: ");
 
         try {
             const response = await axios.delete(
@@ -54,17 +52,34 @@ const TripsCard = (props) => {
                 { headers: headerOptions }
             );
 
-            console.log(response);
+            console.log("response: ", response);
             toast.success("Successfully deleted", {
                 position: toast.POSITION.TOP_CENTER,
             });
-            navigate(`/users/my/trips`);
+            refreshPage();
+            // navigate(`/users/my/trips`);
         } catch (error) {
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
             });
         }
     };
+
+    // const handleReply = async (e) => {
+    //     e.preventDefault();
+
+    //     try {
+    //         const reply = await axios.get(
+    //             "http://localhost:8000/api/v1/user/trips",
+    //             { headers: headerOptions }
+    //         );
+    //         console.log("reply: ", reply);
+    //     } catch (error) {
+    //         toast.error(error.message, {
+    //             position: toast.POSITION.TOP_CENTER,
+    //         });
+    //     }
+    // };
 
     if (!props.data) {
         return <></>;
