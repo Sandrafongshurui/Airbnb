@@ -102,7 +102,7 @@ const BookingForm = (props) => {
                 { headers: headerOptions }
             );
             console.log(response);
-            toast.success("Reserve is successful", {
+            toast.success("Successfully reserved!", {
                 position: toast.POSITION.TOP_CENTER,
             });
             navigate(`/user/trips`);

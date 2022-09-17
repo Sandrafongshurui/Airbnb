@@ -1,15 +1,23 @@
-import style from "./TripsCard.module.css";
+import React, { useEffect, useState } from "react";
 import SwiperCore, { Pagination } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import React, { useEffect, useState } from "react";
+
 import EditTrip from "../editTrip/EditTrip";
-import DelTrip from "../delTrip/DelTrip";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
+import style from "./TripsCard.module.css";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 const TripsCard = (props) => {
     // const { _id, name, price, images_url } = props.data;
     console.log("props.data: ", props.data);
+    // const params = useParams();
+    // const [booking, setBooking] = useState(null);
+    // console.log("params: ", params);
 
     const renderTrips = () => {
         if (props.data) {
@@ -22,6 +30,26 @@ const TripsCard = (props) => {
             });
         }
     };
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+
+    //     try {
+    //         const response = await axios.delete(
+    //             `http://localhost:8000/api/v1/user/trip/${params.booking_id}`
+    //         );
+
+    //         console.log(response);
+    //         // toast.success("Reserve is successful", {
+    //         //     position: toast.POSITION.TOP_CENTER,
+    //         // });
+    //         // navigate(`/user/trips`);
+    //     } catch (error) {
+    //         toast.error(error.message, {
+    //             position: toast.POSITION.TOP_CENTER,
+    //         });
+    //     }
+    // };
 
     if (!props.data) {
         return <></>;
@@ -45,7 +73,7 @@ const TripsCard = (props) => {
                     </div>
                     <div className="col">
                         <div className="delete">
-                            <button onClick={DelTrip}>Delete trip</button>
+                            <button>Delete trip</button>
                         </div>
                     </div>
                 </div>
