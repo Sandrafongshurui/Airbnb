@@ -2,12 +2,11 @@ import ProfileImg from "../../assets/images/profile.svg"
 import style from "./showProfile.module.css"
 
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function ShowProfile() {
 
     const navigate = useNavigate();
-    const params = useParams()
     const [profile, setProfile] = useState([]);
 
     const headerOptions = {
@@ -52,7 +51,7 @@ function ShowProfile() {
 
                         <div className="col-md-6 ms-2">
                             <div className={style.profileHead}>
-                                
+
                                 <h4>Welcome Back, { profile.lastname }</h4>
 
                                     <div className="profileDetails mt-4">
@@ -60,7 +59,7 @@ function ShowProfile() {
                                         <div className="row justify-content-between">
 
                                         <div className="col-md-4">
-                                            <h6>First Name</h6>                                     
+                                            <p>First Name</p>                                     
                                         </div>
 
                                         <div className="col-md-6">

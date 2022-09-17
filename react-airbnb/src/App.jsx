@@ -28,42 +28,23 @@ const App = () => {
 
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
 
                 <Route path="/users/my/profile" element={<ShowProfile />} />
                 <Route path="/users/my/profile/edit" element={<EditProfile />} />
 
                 <Route path="/users/my/listings" element={<HostListings />} />
+                <Route path="/users/my/listings/create" element={<CreateListings />} />
+                <Route path="/users/my/listings/:listingID" element={<BookingHistory />}/>
+                <Route path="/users/my/listings/:listingID/edit" element={<EditListing />}/>
 
-                <Route
-                    path="/users/my/listings/create"
-                    element={<CreateListings />}
-                />
-
-                <Route
-                    path="/users/my/listings/:listingID"
-                    element={<BookingHistory />}
-                />
-
-                <Route
-                    path="/users/my/listings/:listingID/edit"
-                    element={<EditListing />}
-                />
-
-                <Route
-                    path="/listing-details/:listingID"
-                    element={<ListingBooking />}
-                />
+                <Route path="/listing-details/:listingID" element={<ListingBooking />}/>
 
                 <Route path="/user/trips" element={<Trips />} />
                 <Route path="/user/trip/:booking_id" element={<EditTrip />} />
 
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-
-                <Route
-                    path="/protected"
-                    element={<Auth component={Protected} />}
-                />
+                <Route path="/protected" element={<Auth component={Protected} />}/>
             </Routes>
 
             <ToastContainer />
