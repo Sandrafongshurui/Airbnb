@@ -12,7 +12,7 @@ function ListListings({ isHost }) {
 
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await fetch("https://ourairbnb.herokuapp.com//api/v1", {
+            const res = await fetch("https://ourairbnb.herokuapp.com/api/v1", {
                 headers: headerOptions,
             });
             const data = await res.json();
