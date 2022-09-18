@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import React, { createContext, useState } from "react";
 import "./App.css";
 import Home from "./pages/home/home";
 import ShowProfile from "./pages/showProfile/showProfile";
@@ -12,7 +11,6 @@ import ListingBooking from "./components/listing-booking/ListingBooking";
 import Trips from "./components/trips/Trips";
 import SiteHeader from "./components/partials/siteHeaders/SiteHeaders";
 import Auth from "./components/auth/Auth";
-import Protected from "./pages/protected/protected";
 import LoginPage from "./pages/login/LoginPage";
 import RegisterPage from "./pages/register/RegisterPage";
 import EditTrip from "./components/editTrip/EditTrip";
@@ -51,7 +49,7 @@ const App = () => {
                 />
                 <Route path="/user/trip/:booking_id" element={<EditTrip />} />
 
-                <Route path="/protected" element={<Auth component={Trips} />}/>
+                
             </Routes>  
 
             <ToastContainer />
