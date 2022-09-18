@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SwiperCore, { Pagination } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
 import EditTrip from "../editTrip/EditTrip";
-import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
 import axios from "axios";
 import style from "./TripsCard.module.css";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { BedOutlined } from "@mui/icons-material";
 
 const TripsCard = (props) => {
-    const navigate = useNavigate();
-    const params = useParams();
-    const [trip, setTrip] = useState(null);
-
     const renderTrips = () => {
         if (props.data) {
             return props.data.listing.images_url.map((url) => {
@@ -38,14 +32,8 @@ const TripsCard = (props) => {
         Authorization: `Bearer ${localStorage.getItem("user_token")}`,
     };
 
-    const refreshPage = () => {
-        window.location.reload(false);
-    };
-
     // to handle delete of booking
     const handleDelete = async (e) => {
-        e.preventDefault();
-
         try {
             const response = await axios.delete(
                 `http://localhost:8000/api/v1/user/trip/${props.data._id}`,
@@ -56,8 +44,8 @@ const TripsCard = (props) => {
             toast.success("Successfully deleted", {
                 position: toast.POSITION.TOP_CENTER,
             });
-            refreshPage();
-            // navigate(`/users/my/trips`);
+
+            window.location.reload(false);
         } catch (error) {
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
@@ -65,21 +53,15 @@ const TripsCard = (props) => {
         }
     };
 
-    // const handleReply = async (e) => {
-    //     e.preventDefault();
-
-    //     try {
-    //         const reply = await axios.get(
-    //             "http://localhost:8000/api/v1/user/trips",
-    //             { headers: headerOptions }
-    //         );
-    //         console.log("reply: ", reply);
-    //     } catch (error) {
-    //         toast.error(error.message, {
-    //             position: toast.POSITION.TOP_CENTER,
-    //         });
-    //     }
-    // };
+    // to window confirmation of delete
+    const delConfirmation = (e) => {
+        if (window.confirm("Are you sure you want to delete the listing?")) {
+            e.preventDefault();
+            handleDelete();
+        } else {
+            return false;
+        }
+    };
 
     if (!props.data) {
         return <></>;
@@ -93,7 +75,6 @@ const TripsCard = (props) => {
                 </Swiper>
             </div>
 
-            {/* TO FIX THIS PART */}
             {!checkDate ? (
                 <div className="container text-center">
                     <div className="row">
@@ -104,7 +85,7 @@ const TripsCard = (props) => {
                         </div>
                         <div className="col">
                             <div className="delete">
-                                <button onClick={handleDelete}>
+                                <button onClick={delConfirmation}>
                                     Delete trip
                                 </button>
                             </div>
