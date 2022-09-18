@@ -33,7 +33,7 @@ const TripsCard = (props) => {
     };
 
     // to handle delete of booking
-    const handleDelete = async (e) => {
+    const handleDelete = async () => {
         try {
             const response = await axios.delete(
                 `http://localhost:8000/api/v1/user/trip/${props.data._id}`,
