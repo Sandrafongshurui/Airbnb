@@ -64,8 +64,6 @@ function ListingBookingHistory() {
   return (
     <div className={'container-fluid p-0'}>
 
-      <SiteHeader />
-
       <div className={'container mt-4'}>
 
         <div className={'d-flex justify-content-end mb-4'}>

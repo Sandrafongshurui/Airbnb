@@ -8,7 +8,6 @@ function Home() {
     
     return (
     <div className={'container-fluid p-0'}>
-        {/* <SiteHeader /> */}
 
         <div className={'container-xxl mt-4'}>
             <ListListings isHost={ false }/>
