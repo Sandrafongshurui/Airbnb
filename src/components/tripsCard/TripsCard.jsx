@@ -1,23 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SwiperCore, { Pagination } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
 import EditTrip from "../editTrip/EditTrip";
-import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
 import axios from "axios";
 import style from "./TripsCard.module.css";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { BedOutlined } from "@mui/icons-material";
 
 const TripsCard = (props) => {
-    // const { _id, name, price, images_url } = props.data;
-    console.log("props.data: ", props.data);
-    const navigate = useNavigate();
-    const params = useParams();
-    // const [booking, setBooking] = useState(null);
-    console.log("props.data._id: ", props.data._id);
-    console.log("params: ", params);
-    console.log("params.booking_id: ", params.booking_id);
+    const [catchError, setCatchError] = useState(null);
 
     const renderTrips = () => {
         if (props.data) {
@@ -37,20 +28,56 @@ const TripsCard = (props) => {
     const checkIn = props.data.checkin_date;
     const checkDate = isCurrentDate > checkIn;
 
-    // to handle delete of booking
-    const handleDelete = async (e) => {
-        e.preventDefault();
+    //sandra
+    const headerOptions = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("user_token")}`,
+    };
 
+    // to handle delete of booking
+    const handleDelete = async () => {
         try {
             const response = await axios.delete(
-                `http://localhost:8000/api/v1/user/trip/${params.booking_id}`
+                `http://localhost:8000/api/v1/user/trip/${props.data._id}`,
+                { headers: headerOptions }
             );
 
-            console.log(response);
+            console.log("response: ", response);
             toast.success("Successfully deleted", {
                 position: toast.POSITION.TOP_CENTER,
             });
-            // navigate(`/user/trips`);
+
+            window.location.reload(false);
+        } catch (error) {
+            toast.error(error.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });
+        }
+    };
+
+    // to window confirmation of delete
+    const delConfirmation = (e) => {
+        if (window.confirm("Are you sure you want to delete the listing?")) {
+            e.preventDefault();
+            handleDelete();
+        } else {
+            return false;
+        }
+    };
+
+    // handles the edit button
+    const onEdit = async (data) => {
+        console.log("from login:", data);
+        setCatchError(null);
+        try {
+            // const res = await axios.post(
+            //     "http://localhost:8000/api/v1/user/login",
+            //     data
+            // );
+            // console.log("response: ", res);
+            toast.success("Successfully edited", {
+                position: toast.POSITION.TOP_CENTER,
+            });
         } catch (error) {
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
@@ -70,18 +97,17 @@ const TripsCard = (props) => {
                 </Swiper>
             </div>
 
-            {/* TO FIX THIS PART */}
             {!checkDate ? (
                 <div className="container text-center">
                     <div className="row">
                         <div className="col">
                             <div className="edit">
-                                <button onClick={EditTrip}>Edit trip</button>
+                                <button onClick={onEdit}>Edit trip</button>
                             </div>
                         </div>
                         <div className="col">
                             <div className="delete">
-                                <button onClick={handleDelete}>
+                                <button onClick={delConfirmation}>
                                     Delete trip
                                 </button>
                             </div>

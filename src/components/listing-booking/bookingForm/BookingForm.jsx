@@ -10,18 +10,23 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import "./BookingForm.css";
 
 const BookingForm = (props) => {
+    // const tomorrow = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
+    // console.log("tomorrow: ", tomorrow);
+
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [noOfGuests, setNoOfGuests] = useState(1);
     const [totalPrice, setTotalPrice] = useState(0);
-    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         checkin_date: "",
         checkout_date: "",
         total_guests: "",
         total_price: "",
     });
+
+    const navigate = useNavigate();
     const params = useParams();
+
     //sandra
     let isAuth = false;
     const checkAuth = () => {

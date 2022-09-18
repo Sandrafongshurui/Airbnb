@@ -22,7 +22,6 @@ const Trips = () => {
             );
             const data = await response.data;
             setTrips(data);
-            console.log(data);
         };
         fetchApi();
     }, []);
