@@ -11,6 +11,8 @@ const LoginForm = (props) => {
     const [endDate, setEndDate] = useState(new Date());
     const [totalPrice, setTotalPrice] = useState(0);
 
+    console.log("props.data: ", props.data);
+
     // an variable obj to store the start and end date
     const selectionRange = {
         startDate: startDate,
