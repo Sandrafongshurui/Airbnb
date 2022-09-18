@@ -37,6 +37,10 @@ function ShowProfile() {
                                     <div className="row">
                                         <img className={style.avatarImage} src={ ProfileImg } alt=""/>
                                     </div>
+                                    <div className="row ms-3">
+                                    <p>{ profile.email }</p>
+
+                                    </div>
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
                                             <a class="nav-link disabled">Reset Password</a>
@@ -52,7 +56,7 @@ function ShowProfile() {
                         <div className="col-md-6 ms-2">
                             <div className={style.profileHead}>
 
-                                <h4>Welcome Back, { profile.lastname }</h4>
+                                <h4>Welcome Back, { profile.firstname }</h4>
 
                                     <div className="profileDetails mt-4">
 
@@ -87,7 +91,7 @@ function ShowProfile() {
                                         </div>
 
                                         <div className="col-md-6">
-                                            <p>{ profile.about_me ? "Nothing added yet":""}</p>
+                                            <p>{ profile.about_me }</p>
                                         </div>
 
                                     </div>

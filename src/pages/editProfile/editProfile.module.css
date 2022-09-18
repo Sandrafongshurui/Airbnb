@@ -1,0 +1,17 @@
+.formBox {
+    padding-top: 2rem;
+    height: 80vh; 
+    display:flex;
+    justify-content:center;
+}
+.title {
+    justify-content: center;
+    display: flex;
+    padding-top: 2rem;
+}
+.profileBox{
+    padding-top: 2rem;
+    min-height: 300px;
+    display:flex;
+    justify-content:center;
+}

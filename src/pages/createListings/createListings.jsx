@@ -56,7 +56,7 @@ function CreateListings() {
 
     const handleFormSubmit = async(data) => {
         try {
-            const response = await axios.post('https://ourairbnb.herokuapp.com/api/v1/user/listing', data)
+            const response = await axios.post('http://localhost:8000/api/v1/user/listing', data)
             console.log(response)
             toast.success(
                 "Create listing successful",
@@ -70,7 +70,7 @@ function CreateListings() {
             toast.error(
                 error.message,
                 {
-                    position: toast.POSITION.TOP_CENTER
+                    position: toast.POSITION.BOTTOM_CENTER
                 }
             )
         }
@@ -80,16 +80,11 @@ function CreateListings() {
         navigate("/users/my/listings")
     }
 
-
-
         return (
             <form
                 onSubmit={handleSubmit(handleFormSubmit)}
-                className={"container-fluid p-0"}
+                className={"container-fluid p-0 align-items-center"}
             >
-                {/* <SiteHeader /> */}
-
-                {/* select photo and upload it */}
 
                 <div className={"container-xxl mt-4"}>
                     <h4>Add photos to your listing</h4>
@@ -162,11 +157,6 @@ function CreateListings() {
                                             value: 20,
                                             message: "Max length exceeded",
                                         },
-                                        pattern: {
-                                            value: /^[A-Za-z]+$/i,
-                                            message:
-                                                "Alphabetical characters only",
-                                        },
                                     }}
                                     render={({ field }) => (
                                         <TextField
@@ -191,7 +181,6 @@ function CreateListings() {
                                     render={({ field }) => (
                                         <TextField
                                             {...field}
-                                            required
                                             name={"beds"}
                                             label={
                                                 "How many beds can guest use?"
@@ -214,7 +203,6 @@ function CreateListings() {
                                     render={({ field }) => (
                                         <TextField
                                             {...field}
-                                            required
                                             name={"bedrooms"}
                                             label={
                                                 "How many bedrooms can guests use?"
@@ -237,10 +225,9 @@ function CreateListings() {
                                     render={({ field }) => (
                                         <TextField
                                             {...field}
-                                            required
                                             name={"bathrooms"}
                                             label={"No of bathrooms"}
-                                            className={"mb-2"}
+                                            className={"mt-2"}
                                             select
                                             variant={"standard"}
                                             fullWidth
@@ -287,6 +274,12 @@ function CreateListings() {
                                 <Controller
                                     name="price"
                                     control={control}
+                                    rules={{
+                                        pattern: {
+                                            value: /^[0-9]+$/,
+                                            message: 'Please enter a number',
+                                        },
+                                    }}
                                     render={({ field }) => (
                                         <TextField
                                             {...register("price", {
@@ -302,6 +295,12 @@ function CreateListings() {
                                             label={"Price:"}
                                             variant={"standard"}
                                             fullWidth
+                                            error={errors.price ? true : false}
+                                            helperText={
+                                                errors.name && (
+                                                    <p>{errors.price.message}</p>
+                                                )
+                                            }
                                         />
                                     )}
                                 />
@@ -328,7 +327,6 @@ function CreateListings() {
                                     render={({ field }) => (
                                         <TextField
                                             {...field}
-                                            required
                                             name={"address_2"}
                                             label={"Address_2"}
                                             className={"mb-2"}
@@ -344,7 +342,6 @@ function CreateListings() {
                                     render={({ field }) => (
                                         <TextField
                                             {...field}
-                                            required
                                             name={"country"}
                                             label={"Country"}
                                             className={"mb-2"}
@@ -352,11 +349,10 @@ function CreateListings() {
                                             variant={"standard"}
                                             fullWidth
                                         >
-                                            <MenuItem value={1}>
-                                                Singapore
-                                            </MenuItem>
-                                            <MenuItem value={2}>China</MenuItem>
-                                            <MenuItem value={3}>India</MenuItem>
+                                            <MenuItem value={"Singapore"}>Singapore</MenuItem>
+                                            <MenuItem value={"Canada"}>Canada</MenuItem>
+                                            <MenuItem value={"Brazil"}>Brazil</MenuItem>
+                                            <MenuItem value={"Malaysia"}>Malaysia</MenuItem>
                                         </TextField>
                                     )}
                                 />
@@ -364,15 +360,26 @@ function CreateListings() {
                                 <Controller
                                     name="postal_code"
                                     control={control}
+                                    rules={{
+                                        pattern: {
+                                            valueAsNumber: true,
+                                            message: 'Please enter a number',
+                                        },
+                                    }}
                                     render={({ field }) => (
                                         <TextField
                                             {...field}
-                                            required
                                             name={"postal_code"}
                                             label={"Postal code"}
                                             className={"mb-2"}
                                             variant={"standard"}
                                             fullWidth
+                                            error={errors.price ? true : false}
+                                            helperText={
+                                                errors.name && (
+                                                    <p>{errors.price.message}</p>
+                                                )
+                                            }
                                         />
                                     )}
                                 />
@@ -386,7 +393,6 @@ function CreateListings() {
                                         <TextField
                                             {...field}
                                             name={"description"}
-                                            required
                                             label={"Descriptions:"}
                                             fullWidth
                                             variant={"standard"}
@@ -397,7 +403,7 @@ function CreateListings() {
                         </div>
                     </Paper>
 
-                    <div className={"mt-2 d-flex justify-content-end"}>
+                    <div className={"mt-4 mb-4 d-flex justify-content-end"}>
                         <Button
                             onClick={handleCancel}
                             variant={"contained"}
