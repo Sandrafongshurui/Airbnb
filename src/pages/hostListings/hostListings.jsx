@@ -1,4 +1,4 @@
-import SiteHeader from "../../components/partials/siteHeaders/SiteHeaders";
+// import SiteHeader from "../../components/partials/siteHeaders/SiteHeaders";
 import ListListings from "../../components/list-listings/List-listings";
 import Footer from "../../components/partials/footer/Footer";
 import {useNavigate} from 'react-router-dom';

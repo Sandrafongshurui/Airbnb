@@ -4,11 +4,13 @@ import "./pagination.css";
 
 
 
-function Pagination(data) {
-    // console.log(data)
-    // const[data,setData] = useState()
+function Pagination({listings}) {
+    console.log("1",listings)
+    const [data,setData] = useState([])
+    console.log("2",data)
     const [currentPage, setcurrentPage] = useState(1);
     const [itemsPerPage, setitemsPerPage] = useState(20);
+    console.log("itemsPerPage", itemsPerPage)
     const [pageNumberLimit, setpageNumberLimit] = useState(5);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
@@ -18,29 +20,33 @@ function Pagination(data) {
     };
 
     const pages = [];
-    for (let i = 1; i <= Math.ceil(data.length / itemsPerPage); i++) {
-        data.push(i);
+    for (let i = 1; i <= Math.ceil(listings.length / itemsPerPage); i++) {
+        pages.push(i);
     }
+        // console.log("3 pages",pages)
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = listings.slice(indexOfFirstItem, indexOfLastItem);
+    console.log("currentItems", currentItems)
 
     const renderPageNumbers = pages.map((number) => {
         if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
         return (
             <li
-            key={number}
-            id={number}
-            onClick={handleClick}
-            className={currentPage == number ? "active" : null}
+                key={number}
+                id={number}
+                onClick={handleClick}
+                className={currentPage == number ? "active" : null}
             >
-            {number}
+                {number}
             </li>
         );
+
         } else {
         return null;
         }
+
     });
 
     const handleNextbtn = () => {
@@ -80,6 +86,7 @@ function Pagination(data) {
         <>
 
         <ul className="pageNumber">
+
             <li >
 
                 <button className="button"
@@ -89,6 +96,7 @@ function Pagination(data) {
                     Prev
                 </button>
             </li>
+
                 {pageDecrementBtn}
 
                 {renderPageNumbers}

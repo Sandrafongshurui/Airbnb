@@ -1,5 +1,5 @@
 import style from "./listing-card.module.css";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SwiperCore, { Pagination } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";

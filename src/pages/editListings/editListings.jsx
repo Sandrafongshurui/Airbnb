@@ -15,7 +15,7 @@ function EditListing() {
     const [listing, setListing] = useState(null)
     const [selectedImages, setSelectedImages] = useState([]);
 
-    const { reset,register, control, handleSubmit, getValues, setValue, formState: { errors } } = useForm({
+    const { reset,register, control, handleSubmit, getValues, formState: { errors } } = useForm({
         defaultValues: {
             name: '',
             price: 0,

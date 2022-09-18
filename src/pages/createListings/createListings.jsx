@@ -1,10 +1,9 @@
-import SiteHeader from "../../components/partials/siteHeaders/SiteHeaders";
 import Footer from "../../components/partials/footer/Footer";
 import { loadImageFromFile } from "./utils";
-import CountrySelect from "../../components/mulCountrySelection/MulCountrySelection";
+// import CountrySelect from "../../components/mulCountrySelection/MulCountrySelection";
 
 import { useForm, Controller } from "react-hook-form";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Button, MenuItem, Paper, TextField } from "@mui/material";
@@ -12,9 +11,16 @@ import style from "./createListings.module.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 
+
+
 function CreateListings() {
     const navigate = useNavigate();
     const [selectedImages, setSelectedImages] = useState([]);
+
+    const headerOptions = {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('user_token')}`
+    };
 
     const {
         register,
@@ -56,7 +62,11 @@ function CreateListings() {
 
     const handleFormSubmit = async(data) => {
         try {
-            const response = await axios.post('http://localhost:8000/api/v1/user/listing', data)
+            const response = await axios.post(
+                'http://localhost:8000/api/v1/user/listing', 
+                data,
+                {headers:headerOptions}
+            )
             console.log(response)
             toast.success(
                 "Create listing successful",
@@ -99,7 +109,7 @@ function CreateListings() {
                                     flexDirection: "column",
                                 }}
                             >
-                                <img src={image} key={image} width={"200px"} />
+                                <img src={image} key={image} width={"200px"} alt=" " />
                                 <Button
                                     onClick={() => handleDeleteImage(image)}
                                     color={"error"}
@@ -242,28 +252,28 @@ function CreateListings() {
                                 <Controller
                                     name="state"
                                     control={control}
-                                    rules={{
-                                        pattern: {
-                                            value: /^[A-Za-z]+$/i,
-                                            message:
-                                                "Alphabetical characters only",
-                                        },
-                                    }}
+                                    // rules={{
+                                    //     pattern: {
+                                    //         value: /^[A-Za-z]+$/i,
+                                    //         message:
+                                    //             "Alphabetical characters only",
+                                    //     },
+                                    // }}
                                     render={({ field }) => (
                                         <TextField
                                             className={"mb-2"}
                                             label={"State"}
                                             variant={"standard"}
                                             fullWidth
-                                            error={errors.state ? true : false}
+                                            // error={errors.state ? true : false}
                                             {...field}
-                                            helperText={
-                                                errors.state && (
-                                                    <p>
-                                                        {errors.state.message}
-                                                    </p>
-                                                )
-                                            }
+                                            // helperText={
+                                            //     errors.state && (
+                                            //         <p>
+                                            //             {errors.state.message}
+                                            //         </p>
+                                            //     )
+                                            // }
                                         />
                                     )}
                                 />
@@ -274,12 +284,6 @@ function CreateListings() {
                                 <Controller
                                     name="price"
                                     control={control}
-                                    rules={{
-                                        pattern: {
-                                            value: /^[0-9]+$/,
-                                            message: 'Please enter a number',
-                                        },
-                                    }}
                                     render={({ field }) => (
                                         <TextField
                                             {...register("price", {
@@ -295,12 +299,6 @@ function CreateListings() {
                                             label={"Price:"}
                                             variant={"standard"}
                                             fullWidth
-                                            error={errors.price ? true : false}
-                                            helperText={
-                                                errors.name && (
-                                                    <p>{errors.price.message}</p>
-                                                )
-                                            }
                                         />
                                     )}
                                 />
