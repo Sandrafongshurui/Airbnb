@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SwiperCore, { Pagination } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
 import EditTrip from "../editTrip/EditTrip";
@@ -8,6 +8,8 @@ import style from "./TripsCard.module.css";
 import { BedOutlined } from "@mui/icons-material";
 
 const TripsCard = (props) => {
+    const [catchError, setCatchError] = useState(null);
+
     const renderTrips = () => {
         if (props.data) {
             return props.data.listing.images_url.map((url) => {
@@ -63,6 +65,26 @@ const TripsCard = (props) => {
         }
     };
 
+    // handles the edit button
+    const onEdit = async (data) => {
+        console.log("from login:", data);
+        setCatchError(null);
+        try {
+            // const res = await axios.post(
+            //     "http://localhost:8000/api/v1/user/login",
+            //     data
+            // );
+            // console.log("response: ", res);
+            toast.success("Successfully edited", {
+                position: toast.POSITION.TOP_CENTER,
+            });
+        } catch (error) {
+            toast.error(error.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });
+        }
+    };
+
     if (!props.data) {
         return <></>;
     }
@@ -80,7 +102,7 @@ const TripsCard = (props) => {
                     <div className="row">
                         <div className="col">
                             <div className="edit">
-                                <button onClick={EditTrip}>Edit trip</button>
+                                <button onClick={onEdit}>Edit trip</button>
                             </div>
                         </div>
                         <div className="col">
