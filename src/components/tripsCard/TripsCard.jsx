@@ -3,12 +3,19 @@ import SwiperCore, { Pagination } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
 import EditTrip from "../editTrip/EditTrip";
 import { toast } from "react-toastify";
+import Modal from "../modal/Modal";
+import { Box } from "@mui/material";
 import axios from "axios";
 import style from "./TripsCard.module.css";
-import { BedOutlined } from "@mui/icons-material";
 
 const TripsCard = (props) => {
     const [catchError, setCatchError] = useState(null);
+    const [addModalShow, setAddModalShow] = useState(false);
+    const [changeModalState, setChangeModalState] = useState(false);
+
+    const addModalClose = () => {
+        setChangeModalState(addModalShow);
+    };
 
     const renderTrips = () => {
         if (props.data) {
@@ -70,7 +77,7 @@ const TripsCard = (props) => {
         console.log("from login:", data);
         setCatchError(null);
         try {
-            // const res = await axios.post(
+            // const res = await axios.patch(
             //     "http://localhost:8000/api/v1/user/login",
             //     data
             // );
@@ -102,7 +109,17 @@ const TripsCard = (props) => {
                     <div className="row">
                         <div className="col">
                             <div className="edit">
-                                <button onClick={onEdit}>Edit trip</button>
+                                <button
+                                    onClick={() => {
+                                        setAddModalShow(true);
+                                    }}
+                                >
+                                    Edit trip
+                                </button>
+                                <EditTrip
+                                    show={addModalShow}
+                                    onHide={addModalClose}
+                                />
                             </div>
                         </div>
                         <div className="col">
@@ -140,6 +157,12 @@ const TripsCard = (props) => {
                 <span>Checkout date: </span>
                 <strong className={"ms-2 me-2"}>
                     {props.data.checkout_date}
+                </strong>
+            </div>
+            <div>
+                <span>No of Guest: </span>
+                <strong className={"ms-2 me-2"}>
+                    {props.data.total_guests}
                 </strong>
             </div>
             <div>
