@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import Modal from "../modal/Modal";
 import { Box } from "@mui/material";
@@ -9,24 +9,36 @@ import style from "./EditTrip.css";
 const EditTrip = (props) => {
     const [catchError, setCatchError] = useState(null);
     const [open, setOpen] = useState(true);
+    const [editTrips, setEditTrips] = useState([]);
 
-    const onEdit = async (data) => {
-        console.log("from login:", data);
-        setCatchError(null);
-        try {
-            // const res = await axios.post(
-            //     "http://localhost:8000/api/v1/user/login",
-            //     data
-            // );
-            // console.log("response: ", res);
-            toast.success("Successfully edited", {
-                position: toast.POSITION.TOP_CENTER,
-            });
-        } catch (error) {
-            toast.error(error.message, {
-                position: toast.POSITION.TOP_CENTER,
-            });
-        }
+    const headerOptions = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("user_token")}`,
+    };
+
+    // useEffect(() => {
+    //     const fetchApi = async () => {
+    //         const response = await axios.get(
+    //             "http://localhost:8000/api/v1/user/trips/63286e6046ad1dfff1b8a3bc",
+    //             // `http://localhost:8000/api/v1/user/trips/${props.bookingId}`,
+    //             { headers: headerOptions }
+    //         );
+    //         const data = await response.data;
+    //         console.log("data: ", data);
+    //         setEditTrips(data);
+    //     };
+    //     fetchApi();
+    // }, []);
+
+    const fetchApi = async () => {
+        const response = await axios.get(
+            "http://localhost:8000/api/v1/user/trips/63286e6046ad1dfff1b8a3bc",
+            // `http://localhost:8000/api/v1/user/trips/${props.bookingId}`,
+            { headers: headerOptions }
+        );
+        const data = await response.data;
+        console.log("data: ", data);
+        setEditTrips(data);
     };
 
     return (
@@ -54,7 +66,7 @@ const EditTrip = (props) => {
                         </div>
                     )}
                     {/* --------insert component here------------- */}
-                    <EditForm data={onEdit} />
+                    <EditForm data={editTrips} />
                 </div>
             </Box>
         </Modal>

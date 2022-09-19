@@ -1,21 +1,15 @@
 import React, { useState } from "react";
-import SwiperCore, { Pagination } from "swiper/core";
+import { Pagination } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
 import EditTrip from "../editTrip/EditTrip";
 import { toast } from "react-toastify";
-import Modal from "../modal/Modal";
-import { Box } from "@mui/material";
 import axios from "axios";
 import style from "./TripsCard.module.css";
 
 const TripsCard = (props) => {
     const [catchError, setCatchError] = useState(null);
     const [addModalShow, setAddModalShow] = useState(false);
-    const [changeModalState, setChangeModalState] = useState(false);
-
-    const addModalClose = () => {
-        setChangeModalState(addModalShow);
-    };
+    const [editTrips, setEditTrips] = useState([]);
 
     const renderTrips = () => {
         if (props.data) {
@@ -54,7 +48,8 @@ const TripsCard = (props) => {
                 position: toast.POSITION.TOP_CENTER,
             });
 
-            window.location.reload(false);
+            // window.location.reload(false);
+            console.log("props.data._id: ", props.data._id);
         } catch (error) {
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
@@ -72,29 +67,32 @@ const TripsCard = (props) => {
         }
     };
 
-    // handles the edit button
-    const onEdit = async (data) => {
-        console.log("from login:", data);
-        setCatchError(null);
-        try {
-            // const res = await axios.patch(
-            //     "http://localhost:8000/api/v1/user/login",
-            //     data
-            // );
-            // console.log("response: ", res);
-            toast.success("Successfully edited", {
-                position: toast.POSITION.TOP_CENTER,
-            });
-        } catch (error) {
-            toast.error(error.message, {
-                position: toast.POSITION.TOP_CENTER,
-            });
-        }
-    };
-
     if (!props.data) {
         return <></>;
     }
+
+    const handleToggle = (value) => {
+        setAddModalShow(value);
+    };
+
+    console.log("props.data: ", props.data);
+    console.log("props.data._id: ", props.data._id);
+
+    const fetchApi = async () => {
+        console.log("props.data._id: ", props.data._id);
+        const response = await axios.get(
+            `http://localhost:8000/api/v1/user/trip/${props.data._id}`,
+            { headers: headerOptions }
+        );
+        const data = await response.data;
+        console.log("data: ", data);
+        setAddModalShow(true);
+        setEditTrips(data);
+    };
+
+    const clickEdit = () => {
+        fetchApi();
+    };
 
     return (
         <div className={style.tripsCard}>
@@ -109,17 +107,13 @@ const TripsCard = (props) => {
                     <div className="row">
                         <div className="col">
                             <div className="edit">
-                                <button
-                                    onClick={() => {
-                                        setAddModalShow(true);
-                                    }}
-                                >
-                                    Edit trip
-                                </button>
-                                <EditTrip
-                                    show={addModalShow}
-                                    onHide={addModalClose}
-                                />
+                                <button onClick={clickEdit}>Edit trip</button>
+                                {addModalShow && (
+                                    <EditTrip
+                                        toggle={handleToggle}
+                                        bookingId={props.data._id}
+                                    />
+                                )}
                             </div>
                         </div>
                         <div className="col">

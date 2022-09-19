@@ -1,17 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField, Button, Box } from "@mui/material";
-import "bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { DateRangePicker } from "react-date-range";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import "bootstrap";
 
-const LoginForm = (props) => {
+const EditForm = (props) => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [totalPrice, setTotalPrice] = useState(0);
+    const [editData, setEditData] = useState(null);
+    const [noOfGuests, setNoOfGuests] = useState(1);
+    const params = useParams();
 
-    console.log("props.data: ", props.data);
+    // console.log("props.data: ", props.data);
+
+    // useEffect(() => {
+    //     const onEdit = async (data) => {
+    //         console.log("from edit:", data);
+    //         // setCatchError(null);
+    //         try {
+    //             const res = await axios.post(
+    //                 `http://localhost:8000/api/v1/user/trip/${params._bookingId}`,
+    //                 data
+    //             );
+    //             console.log("res.data: ", res.data);
+    //             setEditData(res.data);
+    //             toast.success("Successfully edited", {
+    //                 position: toast.POSITION.TOP_CENTER,
+    //             });
+    //         } catch (error) {
+    //             toast.error(error.message, {
+    //                 position: toast.POSITION.TOP_CENTER,
+    //             });
+    //         }
+    //     };
+    //     onEdit();
+    // }, []);
 
     // an variable obj to store the start and end date
     const selectionRange = {
@@ -46,53 +75,49 @@ const LoginForm = (props) => {
             : props.data.price.toLocaleString();
     };
 
-    // form validation rules
-    const validationSchema = yup.object().shape({
-        email: yup.string().email("Valid email is required").required(),
-    });
-
     //actual input names
     const defaultValues = {
-        email: "",
+        checkin_date: "",
+        checkout_date: "",
+        total_guests: "",
+        total_price: "",
     };
-    const {
-        control,
-        handleSubmit,
-        // formState: { errors },
-    } = useForm({ resolver: yupResolver(validationSchema), defaultValues });
 
     const onSubmit = async (data) => {
         console.log("From loginform:", data);
         props.data(data);
     };
 
+    // set no of guests state upon selecting the no of guests
+    const handleGuests = (e) => {
+        setNoOfGuests(e.target.value);
+    };
+
     return (
         <div>
             <div>
-                <h1 className="text-center pb-3 m-0 mb-3">Login</h1>
+                <h1 className="text-center pb-3 m-0 mb-3">Edit Trip</h1>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={onSubmit}>
                 <Box mb={3}>
-                    <Controller
-                        name="email" //actual input
-                        control={control} //take place of the register RHF
-                        render={({
-                            //takes a function and rturn a react element
-                            field,
-                            fieldState: { error }, //this error will be displyed takes over form state errors
-                        }) => (
-                            <TextField
-                                label={"email"} //label in the box
-                                variant="outlined"
-                                fullWidth
-                                autoComplete="email"
-                                autoFocus
-                                error={!!error} //convert obj into a bool
-                                helperText={error ? error.message : null}
-                                {...field}
-                            />
-                        )}
-                    />
+                    <div className="col">
+                        <div className="pricing">
+                            <label>
+                                {/* sandra */}
+                                {/* <p>${checkPriceType()} / Night</p> */}
+                                <p>$100 / Night</p>
+                                <p>Total price: ${totalPrice} SGD</p>
+                            </label>
+                        </div>
+                        No of Guests:
+                        <input
+                            type="number"
+                            value={noOfGuests}
+                            onChange={handleGuests}
+                            min={1}
+                            max={props.data.accommodates}
+                        ></input>
+                    </div>
                 </Box>
                 <Box mb={3}>
                     <DateRangePicker
@@ -116,4 +141,4 @@ const LoginForm = (props) => {
     );
 };
 
-export default LoginForm;
+export default EditForm;
