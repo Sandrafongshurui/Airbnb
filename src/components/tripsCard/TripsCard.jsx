@@ -92,9 +92,9 @@ const TripsCard = (props) => {
     return (
         <div className={style.tripsCard}>
             <div>
-                <Swiper modules={[Pagination]} pagination={{ clickable: true }}>
+                {/* <Swiper modules={[Pagination]} pagination={{ clickable: true }}>
                     {renderTrips()}
-                </Swiper>
+                </Swiper> */}
             </div>
 
             {!checkDate ? (

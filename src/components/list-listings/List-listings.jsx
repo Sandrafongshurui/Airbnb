@@ -30,7 +30,7 @@ function ListListings({ isHost }) {
     return (
         <div className={"mt-2 me-3"}>
             <div className={"d-flex flex-wrap"}>{renderListings}</div>
-            <Pagination data={ listings }/>
+            {/* <Pagination data={ listings }/> */}
         </div>
     );
 }
