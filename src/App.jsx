@@ -29,36 +29,36 @@ const App = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
 
-                <Route path="/users/my/profile" element={<ShowProfile />} />
+                <Route path="/users/my/profile" element={<Auth component={ShowProfile} />} />
                 <Route
                     path="/users/my/profile/edit"
-                    element={<EditProfile />}
+                    element={<Auth component={EditProfile} />}
                 />
 
-                <Route path="/users/my/listings" element={<HostListings />} />
+                <Route path="/users/my/listings" element={<Auth component={HostListings } />}/>
                 <Route
                     path="/users/my/listings/create"
-                    element={<CreateListings />}
+                    element={<Auth component={CreateListings }/>}
                 />
                 <Route
                     path="/users/my/listings/:listingID"
-                    element={<BookingHistory />}
+                    element={<Auth component={BookingHistory }/>}
                 />
                 <Route
                     path="/users/my/listings/:listingID/edit"
-                    element={<EditListing />}
+                    element={<Auth component={EditListing }/>}
                 />
 
                 <Route
                     path="/listing-details/:listingID"
-                    element={<ListingBooking />}
+                    element={<Auth component={ListingBooking } />}
                 />
 
                 <Route
                     path="/users/my/trips"
                     element={<Auth component={Trips} />}
                 />
-                <Route path="/user/trip/:booking_id" element={<EditTrip />} />
+                <Route path="/user/trip/:booking_id" element={<Auth component={EditTrip} />} />
             </Routes>
 
             <ToastContainer />

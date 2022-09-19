@@ -181,7 +181,7 @@ const RegisterForm = (props) => {
             )}
           />
         </Box>
-        <Box mb={3} >
+        {/* <Box mb={3} >
           <Controller
             name="gender" //actual input
             control={control} //take place of the register RHF
@@ -233,7 +233,7 @@ const RegisterForm = (props) => {
               </RadioGroup>
             )}
           />
-        </Box>
+        </Box> */}
         <Box mb={3}>
           <Controller
             name="about_me" //actual input

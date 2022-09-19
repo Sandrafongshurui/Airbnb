@@ -29,7 +29,7 @@ const Login = (props) => {
                 localStorage.setItem("user_token", res.data.token);
                 //close the portal, site header change to token bearer name
                 setOpen(false);
-                window.location.reload(true);
+                // window.location.reload(true);
                 toast.success("Login successfullly", {
                     position: toast.POSITION.TOP_CENTER,
                 });
