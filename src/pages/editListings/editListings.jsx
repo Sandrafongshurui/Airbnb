@@ -10,12 +10,13 @@ import style from '../createListings/createListings.module.css';
 import { toast } from 'react-toastify'
 
 function EditListing() {
+    
     const navigate = useNavigate()
     const params = useParams()
     const [listing, setListing] = useState(null)
     const [selectedImages, setSelectedImages] = useState([]);
 
-    const { reset,register, control, handleSubmit, getValues, setValue, formState: { errors } } = useForm({
+    const { reset,register, control, handleSubmit, getValues,setValue,formState: { errors } } = useForm({
         defaultValues: {
             name: '',
             price: 0,
@@ -38,8 +39,8 @@ function EditListing() {
 
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`,{headers:headerOptions})
-            //const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/listings/${params.listingID}`,{headers:headerOptions})
+            const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`,{headers:headerOptions})
+            // const res = await fetch(`http://localhost:8000/api/v1/listings/${params.listingID}`,{headers:headerOptions})
             const data = await res.json()
             console.log(data)
             setListing(data)
@@ -83,7 +84,9 @@ function EditListing() {
 
     function handleFormSubmit(e) {
         e.preventDefault()
-        fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`, {
+        fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, 
+        // fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`,
+        {
             method: 'PATCH',
             body: JSON.stringify(getValues()),
             headers: headerOptions,
@@ -107,8 +110,6 @@ function EditListing() {
     return (
 
         <form onSubmit={handleFormSubmit} className={'container-fluid p-0'}>
-
-            {/* <SiteHeader /> */}
             
             {/* select photo and upload it */}
             <div className={'container-xxl mt-4'}>
@@ -148,7 +149,6 @@ function EditListing() {
 
                             <Controller
                                 name="name"
-                                // Value={formData.name}
                                 control={control}
                                 render={({field}) => 
                                     (
@@ -166,7 +166,6 @@ function EditListing() {
                             
                             <Controller
                                 name="beds"
-                                // value={formData.beds}
                                 control={control}
                                 render={({ field }) => (
                                     <TextField {...field} required name={'beds'} label={'How many beds can guest use?'} className={'mb-2'} select variant={'standard'} fullWidth>

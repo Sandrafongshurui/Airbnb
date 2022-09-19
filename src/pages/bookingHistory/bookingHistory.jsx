@@ -1,4 +1,3 @@
-import SiteHeader from "../../components/partials/siteHeaders/SiteHeaders";
 import React, {useEffect, useState} from 'react';
 import { Button, Menu, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import moment from 'moment'
@@ -19,7 +18,8 @@ function ListingBookingHistory() {
 
   useEffect(() => {
     const fetchApi = async () => {
-        const res = await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`, {headers:headerOptions})
+        const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, {headers:headerOptions})
+        // const res = await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`, {headers:headerOptions})
         const data = await res.json()
         console.log(data)
         setHistory(data)
@@ -37,7 +37,8 @@ function ListingBookingHistory() {
   };
 
   const handleDelete = async () => {
-    await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`, {
+    await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, {
+    // await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`,{
       method: 'DELETE'
     })
     alert('Delete successfully!');

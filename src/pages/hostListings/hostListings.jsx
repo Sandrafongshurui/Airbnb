@@ -1,4 +1,4 @@
-import SiteHeader from "../../components/partials/siteHeaders/SiteHeaders";
+// import SiteHeader from "../../components/partials/siteHeaders/SiteHeaders";
 import ListListings from "../../components/list-listings/List-listings";
 import Footer from "../../components/partials/footer/Footer";
 import {useNavigate} from 'react-router-dom';
@@ -9,8 +9,6 @@ function HostListings() {
     
     return (
     <div className={'container-fluid p-0'}>
-
-        {/* <SiteHeader /> */}
 
         <div className={'container-xxl mt-4'}>
         

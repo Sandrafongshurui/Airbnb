@@ -2,11 +2,9 @@ import ProfileImg from "../../assets/images/profile.svg"
 import style from "./showProfile.module.css"
 
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 function ShowProfile() {
-
-    const navigate = useNavigate();
     const [profile, setProfile] = useState([]);
 
     const headerOptions = {
@@ -16,9 +14,9 @@ function ShowProfile() {
     
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await fetch(`http://localhost:8000/api/v1/user/profile`, {headers:headerOptions})
+            // const res = await fetch(`http://localhost:8000/api/v1/user/profile`,{headers:headerOptions})
+            const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/profile`, {headers:headerOptions})
             const data = await res.json()
-            console.log(data)
             setProfile(data)
         }
         fetchApi()
@@ -35,7 +33,7 @@ function ShowProfile() {
                         <div class="col-md-2">
                             <div className={style.imageBox}>
                                     <div className="row">
-                                        <img className={style.avatarImage} src={ ProfileImg } alt=""/>
+                                            <img className={style.avatarImage} src={ ProfileImg } alt=""/>
                                     </div>
                                     <div className="row ms-3">
                                     <p>{ profile.email }</p>
@@ -78,13 +76,13 @@ function ShowProfile() {
                                             <p>{ profile.lastname }</p>
                                         </div>
 
-                                        <div className="col-md-4">
+                                        {/* <div className="col-md-4">
                                             <h6>Gender</h6>                                     
                                         </div>
 
                                         <div className="col-md-6">
                                             <p>{ profile.gender }</p>
-                                        </div>
+                                        </div> */}
 
                                         <div className="col-md-4">
                                             <h6>About me</h6>                                     
