@@ -5,6 +5,7 @@ import Register from "../../register/Register";
 import logo from "../../../assets/images/house.png";
 import "./siteHeader.css";
 import { useNavigate, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SiteHeader = () => {
     let username = "username";
@@ -26,11 +27,6 @@ const SiteHeader = () => {
         }
     };
 
-    // useEffect(() => {
-    //   checkAuth()
-    //   console.log("use effect, check auth")
-    // }, []);
-
     const navStateToggle = () => {
         setNavState((prevState) => !prevState);
         checkAuth();
@@ -39,7 +35,7 @@ const SiteHeader = () => {
         setOpenLogin(value);
     };
     const handleRegisterToggle = (value) => {
-        setOpenRegister(value);
+        value? handleOpenLogin() : setOpenRegister(value)
     };
     const handleOpenRegister = () => {
         if (location.pathname !== "/register") {
@@ -69,6 +65,12 @@ const SiteHeader = () => {
             navigate("/");
         }
     };
+    const handleAfterRegister = (value) => {
+        handleLoginToggle(value)
+        toast.success("Account created, please login to continue", {
+            position: toast.POSITION.TOP_CENTER,
+        });
+    }
 
     return (
         <div>
@@ -148,7 +150,7 @@ const SiteHeader = () => {
                 </div>
             </div>
             {openLogin && <Login toggle={handleLoginToggle} />}
-            {openRegister && <Register toggle={handleRegisterToggle} />}
+            {openRegister && <Register toggle={handleRegisterToggle} afterRegister={handleAfterRegister}/>}
         </div>
     );
 };

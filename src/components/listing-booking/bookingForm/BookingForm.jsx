@@ -12,12 +12,13 @@ import "./BookingForm.css";
 const BookingForm = (props) => {
     // const tomorrow = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
     // console.log("tomorrow: ", tomorrow);
+    //const{unavailable_dates} = props.data
 
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [noOfGuests, setNoOfGuests] = useState(1);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [unavailableDates, setUnavailableDates] = useState[props.data.unavailable_dates.join()]
+    // const [unavailableDates, setUnavailableDates] = useState[[]]
     const [formData, setFormData] = useState({
         checkin_date: "",
         checkout_date: "",
@@ -27,6 +28,7 @@ const BookingForm = (props) => {
 
     const navigate = useNavigate();
     const params = useParams();
+
 
 
 
@@ -187,7 +189,7 @@ const BookingForm = (props) => {
                         months={2}
                         direction="horizontal"
                         inputRanges={[]}
-                        disabledDates = {[unavailableDates]}
+                        // disabledDates = {[unavailableDates]}
                     />
                 </div>
             </div>

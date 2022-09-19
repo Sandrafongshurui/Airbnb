@@ -8,7 +8,6 @@ import RegisterForm from "./register-form/RegisterForm";
 const Register = (props) => {
   const [open, setOpen] = useState(true);
   const [catchError, setCatchError] = useState(null);
-
   const onSubmit = async (data) => {
     console.log("send data:", data);
     setCatchError(null);
@@ -22,6 +21,8 @@ const Register = (props) => {
       if (res.status === 200 || res.status === 201) {
         //close the portal, site header change to token bearer name
         setOpen(false);
+        props.toggle(false)
+        props.afterRegister(true)
       }
     } catch (error) {
       console.log(error);

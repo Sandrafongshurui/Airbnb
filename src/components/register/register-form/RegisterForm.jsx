@@ -8,16 +8,19 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  Select,
+  MenuItem
 } from "@mui/material";
 import "bootstrap";
 import { Controller, useForm } from "react-hook-form";
+import { FormControl } from "@mui/material";
 
 const RegisterForm = (props) => {
   // form validation rules
   const validationSchema = yup.object().shape({
     firstname: yup.string().min(4, "Mininum 4 characters").required(),
     lastname: yup.string().min(2, "Mininum 2 characters").required(),
-    gender: yup.string().required(),
+    gender: yup.string().required("Gender is required"),
     email: yup.string().email("Valid email is required").required(),
     password: yup
       .string()
@@ -48,8 +51,18 @@ const RegisterForm = (props) => {
 
   const onSubmit = async (data) => {
     console.log("From RegisterForm:", data);
-    await props.data(data);
+    props.data(data);
   };
+
+   // Options
+   const options = [
+    {
+      title: "Male"
+    },
+    {
+      title: "Female"
+    }
+  ];
 
   return (
     <div>
@@ -131,7 +144,7 @@ const RegisterForm = (props) => {
             name="password" //actual input
             control={control} //take place of the register RHF
             render={({
-              field //this error will be displyed in formstate errors
+              field, //this error will be displyed in formstate errors
             }) => (
               <TextField
                 label={"Password"} //label in the box
@@ -142,7 +155,7 @@ const RegisterForm = (props) => {
                 // error={!!error} //convert obj into a bool
                 // helperText={error ? error.message : null}
                 error={errors.password ? true : false}
-                helperText = {errors.password?.message}
+                helperText={errors.password?.message}
                 {...field}
               />
             )}
@@ -162,33 +175,62 @@ const RegisterForm = (props) => {
                 // error={!!error} //convert obj into a bool
                 // helperText={error ? error.message : null}
                 error={errors.confirmpassword ? true : false}
-                helperText = {errors.confirmpassword?.message}
+                helperText={errors.confirmpassword?.message}
                 {...field}
               />
             )}
           />
         </Box>
-        <Box mb={3}>
+        <Box mb={3} >
           <Controller
             name="gender" //actual input
             control={control} //take place of the register RHF
+            rules={{ required: "Please make a selection." }}
             render={({
               //takes a function and rturn a react element
               field,
             }) => (
-              <RadioGroup defaultValue="male" row={true}>
-                <FormControlLabel
-                  value="male"
-                  control={<Radio />}
-                  label="Male"
-                 
-                />
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Female"                 
-                />              
-              </RadioGroup>
+              <Select
+              labelId="demo-simple-select-required-label"
+              id="demo-simple-select-required"
+              // value={age}
+              label="Age *"
+              {...field}
+              // onChange={handleChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+            //   <RadioGroup >
+            //   {options.map((option, i) => (
+            //     <FormControlLabel  {...field} 
+            //       value={option.title}
+            //       control={<Radio />}
+            //       label={option.title}
+            //       key={i}
+            //     />
+            //   ))}
+            // </RadioGroup>
+              // <RadioGroup defaultValue="male" row={true} >
+
+              //   <FormControl {...field}>
+              //   <FormControlLabel
+              //     value="male"
+              //     control={<Radio />}
+              //     label="Male"
+              //   />
+              //   <FormControlLabel
+              //     value="female"
+              //     control={<Radio />}
+              //     label="Female"
+              //   />
+              //   </FormControl>
+               
+              // </RadioGroup>
             )}
           />
         </Box>
@@ -207,7 +249,7 @@ const RegisterForm = (props) => {
                 // error={!!error} //convert obj into a bool
                 // helperText={error ? error.message : null}
                 error={errors.about_me ? true : false}
-                helperText = {errors.about_me?.message}
+                helperText={errors.about_me?.message}
                 {...field}
               />
             )}

@@ -22,7 +22,7 @@ const LoginForm = (props) => {
   const {
     control,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
   } = useForm({ resolver: yupResolver(validationSchema), defaultValues });
 
   const onSubmit = async (data) => {
@@ -42,8 +42,7 @@ const LoginForm = (props) => {
             control={control} //take place of the register RHF
             render={({
               //takes a function and rturn a react element
-              field,
-              fieldState: { error }, //this error will be displyed takes over form state errors
+              field//this error will be displyed takes over form state errors
             }) => (
               <TextField
                 label={"email"} //label in the box
@@ -51,8 +50,10 @@ const LoginForm = (props) => {
                 fullWidth
                 autoComplete="email"
                 autoFocus
-                error={!!error} //convert obj into a bool
-                helperText={error ? error.message : null}
+                // error={!!error} //convert obj into a bool
+                // helperText={error ? error.message : null}
+                error={errors.email ? true : false}
+                helperText={errors.email?.message}
                 {...field}
               />
             )}
@@ -64,8 +65,7 @@ const LoginForm = (props) => {
             control={control} //take place of the register RHF
             render={({
               //takes a function and rturn a react element
-              field,
-              fieldState: { error }, //this error will be displyed takes over form state errors
+              field//this error will be displyed takes over form state errors
             }) => (
               <TextField
                 label={"password"} //label in the box
@@ -73,8 +73,10 @@ const LoginForm = (props) => {
                 fullWidth
                 autoComplete="password"
                 autoFocus
-                error={!!error} //convert obj into a bool
-                helperText={error ? error.message : null}
+                // error={!!error} //convert obj into a bool
+                // helperText={error ? error.message : null}
+                error={errors.password ? true : false}
+                helperText={errors.password?.message}
                 {...field}
               />
             )}

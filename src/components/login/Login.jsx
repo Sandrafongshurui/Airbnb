@@ -5,6 +5,7 @@ import { Box } from "@mui/material";
 import "bootstrap";
 import axios from "axios";
 import LoginForm from "./login-form/LoginForm";
+import { toast } from "react-toastify";
 
 const Login = (props) => {
     const location = useLocation();
@@ -28,7 +29,12 @@ const Login = (props) => {
                 localStorage.setItem("user_token", res.data.token);
                 //close the portal, site header change to token bearer name
                 setOpen(false);
-                //navigate(location.pathname);
+                window.location.reload(true);
+                toast.success("Login successfullly", {
+                    position: toast.POSITION.TOP_CENTER,
+                });
+               
+                navigate(location.pathname);
             }
         } catch (error) {
             console.log(error);
