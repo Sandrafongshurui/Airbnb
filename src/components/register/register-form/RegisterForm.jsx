@@ -48,7 +48,7 @@ const RegisterForm = (props) => {
 
   const onSubmit = async (data) => {
     console.log("From RegisterForm:", data);
-    props.data(data);
+    await props.data(data);
   };
 
   return (

@@ -17,6 +17,7 @@ const BookingForm = (props) => {
     const [endDate, setEndDate] = useState(new Date());
     const [noOfGuests, setNoOfGuests] = useState(1);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [unavailableDates, setUnavailableDates] = useState[props.unavailableDates[0]]
     const [formData, setFormData] = useState({
         checkin_date: "",
         checkout_date: "",
@@ -27,6 +28,13 @@ const BookingForm = (props) => {
     const navigate = useNavigate();
     const params = useParams();
 
+
+    //sandra
+    // const getUnvailaableDate = () => {
+    //     props.date.unavailableDates.forEach(element => {
+            
+    //     });
+    // }
     //sandra
     let isAuth = false;
     const checkAuth = () => {
@@ -184,6 +192,7 @@ const BookingForm = (props) => {
                         months={2}
                         direction="horizontal"
                         inputRanges={[]}
+                        // disabledDates = {[unavailableDates]}
                     />
                 </div>
             </div>
