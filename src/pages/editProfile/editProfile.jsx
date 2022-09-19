@@ -28,6 +28,7 @@ function EditProfile() {
 
     useEffect(() => {
         const fetchApi = async () => {
+            // const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/profile`, {headers:headerOptions})
             const res = await fetch(`http://localhost:8000/api/v1/user/profile`, {headers:headerOptions})
             const data = await res.json()
             console.log(data)
@@ -46,11 +47,13 @@ function EditProfile() {
         e.preventDefault()
         console.log(JSON.stringify(getValues()))
 
-            fetch(`http://localhost:8000/api/v1/user/profile`, {
+            // fetch(`https://ourairbnb.herokuapp.com/api/v1/user/profile`, 
+            fetch(`http://localhost:8000/api/v1`,
+            {
             method: 'PATCH',
             body: JSON.stringify(getValues()),
             headers: headerOptions,
-        })
+            })
 
         .then(response => {
             toast.success("Edit successfully",

@@ -1,15 +1,16 @@
 import style from "./listing-card.module.css";
 import React from "react";
-import SwiperCore, { Pagination } from "swiper/core";
+import SwiperCore, { Pagination, Navigation} from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
+import { EffectFade } from "swiper";
 
-SwiperCore.use([Pagination]);
+SwiperCore.use([Pagination,Navigation,EffectFade]);
 
 function ListingCard(props) {
     const { _id, name, price, images_url } = props.data;
-    // console.log(props.data);
+    console.log(props.data);
     const navigate = useNavigate();
 
     const handleClickListing = () => {
@@ -27,29 +28,47 @@ function ListingCard(props) {
             : price.toLocaleString();
         }
     }
-    const renderImages = () => {
-        if (props.data) {
-            return images_url.map((url) => {
-                return (
-                    <SwiperSlide key={url} className={style.listingImagesBox}>
-                        <img className={style.listingImages} src={url} alt="" />
-                    </SwiperSlide>
-                );
-            });
-        }
-    };
-    if (!props.data) {
-        return <>
-        </>;
-    }
+    // const renderImages = () => {
+    //     if (props.data) {
+    //         return images_url.map((url) => {
+    //             return (
+    //                 <SwiperSlide key={ url } className={style.listingImagesBox}>
+    //                     <img className={style.listingImages} src={url} alt="" />
+    //                 </SwiperSlide>
+    //             );
+    //         });
+    //     }
+    // };
+    // if (!props.data) {
+    //     return <>
+    //     </>;
+    // }
 
     return (
         <div className={style.listingCard} onClick={handleClickListing}>
-            <FavoriteBorderIcon className={style.like} />
+            {/* <FavoriteBorderIcon className={style.like} /> */}
 
             <div>
-                <Swiper modules={[Pagination]} pagination={{ clickable: true }}>
-                    {renderImages()}
+                <Swiper 
+                    modules={[Pagination,Navigation]} 
+                    navigation={true}
+                    slidesPerView={1.1}
+                    centeredSlides={true}
+                    // speaceBetween={20}
+                    // pagination={{type:"franction",}}
+                    onSlideChange={()=>console.log('slide change')}
+                    onSwiper={swiper=> console.log(swiper)}
+                >
+                    
+                {images_url.map((url) => {
+                    console.log(url)
+                    return (
+                        <SwiperSlide className={style.listingImagesBox}>
+                            <img key={ url } src={ url } alt="" className={style.listingImages}/>
+                        </SwiperSlide>
+                    );
+                })};
+        
                 </Swiper>
             </div>
 
