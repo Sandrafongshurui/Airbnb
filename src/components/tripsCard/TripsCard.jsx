@@ -48,8 +48,7 @@ const TripsCard = (props) => {
                 position: toast.POSITION.TOP_CENTER,
             });
 
-            // window.location.reload(false);
-            console.log("props.data._id: ", props.data._id);
+            window.location.reload(false);
         } catch (error) {
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
@@ -75,9 +74,6 @@ const TripsCard = (props) => {
         setAddModalShow(value);
     };
 
-    console.log("props.data: ", props.data);
-    console.log("props.data._id: ", props.data._id);
-
     const fetchApi = async () => {
         console.log("props.data._id: ", props.data._id);
         const response = await axios.get(
@@ -90,9 +86,9 @@ const TripsCard = (props) => {
         setEditTrips(data);
     };
 
-    const clickEdit = () => {
-        fetchApi();
-    };
+    // const clickEdit = () => {
+    //     fetchApi();
+    // };
 
     return (
         <div className={style.tripsCard}>
@@ -107,12 +103,9 @@ const TripsCard = (props) => {
                     <div className="row">
                         <div className="col">
                             <div className="edit">
-                                <button onClick={clickEdit}>Edit trip</button>
+                                <button onClick={fetchApi}>Edit trip</button>
                                 {addModalShow && (
-                                    <EditTrip
-                                        toggle={handleToggle}
-                                        bookingId={props.data._id}
-                                    />
+                                    <EditTrip toggle={handleToggle} />
                                 )}
                             </div>
                         </div>
