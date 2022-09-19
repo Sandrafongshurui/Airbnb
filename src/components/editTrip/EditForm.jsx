@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField, Button, Box } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
 import { DateRangePicker } from "react-date-range";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import "bootstrap";
 
 const EditForm = (props) => {
@@ -14,10 +13,21 @@ const EditForm = (props) => {
     const [endDate, setEndDate] = useState(new Date());
     const [totalPrice, setTotalPrice] = useState(0);
     const [editData, setEditData] = useState(null);
-    const [noOfGuests, setNoOfGuests] = useState(1);
+    // const [noOfGuests, setNoOfGuests] = useState(1);
     const params = useParams();
 
-    console.log("props.data: ", props.data);
+    const [formData, setFormData] = useState({
+        checkin_date: props.data[0].checkin_date,
+        checkout_date: props.data[0].checkout_date,
+        total_guests: props.data[0].total_guests,
+        total_price: props.data[0].total_price,
+    });
+
+    console.log("props.data[0]: ", props.data[0]);
+    // console.log("props.data[0].checkin_date: ", props.data[0].checkin_date);
+    // console.log("props.data[0].checkout_date: ", props.data[0].checkout_date);
+    // console.log("props.data[0].total_guests: ", props.data[0].total_guests);
+    // console.log("props.data[0].total_price: ", props.data[0].total_price);
 
     // an variable obj to store the start and end date
     const selectionRange = {
@@ -52,47 +62,71 @@ const EditForm = (props) => {
             : props.data.price.toLocaleString();
     };
 
-    //actual input names
-    const defaultValues = {
-        checkin_date: "",
-        checkout_date: "",
-        total_guests: "",
-        total_price: "",
+    //sandra
+    const headerOptions = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("user_token")}`,
     };
 
-    const onSubmit = async (data) => {
-        console.log("From loginform:", data);
-        props.data(data);
+    const handleInputChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const onEdit = async (data) => {
+        // setCatchError(null);
+        try {
+            const res = await axios.post(
+                `http://localhost:8000/api/v1/user/trip/${props.data[0]._id}`,
+                data
+            );
+            console.log("res.data: ", res.data);
+            setEditData(res.data);
+            toast.success("Successfully edited", {
+                position: toast.POSITION.TOP_CENTER,
+            });
+        } catch (error) {
+            toast.error(error.message, {
+                position: toast.POSITION.TOP_CENTER,
+            });
+        }
     };
 
     // set no of guests state upon selecting the no of guests
-    const handleGuests = (e) => {
-        setNoOfGuests(e.target.value);
-    };
+    // const handleGuests = (e) => {
+    //     setNoOfGuests(e.target.value);
+    // };
 
     return (
         <div>
             <div>
                 <h1 className="text-center pb-3 m-0 mb-3">Edit Trip</h1>
             </div>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onEdit}>
                 <Box mb={3}>
                     <div className="col">
-                        <div className="pricing">
-                            <label>
-                                {/* sandra */}
-                                {/* <p>${checkPriceType()} / Night</p> */}
-                                <p>$100 / Night</p>
-                                <p>Total price: ${totalPrice} SGD</p>
+                        <div>
+                            <label htmlFor="total_price" className="form-label">
+                                {/* <p>${props.data[0].total_price} SGD / Night</p> */}
+                                <p>
+                                    Total price: ${props.data[0].total_price}{" "}
+                                    SGD
+                                </p>
                             </label>
                         </div>
-                        No of Guests:
+                        <label htmlFor="total_guests" className="form-label">
+                            No of Guests:
+                        </label>
                         <input
+                            id="total_guests"
+                            name="total_guests"
                             type="number"
-                            value={noOfGuests}
-                            onChange={handleGuests}
+                            onChange={handleInputChange}
                             min={1}
-                            max={props.data.accommodates}
+                            max={props.data[0].listing.accommodates}
+                            value={formData.total_guests}
                         ></input>
                     </div>
                 </Box>
@@ -105,13 +139,11 @@ const EditForm = (props) => {
                         months={2}
                         direction="horizontal"
                         inputRanges={[]}
+                        staticRanges={[]}
                     />
                 </Box>
                 <Button type="submit" variant="contained" color="primary">
                     Update
-                </Button>
-                <Button type="submit" variant="contained" color="primary">
-                    Cancel
                 </Button>
             </form>
         </div>
