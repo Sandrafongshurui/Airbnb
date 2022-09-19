@@ -16,7 +16,7 @@ function EditProfile() {
         defaultValues: {
             firstname: '',
             lastname:'',
-            gender: '',
+            // gender: '',
             about_me: '',
         }
     });

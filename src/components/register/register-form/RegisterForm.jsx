@@ -20,7 +20,7 @@ const RegisterForm = (props) => {
   const validationSchema = yup.object().shape({
     firstname: yup.string().min(4, "Mininum 4 characters").required(),
     lastname: yup.string().min(2, "Mininum 2 characters").required(),
-    gender: yup.string().required("Gender is required"),
+    // gender: yup.string().required("Gender is required"),
     email: yup.string().email("Valid email is required").required(),
     password: yup
       .string()
@@ -38,7 +38,7 @@ const RegisterForm = (props) => {
     firstname: "",
     lastname: "",
     email: "",
-    gender: "",
+    // gender: "",
     about_me: "",
     password: "",
     confirmpassword: "",
@@ -54,15 +54,15 @@ const RegisterForm = (props) => {
     props.data(data);
   };
 
-   // Options
-   const options = [
-    {
-      title: "Male"
-    },
-    {
-      title: "Female"
-    }
-  ];
+  //  // Options
+  //  const options = [
+  //   {
+  //     title: "Male"
+  //   },
+  //   {
+  //     title: "Female"
+  //   }
+  // ];
 
   return (
     <div>
