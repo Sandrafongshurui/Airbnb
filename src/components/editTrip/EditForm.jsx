@@ -6,6 +6,7 @@ import { DateRangePicker } from "react-date-range";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { DateTime } from "luxon";
 import "bootstrap";
 
 const EditForm = (props) => {
@@ -16,18 +17,17 @@ const EditForm = (props) => {
     // const [noOfGuests, setNoOfGuests] = useState(1);
     const params = useParams();
 
+    // TODO: convert date format here
     const [formData, setFormData] = useState({
-        checkin_date: props.data[0].checkin_date,
+        checkin_date: DateTime.now(props.data[0].checkin_date).toJSDate(),
         checkout_date: props.data[0].checkout_date,
         total_guests: props.data[0].total_guests,
         total_price: props.data[0].total_price,
     });
 
+    console.log("formData: ", formData);
+
     console.log("props.data[0]: ", props.data[0]);
-    // console.log("props.data[0].checkin_date: ", props.data[0].checkin_date);
-    // console.log("props.data[0].checkout_date: ", props.data[0].checkout_date);
-    // console.log("props.data[0].total_guests: ", props.data[0].total_guests);
-    // console.log("props.data[0].total_price: ", props.data[0].total_price);
 
     // an variable obj to store the start and end date
     const selectionRange = {
@@ -36,24 +36,24 @@ const EditForm = (props) => {
         key: "selection",
     };
 
-    const handleSelect = (ranges) => {
-        setStartDate(ranges.selection.startDate);
-        setEndDate(ranges.selection.endDate);
+    // const handleSelect = (ranges) => {
+    //     setStartDate(ranges.selection.startDate);
+    //     setEndDate(ranges.selection.endDate);
 
-        // getting the startDate and endDate and push into array
-        const datesBetween = require("dates-between");
-        const dates = Array.from(
-            datesBetween(ranges.selection.startDate, ranges.selection.endDate)
-        );
+    //     // getting the startDate and endDate and push into array
+    //     const datesBetween = require("dates-between");
+    //     const dates = Array.from(
+    //         datesBetween(ranges.selection.startDate, ranges.selection.endDate)
+    //     );
 
-        // getting number of nights between startDate and endDate
-        const noOfNights = dates.length - 1;
+    //     // getting number of nights between startDate and endDate
+    //     const noOfNights = dates.length - 1;
 
-        // calculation of total price based on no. of nights
-        const pricePerNight = checkPriceType(); //sandra
+    //     // calculation of total price based on no. of nights
+    //     const pricePerNight = checkPriceType(); //sandra
 
-        setTotalPrice(noOfNights * Number(pricePerNight));
-    };
+    //     setTotalPrice(noOfNights * Number(pricePerNight));
+    // };
 
     //sandra
     const checkPriceType = () => {
@@ -94,11 +94,6 @@ const EditForm = (props) => {
         }
     };
 
-    // set no of guests state upon selecting the no of guests
-    // const handleGuests = (e) => {
-    //     setNoOfGuests(e.target.value);
-    // };
-
     return (
         <div>
             <div>
@@ -109,7 +104,6 @@ const EditForm = (props) => {
                     <div className="col">
                         <div>
                             <label htmlFor="total_price" className="form-label">
-                                {/* <p>${props.data[0].total_price} SGD / Night</p> */}
                                 <p>
                                     Total price: ${props.data[0].total_price}{" "}
                                     SGD
@@ -135,7 +129,7 @@ const EditForm = (props) => {
                         ranges={[selectionRange]}
                         minDate={new Date()}
                         rangeColors={["#FD5B61"]}
-                        onChange={handleSelect}
+                        // onChange={handleInputChange}
                         months={2}
                         direction="horizontal"
                         inputRanges={[]}

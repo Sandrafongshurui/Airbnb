@@ -106,7 +106,10 @@ const BookingForm = (props) => {
                 },
                 { headers: headerOptions }
             );
-            console.log(response);
+
+            console.log("startDate: ", startDate);
+            console.log("endDate: ", endDate);
+
             toast.success("Successfully reserved!", {
                 position: toast.POSITION.TOP_CENTER,
             });
