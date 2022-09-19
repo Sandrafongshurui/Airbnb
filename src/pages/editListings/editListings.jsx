@@ -39,8 +39,8 @@ function EditListing() {
 
     useEffect(() => {
         const fetchApi = async () => {
-            // const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`,{headers:headerOptions})
-            const res = await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`,{headers:headerOptions})
+            const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`,{headers:headerOptions})
+            // const res = await fetch(`http://localhost:8000/api/v1/listings/${params.listingID}`,{headers:headerOptions})
             const data = await res.json()
             console.log(data)
             setListing(data)
@@ -84,8 +84,9 @@ function EditListing() {
 
     function handleFormSubmit(e) {
         e.preventDefault()
-        // fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, 
-        fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}}`,{
+        fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, 
+        // fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`,
+        {
             method: 'PATCH',
             body: JSON.stringify(getValues()),
             headers: headerOptions,
@@ -109,8 +110,6 @@ function EditListing() {
     return (
 
         <form onSubmit={handleFormSubmit} className={'container-fluid p-0'}>
-
-            {/* <SiteHeader /> */}
             
             {/* select photo and upload it */}
             <div className={'container-xxl mt-4'}>

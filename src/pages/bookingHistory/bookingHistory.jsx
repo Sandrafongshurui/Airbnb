@@ -18,8 +18,8 @@ function ListingBookingHistory() {
 
   useEffect(() => {
     const fetchApi = async () => {
-        // const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, 
-        const res = await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`, {headers:headerOptions})
+        const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, {headers:headerOptions})
+        // const res = await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`, {headers:headerOptions})
         const data = await res.json()
         console.log(data)
         setHistory(data)
@@ -37,8 +37,8 @@ function ListingBookingHistory() {
   };
 
   const handleDelete = async () => {
-    // await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, 
-    await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`,{
+    await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, {
+    // await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`,{
       method: 'DELETE'
     })
     alert('Delete successfully!');

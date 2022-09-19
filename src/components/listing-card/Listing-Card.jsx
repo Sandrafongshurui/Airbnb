@@ -28,48 +28,30 @@ function ListingCard(props) {
             : price.toLocaleString();
         }
     }
-    // const renderImages = () => {
-    //     if (props.data) {
-    //         return images_url.map((url) => {
-    //             return (
-    //                 <SwiperSlide key={ url } className={style.listingImagesBox}>
-    //                     <img className={style.listingImages} src={url} alt="" />
-    //                 </SwiperSlide>
-    //             );
-    //         });
-    //     }
-    // };
-    // if (!props.data) {
-    //     return <>
-    //     </>;
-    // }
+    const renderImages = () => {
+        if (props.data) {
+            return images_url.map((url) => {
+                return (
+                    <SwiperSlide key={ url } className={style.listingImagesBox}>
+                        <img className={style.listingImages} src={url} alt="" />
+                    </SwiperSlide>
+                );
+            });
+        }
+    };
+    if (!props.data) {
+        return <>
+        </>;
+    }
 
     return (
         <div className={style.listingCard} onClick={handleClickListing}>
             {/* <FavoriteBorderIcon className={style.like} /> */}
 
             <div>
-                <Swiper 
-                    modules={[Pagination,Navigation]} 
-                    navigation={true}
-                    slidesPerView={1.1}
-                    centeredSlides={true}
-                    // speaceBetween={20}
-                    // pagination={{type:"franction",}}
-                    onSlideChange={()=>console.log('slide change')}
-                    onSwiper={swiper=> console.log(swiper)}
-                >
-                    
-                {images_url.map((url) => {
-                    console.log(url)
-                    return (
-                        <SwiperSlide className={style.listingImagesBox}>
-                            <img key={ url } src={ url } alt="" className={style.listingImages}/>
-                        </SwiperSlide>
-                    );
-                })};
-        
-                </Swiper>
+                    <Swiper modules={[Pagination]} pagination={{ clickable: true }}>
+                        {renderImages()}
+                    </Swiper>
             </div>
 
             <div className={"ms-2 mt-2 d-flex justify-content-between"}>

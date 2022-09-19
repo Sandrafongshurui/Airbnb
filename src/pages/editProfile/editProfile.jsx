@@ -28,15 +28,15 @@ function EditProfile() {
 
     useEffect(() => {
         const fetchApi = async () => {
-            // const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/profile`, {headers:headerOptions})
-            const res = await fetch(`http://localhost:8000/api/v1/user/profile`, {headers:headerOptions})
+            const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/profile`, {headers:headerOptions})
+            // const res = await fetch(`http://localhost:8000/api/v1/user/profile`, {headers:headerOptions})
             const data = await res.json()
             console.log(data)
             setProfile(data)
             reset({
                 firstname: data.firstname,
                 lastname: data.lastname,
-                gender: data.gender,
+                // gender: data.gender,
                 about_me: data.about_me,
             })
         }
@@ -45,10 +45,10 @@ function EditProfile() {
 
     function handleFormSubmit(e) {
         e.preventDefault()
-        console.log(JSON.stringify(getValues()))
+        // console.log(JSON.stringify(getValues()))
 
-            // fetch(`https://ourairbnb.herokuapp.com/api/v1/user/profile`, 
-            fetch(`http://localhost:8000/api/v1`,
+            fetch(`https://ourairbnb.herokuapp.com/api/v1/user/profile`, 
+            // fetch(`http://localhost:8000/api/v1/user/profile`,
             {
             method: 'PATCH',
             body: JSON.stringify(getValues()),
@@ -57,12 +57,12 @@ function EditProfile() {
 
         .then(response => {
             toast.success("Edit successfully",
-            { position: toast.POSITION.BOTTOM_CENTER })
+            { position: toast.POSITION.TOP_CENTER })
             navigate('/users/my/profile')
         })
 
         .catch(err => {
-            toast.error(err.message, {position: toast.POSITION.BOTTOM_CENTER})
+            toast.error(err.message, {position: toast.POSITION.TOP_CENTER})
         })
     }
 
@@ -152,7 +152,7 @@ function EditProfile() {
                             )}
                         />
 
-                        <Controller
+                        {/* <Controller
                             name="gender"
                             control={control}
                             render={({ field }) => (
@@ -169,7 +169,7 @@ function EditProfile() {
                                     <MenuItem value={"male"}>Male</MenuItem>
                                 </TextField>
                             )}
-                        />
+                        /> */}
 
                         <Controller
                             name="about_me"

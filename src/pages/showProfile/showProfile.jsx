@@ -14,8 +14,8 @@ function ShowProfile() {
     
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await fetch(`http://localhost:8000/api/v1/user/profile`,{headers:headerOptions})
-            // const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/profile`, {headers:headerOptions})
+            // const res = await fetch(`http://localhost:8000/api/v1/user/profile`,{headers:headerOptions})
+            const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/profile`, {headers:headerOptions})
             const data = await res.json()
             setProfile(data)
         }
@@ -76,13 +76,13 @@ function ShowProfile() {
                                             <p>{ profile.lastname }</p>
                                         </div>
 
-                                        <div className="col-md-4">
+                                        {/* <div className="col-md-4">
                                             <h6>Gender</h6>                                     
                                         </div>
 
                                         <div className="col-md-6">
                                             <p>{ profile.gender }</p>
-                                        </div>
+                                        </div> */}
 
                                         <div className="col-md-4">
                                             <h6>About me</h6>                                     

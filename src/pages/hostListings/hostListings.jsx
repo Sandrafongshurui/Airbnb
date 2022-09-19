@@ -10,8 +10,6 @@ function HostListings() {
     return (
     <div className={'container-fluid p-0'}>
 
-        {/* <SiteHeader /> */}
-
         <div className={'container-xxl mt-4'}>
         
             <div className={'mt-2'}>
