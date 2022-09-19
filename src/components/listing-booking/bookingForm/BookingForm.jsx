@@ -17,7 +17,7 @@ const BookingForm = (props) => {
     const [endDate, setEndDate] = useState(new Date());
     const [noOfGuests, setNoOfGuests] = useState(1);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [unavailableDates, setUnavailableDates] = useState[props.unavailableDates.join()]
+    const [unavailableDates, setUnavailableDates] = useState[props.data.unavailable_dates.join()]
     const [formData, setFormData] = useState({
         checkin_date: "",
         checkout_date: "",
