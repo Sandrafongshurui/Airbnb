@@ -7,7 +7,12 @@ import style from "./EditTrip.css";
 const EditTrip = (props) => {
     const [catchError, setCatchError] = useState(null);
     const [open, setOpen] = useState(true);
-    const [editTrips, setEditTrips] = useState([]);
+    const [editTrip, setEditTrip] = useState([]);
+
+    // console.log("props.data: ", props.data);
+    // const handleEdit = () => {
+    //     setEditTrip(props.data);
+    // };
 
     return (
         <Modal open={open}>
@@ -34,7 +39,7 @@ const EditTrip = (props) => {
                         </div>
                     )}
                     {/* --------insert component here------------- */}
-                    <EditForm data={editTrips} />
+                    <EditForm data={props.data} />
                 </div>
             </Box>
         </Modal>

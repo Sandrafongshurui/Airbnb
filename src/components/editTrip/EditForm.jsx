@@ -17,30 +17,7 @@ const EditForm = (props) => {
     const [noOfGuests, setNoOfGuests] = useState(1);
     const params = useParams();
 
-    // console.log("props.data: ", props.data);
-
-    // useEffect(() => {
-    //     const onEdit = async (data) => {
-    //         console.log("from edit:", data);
-    //         // setCatchError(null);
-    //         try {
-    //             const res = await axios.post(
-    //                 `http://localhost:8000/api/v1/user/trip/${params._bookingId}`,
-    //                 data
-    //             );
-    //             console.log("res.data: ", res.data);
-    //             setEditData(res.data);
-    //             toast.success("Successfully edited", {
-    //                 position: toast.POSITION.TOP_CENTER,
-    //             });
-    //         } catch (error) {
-    //             toast.error(error.message, {
-    //                 position: toast.POSITION.TOP_CENTER,
-    //             });
-    //         }
-    //     };
-    //     onEdit();
-    // }, []);
+    console.log("props.data: ", props.data);
 
     // an variable obj to store the start and end date
     const selectionRange = {

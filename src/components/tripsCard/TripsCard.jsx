@@ -9,7 +9,7 @@ import style from "./TripsCard.module.css";
 const TripsCard = (props) => {
     const [catchError, setCatchError] = useState(null);
     const [addModalShow, setAddModalShow] = useState(false);
-    const [editTrips, setEditTrips] = useState([]);
+    const [editTrip, setEditTrip] = useState([]);
 
     const renderTrips = () => {
         if (props.data) {
@@ -74,21 +74,16 @@ const TripsCard = (props) => {
         setAddModalShow(value);
     };
 
-    const fetchApi = async () => {
-        console.log("props.data._id: ", props.data._id);
+    const handleEdit = async () => {
         const response = await axios.get(
             `http://localhost:8000/api/v1/user/trip/${props.data._id}`,
             { headers: headerOptions }
         );
         const data = await response.data;
-        console.log("data: ", data);
-        setAddModalShow(true);
-        setEditTrips(data);
-    };
 
-    // const clickEdit = () => {
-    //     fetchApi();
-    // };
+        setAddModalShow(true);
+        setEditTrip(data);
+    };
 
     return (
         <div className={style.tripsCard}>
@@ -103,9 +98,12 @@ const TripsCard = (props) => {
                     <div className="row">
                         <div className="col">
                             <div className="edit">
-                                <button onClick={fetchApi}>Edit trip</button>
+                                <button onClick={handleEdit}>Edit trip</button>
                                 {addModalShow && (
-                                    <EditTrip toggle={handleToggle} />
+                                    <EditTrip
+                                        toggle={handleToggle}
+                                        data={editTrip}
+                                    />
                                 )}
                             </div>
                         </div>
