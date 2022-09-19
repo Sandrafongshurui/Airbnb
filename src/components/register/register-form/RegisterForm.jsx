@@ -190,21 +190,21 @@ const RegisterForm = (props) => {
               //takes a function and rturn a react element
               field,
             }) => (
-              <Select
-              labelId="demo-simple-select-required-label"
-              id="demo-simple-select-required"
-              // value={age}
-              label="Age *"
-              {...field}
-              // onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
+            //   <Select
+            //   labelId="demo-simple-select-required-label"
+            //   id="demo-simple-select-required"
+            //   // value={age}
+            //   label="Age *"
+            //   {...field}
+            //   // onChange={handleChange}
+            // >
+            //   <MenuItem value="">
+            //     <em>None</em>
+            //   </MenuItem>
+            //   <MenuItem value={10}>Ten</MenuItem>
+            //   <MenuItem value={20}>Twenty</MenuItem>
+            //   <MenuItem value={30}>Thirty</MenuItem>
+            // </Select>
             //   <RadioGroup >
             //   {options.map((option, i) => (
             //     <FormControlLabel  {...field} 
@@ -215,22 +215,22 @@ const RegisterForm = (props) => {
             //     />
             //   ))}
             // </RadioGroup>
-              // <RadioGroup defaultValue="male" row={true} >
+              <RadioGroup {...field} row={true} >
 
-              //   <FormControl {...field}>
-              //   <FormControlLabel
-              //     value="male"
-              //     control={<Radio />}
-              //     label="Male"
-              //   />
-              //   <FormControlLabel
-              //     value="female"
-              //     control={<Radio />}
-              //     label="Female"
-              //   />
-              //   </FormControl>
+                <FormControl >
+                <FormControlLabel
+                  value="male"
+                  control={<Radio />}
+                  label="Male"
+                />
+                <FormControlLabel
+                  value="female"
+                  control={<Radio />}
+                  label="Female"
+                />
+                </FormControl>
                
-              // </RadioGroup>
+              </RadioGroup>
             )}
           />
         </Box>
