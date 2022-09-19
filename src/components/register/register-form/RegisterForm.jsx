@@ -43,7 +43,7 @@ const RegisterForm = (props) => {
   const {
     control,
     handleSubmit,
-    //formState: { errors }, i sue the controller error field instead
+    formState: { errors },
   } = useForm({ resolver: yupResolver(validationSchema), defaultValues });
 
   const onSubmit = async (data) => {
@@ -63,8 +63,7 @@ const RegisterForm = (props) => {
             control={control} //take place of the register RHF
             render={({
               //takes a function and rturn a react element
-              field,
-              fieldState: { error }, //this error will be displyed in formstate errors
+              field//this error will be displyed in formstate errors
             }) => (
               <TextField
                 // onChange={onChange} // send value to hook form
@@ -74,8 +73,10 @@ const RegisterForm = (props) => {
                 fullWidth
                 autoComplete="firstname"
                 autoFocus
-                error={!!error} //convert obj into a bool
-                helperText={error ? error.message : null}
+                // error={!!error} //convert obj into a bool
+                // helperText={error ? error.message : null}
+                error={errors.firstname ? true : false}
+                helperText = {errors.firstname?.message}
                 {...field}
               />
             )}
@@ -86,8 +87,7 @@ const RegisterForm = (props) => {
             name="lastname" //actual input
             control={control} //take place of the register RHF
             render={({
-              field,
-              fieldState: { error }, //this error will be displyed in formstate errors
+              field//this error will be displyed in formstate errors
             }) => (
               <TextField
                 label={"Last Name"} //label in the box
@@ -95,8 +95,10 @@ const RegisterForm = (props) => {
                 fullWidth
                 autoComplete="lastname"
                 autoFocus
-                error={!!error} //convert obj into a bool
-                helperText={error ? error.message : null}
+                // error={!!error} //convert obj into a bool
+                // helperText={error ? error.message : null}
+                error={errors.lastname? true : false}
+                helperText = {errors.lastname?.message}
                 {...field}
               />
             )}
@@ -107,8 +109,7 @@ const RegisterForm = (props) => {
             name="email" //actual input
             control={control} //take place of the register RHF
             render={({
-              field,
-              fieldState: { error }, //this error will be displyed in formstate errors
+              field //this error will be displyed in formstate errors
             }) => (
               <TextField
                 label={"Email"} //label in the box
@@ -116,8 +117,10 @@ const RegisterForm = (props) => {
                 fullWidth
                 autoComplete="email"
                 autoFocus
-                error={!!error} //convert obj into a bool
-                helperText={error ? error.message : null}
+                // error={!!error} //convert obj into a bool
+                // helperText={error ? error.message : null}
+                error={errors.email ? true : false}
+                helperText = {errors.email?.message}
                 {...field}
               />
             )}
@@ -128,8 +131,7 @@ const RegisterForm = (props) => {
             name="password" //actual input
             control={control} //take place of the register RHF
             render={({
-              field,
-              fieldState: { error }, //this error will be displyed in formstate errors
+              field //this error will be displyed in formstate errors
             }) => (
               <TextField
                 label={"Password"} //label in the box
@@ -137,8 +139,10 @@ const RegisterForm = (props) => {
                 fullWidth
                 autoComplete="password"
                 autoFocus
-                error={!!error} //convert obj into a bool
-                helperText={error ? error.message : null}
+                // error={!!error} //convert obj into a bool
+                // helperText={error ? error.message : null}
+                error={errors.password ? true : false}
+                helperText = {errors.password?.message}
                 {...field}
               />
             )}
@@ -148,17 +152,17 @@ const RegisterForm = (props) => {
           <Controller
             name="confirmpassword" //actual input
             control={control} //take place of the register RHF
-            render={({ field, fieldState: { error } }) => (
+            render={({ field }) => (
               <TextField
                 label={"Confirm Password"} //label in the box
                 variant="outlined"
                 fullWidth
                 autoComplete="confirmpassword"
                 autoFocus
-                error={!!error} //convert obj into a bool
-                helperText={error ? error.message : null}
-                // error={errors.confirmpassword ? true : false}
-                // helperText = {errors.confirmpassword?.message}
+                // error={!!error} //convert obj into a bool
+                // helperText={error ? error.message : null}
+                error={errors.confirmpassword ? true : false}
+                helperText = {errors.confirmpassword?.message}
                 {...field}
               />
             )}
@@ -192,7 +196,7 @@ const RegisterForm = (props) => {
           <Controller
             name="about_me" //actual input
             control={control} //take place of the register RHF
-            render={({ field, fieldState: { error } }) => (
+            render={({ field }) => (
               <TextField
                 label={"Write a brief description about yourself"} //label in the box
                 variant="outlined"
@@ -200,10 +204,10 @@ const RegisterForm = (props) => {
                 //multiline={true}
                 fullWidth
                 autoFocus
-                error={!!error} //convert obj into a bool
-                helperText={error ? error.message : null}
-                // error={errors.about_me ? true : false}
-                // helperText = {errors.about_me?.message}
+                // error={!!error} //convert obj into a bool
+                // helperText={error ? error.message : null}
+                error={errors.about_me ? true : false}
+                helperText = {errors.about_me?.message}
                 {...field}
               />
             )}

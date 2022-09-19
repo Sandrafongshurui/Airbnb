@@ -136,6 +136,7 @@ const BookingForm = (props) => {
                     <div className="row">
                         <div className="col">
                             Description
+                            <p>{props.data.name}</p>
                             <p>{props.data.description}</p>
                         </div>
                         <div className="col">
