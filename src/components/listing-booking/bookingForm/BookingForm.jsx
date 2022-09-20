@@ -99,7 +99,7 @@ const BookingForm = (props) => {
 
         try {
             const response = await axios.post(
-                `http://localhost:8000/api/v1/user/book/${params.listingID}`,
+                `https://ourairbnb.herokuapp.com/api/v1/user/book/${params.listingID}`,
                 {
                     checkin_date: startDate,
                     checkout_date: endDate,
