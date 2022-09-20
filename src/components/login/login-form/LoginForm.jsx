@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField, Button, Box } from "@mui/material";
 import "bootstrap";
 import { Controller, useForm } from "react-hook-form";
-
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import style from "./LoginForm.module.css"
+const eye = <FontAwesomeIcon icon={faEye} />;
 
 const LoginForm = (props) => {
   // form validation rules
@@ -13,7 +15,10 @@ const LoginForm = (props) => {
     email: yup.string().email("Valid email is required").required(),
     password: yup.string().min(4, "Mininum 4 characters").required(),
   });
-
+  const [passwordShow, setPasswordShow] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShow(passwordShow ? false : true);
+  };
   //actual input names
   const defaultValues = {
     email: "",
@@ -42,7 +47,7 @@ const LoginForm = (props) => {
             control={control} //take place of the register RHF
             render={({
               //takes a function and rturn a react element
-              field//this error will be displyed takes over form state errors
+              field, //this error will be displyed takes over form state errors
             }) => (
               <TextField
                 label={"email"} //label in the box
@@ -59,13 +64,13 @@ const LoginForm = (props) => {
             )}
           />
         </Box>
-        <Box mb={3}>
+        <Box mb={3} className={style.passwordbox}>
           <Controller
             name="password" //actual input
             control={control} //take place of the register RHF
             render={({
               //takes a function and rturn a react element
-              field//this error will be displyed takes over form state errors
+              field, //this error will be displyed takes over form state errors
             }) => (
               <TextField
                 label={"password"} //label in the box
@@ -73,14 +78,21 @@ const LoginForm = (props) => {
                 fullWidth
                 autoComplete="password"
                 autoFocus
+                placeholder="password"
+                type={passwordShow ? "text" : "password"}
                 // error={!!error} //convert obj into a bool
                 // helperText={error ? error.message : null}
                 error={errors.password ? true : false}
                 helperText={errors.password?.message}
                 {...field}
               />
+              
             )}
+          
           />
+          <div>
+            <i onClick={togglePasswordVisiblity}>{eye}</i>{" "}
+          </div>      
         </Box>
         <Button type="submit" variant="contained" color="primary" fullWidth>
           Login

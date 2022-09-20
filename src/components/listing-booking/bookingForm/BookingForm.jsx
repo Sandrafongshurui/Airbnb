@@ -10,10 +10,16 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import "./BookingForm.css";
 
 const BookingForm = (props) => {
-    // const tomorrow = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
-    // console.log("tomorrow: ", tomorrow);
-    //const{unavailable_dates} = props.data
-
+    const unavailableDates = props.data.unavailable_dates
+    // const getDates = (datesArray) => {
+    //     const structuredDates= []
+    //     datesArray.forEach(element => {
+    //         structuredDates.push([new Date(element[0]), new Date(element.slice(-1))])
+    //     });
+    //     console.log(structuredDates)
+    //     return structuredDates
+    // }
+    
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [noOfGuests, setNoOfGuests] = useState(1);
@@ -28,9 +34,6 @@ const BookingForm = (props) => {
 
     const navigate = useNavigate();
     const params = useParams();
-
-
-
 
     //sandra
     let isAuth = false;
@@ -172,7 +175,7 @@ const BookingForm = (props) => {
                             ) : (
                                 <button disabled
                                     className="reserve"
-                                    // onClick={loginHandler}
+                                    onClick={loginHandler}
                                 >
                                     Login to Reserve
                                 </button>
@@ -193,7 +196,7 @@ const BookingForm = (props) => {
                         months={2}
                         direction="horizontal"
                         inputRanges={[]}
-                        // disabledDates = {[unavailableDates]}
+                        // disabledDates = {unavailableDates}
                     />
                 </div>
             </div>
