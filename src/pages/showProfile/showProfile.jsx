@@ -60,7 +60,7 @@ function ShowProfile() {
 
                                         <div className="row justify-content-between">
 
-                                        <div className="col-md-4">
+                                        <div className="col-md-6">
                                             <p>First Name</p>                                     
                                         </div>
 
@@ -84,7 +84,7 @@ function ShowProfile() {
                                             <p>{ profile.gender }</p>
                                         </div> */}
 
-                                        <div className="col-md-4">
+                                        <div className="col-md-6">
                                             <h6>About me</h6>                                     
                                         </div>
 
