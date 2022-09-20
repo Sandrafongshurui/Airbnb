@@ -76,7 +76,7 @@ const TripsCard = (props) => {
 
     const handleEdit = async () => {
         const response = await axios.get(
-            `http://localhost:8000/api/v1/user/trip/${props.data._id}`,
+            `https://ourairbnb.herokuapp.com/api/v1/user/trip/${props.data._id}`,
             { headers: headerOptions }
         );
         const data = await response.data;
