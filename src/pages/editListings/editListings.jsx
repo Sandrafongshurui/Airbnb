@@ -27,7 +27,7 @@ function EditListing() {
             address_2: '',
             country: '',
             state:'',
-            postal_code: '',
+            postal_code: 0,
             description: ''
         }
     });
@@ -39,24 +39,31 @@ function EditListing() {
 
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`,{headers:headerOptions})
-            // const res = await fetch(`http://localhost:8000/api/v1/listings/${params.listingID}`,{headers:headerOptions})
-            const data = await res.json()
-            console.log(data)
-            setListing(data)
-            reset({
-                name: data.name,
-                price: data.price,
-                beds: data.beds,
-                bedrooms: data.bedrooms,
-                bathrooms: data.bathrooms,
-                address_1: data.address_1,
-                address_2: data.address_2,
-                country: data.country,
-                state:data.state,
-                postal_code: data.postal_code,
-                description: data.description
-            })
+            try {
+                const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/listings/${params.listingID}`,{headers:headerOptions})
+                //const res = await fetch(`http://localhost:8000/api/v1/listings/${params.listingID}`,{headers:headerOptions})
+                const data = await res.json()
+                console.log(data)
+                setListing(data)
+                reset({
+                    name: data.name,
+                    price: data.price,
+                    beds: data.beds,
+                    bedrooms: data.bedrooms,
+                    bathrooms: data.bathrooms,
+                    address_1: data.address_1,
+                    address_2: data.address_2,
+                    country: data.country,
+                    state:data.state,
+                    postal_code: data.postal_code,
+                    description: data.description
+                })
+                
+            } catch (error) {
+                console.log(error)
+                
+            }
+           
         }
         fetchApi()
     }, [params])
@@ -113,7 +120,7 @@ function EditListing() {
             
             {/* select photo and upload it */}
             <div className={'container-xxl mt-4'}>
-                <h4>Add photos to your listing</h4>
+                <h4>Photos cannot be edited for now</h4>
                 
                 {selectedImages?.map(image => {
                     return (
@@ -132,8 +139,8 @@ function EditListing() {
                     (
                         <Paper className={style.photoBox + ' d-flex align-items-center justify-content-center'}>
                             <Button component={'label'}>
-                                Upload Photo
-                                <input onChange={handleSelectImage} name={'file'} multiple accept={'image/jpeg, image/png'} type={'file'} hidden/>
+                                Edit Photo
+                                <input disabled onChange={handleSelectImage} name={'file'} multiple accept={'image/jpeg, image/png'} type={'file'} />
                             </Button>
                         </Paper>
                     )
