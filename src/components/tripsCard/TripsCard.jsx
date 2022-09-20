@@ -5,6 +5,7 @@ import EditTrip from "../editTrip/EditTrip";
 import { toast } from "react-toastify";
 import axios from "axios";
 import style from "./TripsCard.module.css";
+import { format } from "date-fns";
 
 const TripsCard = (props) => {
     const [catchError, setCatchError] = useState(null);
@@ -76,7 +77,7 @@ const TripsCard = (props) => {
 
     const handleEdit = async () => {
         const response = await axios.get(
-            `https://ourairbnb.herokuapp.com/api/v1/user/trip/${props.data._id}`,
+            `http://localhost:8000/api/v1/user/trip/${props.data._id}`,
             { headers: headerOptions }
         );
         const data = await response.data;
@@ -135,13 +136,13 @@ const TripsCard = (props) => {
             <div>
                 <span>Checkin date: </span>
                 <strong className={"ms-2 me-2"}>
-                    {props.data.checkin_date}
+                    {format(new Date(props.data.checkin_date), "dd-MM-yyyy")}
                 </strong>
             </div>
             <div>
                 <span>Checkout date: </span>
                 <strong className={"ms-2 me-2"}>
-                    {props.data.checkout_date}
+                    {format(new Date(props.data.checkout_date), "dd-MM-yyyy")}
                 </strong>
             </div>
             <div>

@@ -10,32 +10,26 @@ import { DateTime } from "luxon";
 import "bootstrap";
 
 const EditForm = (props) => {
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
     const [totalPrice, setTotalPrice] = useState(0);
-    const [editData, setEditData] = useState(null);
+    // const [editData, setEditData] = useState(null);
     const params = useParams();
+
+    const isoStrCheckIn = props.data[0].checkin_date;
+    const isoStrCheckOut = props.data[0].checkout_date;
 
     // TODO: convert date format here
     const [formData, setFormData] = useState({
-        checkin_date: new Date(props.data[0].checkin_date),
-        checkout_date: new Date(props.data[0].checkout_date),
+        checkin_date: new Date(isoStrCheckIn),
+        checkout_date: new Date(isoStrCheckOut),
         total_guests: props.data[0].total_guests,
         total_price: props.data[0].total_price,
     });
 
-    console.log("formData: ", formData);
-
-    console.log("props.data[0]: ", new Date(props.data[0]));
-
-    // an variable obj to store the start and end date
     const selectionRange = {
-        startDate: startDate,
-        endDate: endDate,
+        startDate: formData.checkin_date,
+        endDate: formData.checkout_date,
         key: "selection",
     };
-
-    // console.log("selectionRange: ", selectionRange);
 
     // const handleSelect = (ranges) => {
     //     setStartDate(ranges.selection.startDate);
@@ -69,25 +63,41 @@ const EditForm = (props) => {
         Authorization: `Bearer ${localStorage.getItem("user_token")}`,
     };
 
-    const handleInputChange = (e) => {
+    //on calendar change
+    const onCalChange = (e) => {
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value,
+            checkin_date: e.selection.startDate,
+            checkout_date: e.selection.endDate,
         });
     };
 
-    const onEdit = async (data) => {
-        // setCatchError(null);
+    const onTotalGuestChange = (e) => {
+        setFormData({
+            ...formData,
+            total_guests: Number(e.target.value),
+        });
+    };
+
+    const onSubmit = async (evnt) => {
+        evnt.preventDefault();
+        console.log("formData: ", formData);
         try {
-            const res = await axios.post(
-                `https://ourairbnb.herokuapp.com/api/v1/user/trip/${props.data[0]._id}`,
-                data
+            const res = await axios.patch(
+                `http://localhost:8000/api/v1/user/trip/${props.data[0]._id}`,
+                {
+                    checkin_date: formData.checkin_date,
+                    checkout_date: formData.checkout_date,
+                    total_guests: formData.total_guests,
+                    total_price: formData.total_price,
+                },
+                { headers: headerOptions }
             );
-            console.log("res.data: ", res.data);
-            setEditData(res.data);
+
             toast.success("Successfully edited", {
                 position: toast.POSITION.TOP_CENTER,
             });
+            window.location.reload();
         } catch (error) {
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
@@ -100,7 +110,7 @@ const EditForm = (props) => {
             <div>
                 <h1 className="text-center pb-3 m-0 mb-3">Edit Trip</h1>
             </div>
-            <form onSubmit={onEdit}>
+            <form onSubmit={onSubmit}>
                 <Box mb={3}>
                     <div className="col">
                         <div>
@@ -118,7 +128,7 @@ const EditForm = (props) => {
                             id="total_guests"
                             name="total_guests"
                             type="number"
-                            onChange={handleInputChange}
+                            onChange={onTotalGuestChange}
                             min={1}
                             max={props.data[0].listing.accommodates}
                             value={formData.total_guests}
@@ -130,7 +140,7 @@ const EditForm = (props) => {
                         ranges={[selectionRange]}
                         minDate={new Date()}
                         rangeColors={["#FD5B61"]}
-                        // onChange={handleInputChange}
+                        onChange={onCalChange}
                         months={2}
                         direction="horizontal"
                         inputRanges={[]}
