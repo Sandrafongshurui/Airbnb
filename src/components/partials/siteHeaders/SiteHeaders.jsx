@@ -102,9 +102,9 @@ const SiteHeader = () => {
                             <div className="rightPop">
                                 <p
                                     className="rightPopText"
-                                    onClick={() => {
-                                        navigate("users/my/trips");
-                                    }}
+                                    // onClick={() => {
+                                    //     navigate("users/my/trips");
+                                    // }}
                                 >
                                     My trips
                                 </p>
