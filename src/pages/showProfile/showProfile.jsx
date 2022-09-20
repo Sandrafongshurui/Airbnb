@@ -68,7 +68,7 @@ function ShowProfile() {
                                             <p>{profile.firstname}</p>
                                         </div>
 
-                                        <div className="col-md-4">
+                                        <div className="col-md-6">
                                             <h6>Last Name</h6>                                     
                                         </div>
 

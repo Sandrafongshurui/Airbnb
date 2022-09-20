@@ -170,7 +170,7 @@ const BookingForm = (props) => {
                                     Reserve
                                 </button>
                             ) : (
-                                <button
+                                <button disabled
                                     className="reserve"
                                     // onClick={loginHandler}
                                 >
