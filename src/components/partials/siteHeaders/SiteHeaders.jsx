@@ -6,9 +6,10 @@ import logo from "../../../assets/images/house.png";
 import "./siteHeader.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import jwt_decode from "jwt-decode";
 
 const SiteHeader = () => {
-    let username = "username";
+    const [username,setUsername] = useState("");
     const location = useLocation();
     const navigate = useNavigate();
     const [navState, setNavState] = useState(false);
@@ -16,11 +17,14 @@ const SiteHeader = () => {
     const [openRegister, setOpenRegister] = useState(false);
     const [isAuth, setIsAuth] = useState(false);
     console.log("open siteheader ");
+    
 
     const checkAuth = () => {
         const token = localStorage.getItem("user_token");
+        const user = jwt_decode(token);
         if (token) {
             setIsAuth(true);
+            setUsername(user.data.username)
             console.log(token);
         } else {
             setIsAuth(false);
@@ -88,8 +92,7 @@ const SiteHeader = () => {
                 <div className="header__right">
                     {isAuth && (
                         <p style={{ marginRight: "2em", marginBottom: "0" }}>
-                            {" "}
-                            {username}{" "}
+                            {username}
                         </p>
                     )}
                     <span
