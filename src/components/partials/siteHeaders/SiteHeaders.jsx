@@ -33,9 +33,11 @@ const SiteHeader = () => {
     };
     const handleLoginToggle = (value) => {
         setOpenLogin(value);
+        //navStateToggle();
     };
     const handleRegisterToggle = (value) => {
         value? handleOpenLogin() : setOpenRegister(value)
+        //navStateToggle();
     };
     const handleOpenRegister = () => {
         if (location.pathname !== "/register") {
@@ -112,6 +114,7 @@ const SiteHeader = () => {
                                     className="rightPopText"
                                     onClick={() => {
                                         navigate("users/my/listings");
+                                        navStateToggle();
                                     }}
                                 >
                                     My listings
@@ -120,6 +123,7 @@ const SiteHeader = () => {
                                     className="rightPopText"
                                     onClick={() => {
                                         navigate("/users/my/profile");
+                                        navStateToggle();
                                     }}
                                 >
                                     My Profile
