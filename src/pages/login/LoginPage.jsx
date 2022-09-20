@@ -8,7 +8,6 @@ const LoginPage = () => {
   const [catchError, setCatchError] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
-  const history = useHistory();
 
   const onSubmit = async (data) => {
     console.log("from loginpage:", data);
@@ -26,7 +25,7 @@ const LoginPage = () => {
         localStorage.setItem("user_token", res.data.token);
         //navigate to home
         if (location.pathname === "/login") {
-          history.length > 0 ? history.goBack() : navigate("/");
+          location.length > 0 ? location.goBack() : navigate("/");
         }
       }
     } catch (error) {
