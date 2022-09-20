@@ -153,6 +153,7 @@ const BookingForm = (props) => {
                                 </label>
                             </div>
                             No of Guests:
+                            <div className="input">
                             <input
                                 type="number"
                                 value={noOfGuests}
@@ -160,6 +161,9 @@ const BookingForm = (props) => {
                                 min={1}
                                 max={props.data.accommodates}
                             ></input>
+
+                            </div>
+                           
                             <br />
                             {isAuth ? (
                                 <button className="reserve" type="submit">

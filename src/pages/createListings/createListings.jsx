@@ -71,13 +71,12 @@ function CreateListingsCopy() {
       Object.keys(data).forEach((element) => {
         formData.append(element, data[element]);
       });
-      console.log(selectedImages)
-      Object.keys(selectedImages).forEach((element) => {
-        formData.append(element, selectedImages.files[element]);
+      Object.keys(data.files).forEach((element) => {
+        formData.append(element, data.files[element]);
       });
       const res = await axios.post(
-        //"https://ourairbnb.herokuapp.com/api/v1/user/listing",
-         "http://localhost:8000/api/v1/user/listing",
+        "https://ourairbnb.herokuapp.com/api/v1/user/listing",
+        // "http://localhost:8000/api/v1/user/listing",
         formData,
         { headers: headerOptions }
       );
@@ -149,6 +148,7 @@ function CreateListingsCopy() {
                     multiple
                     accept={"image/jpeg, image/png"}
                     type="file"
+                    fullwidth
                     //hidden
                 />
                 {/* Upload */}
