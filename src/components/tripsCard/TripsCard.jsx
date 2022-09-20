@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import SwiperCore, { Pagination } from "swiper/core";
+import { Pagination } from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
 import EditTrip from "../editTrip/EditTrip";
 import { toast } from "react-toastify";
 import axios from "axios";
 import style from "./TripsCard.module.css";
-import { BedOutlined } from "@mui/icons-material";
 
 const TripsCard = (props) => {
     const [catchError, setCatchError] = useState(null);
+    const [addModalShow, setAddModalShow] = useState(false);
+    const [editTrip, setEditTrip] = useState([]);
 
     const renderTrips = () => {
         if (props.data) {
@@ -65,29 +66,24 @@ const TripsCard = (props) => {
         }
     };
 
-    // handles the edit button
-    const onEdit = async (data) => {
-        console.log("from login:", data);
-        setCatchError(null);
-        try {
-            // const res = await axios.post(
-            //     "http://localhost:8000/api/v1/user/login",
-            //     data
-            // );
-            // console.log("response: ", res);
-            toast.success("Successfully edited", {
-                position: toast.POSITION.TOP_CENTER,
-            });
-        } catch (error) {
-            toast.error(error.message, {
-                position: toast.POSITION.TOP_CENTER,
-            });
-        }
-    };
-
     if (!props.data) {
         return <></>;
     }
+
+    const handleToggle = (value) => {
+        setAddModalShow(value);
+    };
+
+    const handleEdit = async () => {
+        const response = await axios.get(
+            `http://localhost:8000/api/v1/user/trip/${props.data._id}`,
+            { headers: headerOptions }
+        );
+        const data = await response.data;
+
+        setAddModalShow(true);
+        setEditTrip(data);
+    };
 
     return (
         <div className={style.tripsCard}>
@@ -102,7 +98,13 @@ const TripsCard = (props) => {
                     <div className="row">
                         <div className="col">
                             <div className="edit">
-                                <button onClick={onEdit}>Edit trip</button>
+                                <button onClick={handleEdit}>Edit trip</button>
+                                {addModalShow && (
+                                    <EditTrip
+                                        toggle={handleToggle}
+                                        data={editTrip}
+                                    />
+                                )}
                             </div>
                         </div>
                         <div className="col">
@@ -140,6 +142,12 @@ const TripsCard = (props) => {
                 <span>Checkout date: </span>
                 <strong className={"ms-2 me-2"}>
                     {props.data.checkout_date}
+                </strong>
+            </div>
+            <div>
+                <span>No of Guest: </span>
+                <strong className={"ms-2 me-2"}>
+                    {props.data.total_guests}
                 </strong>
             </div>
             <div>

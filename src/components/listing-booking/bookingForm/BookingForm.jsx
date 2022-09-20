@@ -51,6 +51,8 @@ const BookingForm = (props) => {
         key: "selection",
     };
 
+    console.log("selectionRange: ", selectionRange);
+
     // to update the start and end date state upon selecting the dates
     const handleSelect = (ranges) => {
         setStartDate(ranges.selection.startDate);
@@ -97,7 +99,7 @@ const BookingForm = (props) => {
 
         try {
             const response = await axios.post(
-                `http://localhost:8000/api/v1/user/book/${params.listingID}`,
+                `https://ourairbnb.herokuapp.com/api/v1/user/book/${params.listingID}`,
                 {
                     checkin_date: startDate,
                     checkout_date: endDate,
@@ -106,7 +108,10 @@ const BookingForm = (props) => {
                 },
                 { headers: headerOptions }
             );
-            console.log(response);
+
+            console.log("startDate: ", startDate);
+            console.log("endDate: ", endDate);
+
             toast.success("Successfully reserved!", {
                 position: toast.POSITION.TOP_CENTER,
             });
