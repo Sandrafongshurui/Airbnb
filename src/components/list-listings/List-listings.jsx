@@ -9,10 +9,10 @@ function ListListings({ isHost }) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("user_token")}`,
     };
-   
+
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await fetch('http://localhost:8000/api/v1', {
+            const res = await fetch("https://ourairbnb.herokuapp.com/api/v1", {
                 headers: headerOptions,
             });
             const data = await res.json();

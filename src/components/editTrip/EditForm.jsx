@@ -80,7 +80,7 @@ const EditForm = (props) => {
         // setCatchError(null);
         try {
             const res = await axios.post(
-                `http://localhost:8000/api/v1/user/trip/${props.data[0]._id}`,
+                `https://ourairbnb.herokuapp.com/api/v1/user/trip/${props.data[0]._id}`,
                 data
             );
             console.log("res.data: ", res.data);
