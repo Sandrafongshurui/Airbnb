@@ -29,6 +29,10 @@ const App = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route
+                    path="/listing-details/:listingID"
+                    element={<ListingBooking />}
+                />
 
                 <Route path="/users/my/profile" element={<Auth component={ShowProfile} />} />
                 <Route
@@ -50,10 +54,7 @@ const App = () => {
                     element={<Auth component={EditListing }/>}
                 />
 
-                <Route
-                    path="/listing-details/:listingID"
-                    element={<Auth component={ListingBooking } />}
-                />
+               
 
                 <Route
                     path="/users/my/trips"
