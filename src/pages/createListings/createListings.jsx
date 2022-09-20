@@ -179,7 +179,7 @@ function CreateListingsCopy() {
                     message: "Max length exceeded",
                   },
                   pattern: {
-                    value: /^[A-Za-z]+$/i,
+                    value: /^[A-Za-z ]+$/i,
                     message: "Alphabetical characters only",
                   },
                 }}
@@ -314,7 +314,7 @@ function CreateListingsCopy() {
                     {...field}
                     required
                     name={"address_1"}
-                    label={"Address 1 - Street Name (Avaiable to public)"}
+                    label={"Address 1 - Street Name (Available to public)"}
                     className={"mb-2"}
                     variant={"standard"}
                     fullWidth
@@ -330,7 +330,7 @@ function CreateListingsCopy() {
                     {...field}
                     // required
                     name={"address_2"}
-                    label={"Address 2 -Apartment, unit No. (Sent to user after reservation confirmation)"}
+                    label={"Address 2 - Apartment, Unit No. (optional)"}
                     className={"mb-2"}
                     variant={"standard"}
                     fullWidth

@@ -45,7 +45,7 @@ function ListingBookingHistory() {
           method: 'DELETE',
           headers : headerOptions
         })
-        toast.success("Create listing successful", {
+        toast.success("Delete listing successful", {
           position: toast.POSITION.TOP_CENTER,
         });
         // alert('Delete successfully!');
