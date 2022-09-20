@@ -10,7 +10,7 @@ SwiperCore.use([Pagination, Navigation, EffectFade]);
 
 function ListingCard(props) {
   const { _id, name, price, images_url } = props.data;
-  console.log(props.data);
+  // console.log(props.data);
   const navigate = useNavigate();
 
   const handleClickListing = () => {
@@ -30,13 +30,17 @@ function ListingCard(props) {
   };
   const renderImages = () => {
     if (props.data) {
-      return images_url.map((url) => {
-        return (
-          <SwiperSlide key={url} className={style.listingImagesBox}>
-            <img className={style.listingImages} src={url} alt="" />
-          </SwiperSlide>
-        );
-      });
+      // return images_url.map((url, idx) => {
+      //   return (
+      //     <SwiperSlide key={url} className={style.listingImagesBox}>
+      //       <img className={style.listingImages} src={url} alt="" />
+      //     </SwiperSlide>
+      //   );   
+          return (
+            <SwiperSlide key={images_url[0]} className={style.listingImagesBox}>
+              <img className={style.listingImages} src={images_url[0]} alt="" />
+            </SwiperSlide>
+          );     
     }
   };
   if (!props.data) {

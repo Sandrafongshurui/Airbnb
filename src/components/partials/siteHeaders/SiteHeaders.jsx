@@ -21,8 +21,8 @@ const SiteHeader = () => {
 
     const checkAuth = () => {
         const token = localStorage.getItem("user_token");
-        const user = jwt_decode(token);
         if (token) {
+            const user = jwt_decode(token);
             setIsAuth(true);
             setUsername(user.data.username)
             console.log(token);
