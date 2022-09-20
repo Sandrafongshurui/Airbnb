@@ -14,20 +14,19 @@ const EditForm = (props) => {
     const [endDate, setEndDate] = useState(new Date());
     const [totalPrice, setTotalPrice] = useState(0);
     const [editData, setEditData] = useState(null);
-    // const [noOfGuests, setNoOfGuests] = useState(1);
     const params = useParams();
 
     // TODO: convert date format here
     const [formData, setFormData] = useState({
-        checkin_date: DateTime.now(props.data[0].checkin_date).toJSDate(),
-        checkout_date: props.data[0].checkout_date,
+        checkin_date: new Date(props.data[0].checkin_date),
+        checkout_date: new Date(props.data[0].checkout_date),
         total_guests: props.data[0].total_guests,
         total_price: props.data[0].total_price,
     });
 
     console.log("formData: ", formData);
 
-    console.log("props.data[0]: ", props.data[0]);
+    console.log("props.data[0]: ", new Date(props.data[0]));
 
     // an variable obj to store the start and end date
     const selectionRange = {
@@ -35,6 +34,8 @@ const EditForm = (props) => {
         endDate: endDate,
         key: "selection",
     };
+
+    // console.log("selectionRange: ", selectionRange);
 
     // const handleSelect = (ranges) => {
     //     setStartDate(ranges.selection.startDate);

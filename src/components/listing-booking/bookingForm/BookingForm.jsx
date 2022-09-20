@@ -51,6 +51,8 @@ const BookingForm = (props) => {
         key: "selection",
     };
 
+    console.log("selectionRange: ", selectionRange);
+
     // to update the start and end date state upon selecting the dates
     const handleSelect = (ranges) => {
         setStartDate(ranges.selection.startDate);

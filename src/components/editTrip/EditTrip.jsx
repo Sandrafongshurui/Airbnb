@@ -10,9 +10,6 @@ const EditTrip = (props) => {
     const [editTrip, setEditTrip] = useState([]);
 
     // console.log("props.data: ", props.data);
-    // const handleEdit = () => {
-    //     setEditTrip(props.data);
-    // };
 
     return (
         <Modal open={open}>
