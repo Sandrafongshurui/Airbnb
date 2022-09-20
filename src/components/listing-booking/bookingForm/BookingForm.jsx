@@ -44,7 +44,7 @@ const BookingForm = (props) => {
         navigate("/login");
     };
 
-    // an variable obj to store the start and end date
+    // an variable obj to store the checkin date and checkout date
     const selectionRange = {
         startDate: startDate,
         endDate: endDate,

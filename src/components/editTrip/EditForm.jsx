@@ -13,11 +13,13 @@ const EditForm = (props) => {
     const [totalPrice, setTotalPrice] = useState(0);
     // const [editData, setEditData] = useState(null);
     const params = useParams();
+    const datesBetween = require("dates-between");
 
+    // setting a constant to the date props to convert the date format
     const isoStrCheckIn = props.data[0].checkin_date;
     const isoStrCheckOut = props.data[0].checkout_date;
 
-    // TODO: convert date format here
+    // setting the state of the form data
     const [formData, setFormData] = useState({
         checkin_date: new Date(isoStrCheckIn),
         checkout_date: new Date(isoStrCheckOut),
@@ -25,36 +27,11 @@ const EditForm = (props) => {
         total_price: props.data[0].total_price,
     });
 
+    // an variable obj to store the checkin date and checkout date
     const selectionRange = {
         startDate: formData.checkin_date,
         endDate: formData.checkout_date,
         key: "selection",
-    };
-
-    // const handleSelect = (ranges) => {
-    //     setStartDate(ranges.selection.startDate);
-    //     setEndDate(ranges.selection.endDate);
-
-    //     // getting the startDate and endDate and push into array
-    //     const datesBetween = require("dates-between");
-    //     const dates = Array.from(
-    //         datesBetween(ranges.selection.startDate, ranges.selection.endDate)
-    //     );
-
-    //     // getting number of nights between startDate and endDate
-    //     const noOfNights = dates.length - 1;
-
-    //     // calculation of total price based on no. of nights
-    //     const pricePerNight = checkPriceType(); //sandra
-
-    //     setTotalPrice(noOfNights * Number(pricePerNight));
-    // };
-
-    //sandra
-    const checkPriceType = () => {
-        return props.data.price.$numberDecimal
-            ? props.data.price["$numberDecimal"].toLocaleString()
-            : props.data.price.toLocaleString();
     };
 
     //sandra
@@ -63,20 +40,67 @@ const EditForm = (props) => {
         Authorization: `Bearer ${localStorage.getItem("user_token")}`,
     };
 
-    //on calendar change
+    // on calendar change
     const onCalChange = (e) => {
+        const dates = Array.from(
+            datesBetween(e.selection.startDate, e.selection.endDate)
+        );
+
+        console.log("e.selection.checkin_date: ", e.selection.startDate);
+        console.log("e.selection.checkout_date", e.selection.endDate);
+
+        // getting number of nights between startDate and endDate
+        let noOfNights = dates.length - 1;
+        let pricePerNight = checkPriceType();
+
+        console.log(
+            "noOfNights * Number(pricePerNight): ",
+            noOfNights * Number(pricePerNight)
+        );
+
         setFormData({
             ...formData,
             checkin_date: e.selection.startDate,
             checkout_date: e.selection.endDate,
+            total_price: noOfNights * Number(pricePerNight),
         });
+
+        // onTotalPriceChange();
     };
 
+    // on total guest change
     const onTotalGuestChange = (e) => {
         setFormData({
             ...formData,
             total_guests: Number(e.target.value),
         });
+    };
+
+    //sandra
+    const checkPriceType = () => {
+        return props.data[0].listing.price.$numberDecimal
+            ? props.data[0].listing.price["$numberDecimal"]
+            : props.data[0].listing.price;
+    };
+
+    const onTotalPriceChange = () => {
+        const dates = Array.from(
+            datesBetween(formData.checkin_date, formData.checkout_date)
+        );
+
+        // getting number of nights between startDate and endDate
+        let noOfNights = dates.length - 1;
+        let pricePerNight = checkPriceType();
+
+        console.log(
+            "noOfNights * Number(pricePerNight): ",
+            noOfNights * Number(pricePerNight)
+        );
+        // setTotalPrice(noOfNights * Number(pricePerNight));
+        // setFormData({
+        //     ...formData,
+        //     total_price: noOfNights * Number(pricePerNight),
+        // });
     };
 
     const onSubmit = async (evnt) => {
@@ -115,10 +139,7 @@ const EditForm = (props) => {
                     <div className="col">
                         <div>
                             <label htmlFor="total_price" className="form-label">
-                                <p>
-                                    Total price: ${props.data[0].total_price}{" "}
-                                    SGD
-                                </p>
+                                <p>Total price: ${formData.total_price} SGD</p>
                             </label>
                         </div>
                         <label htmlFor="total_guests" className="form-label">

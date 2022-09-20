@@ -44,7 +44,6 @@ const TripsCard = (props) => {
                 { headers: headerOptions }
             );
 
-            console.log("response: ", response);
             toast.success("Successfully deleted", {
                 position: toast.POSITION.TOP_CENTER,
             });

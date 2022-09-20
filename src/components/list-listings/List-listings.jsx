@@ -13,7 +13,8 @@ function ListListings({ isHost }) {
 
     useEffect(() => {
         const fetchApi = async () => {
-            const res = await fetch("https://ourairbnb.herokuapp.com/api/v1", {
+            const res = await fetch("http://localhost:8000/api/v1", {
+                // https://ourairbnb.herokuapp.com/api/v1
                 headers: headerOptions,
             });
             const data = await res.json();
@@ -30,7 +31,7 @@ function ListListings({ isHost }) {
     return (
         <div className={"mt-2 me-3"}>
             <div className={"d-flex flex-wrap"}>{renderListings}</div>
-            <Pagination data={listings} />
+            {/* <Pagination data={listings} /> */}
         </div>
     );
 }
