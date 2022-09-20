@@ -1,6 +1,6 @@
 import LoginForm from "../../components/login/login-form/LoginForm";
 import "../../components/modal/Modal.css";
-import { useNavigate, useLocation, useHistory } from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -25,7 +25,7 @@ const LoginPage = () => {
         localStorage.setItem("user_token", res.data.token);
         //navigate to home
         if (location.pathname === "/login") {
-          location.length > 0 ? location.goBack() : navigate("/");
+          location.length > 0 ? navigate(-1) : navigate("/");
         }
       }
     } catch (error) {
