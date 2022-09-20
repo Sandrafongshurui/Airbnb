@@ -168,7 +168,7 @@ const BookingForm = (props) => {
                             ) : (
                                 <button
                                     className="reserve"
-                                    onClick={loginHandler}
+                                    // onClick={loginHandler}
                                 >
                                     Login to Reserve
                                 </button>

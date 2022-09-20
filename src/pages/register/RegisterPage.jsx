@@ -1,13 +1,15 @@
 import RegisterForm from "../../components/register/register-form/RegisterForm";
 import "../../components/modal/Modal.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const [catchError, setCatchError] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const history = useHistory();
 
   const onSubmit = async (data) => {
     console.log("from loginpage:", data);
@@ -21,7 +23,10 @@ const LoginPage = () => {
 
       if (res.status === 200 || res.status === 201) {
         //navigate to home
-        if (location.pathname === "/Register") {
+        toast.success("Account created, please login to continue", {
+          position: toast.POSITION.TOP_CENTER,
+      });
+        if (location.pathname === "/register") {
           navigate("/");
         }
       }

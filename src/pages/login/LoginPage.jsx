@@ -1,6 +1,6 @@
 import LoginForm from "../../components/login/login-form/LoginForm";
 import "../../components/modal/Modal.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -8,6 +8,7 @@ const LoginPage = () => {
   const [catchError, setCatchError] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const history = useHistory();
 
   const onSubmit = async (data) => {
     console.log("from loginpage:", data);
@@ -25,7 +26,7 @@ const LoginPage = () => {
         localStorage.setItem("user_token", res.data.token);
         //navigate to home
         if (location.pathname === "/login") {
-          navigate("/");
+          history.length > 0 ? history.goBack() : navigate("/");
         }
       }
     } catch (error) {
