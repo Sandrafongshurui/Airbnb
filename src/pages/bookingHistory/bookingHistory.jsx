@@ -3,6 +3,7 @@ import { Button, Menu, MenuItem, Paper, Table, TableBody, TableCell, TableContai
 import moment from 'moment'
 import MenuIcon from '@mui/icons-material/Menu';
 import {useNavigate, useParams} from "react-router-dom";
+import { toast } from "react-toastify";
 
 function ListingBookingHistory() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -10,6 +11,7 @@ function ListingBookingHistory() {
   const navigate = useNavigate();
   const params = useParams()
   const [history, setHistory] = useState([]);
+
 
   const headerOptions = {
     "Content-Type": "application/json",
@@ -37,12 +39,22 @@ function ListingBookingHistory() {
   };
 
   const handleDelete = async () => {
-    await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, {
-    // await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`,{
-      method: 'DELETE'
-    })
-    alert('Delete successfully!');
-    navigate('/users/my/listings');
+    try {
+      await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, {
+        // await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`,{
+          method: 'DELETE',
+          headers : headerOptions
+        })
+        toast.success("Create listing successful", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        // alert('Delete successfully!');
+        navigate('/users/my/listings');
+    } catch (error) {
+      toast.error(error.message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } 
   }
 
   

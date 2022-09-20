@@ -33,7 +33,7 @@ function CreateListingsCopy() {
       address_2: "",
       country: "",
       state: "",
-      postal_code: "",
+      postal_code: 0,
       description: "",
     },
   });
@@ -175,7 +175,7 @@ function CreateListingsCopy() {
                     message: "Name is required",
                   },
                   maxLength: {
-                    value: 20,
+                    value: 100,
                     message: "Max length exceeded",
                   },
                   pattern: {
@@ -292,7 +292,7 @@ function CreateListingsCopy() {
                     {...register("price", {
                       required: true,
                       min: 1,
-                      max: 100,
+                      max: 1000,
                     })}
                     {...field}
                     required
@@ -314,7 +314,7 @@ function CreateListingsCopy() {
                     {...field}
                     required
                     name={"address_1"}
-                    label={"Address_1"}
+                    label={"Address 1 - Street Name (Avaiable to public)"}
                     className={"mb-2"}
                     variant={"standard"}
                     fullWidth
@@ -328,9 +328,9 @@ function CreateListingsCopy() {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    required
+                    // required
                     name={"address_2"}
-                    label={"Address_2"}
+                    label={"Address 2 -Apartment, unit No. (Sent to user after reservation confirmation)"}
                     className={"mb-2"}
                     variant={"standard"}
                     fullWidth
@@ -368,6 +368,7 @@ function CreateListingsCopy() {
                     required
                     name={"postal_code"}
                     label={"Postal code"}
+                    type={"number"}
                     className={"mb-2"}
                     variant={"standard"}
                     fullWidth
