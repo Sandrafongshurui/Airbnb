@@ -194,13 +194,14 @@ function CreateListingsCopy() {
                     message: "Max length exceeded",
                   },
                   pattern: {
-                    value: /^[A-Za-z ]+$/i,
-                    message: "Alphabetical characters only",
+                    value: /^[0-9A-Za-z ]+$/i,
+                    message: "Alphanumeric characters only",
                   },
                 }}
                 render={({ field }) => (
                   <TextField
                     className={"mb-2"}
+                    required
                     label={"Listing Name"}
                     variant={"standard"}
                     fullWidth
@@ -235,9 +236,9 @@ function CreateListingsCopy() {
                     variant={"standard"}
                     fullWidth
                     type={Number}
-                    error={errors.name ? true : false}
+                    error={errors.beds ? true : false}
                     {...field}
-                    helperText={errors.name && <p>{errors.name.message}</p>}
+                    helperText={errors.beds && <p>{errors.beds.message}</p>}
                   >
                     {/* <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>2</MenuItem>
@@ -249,6 +250,16 @@ function CreateListingsCopy() {
               <Controller
                 name="bedrooms"
                 control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Required",
+                  },
+                  pattern: {
+                    value: /^0|[1-9]\d*$/,
+                    message: "Numbers only",
+                  },
+                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -256,13 +267,17 @@ function CreateListingsCopy() {
                     name={"bedrooms"}
                     label={"How many bedrooms can guests use?"}
                     className={"mt-2"}
-                    select
+                    //select
                     variant={"standard"}
                     fullWidth
+                    type={Number}
+                    error={errors.bedrooms ? true : false}
+                    {...field}
+                    helperText={errors.bedrooms && <p>{errors.bedrooms.message}</p>}
                   >
-                    <MenuItem value={1}>1</MenuItem>
+                    {/* <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
+                    <MenuItem value={3}>3</MenuItem> */}
                   </TextField>
                 )}
               />
@@ -270,6 +285,16 @@ function CreateListingsCopy() {
               <Controller
                 name="bathrooms"
                 control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Required",
+                  },
+                  pattern: {
+                    value: /^0|[1-9]\d*$/,
+                    message: "Numbers only",
+                  },
+                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -277,13 +302,17 @@ function CreateListingsCopy() {
                     name={"bathrooms"}
                     label={"No of bathrooms"}
                     className={"mb-2"}
-                    select
+                    //select
                     variant={"standard"}
                     fullWidth
+                    type={Number}
+                    error={errors.bathrooms ? true : false}
+                    {...field}
+                    helperText={errors.bathrooms && <p>{errors.bathrooms.message}</p>}
                   >
-                    <MenuItem value={1}>1</MenuItem>
+                    {/* <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
+                    <MenuItem value={3}>3</MenuItem> */}
                   </TextField>
                 )}
               />
@@ -292,6 +321,10 @@ function CreateListingsCopy() {
                 name="state"
                 control={control}
                 rules={{
+                  required: {
+                    value: true,
+                    message: "Required",
+                  },
                   pattern: {
                     value: /^[A-Za-z]+$/i,
                     message: "Alphabetical characters only",
@@ -299,10 +332,12 @@ function CreateListingsCopy() {
                 }}
                 render={({ field }) => (
                   <TextField
+                    required
                     className={"mb-2"}
                     label={"State"}
                     variant={"standard"}
                     fullWidth
+                    type={String}
                     error={errors.state ? true : false}
                     {...field}
                     helperText={errors.state && <p>{errors.state.message}</p>}
@@ -316,21 +351,38 @@ function CreateListingsCopy() {
               <Controller
                 name="price"
                 control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Required",
+                  },
+                  pattern: {
+                    value: /^0|[1-9]\d*$/,
+                    message: "Numbers only",
+                  },
+                  min:{ value: 1,
+                  message: "Min $50",},
+                  max:{ value: 1000,
+                    message: "Max $1000",},
+                }}
                 render={({ field }) => (
                   <TextField
-                    {...register("price", {
-                      required: true,
-                      min: 1,
-                      max: 1000,
-                    })}
+                    // {...register("price", {
+                    //   required: true,
+                    //   min: 1,
+                    //   max: 1000,
+                    // })}
                     {...field}
                     required
                     name={"price"}
-                    type={"number"}
+                    type={Number}
                     className={"mb-2"}
                     label={"Price:"}
                     variant={"standard"}
                     fullWidth
+                    error={errors.price ? true : false}
+                    {...field}
+                    helperText={errors.price && <p>{errors.price.message}</p>}
                   />
                 )}
               />
@@ -338,6 +390,20 @@ function CreateListingsCopy() {
               <Controller
                 name="address_1"
                 control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Required",
+                  },
+                  maxLength: {
+                    value: 200,
+                    message: "Max length exceeded",
+                  },
+                  pattern: {
+                    value: /^[0-9A-Za-z ]+$/i,
+                    message: "Alphanumeric characters only",
+                  },
+                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -347,6 +413,9 @@ function CreateListingsCopy() {
                     className={"mb-2"}
                     variant={"standard"}
                     fullWidth
+                    error={errors.address_1 ? true : false}
+                    {...field}
+                    helperText={errors.address_1 && <p>{errors.address_1.message}</p>}
                   />
                 )}
               />
@@ -354,6 +423,16 @@ function CreateListingsCopy() {
               <Controller
                 name="address_2"
                 control={control}
+                rules={{
+                  maxLength: {
+                    value: 200,
+                    message: "Max length exceeded",
+                  },
+                  pattern: {
+                    value: /^[0-9A-Za-z ]+$/i,
+                    message: "Alphanumeric characters only",
+                  },
+                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -363,6 +442,9 @@ function CreateListingsCopy() {
                     className={"mb-2"}
                     variant={"standard"}
                     fullWidth
+                    error={errors.address_2 ? true : false}
+                    {...field}
+                    helperText={errors.address_2 && <p>{errors.address_2.message}</p>}
                   />
                 )}
               />
@@ -370,6 +452,12 @@ function CreateListingsCopy() {
               <Controller
                 name="country"
                 control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Required",
+                  },
+                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -380,6 +468,9 @@ function CreateListingsCopy() {
                     select
                     variant={"standard"}
                     fullWidth
+                    error={errors.country ? true : false}
+                    {...field}
+                    helperText={errors.country && <p>{errors.country.message}</p>}
                   >
                     <MenuItem value={"Singapore"}>Singapore</MenuItem>
                     <MenuItem value={"Canada"}>Canada</MenuItem>
@@ -391,6 +482,16 @@ function CreateListingsCopy() {
               <Controller
                 name="postal_code"
                 control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Required",
+                  },
+                  pattern: {
+                    value: /^0|[1-9]\d*$/,
+                    message: "Numbers only",
+                  }
+                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -401,6 +502,9 @@ function CreateListingsCopy() {
                     className={"mb-2"}
                     variant={"standard"}
                     fullWidth
+                    error={errors.postal_code ? true : false}
+                    {...field}
+                    helperText={errors.postal_code && <p>{errors.postal_code.message}</p>}
                   />
                 )}
               />
@@ -410,6 +514,20 @@ function CreateListingsCopy() {
               <Controller
                 name="description"
                 control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Required",
+                  },
+                  maxLength: {
+                    value: 100,
+                    message: "Max length exceeded",
+                  },
+                  pattern: {
+                    value: /^[0-9A-Za-z ]+$/i,
+                    message: "Alphanumeric characters only",
+                  },
+                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -418,6 +536,9 @@ function CreateListingsCopy() {
                     label={"Descriptions:"}
                     fullWidth
                     variant={"standard"}
+                    error={errors.description ? true : false}
+                    {...field}
+                    helperText={errors.description && <p>{errors.description.message}</p>}
                   />
                 )}
               />
@@ -426,15 +547,15 @@ function CreateListingsCopy() {
         </Paper>
 
         <div className={"mt-2 d-flex justify-content-evenly"}>
-          <Button style={style.confirmButton}
+          <Button className={style.confirmButton} style={{margin:"30px"}}
             onClick={handleCancel}
             variant={"contained"}
-            className={"me-2"}
+            // className={"me-2"}
             color={"inherit"}
           >
             Cancel
           </Button>
-          <Button type={"submit"} variant={"contained"} color={"primary"} style={style.confirmButton}>
+          <Button type={"submit"} variant={"contained"} color={"primary"} className={style.confirmButton}> style={{margin:"30px"}}
             Confirm
           </Button>
         </div>

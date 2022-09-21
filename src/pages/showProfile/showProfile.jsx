@@ -28,7 +28,7 @@ function ShowProfile() {
             <>
 
                 <div className={style.profileContainer}>
-                    <div class="row ">
+                    <div class="row p-2 ">
 
                         <div class="col-md-3">
                             <div className={style.imageBox}>
@@ -42,7 +42,7 @@ function ShowProfile() {
                                         <li class="nav-item">
                                             <a class="nav-link disabled">Delete account</a>
                                         </li>
-                                        <li  class="nav-item">
+                                        <li  class="nav-item ms-3">
                                             <Link to={`/users/my/profile/edit`} className='card-link'>EDIT</Link>
                                         </li>
                                     
