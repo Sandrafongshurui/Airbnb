@@ -40,8 +40,13 @@
 }
 
 .profileHead {
+<<<<<<< HEAD
     /* margin-top: 4rem; */
     margin-left: 1rem;
+=======
+    margin-top: 1rem;
+    margin-left: 4rem;
+>>>>>>> 323d697629b2d0c999e3abb87ba287ae0418f2ff
 }
 
 .profileDetails {

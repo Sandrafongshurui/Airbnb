@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button, MenuItem, TextField } from "@mui/material";
 import { DateRangePicker } from "react-date-range";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -41,10 +42,10 @@ const BookingForm = (props) => {
         const token = localStorage.getItem("user_token");
         if (token) {
             isAuth = true;
-            console.log(token);
+            // console.log(token);
         } else {
             isAuth = false;
-            console.log("no token");
+            // console.log("no token");
         }
     };
     checkAuth();
@@ -102,8 +103,8 @@ const BookingForm = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("submit token---->", localStorage.getItem("user_token")); //sandra
-        console.log("handleSubmit: ", handleSubmit);
+        // console.log("submit token---->", localStorage.getItem("user_token")); //sandra
+        // console.log("handleSubmit: ", handleSubmit);
 
         try {
             const response = await axios.post(
@@ -116,17 +117,14 @@ const BookingForm = (props) => {
                 },
                 { headers: headerOptions }
             );
-
-            console.log("startDate: ", startDate);
-            console.log("endDate: ", endDate);
-
+            // console.log(response);
             toast.success("Successfully reserved!", {
                 position: toast.POSITION.TOP_CENTER,
             });
             // navigate(`/users/my/trips`);
         } catch (error) {
-            console.log(error.response); //sandra
-            console.log(error.response.data.message); //sandra
+            // console.log(error.response); //sandra
+            // console.log(error.response.data.message); //sandra
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
             });
@@ -142,37 +140,59 @@ const BookingForm = (props) => {
 
     return (
         <form onSubmit={handleSubmit} className={"container-fluid p-0"}>
-            <div className={"container-xxl mt-4"}>
-                <h4>BookingForm</h4>
 
-                <div className="container text-center">
+            <div className={"container-fluid mt-4 mb-1"}>
+
+                <div className="container">
                     <div className="row">
-                        <div className="col">
-                            Description
-                            <p>{props.data.name}</p>
+
+                        <div className="col descriptionBox">
+                            <h2>Description</h2>
                             <p>{props.data.description}</p>
                         </div>
-                        <div className="col">
-                            <div className="pricing">
-                                <label>
-                                    {/* sandra */}
-                                    <p>${checkPriceType()} / Night</p>
-                                    <p>Total price: ${totalPrice} SGD</p>
-                                </label>
-                            </div>
-                            No of Guests:
-                            <div className="input">
-                            <input
-                                type="number"
-                                value={noOfGuests}
-                                onChange={handleGuests}
-                                min={1}
-                                max={props.data.accommodates}
-                            ></input>
+
+                        <div className="col reserveBox">
+
+                            <div className="pricingBox">
+
+                                <div className="row mt-2">
+
+                                    <label className="col-5">
+                                        <p className="priceFont">Price/night: ${checkPriceType()} SGD</p>
+                                    </label>
+
+                                    <label className="col-5">
+                                        <p className="priceFont">Total price:${totalPrice} SGD</p>
+                                    </label>
+
+                                </div>
+
+                                <div className="row">
+
+                                    <div className="col-5">
+
+                                        <TextField
+                                            fullWidth
+                                            label="Number of guests"
+                                            type="number"
+                                            InputProps={{ inputProps:
+                                                {
+                                                    min: 1,
+                                                    max: props.data.accommodates
+                                                }
+                                            }}
+                                            variant="standard"
+                                            onChange={handleGuests}
+                                            value={ noOfGuests }
+                                        />
+
+                                    </div>
+
+                                </div>
 
                             </div>
-                           
-                            <br />
+
+                            <div>
                             {isAuth ? (
                                 <button className="reserve" type="submit">
                                     Reserve
@@ -185,24 +205,33 @@ const BookingForm = (props) => {
                                     Login to Reserve
                                 </button>
                             )}
-                            <br />
+                            </div>
+
                         </div>
+
                     </div>
+
                 </div>
 
-                <div className="container text-center data-picker">
-                    <h4>Select your Dates:</h4>
+                <div className="container ">
 
-                    <DateRangePicker
-                        ranges={[selectionRange]}
-                        minDate={new Date()}
-                        rangeColors={["#FD5B61"]}
-                        onChange={handleSelect}
-                        months={2}
-                        direction="horizontal"
-                        inputRanges={[]}
-                        // disabledDates = {unavailableDates}
-                    />
+                    <div className="date-title">
+                        <h2>Select your Dates:</h2>
+                    </div>
+
+                    <div className="date-picker">
+                        <DateRangePicker
+                            ranges={[selectionRange]}
+                            minDate={new Date()}
+                            rangeColors={["#FD5B61"]}
+                            onChange={handleSelect}
+                            months={2}
+                            direction="horizontal"
+                            inputRanges={[]}
+                        />
+                    </div>
+
+                    
                 </div>
             </div>
         </form>

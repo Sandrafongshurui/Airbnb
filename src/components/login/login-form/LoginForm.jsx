@@ -31,7 +31,7 @@ const LoginForm = (props) => {
   } = useForm({ resolver: yupResolver(validationSchema), defaultValues });
 
   const onSubmit = async (data) => {
-    console.log("From loginform:", data);
+    // console.log("From loginform:", data);
     props.data(data);
   };
 

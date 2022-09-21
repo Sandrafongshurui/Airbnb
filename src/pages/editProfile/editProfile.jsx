@@ -3,7 +3,7 @@ import style from "./editProfile.module.css"
 
 import { useForm, Controller } from "react-hook-form";
 import React, {useState, useEffect} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 import {Button,MenuItem,Paper,TextField} from "@mui/material";
 import { toast } from 'react-toastify'
@@ -193,7 +193,6 @@ function EditProfile() {
                         <Button type={'submit'} variant={'contained'} color={'primary'}>Confirm</Button>
                 </div>
 
-  
             </div>
 
             <Footer />
