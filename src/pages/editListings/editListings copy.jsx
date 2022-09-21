@@ -26,7 +26,7 @@ function EditListing() {
   } = useForm({
     defaultValues: {
       name: "",
-      price: "",
+      price: 0,
       beds: 0,
       bedrooms: 0,
       bathrooms: 0,
@@ -121,84 +121,73 @@ function EditListing() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(handleFormSubmit)}
-      className={"container-fluid p-0"}
-    >
-      {/* <SiteHeader /> */}
-
+    <form onSubmit={handleFormSubmit} className={"container-fluid p-0"}>
       {/* select photo and upload it */}
+      <div className={"container-xxl mt-4"}>
+        <h4>Photos cannot be edited for now</h4>
 
-      <div className={"container-xxl mt-4 "}>
-        <div className={"text-center"}>
-          <h4 >Add photos to your listing</h4>
-        </div>
-       
+        {selectedImages?.map((image) => {
+          return (
+            <div
+              style={{
+                width: "200px",
+                marginRight: "20px",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <img src={image} key={image} width={"200px"} alt={"listing"}/>
+              <Button disabled onClick={() => handleDeleteImage(image)} color={"error"}>
+                Delete
+              </Button>
+            </div>
+          );
+        })}
 
-        
+        <p className={"text-secondary"}>Tips: png/jpeg only</p>
 
         {
           <Paper
             className={
               style.photoBox +
-              " m-auto d-flex justify-content-center mt-4"
+              " d-flex align-items-center justify-content-center"
             }
-          >            
-            <div className="my-auto text-start filesInput">
-              <h6>Select images to upload</h6>
-              <div>
-                <input
-                  {...register("files")}
-                  onChange={handleSelectImage}
-                  name="files"
-                  multiple
-                  accept={"image/jpeg, image/png"}
-                  type="file"
-                  fullwidth
-                  //hidden
-                />
-              </div>
-              <p className={"text-secondary"}> Tips: png/jpeg only </p>
-              {/* Upload */}
-            </div>
-            {/* <div className={style.imagesDiv}> */}
-          {selectedImages.map((image) => {
-            return (
-              <div className="my-auto text-center">
-                <div
-                style={{
-                  width: "200px",
-                  marginRight: "20px",
-                  display: "flex",
-                  flexDirection: "column",
-                  borderRadius: "25px",
-                }}
-              >
-                <img src={image} key={image} width={"200px"} alt={"listing"} object-fit={"cover"}/>
-                <Button
-                  onClick={() => handleDeleteImage(image)}
-                  color={"error"}
-                >
-                  Delete
-                </Button>
-              </div>
-             
-              </div>
-              
-            );
-          })}
-             {/* </div> */}
+          >
+            <label>
+              <p>Select images to upload</p>
+              <input
+                {...register("files")}
+                onChange={handleSelectImage}
+                name="files"
+                multiple
+                accept={"image/jpeg, image/png"}
+                type="file"
+                fullwidth
+                //hidden
+              />
+            
+            </label>
+            {/* <Button component={"label"}>
+              Edit Photo
+              <input
+                disabled
+                onChange={handleSelectImage}
+                name={"file"}
+                multiple
+                accept={"image/jpeg, image/png"}
+                type={"file"}
+              />
+            </Button> */}
           </Paper>
         }
       </div>
 
-      <div className={"container-xxl mt-4 "}>
-        <div className={"text-center"}>
-        <h4>Listing Information</h4>
-        </div>
+      <div className={"container-xxl mt-4"}>
+        <h4>Basic info</h4>
+
         <Paper
           className={
-            style.photoBox + " d-flex align-items-center justify-content-center m-auto"
+            style.photoBox + " d-flex align-items-center justify-content-center"
           }
         >
           <div className={"row w-100 mt-2"}>
@@ -206,25 +195,10 @@ function EditListing() {
               <Controller
                 name="name"
                 control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Required",
-                  },
-                  maxLength: {
-                    value: 100,
-                    message: "Max length exceeded",
-                  },
-                  pattern: {
-                    value: /^[0-9A-Za-z ]+$/i,
-                    message: "Alphanumeric characters only",
-                  },
-                }}
                 render={({ field }) => (
                   <TextField
                     className={"mb-2"}
-                    required
-                    label={"Listing Name"}
+                    label={"Name"}
                     variant={"standard"}
                     fullWidth
                     error={errors.name ? true : false}
@@ -237,34 +211,20 @@ function EditListing() {
               <Controller
                 name="beds"
                 control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Required",
-                  },
-                  pattern: {
-                    value: /^0|[1-9]\d*$/,
-                    message: "Numbers only",
-                  },
-                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
                     required
                     name={"beds"}
-                    label={"Number of beds"}
+                    label={"How many beds can guest use?"}
                     className={"mb-2"}
-                    // select
+                    select
                     variant={"standard"}
                     fullWidth
-                    type={Number}
-                    error={errors.beds ? true : false}
-                    {...field}
-                    helperText={errors.beds && <p>{errors.beds.message}</p>}
                   >
-                    {/* <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem> */}
+                    <MenuItem value={3}>3</MenuItem>
                   </TextField>
                 )}
               />
@@ -272,34 +232,20 @@ function EditListing() {
               <Controller
                 name="bedrooms"
                 control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Required",
-                  },
-                  pattern: {
-                    value: /^0|[1-9]\d*$/,
-                    message: "Numbers only",
-                  },
-                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
                     required
                     name={"bedrooms"}
-                    label={"Number of bedrooms"}
+                    label={"How many bedrooms can guests use?"}
                     className={"mt-2"}
-                    //select
+                    select
                     variant={"standard"}
                     fullWidth
-                    type={Number}
-                    error={errors.bedrooms ? true : false}
-                    {...field}
-                    helperText={errors.bedrooms && <p>{errors.bedrooms.message}</p>}
                   >
-                    {/* <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem> */}
+                    <MenuItem value={3}>3</MenuItem>
                   </TextField>
                 )}
               />
@@ -307,34 +253,20 @@ function EditListing() {
               <Controller
                 name="bathrooms"
                 control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Required",
-                  },
-                  pattern: {
-                    value: /^0|[1-9]\d*$/,
-                    message: "Numbers only",
-                  },
-                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
                     required
                     name={"bathrooms"}
-                    label={"Number of bathrooms"}
+                    label={"No of bathrooms"}
                     className={"mb-2"}
-                    //select
+                    select
                     variant={"standard"}
                     fullWidth
-                    type={Number}
-                    error={errors.bathrooms ? true : false}
-                    {...field}
-                    helperText={errors.bathrooms && <p>{errors.bathrooms.message}</p>}
                   >
-                    {/* <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem> */}
+                    <MenuItem value={3}>3</MenuItem>
                   </TextField>
                 )}
               />
@@ -343,10 +275,6 @@ function EditListing() {
                 name="state"
                 control={control}
                 rules={{
-                  required: {
-                    value: true,
-                    message: "Required",
-                  },
                   pattern: {
                     value: /^[A-Za-z]+$/i,
                     message: "Alphabetical characters only",
@@ -354,12 +282,10 @@ function EditListing() {
                 }}
                 render={({ field }) => (
                   <TextField
-                    required
                     className={"mb-2"}
                     label={"State"}
                     variant={"standard"}
                     fullWidth
-                    type={String}
                     error={errors.state ? true : false}
                     {...field}
                     helperText={errors.state && <p>{errors.state.message}</p>}
@@ -373,38 +299,17 @@ function EditListing() {
               <Controller
                 name="price"
                 control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Required",
-                  },
-                  pattern: {
-                    value: /^0|[1-9]\d*$/,
-                    message: "Numbers only",
-                  },
-                  min:{ value: 1,
-                  message: "Min $50",},
-                  max:{ value: 1000,
-                    message: "Max $1000",},
-                }}
                 render={({ field }) => (
                   <TextField
-                    // {...register("price", {
-                    //   required: true,
-                    //   min: 1,
-                    //   max: 1000,
-                    // })}
+                    {...register("price", { required: true, min: 1, max: 100 })}
                     {...field}
                     required
                     name={"price"}
-                    type={Number}
+                    type={"number"}
                     className={"mb-2"}
                     label={"Price:"}
                     variant={"standard"}
                     fullWidth
-                    error={errors.price ? true : false}
-                    {...field}
-                    helperText={errors.price && <p>{errors.price.message}</p>}
                   />
                 )}
               />
@@ -412,32 +317,15 @@ function EditListing() {
               <Controller
                 name="address_1"
                 control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Required",
-                  },
-                  maxLength: {
-                    value: 200,
-                    message: "Max length exceeded",
-                  },
-                  pattern: {
-                    value: /^[0-9A-Za-z ]+$/i,
-                    message: "Alphanumeric characters only",
-                  },
-                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
                     required
                     name={"address_1"}
-                    label={"Address 1 - Street Name (Available to public)"}
+                    label={"Address_1"}
                     className={"mb-2"}
                     variant={"standard"}
                     fullWidth
-                    error={errors.address_1 ? true : false}
-                    {...field}
-                    helperText={errors.address_1 && <p>{errors.address_1.message}</p>}
                   />
                 )}
               />
@@ -445,28 +333,15 @@ function EditListing() {
               <Controller
                 name="address_2"
                 control={control}
-                rules={{
-                  maxLength: {
-                    value: 200,
-                    message: "Max length exceeded",
-                  },
-                  pattern: {
-                    value: /^[0-9A-Za-z ]+$/i,
-                    message: "Alphanumeric characters only",
-                  },
-                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    // required
+                    required
                     name={"address_2"}
-                    label={"Address 2 - Apartment, Unit No. (optional)"}
+                    label={"Address_2"}
                     className={"mb-2"}
                     variant={"standard"}
                     fullWidth
-                    error={errors.address_2 ? true : false}
-                    {...field}
-                    helperText={errors.address_2 && <p>{errors.address_2.message}</p>}
                   />
                 )}
               />
@@ -474,12 +349,6 @@ function EditListing() {
               <Controller
                 name="country"
                 control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Required",
-                  },
-                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -490,13 +359,10 @@ function EditListing() {
                     select
                     variant={"standard"}
                     fullWidth
-                    error={errors.country ? true : false}
-                    {...field}
-                    helperText={errors.country && <p>{errors.country.message}</p>}
                   >
                     <MenuItem value={"Singapore"}>Singapore</MenuItem>
-                    <MenuItem value={"Canada"}>Canada</MenuItem>
-                    <MenuItem value={"Brazail"}>Brazail</MenuItem>
+                    <MenuItem value={"China"}>China</MenuItem>
+                    <MenuItem value={"India"}>India</MenuItem>
                   </TextField>
                 )}
               />
@@ -504,29 +370,15 @@ function EditListing() {
               <Controller
                 name="postal_code"
                 control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Required",
-                  },
-                  pattern: {
-                    value: /^0|[1-9]\d*$/,
-                    message: "Numbers only",
-                  }
-                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
                     required
                     name={"postal_code"}
-                    label={"Postal code"}
-                    type={"number"}
+                    label={"Post code"}
                     className={"mb-2"}
                     variant={"standard"}
                     fullWidth
-                    error={errors.postal_code ? true : false}
-                    {...field}
-                    helperText={errors.postal_code && <p>{errors.postal_code.message}</p>}
                   />
                 )}
               />
@@ -536,20 +388,6 @@ function EditListing() {
               <Controller
                 name="description"
                 control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Required",
-                  },
-                  maxLength: {
-                    value: 100,
-                    message: "Max length exceeded",
-                  },
-                  pattern: {
-                    value: /^[0-9A-Za-z ]+$/i,
-                    message: "Alphanumeric characters only",
-                  },
-                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -558,9 +396,6 @@ function EditListing() {
                     label={"Descriptions:"}
                     fullWidth
                     variant={"standard"}
-                    error={errors.description ? true : false}
-                    {...field}
-                    helperText={errors.description && <p>{errors.description.message}</p>}
                   />
                 )}
               />
@@ -568,16 +403,16 @@ function EditListing() {
           </div>
         </Paper>
 
-        <div className={"mt-2 d-flex justify-content-evenly"}>
-          <Button className={style.confirmButton} style={{margin:"30px"}}
+        <div className={"mt-2 d-flex justify-content-end"}>
+          <Button
             onClick={handleCancel}
             variant={"contained"}
-            // className={"me-2"}
+            className={"me-2"}
             color={"inherit"}
           >
             Cancel
           </Button>
-          <Button type={"submit"} variant={"contained"} color={"primary"} className={style.confirmButton} style={{margin:"30px"}}> 
+          <Button type={"submit"} variant={"contained"} color={"primary"}>
             Confirm
           </Button>
         </div>
