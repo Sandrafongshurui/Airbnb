@@ -2,7 +2,6 @@ import React from "react";
 import "./BookingHostInfo.css";
 
 const BookingHostInfo = (props) => {
-    // pass in props here for hosting info
     const{firstname, lastname, about_me, email} = props.data.created_by
 
     return (

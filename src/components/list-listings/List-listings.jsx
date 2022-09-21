@@ -27,6 +27,24 @@ function ListListings({ isHost }) {
         fetchApi();
     }, []);
 
+    // function handlePagination(page)
+    // {
+    //     let query = "";
+
+    //     if(page > 1)
+    //         { query = `?page=${page}`}
+    //             fetch(`http://localhost:8000/api/v1${query}`, {
+    //             headers: headerOptions
+    //         })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         setListings(data);
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //     });
+    // }
+
     const renderListings = listings.map((listing) => (
         <ListingCard key={ listing._id } data={ listing } isHost={ isHost } />
     ));
@@ -34,7 +52,8 @@ function ListListings({ isHost }) {
     return (
         <div className={"mt-2 me-3"}>
             <div className={"d-flex flex-wrap"}> {renderListings} </div>
-            {/* <Pagination listings={ listings }/> */}
+
+            {/* <Pagination listings={listings} handlePagination={handlePagination}/> */}
         </div>
     );
 }

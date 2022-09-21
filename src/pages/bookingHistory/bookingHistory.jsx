@@ -3,6 +3,8 @@ import { Button, Menu, MenuItem, Paper, Table, TableBody, TableCell, TableContai
 import moment from 'moment'
 import MenuIcon from '@mui/icons-material/Menu';
 import {useNavigate, useParams} from "react-router-dom";
+import style from "./bookingHistory.module.css";
+import noData from "../../assets/images/empty.png"
 
 function ListingBookingHistory() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -18,8 +20,8 @@ function ListingBookingHistory() {
 
   useEffect(() => {
     const fetchApi = async () => {
-        const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, {headers:headerOptions})
-        // const res = await fetch(`http:///api/v1/user/listing/${params.listingID}`, {headers:headerOptions})
+        // const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`, {headers:headerOptions})
+        const res = await fetch(`http://localhost:8000/api/v1/user/listing/${params.listingID}`, {headers:headerOptions})
         const data = await res.json()
         console.log(data)
         setHistory(data)
@@ -47,18 +49,46 @@ function ListingBookingHistory() {
 
   
   const renderHistory = () => {
-    return history.map((item, index )=> {
+    if (history.length) {
+      return history.map((item, index )=> {
+        return (
+          <>
+          <TableHead>
+              <TableRow>
+                <TableCell>No</TableCell>
+                <TableCell>Booked By</TableCell>
+                <TableCell>Date Period</TableCell>
+                <TableCell>Guests</TableCell>
+              </TableRow>
+          </TableHead>
+        
+          <TableBody>
+            <TableRow key={item._id}>
+              <TableCell>{index}</TableCell>
+              <TableCell>{item.booked_by.firstname}</TableCell>
+              <TableCell>
+                {moment(item.checkin_date).format(`DD/MM/YYYY`)}-
+                {moment(item.checkout_date).format(`DD/MM/YYYY`)}
+                </TableCell>
+              <TableCell>{item.total_guests}</TableCell>
+            </TableRow>
+          </TableBody>
+          </>)
+      })
+    } 
+   
+    if(!history.length){
       return (
-        <TableRow key={item._id}>
-          <TableCell>{index}</TableCell>
-          <TableCell>{item.booked_by.firstname}</TableCell>
-          <TableCell>
-            {moment(item.checkin_date).format(`DD/MM/YYYY`)}-
-            {moment(item.checkout_date).format(`DD/MM/YYYY`)}
-            </TableCell>
-          <TableCell>{item.total_guests}</TableCell>
-      </TableRow>)
-    })
+        <div className={style.showImg} >
+          <div className={style.imgHolder}>
+              <img src={noData} class="rounded w-50 h-50" alt="..." />
+              <p className='text-center'> No booking record yet</p >
+          </div>
+        </div>
+      
+      )
+    }
+
   }
 
 
@@ -103,19 +133,10 @@ function ListingBookingHistory() {
           </Menu>
 
         </div>
+
         <TableContainer component={Paper}>
           <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>No</TableCell>
-                <TableCell>Booked By</TableCell>
-                <TableCell>Date Period</TableCell>
-                <TableCell>Guests</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {renderHistory()}
-            </TableBody>
+              {renderHistory()}        
           </Table>
         </TableContainer>
       </div>

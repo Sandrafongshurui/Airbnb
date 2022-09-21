@@ -4,13 +4,10 @@ import "./pagination.css";
 
 
 
-function Pagination({listings}) {
-    console.log("1",listings)
+function Pagination({listings, handlePagination}){
     const [data,setData] = useState([])
-    console.log("2",data)
     const [currentPage, setcurrentPage] = useState(1);
-    const [itemsPerPage, setitemsPerPage] = useState(20);
-    console.log("itemsPerPage", itemsPerPage)
+    const [itemsPerPage, setitemsPerPage] = useState(5);
     const [pageNumberLimit, setpageNumberLimit] = useState(5);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
     const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
@@ -19,11 +16,15 @@ function Pagination({listings}) {
         setcurrentPage(Number(event.target.id));
     };
 
+    
+    useEffect(() => {
+        handlePagination(currentPage);
+    }, [currentPage]);
+
     const pages = [];
     for (let i = 1; i <= Math.ceil(listings.length / itemsPerPage); i++) {
         pages.push(i);
     }
-        // console.log("3 pages",pages)
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -88,7 +89,6 @@ function Pagination({listings}) {
         <ul className="pageNumber">
 
             <li >
-
                 <button className="button"
                     onClick={handlePrevbtn}
                     disabled={currentPage == pages[0] ? true : false}
