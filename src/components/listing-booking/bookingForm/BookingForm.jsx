@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Button, MenuItem, TextField } from "@mui/material";
 import { DateRangePicker } from "react-date-range";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -124,32 +125,58 @@ const BookingForm = (props) => {
 
     return (
         <form onSubmit={handleSubmit} className={"container-fluid p-0"}>
-            <div className={"container-xxl mt-4"}>
-                <h4>BookingForm</h4>
 
-                <div className="container text-center">
+            <div className={"container-fluid mt-4 mb-1"}>
+
+                <div className="container">
                     <div className="row">
-                        <div className="col">
-                            Description
+
+                        <div className="col descriptionBox">
+                            <h2>Description</h2>
                             <p>{props.data.description}</p>
                         </div>
-                        <div className="col">
-                            <div className="pricing">
-                                <label>
-                                    {/* sandra */}
-                                    <p>${checkPriceType()} / Night</p>
-                                    <p>Total price: ${totalPrice} SGD</p>
-                                </label>
+
+                        <div className="col reserveBox">
+
+                            <div className="pricingBox">
+
+                                <div className="row mt-2">
+
+                                    <label className="col-5">
+                                        <p className="priceFont">Price/night: ${checkPriceType()} SGD</p>
+                                    </label>
+
+                                    <label className="col-5">
+                                        <p className="priceFont">Total price:${totalPrice} SGD</p>
+                                    </label>
+
+                                </div>
+
+                                <div className="row">
+
+                                    <div className="col-5">
+
+                                        <TextField
+                                            fullWidth
+                                            label="Number of guests"
+                                            type="number"
+                                            InputProps={{ inputProps:
+                                                {
+                                                    min: 1,
+                                                    max: props.data.accommodates
+                                                }
+                                            }}
+                                            variant="standard"
+                                            onChange={handleGuests}
+                                        />
+
+                                    </div>
+
+                                </div>
+
                             </div>
-                            No of Guests:
-                            <input
-                                type="number"
-                                value={noOfGuests}
-                                onChange={handleGuests}
-                                min={1}
-                                max={props.data.accommodates}
-                            ></input>
-                            <br />
+
+                            <div>
                             {isAuth ? (
                                 <button className="reserve" type="submit">
                                     Reserve
@@ -162,23 +189,33 @@ const BookingForm = (props) => {
                                     Login to Reserve
                                 </button>
                             )}
-                            <br />
+                            </div>
+
                         </div>
+
                     </div>
+
                 </div>
 
-                <div className="container text-center data-picker">
-                    <h4>Select your Dates:</h4>
+                <div className="container ">
 
-                    <DateRangePicker
-                        ranges={[selectionRange]}
-                        minDate={new Date()}
-                        rangeColors={["#FD5B61"]}
-                        onChange={handleSelect}
-                        months={2}
-                        direction="horizontal"
-                        inputRanges={[]}
-                    />
+                    <div className="date-title">
+                        <h2>Select your Dates:</h2>
+                    </div>
+
+                    <div className="date-picker">
+                        <DateRangePicker
+                            ranges={[selectionRange]}
+                            minDate={new Date()}
+                            rangeColors={["#FD5B61"]}
+                            onChange={handleSelect}
+                            months={2}
+                            direction="horizontal"
+                            inputRanges={[]}
+                        />
+                    </div>
+
+                    
                 </div>
             </div>
         </form>

@@ -26,7 +26,7 @@ function CreateListingsCopy() {
       name: "",
       price: 0,
       beds: 0,
-      files: [], //sandra added
+      files: [], 
       bedrooms: 0,
       bathrooms: 0,
       address_1: "",

@@ -2,11 +2,11 @@ import style from "./listing-card.module.css";
 import React from "react";
 import SwiperCore, { Pagination, Navigation} from "swiper/core";
 import { Swiper, SwiperSlide } from "swiper/react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import 'swiper/css';
+// import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
-import { EffectFade } from "swiper";
 
-SwiperCore.use([Pagination,Navigation,EffectFade]);
+SwiperCore.use([Pagination,Navigation]);
 
 function ListingCard(props) {
     const { _id, name, price, images_url } = props.data;

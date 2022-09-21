@@ -5,12 +5,26 @@
     margin: auto;
 } */
 
-h3 {
+.container {
+    margin-top: 48px;
+}
+
+.h3 {
+    font-size: 26px;
     text-align: left;
     margin-top: 3rem;
     max-width: 800px;
     margin: auto;
-    padding-bottom: 15px;
+    padding-bottom: 14px;
+}
+
+.h2 {
+    font-size:22px;
+    text-align: left;
+    margin-top: 3rem;
+    max-width: 800px;
+    margin: auto;
+    padding-bottom: 14px;
 }
 
 /* .ListingDesNReserve {
@@ -22,7 +36,36 @@ h3 {
     display: inline-block;
 }
 
+.descriptionBox {
+    min-height: 200px;
+
+}
+
+.reserveBox {
+    position: relative ;
+    margin-top: 64px;
+    margin-left: 8% ;
+    margin-right: 0%;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+    height: 240px;
+    display:flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.pricingBox {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15%;
+    width: 100%;
+}
+
 .reserve {
+    margin-left: 15%;
     background-color: #fd5b61;
     color: white;
     border: none;
@@ -32,12 +75,24 @@ h3 {
     width: 60%;
     height: 30px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 3rem;
 }
 
-input {
+.input {
     width: 40px;
     margin-top: 5px;
     margin-left: 5px;
-    font-size: 15px;
+    font-size: 14px;
 }
+
+.date-title {
+    display: flex;
+    justify-content: start;
+}
+
+.date-picker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
