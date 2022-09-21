@@ -12,7 +12,7 @@ import { Controller, useForm } from "react-hook-form";
 import { FormControl } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import style from "./LoginForm.module.css"
+// import style from "./LoginForm.module.css"
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 const RegisterForm = (props) => {
