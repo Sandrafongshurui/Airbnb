@@ -108,7 +108,7 @@ const EditForm = (props) => {
         console.log("formData: ", formData);
         try {
             const res = await axios.patch(
-                `https://ourairbnb.herokuapp.com/api/v1/user/trip/${props.data[0]._id}`,
+                `http://localhost:8000/api/v1/user/trip/${props.data[0]._id}`,
                 {
                     checkin_date: formData.checkin_date,
                     checkout_date: formData.checkout_date,

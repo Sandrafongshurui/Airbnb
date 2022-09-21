@@ -40,7 +40,7 @@ const TripsCard = (props) => {
     const handleDelete = async () => {
         try {
             const response = await axios.delete(
-                `https://ourairbnb.herokuapp.com/api/v1/user/trip/${props.data._id}`,
+                `http://localhost:8000/api/v1/user/trip/${props.data._id}`,
                 { headers: headerOptions }
             );
 
@@ -76,7 +76,7 @@ const TripsCard = (props) => {
 
     const handleEdit = async () => {
         const response = await axios.get(
-            `https://ourairbnb.herokuapp.com/api/v1/user/trip/${props.data._id}`,
+            `http://localhost:8000/api/v1/user/trip/${props.data._id}`,
             { headers: headerOptions }
         );
         const data = await response.data;
@@ -97,8 +97,13 @@ const TripsCard = (props) => {
                 <div className="container text-center">
                     <div className="row">
                         <div className="col">
-                            <div className="edit">
-                                <button onClick={handleEdit}>Edit trip</button>
+                            <div>
+                                <button
+                                    onClick={handleEdit}
+                                    className={style.edit}
+                                >
+                                    Edit trip
+                                </button>
                                 {addModalShow && (
                                     <EditTrip
                                         toggle={handleToggle}
@@ -108,8 +113,11 @@ const TripsCard = (props) => {
                             </div>
                         </div>
                         <div className="col">
-                            <div className="delete">
-                                <button onClick={delConfirmation}>
+                            <div>
+                                <button
+                                    onClick={delConfirmation}
+                                    className={style.delete}
+                                >
                                     Delete trip
                                 </button>
                             </div>
@@ -117,12 +125,16 @@ const TripsCard = (props) => {
                     </div>
                 </div>
             ) : (
-                <strong>Past trip</strong>
+                <div className={style.pastTrip}>
+                    <strong>Past trip</strong>
+                </div>
             )}
 
             <div className={"ms-2 mt-2 d-flex justify-content-between"}>
-                <span>Listing: </span>
-                <strong>{props.data.listing.name}</strong>
+                {/* <div className={style.listing}>Listing:</div> */}
+                <strong className={style.listing}>
+                    {props.data.listing.name}
+                </strong>
             </div>
 
             <div>

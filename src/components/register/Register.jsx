@@ -14,7 +14,7 @@ const Register = (props) => {
         setCatchError(null);
         try {
             const res = await axios.post(
-                "https://ourairbnb.herokuapp.com/api/v1/user/register",
+                "http://localhost:8000/api/v1/user/register",
                 data
             );
             console.log("Server Respond:", res);
