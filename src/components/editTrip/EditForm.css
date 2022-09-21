@@ -3,10 +3,6 @@ h1 {
     padding-left: 1rem;
 }
 
-.reactDate {
-    z-index: 9999 !important;
-}
-
 .rdrDefinedRangesWrapper {
     display: none;
 }

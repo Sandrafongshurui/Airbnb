@@ -124,19 +124,17 @@ const EditForm = (props) => {
                     </div>
                 </Box>
                 <Box mb={3}>
-                    <div className="reactDate">
-                        Select your Dates:
-                        <DateRangePicker
-                            ranges={[selectionRange]}
-                            minDate={new Date()}
-                            rangeColors={["#FD5B61"]}
-                            onChange={onCalChange}
-                            months={2}
-                            direction="horizontal"
-                            inputRanges={[]}
-                            staticRanges={[]}
-                        />
-                    </div>
+                    Select your Dates:
+                    <DateRangePicker
+                        ranges={[selectionRange]}
+                        minDate={new Date()}
+                        rangeColors={["#FD5B61"]}
+                        onChange={onCalChange}
+                        months={2}
+                        direction="horizontal"
+                        inputRanges={[]}
+                        staticRanges={[]}
+                    />
                 </Box>
                 <Box textAlign="center">
                     <Button
