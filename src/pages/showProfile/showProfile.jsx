@@ -28,16 +28,12 @@ function ShowProfile() {
             <>
 
                 <div className={style.profileContainer}>
-                    <div class="row justify-content-between">
+                    <div class="row ">
 
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <div className={style.imageBox}>
                                     <div className="row">
                                             <img className={style.avatarImage} src={ ProfileImg } alt=""/>
-                                    </div>
-                                    <div className="row ms-0">
-                                    <p>{ profile.email }</p>
-
                                     </div>
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
@@ -54,21 +50,21 @@ function ShowProfile() {
                         <div className="col-md-6 ms-2">
                             <div className={style.profileHead}>
 
-                                <h4>Welcome Back, { profile.firstname }</h4>
+                                <h4>Welcome back { profile.firstname }</h4>
 
                                     <div className="profileDetails mt-4">
 
-                                        <div className="row justify-content-between">
+                                        <div className="row">
 
-                                        <div className="col-md-6">
-                                            <p>First Name</p>                                     
+                                        <div className="col-md-4">
+                                            <h6>First Name</h6>                                     
                                         </div>
 
                                         <div className="col-md-6">
                                             <p>{profile.firstname}</p>
                                         </div>
 
-                                        <div className="col-md-6">
+                                        <div className="col-md-4">
                                             <h6>Last Name</h6>                                     
                                         </div>
 
@@ -91,7 +87,7 @@ function ShowProfile() {
                                             <p>{ profile.email }</p>
                                         </div>
 
-                                        <div className="col-md-6">
+                                        <div className="col-md-4">
                                             <h6>About me</h6>                                     
                                         </div>
 
@@ -104,7 +100,7 @@ function ShowProfile() {
                             </div>
                         </div>
 
-                        <div className="col-md-2 ms-2 mt-2">
+                        <div className="col-md-1 ms-2 mt-2">
                             <Link to={`/users/my/profile/edit`} className='card-link'>EDIT</Link>
                         </div>
                     </div>

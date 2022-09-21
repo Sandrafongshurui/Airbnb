@@ -119,13 +119,27 @@ function CreateListingsCopy() {
           <Paper
             className={
               style.photoBox +
-              " d-flex align-items-center justify-content-center m-auto"
+              "m-auto"
             }
-          >
-             <div className={style.imagesDiv}>
+          >            
+            <div className="my-auto text-center">
+              <h6>Select images to upload</h6>
+              <input
+                {...register("files")}
+                onChange={handleSelectImage}
+                name="files"
+                multiple
+                accept={"image/jpeg, image/png"}
+                type="file"
+                fullwidth
+                //hidden
+              />
+              {/* Upload */}
+            </div>
+            {/* <div className={style.imagesDiv}> */}
           {selectedImages.map((image) => {
             return (
-              <div>
+              <div className="my-auto text-center">
                 <div
                 style={{
                   width: "200px",
@@ -148,21 +162,7 @@ function CreateListingsCopy() {
               
             );
           })}
-             </div>
-            <label>
-              <p>Select images to upload</p>
-              <input
-                {...register("files")}
-                onChange={handleSelectImage}
-                name="files"
-                multiple
-                accept={"image/jpeg, image/png"}
-                type="file"
-                fullwidth
-                //hidden
-              />
-              {/* Upload */}
-            </label>
+             {/* </div> */}
           </Paper>
         }
       </div>
@@ -221,10 +221,11 @@ function CreateListingsCopy() {
                     select
                     variant={"standard"}
                     fullWidth
+                    type={Number}
                   >
-                    <MenuItem value={1}>1</MenuItem>
+                    {/* <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>2</MenuItem>
-                    <MenuItem value={3}>3</MenuItem>
+                    <MenuItem value={3}>3</MenuItem> */}
                   </TextField>
                 )}
               />
