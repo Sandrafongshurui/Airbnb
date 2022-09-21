@@ -10,7 +10,7 @@ SwiperCore.use([Pagination,Navigation]);
 
 function ListingCard(props) {
     const { _id, name, price, images_url } = props.data;
-    console.log(props.data);
+    // console.log(props.data);
     const navigate = useNavigate();
 
     const handleClickListing = () => {

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import BookingImg from "./bookingImg/BookingImg";
 import BookingHostInfo from "./bookingHostInfo/BookingHostInfo";
 import BookingForm from "./bookingForm/BookingForm";
-import BookingMap from "./bookingMap/BookingMap";
 import Footer from "../partials/footer/Footer";
 
 const ListingBooking = () => {
@@ -14,11 +12,12 @@ const ListingBooking = () => {
     useEffect(() => {
         const fetchApi = async () => {
             const res = await fetch(
-                `http://localhost:8000/api/v1/listings/${params.listingID}`
+                // `http://localhost:8000/api/v1/listings/${params.listingID}`
+                `https://ourairbnb.herokuapp.com/api/v1/listings/${params.listingID}`
             );
             const data = await res.json();
             setListing(data);
-            console.log("listing", listing)
+            // console.log("listing", listing)
         };
         fetchApi();
     }, []);

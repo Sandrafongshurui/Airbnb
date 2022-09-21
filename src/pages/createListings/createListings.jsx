@@ -1,6 +1,6 @@
 import Footer from "../../components/partials/footer/Footer";
 import { loadImageFromFile } from "./utils";
-import CountrySelect from "../../components/mulCountrySelection/MulCountrySelection";
+// import CountrySelect from "../../components/mulCountrySelection/MulCountrySelection";
 
 import { useForm, Controller } from "react-hook-form";
 import React, { useState, useEffect } from "react";
@@ -14,7 +14,6 @@ import axios from "axios";
 function CreateListingsCopy() {
   const navigate = useNavigate();
   const [selectedImages, setSelectedImages] = useState([]);
-  //const [imagesData, setImagesData] = useState([]);
 
   const {
     register,
@@ -41,7 +40,6 @@ function CreateListingsCopy() {
 
   const handleSelectImage = async (e) => {
     const images = e.target.files;
-    console.log(images);
     //only can set wadever was chosen first time
     let newImages = await Promise.all(
       [...images].map((image) => loadImageFromFile(image))
@@ -64,9 +62,9 @@ function CreateListingsCopy() {
   };
 
   const handleFormSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     try {
-      console.log(data.files);
+      // console.log(data.files);
       const formData = new FormData();
       Object.keys(data).forEach((element) => {
         formData.append(element, data[element]);
@@ -80,7 +78,7 @@ function CreateListingsCopy() {
         formData,
         { headers: headerOptions }
       );
-      console.log(res);
+      // console.log(res);
       if (res.status === 200 || res.status === 201) {
         toast.success("Create listing successful", {
           position: toast.POSITION.TOP_CENTER,
@@ -88,7 +86,7 @@ function CreateListingsCopy() {
       }
       navigate("/users/my/listings")
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.message, {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -104,9 +102,6 @@ function CreateListingsCopy() {
       onSubmit={handleSubmit(handleFormSubmit)}
       className={"container-fluid p-0"}
     >
-      {/* <SiteHeader /> */}
-
-      {/* select photo and upload it */}
 
       <div className={"container-xxl mt-4"}>
         <h4>Add photos to your listing</h4>

@@ -14,15 +14,15 @@ const Login = (props) => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log("from login:", data);
+    // console.log("from login:", data);
     setCatchError(null);
     try {
       const res = await axios.post(
         "http://localhost:8000/api/v1/user/login",
         data
       );
-      console.log("Server Respond:", res);
-      console.log("token", res.data.token);
+      // console.log("Server Respond:", res);
+      // console.log("token", res.data.token);
 
       if (res.status === 200 || res.status === 201) {
         // store the token into localstorage / cookie
@@ -32,9 +32,9 @@ const Login = (props) => {
         //navigate(location.pathname);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       // display an error
-      console.log(error.response.data.error);
+      // console.log(error.response.data.error);
       setCatchError(error.response.data.error);
     }
   };

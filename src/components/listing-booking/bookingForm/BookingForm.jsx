@@ -29,10 +29,10 @@ const BookingForm = (props) => {
         const token = localStorage.getItem("user_token");
         if (token) {
             isAuth = true;
-            console.log(token);
+            // console.log(token);
         } else {
             isAuth = false;
-            console.log("no token");
+            // console.log("no token");
         }
     };
     checkAuth();
@@ -88,8 +88,8 @@ const BookingForm = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("submit token---->", localStorage.getItem("user_token")); //sandra
-        console.log("handleSubmit: ", handleSubmit);
+        // console.log("submit token---->", localStorage.getItem("user_token")); //sandra
+        // console.log("handleSubmit: ", handleSubmit);
 
         try {
             const response = await axios.post(
@@ -102,14 +102,14 @@ const BookingForm = (props) => {
                 },
                 { headers: headerOptions }
             );
-            console.log(response);
+            // console.log(response);
             toast.success("Successfully reserved!", {
                 position: toast.POSITION.TOP_CENTER,
             });
             navigate(`/users/my/trips`);
         } catch (error) {
-            console.log(error.response); //sandra
-            console.log(error.response.data.message); //sandra
+            // console.log(error.response); //sandra
+            // console.log(error.response.data.message); //sandra
             toast.error(error.message, {
                 position: toast.POSITION.TOP_CENTER,
             });
@@ -168,6 +168,7 @@ const BookingForm = (props) => {
                                             }}
                                             variant="standard"
                                             onChange={handleGuests}
+                                            value={ noOfGuests }
                                         />
 
                                     </div>

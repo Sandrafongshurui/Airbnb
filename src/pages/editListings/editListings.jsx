@@ -42,7 +42,7 @@ function EditListing() {
             const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/listing/${params.listingID}`,{headers:headerOptions})
             // const res = await fetch(`http://localhost:8000/api/v1/listings/${params.listingID}`,{headers:headerOptions})
             const data = await res.json()
-            console.log(data)
+            // console.log(data)
             setListing(data)
             reset({
                 name: data.name,
@@ -70,7 +70,7 @@ function EditListing() {
     const handleSelectImage = async (e) => {
             const images = e.target.files;
             let newImages = await Promise.all([...images].map(image => loadImageFromFile(image)));
-            console.log(newImages)
+            // console.log(newImages)
             setSelectedImages(
                 [...selectedImages, ...newImages]
             )

@@ -20,7 +20,7 @@ const SiteHeader = () => {
         const token = localStorage.getItem("user_token");
         if (token) {
             setIsAuth(true);
-            console.log(token);
+            // console.log(token);
         } else {
             setIsAuth(false);
         }
@@ -64,7 +64,7 @@ const SiteHeader = () => {
         const token = localStorage.getItem("user_token");
         if (token) {
             localStorage.removeItem("user_token");
-            console.log("log out");
+            // console.log("log out");
             navStateToggle();
             navigate("/");
         }

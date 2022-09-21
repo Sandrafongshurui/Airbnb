@@ -13,12 +13,12 @@ const Portal = (props) => {
 
   //only useEffect when element, modalRoot changes
   useEffect(() => {
-    console.log("use effect, for mounting")
+    // console.log("use effect, for mounting")
     modalRoot.appendChild(element);
 
     //fires on dismount
     return function cleanup() {
-      console.log("unmount portal")
+      // console.log("unmount portal")
       modalRoot.removeChild(element);
     };
   },[element, modalRoot]);

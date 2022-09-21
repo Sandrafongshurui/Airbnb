@@ -10,7 +10,7 @@ SwiperCore.use([Pagination,Navigation]);
 
 const BookingImg = (props) => {
     const{name, images_url}=props.data
-    console.log(props.data)
+    // console.log(props.data)
 
     const renderImages = () => {
         if (images_url) {
@@ -52,12 +52,7 @@ const BookingImg = (props) => {
                         >
                             {renderImages()}
                         </Swiper>
-                        {/* <img 
-                            src={props.data.images_url[0]}
-                            layout="fill"
-                            alt="Listing"
-                            objectFit="cover"
-                        /> */}
+
                     </div>
 
                 </div>

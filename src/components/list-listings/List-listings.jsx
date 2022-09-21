@@ -1,5 +1,4 @@
 import ListingCard from "../listing-card/Listing-Card";
-// import Pagination from "../pagination/Pagination";
 import React, { useState, useEffect } from "react";
 import noData from "../../assets/images/empty.png"
 import style from "./list-listings.module.css"
@@ -8,10 +7,10 @@ import style from "./list-listings.module.css"
 function ListListings({ isHost }) {
     const [listings, setListings] = useState([]);
 
-    const userUrl = "http://localhost:8000/api/v1";
-    const hostUrl = "http://localhost:8000/api/v1/user/listings"
-    // const userUrl = "https://ourairbnb.herokuapp.com/api/v1";
-    // const hostUrl = "https://ourairbnb.herokuapp.com/api/v1/user/listings"
+    // const userUrl = "http://localhost:8000/api/v1";
+    // const hostUrl = "http://localhost:8000/api/v1/user/listings"
+    const userUrl = "https://ourairbnb.herokuapp.com/api/v1";
+    const hostUrl = "https://ourairbnb.herokuapp.com/api/v1/user/listings"
     
     const headerOptions = {
         "Content-Type": "application/json",
@@ -54,8 +53,6 @@ function ListListings({ isHost }) {
     return (
         <div className={"mt-2 me-3"}>
             <div className={"d-flex flex-wrap"}> {renderListings()} </div>
-
-            {/* <Pagination listings={listings} handlePagination={handlePagination}/> */}
         </div>
     );
 }
