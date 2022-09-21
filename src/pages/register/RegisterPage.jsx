@@ -22,10 +22,7 @@ const LoginPage = () => {
 
       if (res.status === 200 || res.status === 201) {
         //navigate to home
-        toast.success("Account created, please login to continue", {
-          position: toast.POSITION.TOP_CENTER,
-      });
-        if (location.pathname === "/register") {
+        if (location.pathname === "/Register") {
           navigate("/");
         }
       }
@@ -36,14 +33,21 @@ const LoginPage = () => {
       setCatchError(error.response.data.error);
     }
   };
+
   return (
     <div className="login-page-div">
       <div className="login-modal-body">
-        <div style={{width:"600px"}}>     
+        <div style={{ width: "600px" }}>
           <div className="p-3 mb-2 ">
             {catchError && (
               <div>
-                <p style={{ color: "red", textAlign: "center", marginBottom: "1em" }}>
+                <p
+                  style={{
+                    color: "red",
+                    textAlign: "center",
+                    marginBottom: "1em",
+                  }}
+                >
                   {catchError}
                 </p>
               </div>

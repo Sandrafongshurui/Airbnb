@@ -6,31 +6,31 @@ import "bootstrap";
 import RegisterForm from "./register-form/RegisterForm";
 
 const Register = (props) => {
-  const [open, setOpen] = useState(true);
-  const [catchError, setCatchError] = useState(null);
-  const onSubmit = async (data) => {
-    console.log("send data:", data);
-    setCatchError(null);
-    try {
-      const res = await axios.post(
-        "https://ourairbnb.herokuapp.com/api/v1/user/register",
-        data
-      );
-      console.log("Server Respond:", res);
+    const [open, setOpen] = useState(true);
+    const [catchError, setCatchError] = useState(null);
+    const onSubmit = async (data) => {
+        console.log("send data:", data);
+        setCatchError(null);
+        try {
+            const res = await axios.post(
+                "https://ourairbnb.herokuapp.com/api/v1/user/register",
+                data
+            );
+            console.log("Server Respond:", res);
 
-      if (res.status === 200 || res.status === 201) {
-        //close the portal, site header change to token bearer name
-        setOpen(false);
-        props.toggle(false)
-        props.afterRegister(true)
-      }
-    } catch (error) {
-      console.log(error);
-      // display an error
-      console.log(error.response.data.error);
-      setCatchError(error.response.data.error);
-    }
-  };
+            if (res.status === 200 || res.status === 201) {
+                //close the portal, site header change to token bearer name
+                setOpen(false);
+                props.toggle(false);
+                props.afterRegister(true);
+            }
+        } catch (error) {
+            console.log(error);
+            // display an error
+            console.log(error.response.data.error);
+            setCatchError(error.response.data.error);
+        }
+    };
 
   return (
     <div className="Register">

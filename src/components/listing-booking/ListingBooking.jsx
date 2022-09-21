@@ -12,7 +12,6 @@ const ListingBooking = () => {
     useEffect(() => {
         const fetchApi = async () => {
             const res = await fetch(
-                // `http://localhost:8000/api/v1/listings/${params.listingID}`
                 `https://ourairbnb.herokuapp.com/api/v1/listings/${params.listingID}`
             );
             const data = await res.json();

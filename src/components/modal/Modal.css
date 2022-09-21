@@ -1,17 +1,18 @@
 .modal-wrapper {
-  position: fixed;
-  z-index: 100;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+<<<<<<< HEAD
 .login-modal-body{
   background-color: #fefefe;
   margin: auto;
@@ -21,30 +22,41 @@
   width: fit-content;
   flex-grow: 0;
   border-radius: 8px;
+=======
+.login-modal-body {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    height: fit-content;
+    width: fit-content;
+    flex-grow: 0;
+    border-radius: 8px;
+>>>>>>> dc3b0ca9e4422f8d49db20e9bfcbb30d4d752ce8
 }
 
 .close-button {
-  background-color: white;
-  border: none;
-  font-size: xx-large;
-  margin-bottom: 0.5em;
-  float: right;
-  /* font-size: 50px;
+    background-color: white;
+    border: none;
+    font-size: xx-large;
+    margin-bottom: 0.5em;
+    float: right;
+    /* font-size: 50px;
   color: #ff8686;
   float: right;
   font-weight: bold; */
-  /* height: 50%; */
-  /* padding: 0;; */
+    /* height: 50%; */
+    /* padding: 0;; */
 }
 
 .close-button :hover,
 .close-button :focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.login-page-div{
-  height: 600px;
-  display: flex;
+.login-page-div {
+    height: 600px;
+    display: flex;
 }

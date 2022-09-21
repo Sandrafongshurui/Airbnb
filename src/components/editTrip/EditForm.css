@@ -1,0 +1,12 @@
+h1 {
+    color: #fd5b61;
+    padding-left: 1rem;
+}
+
+.rdrDefinedRangesWrapper {
+    display: none;
+}
+
+.updateBtn {
+    text-align: center;
+}

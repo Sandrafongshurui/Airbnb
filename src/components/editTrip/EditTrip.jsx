@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Modal from "../modal/Modal";
 import { Box } from "@mui/material";
 import EditForm from "./EditForm";
-import style from "./EditTrip.css";
 
 const EditTrip = (props) => {
     const [catchError, setCatchError] = useState(null);
@@ -13,7 +12,11 @@ const EditTrip = (props) => {
 
     return (
         <Modal open={open}>
-            <Box justifyContent="center" alignItems="center">
+            <Box
+                justifyContent="center"
+                alignItems="center"
+                style={{ width: "700px" }}
+            >
                 <div>
                     <button
                         className="close-button"
