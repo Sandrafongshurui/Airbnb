@@ -18,6 +18,7 @@ const TripsCard = (props) => {
                     <SwiperSlide key={url} className={style.listingImagesBox}>
                         <img className={style.listingImages} src={url} alt="" />
                     </SwiperSlide>
+                    
                 );
             });
         }
@@ -39,7 +40,7 @@ const TripsCard = (props) => {
     const handleDelete = async () => {
         try {
             const response = await axios.delete(
-                `http://localhost:8000/api/v1/user/trip/${props.data._id}`,
+                `https://ourairbnb.herokuapp.com/api/v1/user/trip/${props.data._id}`,
                 { headers: headerOptions }
             );
 
@@ -88,6 +89,7 @@ const TripsCard = (props) => {
     return (
         <div className={style.tripsCard}>
             <div>
+            {renderTrips()}
                 {/* <Swiper modules={[Pagination]} pagination={{ clickable: true }}>
                     {renderTrips()}
                 </Swiper> */}
