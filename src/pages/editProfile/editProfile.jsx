@@ -1,158 +1,158 @@
 import Footer from "../../components/partials/footer/Footer";
-import style from "./editProfile.module.css"
+import style from "./editProfile.module.css";
 
 import { useForm, Controller } from "react-hook-form";
-import React, {useState, useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import {Button,MenuItem,Paper,TextField} from "@mui/material";
-import { toast } from 'react-toastify'
+import { Button, MenuItem, Paper, TextField } from "@mui/material";
+import { toast } from "react-toastify";
 
 function EditProfile() {
-    const navigate = useNavigate()
-    const [profile, setProfile] = useState(null)
+  const navigate = useNavigate();
+  const [profile, setProfile] = useState(null);
 
-    const { reset, control, getValues, formState: { errors } } = useForm({
-        defaultValues: {
-            firstname: '',
-            lastname:'',
-            // gender: '',
-            about_me: '',
-        }
-    });
+  const {
+    reset,
+    control,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      firstname: "",
+      lastname: "",
+      // gender: '',
+      about_me: "",
+    },
+  });
 
-    const headerOptions = {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem('user_token')}`
+  const headerOptions = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("user_token")}`,
+  };
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      const res = await fetch(
+        `https://ourairbnb.herokuapp.com/api/v1/user/profile`,
+        { headers: headerOptions }
+      );
+      // const res = await fetch(`http://localhost:8000/api/v1/user/profile`, {headers:headerOptions})
+      const data = await res.json();
+      console.log(data);
+      setProfile(data);
+      reset({
+        firstname: data.firstname,
+        lastname: data.lastname,
+        // gender: data.gender,
+        about_me: data.about_me,
+      });
     };
+    fetchApi();
+  }, []);
 
-    useEffect(() => {
-        const fetchApi = async () => {
-            const res = await fetch(`https://ourairbnb.herokuapp.com/api/v1/user/profile`, {headers:headerOptions})
-            // const res = await fetch(`http://localhost:8000/api/v1/user/profile`, {headers:headerOptions})
-            const data = await res.json()
-            console.log(data)
-            setProfile(data)
-            reset({
-                firstname: data.firstname,
-                lastname: data.lastname,
-                // gender: data.gender,
-                about_me: data.about_me,
-            })
-        }
-        fetchApi()
-    }, [])
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    // console.log(JSON.stringify(getValues()))
 
-    function handleFormSubmit(e) {
-        e.preventDefault()
-        // console.log(JSON.stringify(getValues()))
+    fetch(
+      `https://ourairbnb.herokuapp.com/api/v1/user/profile`,
+      // fetch(`http://localhost:8000/api/v1/user/profile`,
+      {
+        method: "PATCH",
+        body: JSON.stringify(getValues()),
+        headers: headerOptions,
+      }
+    )
+      .then((response) => {
+        toast.success("Edit successfully", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        navigate("/users/my/profile");
+      })
 
-            fetch(`https://ourairbnb.herokuapp.com/api/v1/user/profile`, 
-            // fetch(`http://localhost:8000/api/v1/user/profile`,
-            {
-            method: 'PATCH',
-            body: JSON.stringify(getValues()),
-            headers: headerOptions,
-            })
+      .catch((err) => {
+        toast.error(err.message, { position: toast.POSITION.TOP_CENTER });
+      });
+  }
 
-        .then(response => {
-            toast.success("Edit successfully",
-            { position: toast.POSITION.TOP_CENTER })
-            navigate('/users/my/profile')
-        })
+  const handleCancel = (e) => {
+    navigate("/users/my/profile");
+  };
 
-        .catch(err => {
-            toast.error(err.message, {position: toast.POSITION.TOP_CENTER})
-        })
-    }
+  return (
+    <form
+      onSubmit={handleFormSubmit}
+      className={style.formBox + "container-fluid p-0"}
+    >
+      <div className={"container-xxl sty-4 "}>
+        <div className={style.title}>
+          <h4>Edit my profile</h4>
+        </div>
 
-    const handleCancel = (e) => {
-        navigate("/users/my/profile")
-    }
+        <Paper className={style.profileBox}>
+          <div className={"col-5"}>
+            <Controller
+              name="firstname"
+              control={control}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Name is required",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "Max length exceeded",
+                },
+                pattern: {
+                  value: /^[A-Za-z]+$/i,
+                  message: "Alphabetical characters only",
+                },
+              }}
+              render={({ field }) => (
+                <TextField
+                  className={"mb-2"}
+                  label={"First name"}
+                  variant={"standard"}
+                  fullWidth
+                  error={errors.firstname ? true : false}
+                  {...field}
+                  helperText={errors.name && <p>{errors.firstname.message}</p>}
+                />
+              )}
+            />
 
-    return (
+            <Controller
+              name="lastname"
+              control={control}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Name is required",
+                },
+                maxLength: {
+                  value: 20,
+                  message: "Max length exceeded",
+                },
+                pattern: {
+                  value: /^[A-Za-z]+$/i,
+                  message: "Alphabetical characters only",
+                },
+              }}
+              render={({ field }) => (
+                <TextField
+                  className={"mb-2"}
+                  label={"Last name"}
+                  variant={"standard"}
+                  fullWidth
+                  error={errors.lastname ? true : false}
+                  {...field}
+                  helperText={errors.name && <p>{errors.lastname.message}</p>}
+                />
+              )}
+            />
 
-        <form onSubmit={handleFormSubmit} className={style.formBox + 'container-fluid p-0'}>
-
-            <div className={'container-xxl sty-4 '}>
-                <div className={style.title}>
-                    <h4>Edit my profile</h4>
-                </div>
-
-                <Paper className={style.profileBox}>
-
-                    <div className={"col-5"}>
-                        <Controller
-                            name="firstname"
-                            control={control}
-                            rules={{
-                                required: {
-                                    value: true,
-                                    message: "Name is required",
-                                },
-                                maxLength: {
-                                    value: 20,
-                                    message: "Max length exceeded",
-                                },
-                                pattern: {
-                                    value: /^[A-Za-z]+$/i,
-                                    message:
-                                        "Alphabetical characters only",
-                                },
-                            }}
-                            render={({ field }) => (
-                                <TextField
-                                    className={"mb-2"}
-                                    label={"First name"}
-                                    variant={"standard"}
-                                    fullWidth
-                                    error={errors.firstname ? true : false}
-                                    {...field}
-                                    helperText={
-                                        errors.name && (
-                                            <p>{errors.firstname.message}</p>
-                                        )
-                                    }
-                                />
-                            )}
-                        />
-
-                        <Controller
-                            name="lastname"
-                            control={control}
-                            rules={{
-                                required: {
-                                    value: true,
-                                    message: "Name is required",
-                                },
-                                maxLength: {
-                                    value: 20,
-                                    message: "Max length exceeded",
-                                },
-                                pattern: {
-                                    value: /^[A-Za-z]+$/i,
-                                    message:
-                                        "Alphabetical characters only",
-                                },
-                            }}
-                            render={({ field }) => (
-                                <TextField
-                                    className={"mb-2"}
-                                    label={"Last name"}
-                                    variant={"standard"}
-                                    fullWidth
-                                    error={errors.lastname ? true : false}
-                                    {...field}
-                                    helperText={
-                                        errors.name && (
-                                            <p>{errors.lastname.message}</p>
-                                        )
-                                    }
-                                />
-                            )}
-                        />
-
-                        {/* <Controller
+            {/* <Controller
                             name="gender"
                             control={control}
                             render={({ field }) => (
@@ -171,36 +171,49 @@ function EditProfile() {
                             )}
                         /> */}
 
-                        <Controller
-                            name="about_me"
-                            control={control}
-                            render={({ field }) => (
-                                <TextField
-                                    {...field}
-                                    className={"mb-2"}
-                                    name={"about_me"}
-                                    label={"About me:"}
-                                    fullWidth
-                                    variant={"standard"}
-                                />
-                            )}
-                        />
-                    </div>
-                </Paper>
+            <Controller
+              name="about_me"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  className={"mb-2"}
+                  name={"about_me"}
+                  label={"About me:"}
+                  fullWidth
+                  variant={"standard"}
+                />
+              )}
+            />
+          </div>
+        </Paper>
 
-                <div className={'mt-4 mb-4 d-flex justify-content-end'}>
-                        <Button onClick={ handleCancel } variant={'contained'} className={'me-2'} color={'inherit'}>Cancel</Button>
-                        <Button type={'submit'} variant={'contained'} color={'primary'}>Confirm</Button>
-                </div>
+        <div className={"mt-4 mb-4 d-flex justify-content-end"}>
+          <Button
+            sx={{
+              color: "white",
+              backgroundColor: "#FD5B61",
+              fontWeight: "600",
+              "&:hover": {
+                backgroundColor: "#FD5B61",
+              },
+            }}
+            onClick={handleCancel}
+            variant={"contained"}
+            className={"me-2"}
+            color={"inherit"}
+          >
+            Cancel
+          </Button>
+          <Button type={"submit"} variant={"contained"} color={"primary"}>
+            Confirm
+          </Button>
+        </div>
+      </div>
 
-            </div>
-
-            <Footer />
-    
-        </form>
-    )
-
-
+      <Footer />
+    </form>
+  );
 }
 
-export default EditProfile
+export default EditProfile;

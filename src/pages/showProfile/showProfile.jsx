@@ -70,7 +70,7 @@ function ShowProfile() {
                                             <p>{profile.firstname}</p>
                                         </div>
 
-                                        <div className="col-md-6">
+                                        <div className="col-md-4">
                                             <h6>Last Name</h6>                                     
                                         </div>
 
@@ -93,7 +93,7 @@ function ShowProfile() {
                                             <p>{ profile.email }</p>
                                         </div>
 
-                                        <div className="col-md-6">
+                                        <div className="col-md-4">
                                             <h6>About me</h6>                                     
                                         </div>
 

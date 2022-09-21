@@ -25,7 +25,7 @@ const LoginPage = () => {
         localStorage.setItem("user_token", res.data.token);
         //navigate to home
         if (location.pathname === "/login") {
-          location.length > 0 ? navigate(-1) : navigate("/");
+          navigate(-1) 
         }
       }
     } catch (error) {
