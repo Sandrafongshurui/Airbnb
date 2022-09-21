@@ -144,7 +144,7 @@ function ListingBookingHistory() {
                         </MenuItem>
                     </Menu>
                 </div>
-                <TableContainer component={Paper}>
+                {/* <TableContainer component={Paper}>
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -156,7 +156,7 @@ function ListingBookingHistory() {
                         </TableHead>
                         <TableBody>{renderHistory()}</TableBody>
                     </Table>
-                </TableContainer>
+                </TableContainer> */}
             </div>
         </div>
 
