@@ -85,7 +85,6 @@ function ListingBookingHistory() {
               <p className='text-center'> No booking record yet</p >
           </div>
         </div>
-      
       )
     }
 

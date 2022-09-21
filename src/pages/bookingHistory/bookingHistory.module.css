@@ -7,8 +7,9 @@
 .imgHolder {
     display:flex;
     flex-direction: column;
-    justify-content: center;
-    align-content: center;
     align-items: center;
-    
+}
+
+.img {
+    height: 50%;
 }
