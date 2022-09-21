@@ -12,7 +12,6 @@
     justify-content: center;
 }
 
-<<<<<<< HEAD
 .login-modal-body{
   background-color: #fefefe;
   margin: auto;
@@ -22,17 +21,6 @@
   width: fit-content;
   flex-grow: 0;
   border-radius: 8px;
-=======
-.login-modal-body {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    height: fit-content;
-    width: fit-content;
-    flex-grow: 0;
-    border-radius: 8px;
->>>>>>> dc3b0ca9e4422f8d49db20e9bfcbb30d4d752ce8
 }
 
 .close-button {
