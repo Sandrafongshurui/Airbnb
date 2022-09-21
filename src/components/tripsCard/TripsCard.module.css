@@ -1,6 +1,10 @@
-.listingCard {
-    width: 280px;
-    height: 370px;
+.listing {
+    margin-left: inherit;
+}
+
+.tripsCard {
+    width: 300px;
+    /* height: 370px; */
     position: relative;
     margin: 10px;
     border-radius: 10px;
@@ -9,21 +13,29 @@
     cursor: pointer;
 }
 
-.listingImagesBox {
-    width: 280px;
-    height: 280px;
+span {
+    margin-left: 1rem;
 }
 
-.listingCard:hover {
+.cardHeader {
+    color: #fd5b61;
+}
+
+table {
+    display: flex;
+}
+
+.tripsCard:hover {
     transform: scale(1.01);
 }
 
-.listingCard > .listingImagesBox {
-    height: 10em;
-    object-fit: fill;
-    max-width: 100px;
-    max-height: 100px;
-    width: 100%;
+.pastTrip {
+    text-align: center;
+}
+
+.buttons {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .listingImages {
@@ -31,11 +43,28 @@
     height: 280px;
 }
 
-.like {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.listingHeight {
+    height: 2.5rem;
+}
+
+.locationHeight {
+    height: 2.5rem;
+}
+
+.edit,
+.delete {
+    background-color: #fd5b61;
     color: white;
+    border: none;
+    font-size: medium;
+    font-weight: 600;
+    border-radius: 5px;
+    width: 60%;
+    height: 30px;
     cursor: pointer;
-    z-index: 1000;
+}
+
+.edit:hover,
+.delete:hover {
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.1);
 }

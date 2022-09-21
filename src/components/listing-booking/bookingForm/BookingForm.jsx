@@ -53,7 +53,7 @@ const BookingForm = (props) => {
         navigate("/login");
     };
 
-    // an variable obj to store the start and end date
+    // an variable obj to store the checkin date and checkout date
     const selectionRange = {
         startDate: startDate,
         endDate: endDate,
@@ -108,7 +108,7 @@ const BookingForm = (props) => {
 
         try {
             const response = await axios.post(
-                `https://ourairbnb.herokuapp.com/api/v1/user/book/${params.listingID}`,
+                `http://localhost:8000/api/v1/user/book/${params.listingID}`,
                 {
                     checkin_date: startDate,
                     checkout_date: endDate,

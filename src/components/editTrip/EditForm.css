@@ -1,0 +1,21 @@
+h1 {
+    color: #fd5b61;
+    padding-left: 1rem;
+}
+
+.reactDate {
+    z-index: 9999 !important;
+}
+
+/* .react-date-picker__calendar--open {
+    top: 100% !important;
+    bottom: unset !important;
+  } */
+
+.rdrDefinedRangesWrapper {
+    display: none;
+}
+
+.updateBtn {
+    text-align: center;
+}

@@ -52,7 +52,12 @@ function ListListings({ isHost }) {
 
     return (
         <div className={"mt-2 me-3"}>
+<<<<<<< HEAD
             {listings && (<div className={"d-flex flex-wrap"}> {renderListings()} </div>)}
+=======
+            <div className={"d-flex flex-wrap"}>{renderListings}</div>
+            {/* <Pagination data={listings} /> */}
+>>>>>>> styling
         </div>
     );
 }
