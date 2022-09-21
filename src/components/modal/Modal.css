@@ -18,7 +18,7 @@
   padding: 20px;
   border: 1px solid #888;
   height: fit-content;
-  width: 600px;
+  width: fit-content;
   flex-grow: 0;
   border-radius: 8px;
 }
