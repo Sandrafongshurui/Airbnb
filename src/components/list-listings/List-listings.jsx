@@ -15,7 +15,7 @@ function ListListings({ isHost }) {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("user_token")}`,
     };
-   
+
     useEffect(() => {
         const fetchApi = async () => {
             const res = await fetch(isHost ? hostUrl : userUrl, {
