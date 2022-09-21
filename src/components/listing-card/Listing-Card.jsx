@@ -52,9 +52,9 @@ function ListingCard(props) {
       {/* <FavoriteBorderIcon className={style.like} /> */}
 
       <div>
-        <Swiper modules={[Pagination]} pagination={{ clickable: true }}>
+        {/* <Swiper modules={[Pagination]} pagination={{ clickable: true }}> */}
           {renderImages()}
-        </Swiper>
+        {/* </Swiper> */}
       </div>
 
       <div className={"ms-2 mt-2 d-flex justify-content-between"}>
