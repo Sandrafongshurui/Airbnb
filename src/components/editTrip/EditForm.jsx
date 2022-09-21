@@ -4,7 +4,7 @@ import { DateRangePicker } from "react-date-range";
 import { toast } from "react-toastify";
 import axios from "axios";
 import "bootstrap";
-import style from "./EditForm.css";
+import "./EditForm.css";
 
 const EditForm = (props) => {
     const datesBetween = require("dates-between");
@@ -72,7 +72,7 @@ const EditForm = (props) => {
 
         try {
             const res = await axios.patch(
-                `http://localhost:8000/api/v1/user/trip/${props.data[0]._id}`,
+                `https://ourairbnb.herokuapp.com/api/v1/user/trip/${props.data[0]._id}`,
                 {
                     checkin_date: formData.checkin_date,
                     checkout_date: formData.checkout_date,
@@ -96,7 +96,7 @@ const EditForm = (props) => {
     return (
         <div>
             <div>
-                <h1 className="text-center pb-3 m-0 mb-3">Edit Trip</h1>
+                <h3 className="text-center pb-3 m-0 mb-3">Edit Trip</h3>
             </div>
             <form onSubmit={onSubmit}>
                 <Box mb={3}>

@@ -1,3 +1,8 @@
+h3 {
+    color: #fd5b61;
+    padding-left: 1rem;
+}
+
 .listing {
     margin-left: inherit;
 }
@@ -31,6 +36,7 @@ table {
 
 .pastTrip {
     text-align: center;
+    margin-top: 2.8rem;
 }
 
 .buttons {

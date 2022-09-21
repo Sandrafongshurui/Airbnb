@@ -7,11 +7,6 @@ h1 {
     z-index: 9999 !important;
 }
 
-/* .react-date-picker__calendar--open {
-    top: 100% !important;
-    bottom: unset !important;
-  } */
-
 .rdrDefinedRangesWrapper {
     display: none;
 }

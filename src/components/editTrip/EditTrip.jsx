@@ -12,7 +12,11 @@ const EditTrip = (props) => {
 
     return (
         <Modal open={open}>
-            <Box justifyContent="center" alignItems="center">
+            <Box
+                justifyContent="center"
+                alignItems="center"
+                style={{ width: "700px" }}
+            >
                 <div>
                     <button
                         className="close-button"

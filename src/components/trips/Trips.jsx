@@ -17,7 +17,7 @@ const Trips = () => {
     useEffect(() => {
         const fetchApi = async () => {
             const response = await axios.get(
-                "http://localhost:8000/api/v1/user/trips",
+                "https://ourairbnb.herokuapp.com/api/v1/user/trips",
                 { headers: headerOptions }
             );
             const data = await response.data;
@@ -33,7 +33,7 @@ const Trips = () => {
     return (
         <>
             <div>
-                <h1>My Trips</h1>
+                <h3>My Trips</h3>
             </div>
 
             <div className={"mt-2 me-3"}>

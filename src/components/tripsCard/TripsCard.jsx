@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Pagination } from "swiper/core";
-import { Swiper, SwiperSlide } from "swiper/react";
 import EditTrip from "../editTrip/EditTrip";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -9,20 +7,18 @@ import { format } from "date-fns";
 import "bootstrap";
 
 const TripsCard = (props) => {
-    const [catchError, setCatchError] = useState(null);
     const [addModalShow, setAddModalShow] = useState(false);
     const [editTrip, setEditTrip] = useState([]);
 
     const renderTrips = () => {
         if (props.data) {
-            return props.data.listing.images_url.map((url) => {
-                return (
-                    <SwiperSlide key={url} className={style.listingImagesBox}>
-                        <img className={style.listingImages} src={url} alt="" />
-                    </SwiperSlide>
-                    
-                );
-            });
+            return (
+                <img
+                    className={style.listingImages}
+                    src={props.data.listing.images_url[0]}
+                    alt=""
+                />
+            );
         }
     };
 
@@ -78,7 +74,7 @@ const TripsCard = (props) => {
 
     const handleEdit = async () => {
         const response = await axios.get(
-            `http://localhost:8000/api/v1/user/trip/${props.data._id}`,
+            `https://ourairbnb.herokuapp.com/api/v1/user/trip/${props.data._id}`,
             { headers: headerOptions }
         );
         const data = await response.data;
@@ -90,7 +86,7 @@ const TripsCard = (props) => {
     return (
         <div className={style.tripsCard}>
             <div>
-            {renderTrips()}
+                {renderTrips()}
                 {/* <Swiper modules={[Pagination]} pagination={{ clickable: true }}>
                     {renderTrips()}
                 </Swiper> */}

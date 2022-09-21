@@ -11,7 +11,7 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import "./BookingForm.css";
 
 const BookingForm = (props) => {
-    const unavailableDates = props.data.unavailable_dates
+    const unavailableDates = props.data.unavailable_dates;
     // const getDates = (datesArray) => {
     //     const structuredDates= []
     //     datesArray.forEach(element => {
@@ -20,7 +20,7 @@ const BookingForm = (props) => {
     //     console.log(structuredDates)
     //     return structuredDates
     // }
-    
+
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [noOfGuests, setNoOfGuests] = useState(1);
@@ -108,7 +108,7 @@ const BookingForm = (props) => {
 
         try {
             const response = await axios.post(
-                `http://localhost:8000/api/v1/user/book/${params.listingID}`,
+                `https://ourairbnb.herokuapp.com/api/v1/user/book/${params.listingID}`,
                 {
                     checkin_date: startDate,
                     checkout_date: endDate,
@@ -121,7 +121,7 @@ const BookingForm = (props) => {
             toast.success("Successfully reserved!", {
                 position: toast.POSITION.TOP_CENTER,
             });
-            // navigate(`/users/my/trips`);
+            navigate(`/users/my/trips`);
         } catch (error) {
             // console.log(error.response); //sandra
             // console.log(error.response.data.message); //sandra
@@ -140,81 +140,71 @@ const BookingForm = (props) => {
 
     return (
         <form onSubmit={handleSubmit} className={"container-fluid p-0"}>
-
             <div className={"container-fluid mt-4 mb-1"}>
-
                 <div className="container">
                     <div className="row">
-
                         <div className="col descriptionBox">
                             <h2>Description</h2>
                             <p>{props.data.description}</p>
                         </div>
 
                         <div className="col reserveBox">
-
                             <div className="pricingBox">
-
                                 <div className="row mt-2">
-
                                     <label className="col-5">
-                                        <p className="priceFont">Price/night: ${checkPriceType()} SGD</p>
+                                        <p className="priceFont">
+                                            Price/night: ${checkPriceType()} SGD
+                                        </p>
                                     </label>
 
                                     <label className="col-5">
-                                        <p className="priceFont">Total price:${totalPrice} SGD</p>
+                                        <p className="priceFont">
+                                            Total price:${totalPrice} SGD
+                                        </p>
                                     </label>
-
                                 </div>
 
                                 <div className="row">
-
                                     <div className="col-5">
-
                                         <TextField
                                             fullWidth
                                             label="Number of guests"
                                             type="number"
-                                            InputProps={{ inputProps:
-                                                {
+                                            InputProps={{
+                                                inputProps: {
                                                     min: 1,
-                                                    max: props.data.accommodates
-                                                }
+                                                    max: props.data
+                                                        .accommodates,
+                                                },
                                             }}
                                             variant="standard"
                                             onChange={handleGuests}
-                                            value={ noOfGuests }
+                                            value={noOfGuests}
                                         />
-
                                     </div>
-
                                 </div>
-
                             </div>
 
                             <div>
-                            {isAuth ? (
-                                <button className="reserve" type="submit">
-                                    Reserve
-                                </button>
-                            ) : (
-                                <button disabled 
-                                    //className="dreserve"
-                                    // onClick={loginHandler}
-                                >
-                                    Login to Reserve
-                                </button>
-                            )}
+                                {isAuth ? (
+                                    <button className="reserve" type="submit">
+                                        Reserve
+                                    </button>
+                                ) : (
+                                    <button
+                                        disabled
+                                        className="dreserve"
+                                        onClick={loginHandler}
+                                    >
+                                        Login to Reserve
+                                    </button>
+                                )}
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
 
                 <div className="container ">
-
                     <div className="date-title">
                         <h2>Select your Dates:</h2>
                     </div>
@@ -230,8 +220,6 @@ const BookingForm = (props) => {
                             inputRanges={[]}
                         />
                     </div>
-
-                    
                 </div>
             </div>
         </form>
