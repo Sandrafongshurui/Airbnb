@@ -186,7 +186,6 @@ const BookingForm = (props) => {
                             </div>
 
                             <div>
-<<<<<<< HEAD
                             {isAuth ? (
                                 <button className="reserve" type="submit">
                                     Reserve
@@ -199,21 +198,6 @@ const BookingForm = (props) => {
                                     Login to Reserve
                                 </button>
                             )}
-=======
-                                {isAuth ? (
-                                    <button className="reserve" type="submit">
-                                        Reserve
-                                    </button>
-                                ) : (
-                                    <button
-                                        disabled
-                                        className="dreserve"
-                                        onClick={loginHandler}
-                                    >
-                                        Login to Reserve
-                                    </button>
-                                )}
->>>>>>> dc3b0ca9e4422f8d49db20e9bfcbb30d4d752ce8
                             </div>
                         </div>
                     </div>
