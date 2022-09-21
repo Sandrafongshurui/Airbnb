@@ -11,3 +11,8 @@
 .filesInput{
     width: 18%;
 }
+.confirmButton{
+    height: 70px;
+    width: 150px;
+    margin: 30px;
+}

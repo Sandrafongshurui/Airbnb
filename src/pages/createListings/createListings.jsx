@@ -119,7 +119,7 @@ function CreateListingsCopy() {
           <Paper
             className={
               style.photoBox +
-              " m-auto d-flex justify-content-center"
+              " m-auto d-flex justify-content-center mt-4"
             }
           >            
             <div className="my-auto text-start filesInput">
@@ -171,7 +171,7 @@ function CreateListingsCopy() {
       </div>
 
       <div className={"container-xxl mt-4 "}>
-        <div>
+        <div className="text-center">
         <h4>Listing Information</h4>
         </div>
         <Paper
@@ -187,7 +187,7 @@ function CreateListingsCopy() {
                 rules={{
                   required: {
                     value: true,
-                    message: "Name is required",
+                    message: "Required",
                   },
                   maxLength: {
                     value: 100,
@@ -214,6 +214,16 @@ function CreateListingsCopy() {
               <Controller
                 name="beds"
                 control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Required",
+                  },
+                  pattern: {
+                    value: /^0|[1-9]\d*$/,
+                    message: "Numbers only",
+                  },
+                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -413,7 +423,7 @@ function CreateListingsCopy() {
         </Paper>
 
         <div className={"mt-2 d-flex justify-content-evenly"}>
-          <Button
+          <Button style={style.confirmButton}
             onClick={handleCancel}
             variant={"contained"}
             className={"me-2"}
@@ -421,7 +431,7 @@ function CreateListingsCopy() {
           >
             Cancel
           </Button>
-          <Button type={"submit"} variant={"contained"} color={"primary"}>
+          <Button type={"submit"} variant={"contained"} color={"primary"} style={style.confirmButton}>
             Confirm
           </Button>
         </div>
