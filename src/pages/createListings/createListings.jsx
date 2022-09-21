@@ -111,29 +111,7 @@ function CreateListingsCopy() {
         <div className={"text-center"}>
           <h4 >Add photos to your listing</h4>
         </div>
-        <div className={style.imagesDiv}>
-          {selectedImages.map((image) => {
-            return (
-              <div
-                style={{
-                  width: "200px",
-                  marginRight: "20px",
-                  display: "flex",
-                  flexDirection: "column",
-                  borderRadius: "25px",
-                }}
-              >
-                <img src={image} key={image} width={"200px"} alt={"listing"} />
-                <Button
-                  onClick={() => handleDeleteImage(image)}
-                  color={"error"}
-                >
-                  Delete
-                </Button>
-              </div>
-            );
-          })}
-        </div>
+       
 
         <p className={"text-secondary"}> Tips: png/jpeg only </p>
 
@@ -144,6 +122,33 @@ function CreateListingsCopy() {
               " d-flex align-items-center justify-content-center m-auto"
             }
           >
+             <div className={style.imagesDiv}>
+          {selectedImages.map((image) => {
+            return (
+              <div>
+                <div
+                style={{
+                  width: "200px",
+                  marginRight: "20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  borderRadius: "25px",
+                }}
+              >
+                <img src={image} key={image} width={"200px"} alt={"listing"} object-fit={"cover"}/>
+                
+              </div>
+              <Button
+                  onClick={() => handleDeleteImage(image)}
+                  color={"error"}
+                >
+                  Delete
+                </Button>
+              </div>
+              
+            );
+          })}
+             </div>
             <label>
               <p>Select images to upload</p>
               <input
@@ -162,9 +167,10 @@ function CreateListingsCopy() {
         }
       </div>
 
-      <div className={"container-xxl mt-4 text-center"}>
+      <div className={"container-xxl mt-4 "}>
+        <div>
         <h4>Listing Information</h4>
-
+        </div>
         <Paper
           className={
             style.photoBox + " d-flex align-items-center justify-content-center m-auto"
