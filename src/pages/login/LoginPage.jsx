@@ -38,16 +38,18 @@ const LoginPage = () => {
   return (
     <div className="login-page-div">
       <div className="login-modal-body">
-        <div className="p-3 mb-2">
-          {catchError && (
-            <div>
-              <p style={{ color: "red", textAlign: "center", marginBottom: "1em" }}>
-                {catchError}
-              </p>
-            </div>
-          )}
-          {/* --------insert component here------------- */}
-          <LoginForm data={onSubmit} />
+        <div style={{width:"600px"}}>  
+          <div className="p-3 mb-2">
+            {catchError && (
+              <div>
+                <p style={{ color: "red", textAlign: "center", marginBottom: "1em" }}>
+                  {catchError}
+                </p>
+              </div>
+            )}
+            {/* --------insert component here------------- */}
+            <LoginForm data={onSubmit} />
+          </div>
         </div>
       </div>
     </div>

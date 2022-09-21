@@ -12,7 +12,7 @@ function ListingBookingHistory() {
     const open = Boolean(anchorEl);
     const navigate = useNavigate();
     const params = useParams();
-    const [history, setHistory] = useState(null);
+    const [history, setHistory] = useState([]);
 
 
   const headerOptions = {
@@ -162,7 +162,7 @@ function ListingBookingHistory() {
 
         <TableContainer component={Paper}>
           <Table>
-             {history && (renderHistory())}    
+             {history.length !== 0?(renderHistory()):null}    
           </Table>
         </TableContainer>
       </>

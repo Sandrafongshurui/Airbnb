@@ -41,7 +41,12 @@ Same as the Airbnb we all know, this application operates an online marketplace 
 </br>
 
 ## Difficulites Faced
-
+- Working with react dates
+- Implementing react-hook-form with MUI library and validation
+- Unavailable common time to sync and debug 
+- Inconsistency in the files management 
+- Deployment issues
+- Components usability
 
 </br>
 

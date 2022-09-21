@@ -35,7 +35,7 @@ const Register = (props) => {
   return (
     <div className="Register">
       <Modal open={open}>
-        <Box justifyContent="center" alignItems="center">
+        <Box justifyContent="center" alignItems="center" style={{width:"600px"}}>
           <div>          
             <button
               className="close-button"

@@ -104,7 +104,7 @@ function CreateListingsCopy() {
 
       <div className={"container-xxl mt-4 "}>
         <div className={"text-center"}>
-          <h1 >Add photos to your listing</h1>
+          <h3 >Add photos to your listing</h3>
         </div>
        
 
@@ -167,7 +167,7 @@ function CreateListingsCopy() {
 
       <div className={"container-xxl mt-4 "}>
         <div className={"text-center"}>
-        <h4>Listing Information</h4>
+        <h3>Listing Information</h3>
         </div>
         <Paper
           className={
@@ -393,10 +393,6 @@ function CreateListingsCopy() {
                   maxLength: {
                     value: 200,
                     message: "Max length exceeded",
-                  },
-                  pattern: {
-                    value: /^[0-9A-Za-z ]+$/i,
-                    message: "Alphanumeric characters only",
                   },
                 }}
                 render={({ field }) => (
