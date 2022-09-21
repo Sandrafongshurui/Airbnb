@@ -103,7 +103,10 @@ const EditForm = (props) => {
                     <div className="col">
                         <div>
                             <label htmlFor="total_price" className="form-label">
-                                <p>Total price: ${formData.total_price} SGD</p>
+                                <p>
+                                    Total price:{" "}
+                                    <strong>${formData.total_price} SGD</strong>
+                                </p>
                             </label>
                         </div>
                         <label htmlFor="total_guests" className="form-label">
@@ -121,31 +124,36 @@ const EditForm = (props) => {
                     </div>
                 </Box>
                 <Box mb={3}>
-                    <DateRangePicker
-                        ranges={[selectionRange]}
-                        minDate={new Date()}
-                        rangeColors={["#FD5B61"]}
-                        onChange={onCalChange}
-                        months={2}
-                        direction="horizontal"
-                        inputRanges={[]}
-                        staticRanges={[]}
-                    />
+                    <div className="reactDate">
+                        Select your Dates:
+                        <DateRangePicker
+                            ranges={[selectionRange]}
+                            minDate={new Date()}
+                            rangeColors={["#FD5B61"]}
+                            onChange={onCalChange}
+                            months={2}
+                            direction="horizontal"
+                            inputRanges={[]}
+                            staticRanges={[]}
+                        />
+                    </div>
                 </Box>
-                <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{
-                        color: "white",
-                        backgroundColor: "#FD5B61",
-                        fontWeight: "600",
-                        "&:hover": {
+                <Box textAlign="center">
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        sx={{
+                            color: "white",
                             backgroundColor: "#FD5B61",
-                        },
-                    }}
-                >
-                    Update
-                </Button>
+                            fontWeight: "600",
+                            "&:hover": {
+                                backgroundColor: "#FD5B61",
+                            },
+                        }}
+                    >
+                        Update
+                    </Button>
+                </Box>
             </form>
         </div>
     );

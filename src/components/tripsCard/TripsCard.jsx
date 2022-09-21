@@ -115,18 +115,22 @@ const TripsCard = (props) => {
                                 "ms-2 mt-2 d-flex justify-content-between"
                             }
                         >
-                            <strong className={style.listing}>
-                                {props.data.listing.name}
-                            </strong>
+                            <div className={style.listingHeight}>
+                                <strong className={style.listing}>
+                                    {props.data.listing.name}
+                                </strong>
+                            </div>
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <span>Location: </span>
-                            <strong className={"ms-2 me-2"}>
-                                {props.data.listing.state}
-                            </strong>
+                            <div className={style.locationHeight}>
+                                <span>Location: </span>
+                                <strong className={"ms-2 me-2"}>
+                                    {props.data.listing.state}
+                                </strong>
+                            </div>
                         </td>
                     </tr>
 

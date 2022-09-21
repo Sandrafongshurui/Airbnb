@@ -3,7 +3,7 @@
 }
 
 .tripsCard {
-    width: 280px;
+    width: 300px;
     /* height: 370px; */
     position: relative;
     margin: 10px;
@@ -41,6 +41,14 @@ table {
 .listingImages {
     width: 280px;
     height: 280px;
+}
+
+.listingHeight {
+    height: 2.5rem;
+}
+
+.locationHeight {
+    height: 2.5rem;
 }
 
 .edit,

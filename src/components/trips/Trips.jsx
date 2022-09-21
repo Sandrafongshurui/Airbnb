@@ -32,7 +32,9 @@ const Trips = () => {
 
     return (
         <>
-            <div>My Upcoming Trips</div>
+            <div>
+                <h1>My Trips</h1>
+            </div>
 
             <div className={"mt-2 me-3"}>
                 {/* <SiteHeader /> */}
