@@ -24,16 +24,16 @@ function CreateListingsCopy() {
   } = useForm({
     defaultValues: {
       name: "",
-      price: 0,
-      beds: 0,
+      price: "",
+      beds: "",
       files: [], //sandra added
-      bedrooms: 0,
-      bathrooms: 0,
+      bedrooms: "",
+      bathrooms: "",
       address_1: "",
       address_2: "",
       country: "",
       state: "",
-      postal_code: 0,
+      postal_code: "",
       description: "",
     },
   });
@@ -230,7 +230,7 @@ function CreateListingsCopy() {
                     {...field}
                     required
                     name={"beds"}
-                    label={"How many beds can guest use?"}
+                    label={"Number of beds"}
                     className={"mb-2"}
                     // select
                     variant={"standard"}
@@ -265,7 +265,7 @@ function CreateListingsCopy() {
                     {...field}
                     required
                     name={"bedrooms"}
-                    label={"How many bedrooms can guests use?"}
+                    label={"Number of bedrooms"}
                     className={"mt-2"}
                     //select
                     variant={"standard"}
@@ -300,7 +300,7 @@ function CreateListingsCopy() {
                     {...field}
                     required
                     name={"bathrooms"}
-                    label={"No of bathrooms"}
+                    label={"Number of bathrooms"}
                     className={"mb-2"}
                     //select
                     variant={"standard"}
@@ -555,7 +555,7 @@ function CreateListingsCopy() {
           >
             Cancel
           </Button>
-          <Button type={"submit"} variant={"contained"} color={"primary"} className={style.confirmButton}> style={{margin:"30px"}}
+          <Button type={"submit"} variant={"contained"} color={"primary"} className={style.confirmButton} style={{margin:"30px"}}> 
             Confirm
           </Button>
         </div>
