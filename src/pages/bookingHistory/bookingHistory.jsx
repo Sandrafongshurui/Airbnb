@@ -12,7 +12,7 @@ function ListingBookingHistory() {
     const open = Boolean(anchorEl);
     const navigate = useNavigate();
     const params = useParams();
-    const [history, setHistory] = useState([]);
+    const [history, setHistory] = useState(null);
 
 
   const headerOptions = {
@@ -61,7 +61,7 @@ function ListingBookingHistory() {
 
   
   const renderHistory = () => {
-    if (history.length) {
+      if (history.length > 0) {
       return history.map((item, index )=> {
         return (
           <>
@@ -87,20 +87,17 @@ function ListingBookingHistory() {
           </TableBody>
           </>)
       })
-    } 
-   
-    if(!history.length){
-      return (
-        <div className={style.showImg} >
-          <div className={style.imgHolder}>
-              <img src={noData} class="rounded w-50 h-50" alt="..." />
-              <p className='text-center'> No booking record yet</p >
+      }else{
+        return (
+          <div className={style.showImg} >
+            <div className={style.imgHolder}>
+                <img src={noData} class="rounded w-50 h-50" alt="..." />
+                <p className='text-center'> No booking record yet</p >
+            </div>
           </div>
-        </div>
-      )
+        )
+      }
     }
-
-  }
     
   return (
       <>
@@ -165,7 +162,7 @@ function ListingBookingHistory() {
 
         <TableContainer component={Paper}>
           <Table>
-              {renderHistory()}        
+             {history && (renderHistory())}    
           </Table>
         </TableContainer>
       </>

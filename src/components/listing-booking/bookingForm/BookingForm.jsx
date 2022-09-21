@@ -198,9 +198,9 @@ const BookingForm = (props) => {
                                     Reserve
                                 </button>
                             ) : (
-                                <button disabled
-                                    className="reserve"
-                                    onClick={loginHandler}
+                                <button disabled 
+                                    //className="dreserve"
+                                    // onClick={loginHandler}
                                 >
                                     Login to Reserve
                                 </button>

@@ -13,7 +13,7 @@ const BookingHostInfo = (props) => {
                     <div className="bookingHostInfo">
 
                             <div className="hostedBy">
-                                <h2>Hosted By: {`${firstname + lastname}`}</h2>
+                                <h2>Hosted By: {`${firstname} ${lastname}`}</h2>
                             </div>
 
                             <div className="container-fluid mt-4 mb-1">

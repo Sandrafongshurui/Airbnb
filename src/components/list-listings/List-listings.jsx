@@ -5,7 +5,7 @@ import style from "./list-listings.module.css"
 
 
 function ListListings({ isHost }) {
-    const [listings, setListings] = useState([]);
+    const [listings, setListings] = useState(null);
 
     // const userUrl = "http://localhost:8000/api/v1";
     // const hostUrl = "http://localhost:8000/api/v1/user/listings"
@@ -52,7 +52,7 @@ function ListListings({ isHost }) {
 
     return (
         <div className={"mt-2 me-3"}>
-            <div className={"d-flex flex-wrap"}> {renderListings()} </div>
+            {listings && (<div className={"d-flex flex-wrap"}> {renderListings()} </div>)}
         </div>
     );
 }
