@@ -1,18 +1,12 @@
-import React, { useState, useEffect } from "react";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { TextField, Button, Box } from "@mui/material";
+import React, { useState } from "react";
+import { Button, Box } from "@mui/material";
 import { DateRangePicker } from "react-date-range";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
 import axios from "axios";
-import { DateTime } from "luxon";
 import "bootstrap";
+import style from "./EditForm.css";
 
 const EditForm = (props) => {
-    const [totalPrice, setTotalPrice] = useState(0);
-    // const [editData, setEditData] = useState(null);
-    const params = useParams();
     const datesBetween = require("dates-between");
 
     // setting a constant to the date props to convert the date format
@@ -46,17 +40,9 @@ const EditForm = (props) => {
             datesBetween(e.selection.startDate, e.selection.endDate)
         );
 
-        console.log("e.selection.checkin_date: ", e.selection.startDate);
-        console.log("e.selection.checkout_date", e.selection.endDate);
-
         // getting number of nights between startDate and endDate
         let noOfNights = dates.length - 1;
         let pricePerNight = checkPriceType();
-
-        console.log(
-            "noOfNights * Number(pricePerNight): ",
-            noOfNights * Number(pricePerNight)
-        );
 
         setFormData({
             ...formData,
@@ -64,8 +50,6 @@ const EditForm = (props) => {
             checkout_date: e.selection.endDate,
             total_price: noOfNights * Number(pricePerNight),
         });
-
-        // onTotalPriceChange();
     };
 
     // on total guest change
@@ -83,29 +67,9 @@ const EditForm = (props) => {
             : props.data[0].listing.price;
     };
 
-    const onTotalPriceChange = () => {
-        const dates = Array.from(
-            datesBetween(formData.checkin_date, formData.checkout_date)
-        );
-
-        // getting number of nights between startDate and endDate
-        let noOfNights = dates.length - 1;
-        let pricePerNight = checkPriceType();
-
-        console.log(
-            "noOfNights * Number(pricePerNight): ",
-            noOfNights * Number(pricePerNight)
-        );
-        // setTotalPrice(noOfNights * Number(pricePerNight));
-        // setFormData({
-        //     ...formData,
-        //     total_price: noOfNights * Number(pricePerNight),
-        // });
-    };
-
     const onSubmit = async (evnt) => {
         evnt.preventDefault();
-        console.log("formData: ", formData);
+
         try {
             const res = await axios.patch(
                 `http://localhost:8000/api/v1/user/trip/${props.data[0]._id}`,
@@ -168,7 +132,18 @@ const EditForm = (props) => {
                         staticRanges={[]}
                     />
                 </Box>
-                <Button type="submit" variant="contained" color="primary">
+                <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                        color: "white",
+                        backgroundColor: "#FD5B61",
+                        fontWeight: "600",
+                        "&:hover": {
+                            backgroundColor: "#FD5B61",
+                        },
+                    }}
+                >
                     Update
                 </Button>
             </form>

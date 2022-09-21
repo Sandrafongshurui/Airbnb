@@ -15,29 +15,28 @@
 
 span {
     margin-left: 1rem;
-    margin-bottom: 1rem;
 }
 
-/* .cardImagesBox {
-    width: 280px;
-    height: 280px;
-} */
+.cardHeader {
+    color: #fd5b61;
+}
+
+table {
+    display: flex;
+}
 
 .tripsCard:hover {
     transform: scale(1.01);
 }
 
 .pastTrip {
-    margin-left: 1rem;
+    text-align: center;
 }
 
-/* .tripsCard > .cardImagesBox {
-    height: 10em;
-    object-fit: fill;
-    max-width: 100px;
-    max-height: 100px;
-    width: 100%;
-} */
+.buttons {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
 
 .listingImages {
     width: 280px;
@@ -55,4 +54,9 @@ span {
     width: 60%;
     height: 30px;
     cursor: pointer;
+}
+
+.edit:hover,
+.delete:hover {
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1), 0 3px 3px 0 rgba(0, 0, 0, 0.1);
 }

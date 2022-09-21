@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Modal from "../modal/Modal";
 import { Box } from "@mui/material";
 import EditForm from "./EditForm";
-import style from "./EditTrip.css";
 
 const EditTrip = (props) => {
     const [catchError, setCatchError] = useState(null);

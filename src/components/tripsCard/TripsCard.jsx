@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import style from "./TripsCard.module.css";
 import { format } from "date-fns";
+import "bootstrap";
 
 const TripsCard = (props) => {
     const [catchError, setCatchError] = useState(null);
@@ -95,79 +96,122 @@ const TripsCard = (props) => {
 
             {!checkDate ? (
                 <div className="container text-center">
-                    <div className="row">
-                        <div className="col">
-                            <div>
-                                <button
-                                    onClick={handleEdit}
-                                    className={style.edit}
-                                >
-                                    Edit trip
-                                </button>
-                                {addModalShow && (
-                                    <EditTrip
-                                        toggle={handleToggle}
-                                        data={editTrip}
-                                    />
+                    <h5 className={style.cardHeader}>
+                        <strong>Upcoming trip</strong>
+                    </h5>
+                </div>
+            ) : (
+                <div className={style.pastTrip}>
+                    <h5 className={style.cardHeader}>
+                        <strong>Past trip</strong>
+                    </h5>
+                </div>
+            )}
+            <table className="table table-borderless">
+                <tbody>
+                    <tr className={style.listingName}>
+                        <td
+                            className={
+                                "ms-2 mt-2 d-flex justify-content-between"
+                            }
+                        >
+                            <strong className={style.listing}>
+                                {props.data.listing.name}
+                            </strong>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span>Location: </span>
+                            <strong className={"ms-2 me-2"}>
+                                {props.data.listing.state}
+                            </strong>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span>Checkin date: </span>
+                            <strong className={"ms-2 me-2"}>
+                                {format(
+                                    new Date(props.data.checkin_date),
+                                    "dd-MM-yyyy"
                                 )}
+                            </strong>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span>Checkout date: </span>
+                            <strong className={"ms-2 me-2"}>
+                                {format(
+                                    new Date(props.data.checkout_date),
+                                    "dd-MM-yyyy"
+                                )}
+                            </strong>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span>No of Guest: </span>
+                            <strong className={"ms-2 me-2"}>
+                                {props.data.total_guests}
+                            </strong>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <span>Total Price: </span>
+                            <strong className={"ms-2 me-2"}>
+                                ${props.data.total_price} SGD
+                            </strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            {!checkDate ? (
+                <div className="container text-center">
+                    <div className={style.buttons}>
+                        <div className="row">
+                            <div className="col">
+                                <div>
+                                    <button
+                                        onClick={handleEdit}
+                                        className={style.edit}
+                                    >
+                                        Edit
+                                    </button>
+                                    {addModalShow && (
+                                        <EditTrip
+                                            toggle={handleToggle}
+                                            data={editTrip}
+                                        />
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                        <div className="col">
-                            <div>
-                                <button
-                                    onClick={delConfirmation}
-                                    className={style.delete}
-                                >
-                                    Delete trip
-                                </button>
+                            <div className="col">
+                                <div>
+                                    <button
+                                        onClick={delConfirmation}
+                                        className={style.delete}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             ) : (
-                <div className={style.pastTrip}>
-                    <strong>Past trip</strong>
+                <div>
+                    <></>
                 </div>
             )}
-
-            <div className={"ms-2 mt-2 d-flex justify-content-between"}>
-                {/* <div className={style.listing}>Listing:</div> */}
-                <strong className={style.listing}>
-                    {props.data.listing.name}
-                </strong>
-            </div>
-
-            <div>
-                <span>Location: </span>
-                <strong className={"ms-2 me-2"}>
-                    {props.data.listing.state}
-                </strong>
-            </div>
-
-            <div>
-                <span>Checkin date: </span>
-                <strong className={"ms-2 me-2"}>
-                    {format(new Date(props.data.checkin_date), "dd-MM-yyyy")}
-                </strong>
-            </div>
-            <div>
-                <span>Checkout date: </span>
-                <strong className={"ms-2 me-2"}>
-                    {format(new Date(props.data.checkout_date), "dd-MM-yyyy")}
-                </strong>
-            </div>
-            <div>
-                <span>No of Guest: </span>
-                <strong className={"ms-2 me-2"}>
-                    {props.data.total_guests}
-                </strong>
-            </div>
-            <div>
-                <span>Total Price: </span>
-                <strong className={"ms-2 me-2"}>
-                    ${props.data.total_price} SGD
-                </strong>
-            </div>
         </div>
     );
 };
