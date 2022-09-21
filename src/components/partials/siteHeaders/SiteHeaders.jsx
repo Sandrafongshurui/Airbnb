@@ -44,7 +44,7 @@ const SiteHeader = () => {
         //navStateToggle();
     };
     const handleOpenRegister = () => {
-        if (location.pathname !== "/register") {
+        if (location.pathname !== "/register" && location.pathname !== "/login") {
             setOpenRegister(true);
             setOpenLogin(false);
         } else {
@@ -53,7 +53,7 @@ const SiteHeader = () => {
         navStateToggle();
     };
     const handleOpenLogin = () => {
-        if (location.pathname !== "/login") {
+        if (location.pathname !== "/register" && location.pathname !== "/login") {
             setOpenLogin(true);
             setOpenRegister(false);
         } else {
@@ -72,10 +72,10 @@ const SiteHeader = () => {
         }
     };
     const handleAfterRegister = (value) => {
-        handleLoginToggle(value)
         toast.success("Account created, please login to continue", {
             position: toast.POSITION.TOP_CENTER,
         });
+        navigate("/");
     }
 
     return (

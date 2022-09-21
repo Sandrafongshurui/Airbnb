@@ -113,27 +113,30 @@ function CreateListingsCopy() {
         </div>
        
 
-        <p className={"text-secondary"}> Tips: png/jpeg only </p>
+        
 
         {
           <Paper
             className={
               style.photoBox +
-              "m-auto"
+              " m-auto d-flex justify-content-center"
             }
           >            
-            <div className="my-auto text-center">
+            <div className="my-auto text-start filesInput">
               <h6>Select images to upload</h6>
-              <input
-                {...register("files")}
-                onChange={handleSelectImage}
-                name="files"
-                multiple
-                accept={"image/jpeg, image/png"}
-                type="file"
-                fullwidth
-                //hidden
-              />
+              <div>
+                <input
+                  {...register("files")}
+                  onChange={handleSelectImage}
+                  name="files"
+                  multiple
+                  accept={"image/jpeg, image/png"}
+                  type="file"
+                  fullwidth
+                  //hidden
+                />
+              </div>
+              <p className={"text-secondary"}> Tips: png/jpeg only </p>
               {/* Upload */}
             </div>
             {/* <div className={style.imagesDiv}> */}
@@ -150,14 +153,14 @@ function CreateListingsCopy() {
                 }}
               >
                 <img src={image} key={image} width={"200px"} alt={"listing"} object-fit={"cover"}/>
-                
-              </div>
-              <Button
+                <Button
                   onClick={() => handleDeleteImage(image)}
                   color={"error"}
                 >
                   Delete
                 </Button>
+              </div>
+             
               </div>
               
             );
@@ -218,7 +221,7 @@ function CreateListingsCopy() {
                     name={"beds"}
                     label={"How many beds can guest use?"}
                     className={"mb-2"}
-                    select
+                    // select
                     variant={"standard"}
                     fullWidth
                     type={Number}
