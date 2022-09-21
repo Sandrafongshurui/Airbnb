@@ -30,9 +30,9 @@ function ShowProfile() {
                 <div className={style.profileContainer}>
                     <div class="row ">
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div className={style.imageBox}>
-                                    <div className="row">
+                                    <div className="row p-4">
                                             <img className={style.avatarImage} src={ ProfileImg } alt=""/>
                                     </div>
                                     <ul class="nav flex-column">
@@ -42,12 +42,18 @@ function ShowProfile() {
                                         <li class="nav-item">
                                             <a class="nav-link disabled">Delete account</a>
                                         </li>
+                                        <li  class="nav-item">
+                                            <Link to={`/users/my/profile/edit`} className='card-link'>EDIT</Link>
+                                        </li>
                                     
                                     </ul>
+                                    <div className="col-md-1 ms-2 mt-2">
+                           
+                        </div>
                             </div>
                         </div>
 
-                        <div className="col-md-6 ms-2">
+                        <div className="col-md-9">
                             <div className={style.profileHead}>
 
                                 <h4>Welcome back { profile.firstname }</h4>
@@ -100,9 +106,7 @@ function ShowProfile() {
                             </div>
                         </div>
 
-                        <div className="col-md-1 ms-2 mt-2">
-                            <Link to={`/users/my/profile/edit`} className='card-link'>EDIT</Link>
-                        </div>
+                        
                     </div>
 
                         

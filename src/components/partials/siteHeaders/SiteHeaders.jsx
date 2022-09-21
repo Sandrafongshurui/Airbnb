@@ -16,7 +16,7 @@ const SiteHeader = () => {
     const [openLogin, setOpenLogin] = useState(false);
     const [openRegister, setOpenRegister] = useState(false);
     const [isAuth, setIsAuth] = useState(false);
-    console.log("open siteheader ");
+   // console.log("open siteheader ");
     
 
     const checkAuth = () => {
@@ -25,7 +25,7 @@ const SiteHeader = () => {
             const user = jwt_decode(token);
             setIsAuth(true);
             setUsername(user.data.username)
-            console.log(token);
+            //console.log(token);
         } else {
             setIsAuth(false);
         }
@@ -66,7 +66,7 @@ const SiteHeader = () => {
         const token = localStorage.getItem("user_token");
         if (token) {
             localStorage.removeItem("user_token");
-            console.log("log out");
+            //console.log("log out");
             navStateToggle();
             navigate("/");
         }

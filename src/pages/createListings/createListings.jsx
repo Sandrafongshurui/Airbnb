@@ -171,7 +171,7 @@ function CreateListingsCopy() {
       </div>
 
       <div className={"container-xxl mt-4 "}>
-        <div className="text-center">
+        <div className={"text-center"}>
         <h4>Listing Information</h4>
         </div>
         <Paper
@@ -235,6 +235,9 @@ function CreateListingsCopy() {
                     variant={"standard"}
                     fullWidth
                     type={Number}
+                    error={errors.name ? true : false}
+                    {...field}
+                    helperText={errors.name && <p>{errors.name.message}</p>}
                   >
                     {/* <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>2</MenuItem>

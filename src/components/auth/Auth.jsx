@@ -4,7 +4,7 @@ import { DateTime } from "luxon";
 
 //acts like a middle ware...its wrapped in side this...so must go through this first
 const Auth = (props) => {
-  console.log("auth component triggered");
+  //console.log("auth component triggered");
   // write our auth checking logic here in a single place
 
   // retreive token from localstorage
@@ -17,7 +17,7 @@ const Auth = (props) => {
   // check if token expired, in unit 2 is like the max time thing in session
   // if expired, purge localstorage, redirect to login
   const user = jwt_decode(token);
-  console.log(user)
+  //console.log(user)
   const now = DateTime.now().toUnixInteger();
 
 

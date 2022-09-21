@@ -9,16 +9,16 @@ const Portal = (props) => {
   const [modalRoot] = useState(document.getElementById("modal-root"))  
   // Create a div element which will be mounted within modal-root
   const [element] = useState(document.createElement("div"))
-  console.log("open portal")
+  //console.log("open portal")
 
   //only useEffect when element, modalRoot changes
   useEffect(() => {
-    console.log("use effect, for mounting")
+    //console.log("use effect, for mounting")
     modalRoot.appendChild(element);
 
     //fires on dismount
     return function cleanup() {
-      console.log("unmount portal")
+      //console.log("unmount portal")
       modalRoot.removeChild(element);
     };
   },[element, modalRoot]);
