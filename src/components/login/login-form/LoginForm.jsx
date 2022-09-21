@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { TextField, Button, Box } from "@mui/material";
+import { TextField, Button, Box, InputAdornment } from "@mui/material";
 import "bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -85,14 +85,21 @@ const LoginForm = (props) => {
                 error={errors.password ? true : false}
                 helperText={errors.password?.message}
                 {...field}
+                InputProps={{ // <-- This is where the toggle button is added.
+                  endAdornment: (
+                    <InputAdornment position="end">
+                     <i onClick={togglePasswordVisiblity}>{eye}</i>{" "}
+                    </InputAdornment>
+                  )
+                }}
               />
               
             )}
           
           />
-          <div>
+          {/* <div className={style.eye}>
             <i onClick={togglePasswordVisiblity}>{eye}</i>{" "}
-          </div>      
+          </div>       */}
         </Box>
         <Button type="submit" variant="contained" color="primary" fullWidth>
           Login
