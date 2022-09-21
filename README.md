@@ -8,7 +8,8 @@ Same as the Airbnb we all know, this application operates an online marketplace 
 
 ## Links
 
-- **[Application Link](https://wonder-class.herokuapp.com/)**
+- **[Application Link](https://)**
+- **[User Story](https://www.canva.com/design/DAFI77lG53c/tN6ZprrnPEBJ13hRimnC5g/view?utm_content=DAFI77lG53c&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)**
 - **[Wireframe - XD file](https://xd.adobe.com/view/a92a6a9e-69c1-4f1c-9006-eb0825cf8fe1-fc79/)**
 
 </br>
@@ -48,4 +49,4 @@ Same as the Airbnb we all know, this application operates an online marketplace 
 - "Search" function: help our user to find an ideal house
 - "Pagination" function: help our user to see more listings
 - "Chat" function: both host and visitor can have real chats to make their communication easier
-- "Review" function
+- "Review" function: manage reviews for every listing
