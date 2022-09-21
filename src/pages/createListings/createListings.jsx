@@ -104,7 +104,7 @@ function CreateListingsCopy() {
 
       <div className={"container-xxl mt-4 "}>
         <div className={"text-center"}>
-          <h4 >Add photos to your listing</h4>
+          <h1 >Add photos to your listing</h1>
         </div>
        
 
@@ -118,7 +118,7 @@ function CreateListingsCopy() {
             }
           >            
             <div className="my-auto text-start filesInput">
-              <h6>Select images to upload</h6>
+              <h4>Select images to upload</h4>
               <div>
                 <input
                   {...register("files")}
