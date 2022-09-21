@@ -8,23 +8,26 @@ const BookingHostInfo = (props) => {
         <section>
             <div className={"container-fluid mt-4 pb-6"}>
 
-                <div className="bookingHostInfo">
+                <div className="container">
 
-                        <div className="mt-3">
-                            <h2>Hosted By: {`${firstname + lastname}`}</h2>
-                        </div>
+                    <div className="bookingHostInfo">
 
-                        <div className="container-fluid mt-4 mb-1">
-                            <div className="row">
-                                <div className="col">
-                                    <p>Contact: {email}</p>
+                            <div className="hostedBy">
+                                <h2>Hosted By: {`${firstname + lastname}`}</h2>
+                            </div>
+
+                            <div className="container-fluid mt-4 mb-1">
+                                <div className="row">
+                                        <p className="ps-0">Contact: {email}</p>
+                                </div>
+
+                                <div className="row">
+                                    <p className="ps-0">About Host: {about_me}</p>
                                 </div>
                             </div>
 
-                            <div className="row">
-                                <p>About Host: {about_me}</p>
-                            </div>
-                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>

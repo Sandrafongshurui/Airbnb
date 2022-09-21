@@ -1,11 +1,11 @@
 .section {
     margin-left: 48px;
+    margin-top: 48px;
 }
 
 .h2 {
     font-size:22px;
     text-align: left;
-
     max-width: 800px;
     margin: auto;
     padding-bottom: 14px;
@@ -13,9 +13,16 @@
 
 .bookingHostInfo {
     border-top: 1px solid lightgrey;
-    padding-top: 8px;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
     max-width: 1024px;
-    margin-left: 320px;
     text-align: left;
     margin-bottom: 4rem;
+}
+
+.hostedBy {
+    display: flex;
+    justify-content: start;
 }
