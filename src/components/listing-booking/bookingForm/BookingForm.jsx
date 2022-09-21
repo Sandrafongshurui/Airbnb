@@ -60,7 +60,7 @@ const BookingForm = (props) => {
         key: "selection",
     };
 
-    console.log("selectionRange: ", selectionRange);
+    // console.log("selectionRange: ", selectionRange);
 
     // to update the start and end date state upon selecting the dates
     const handleSelect = (ranges) => {
@@ -121,7 +121,7 @@ const BookingForm = (props) => {
             toast.success("Successfully reserved!", {
                 position: toast.POSITION.TOP_CENTER,
             });
-            // navigate(`/users/my/trips`);
+            navigate(`/users/my/trips`);
         } catch (error) {
             // console.log(error.response); //sandra
             // console.log(error.response.data.message); //sandra
