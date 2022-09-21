@@ -35,7 +35,7 @@ function ShowProfile() {
                                     <div className="row">
                                             <img className={style.avatarImage} src={ ProfileImg } alt=""/>
                                     </div>
-                                    <div className="row ms-3">
+                                    <div className="row ms-0">
                                     <p>{ profile.email }</p>
 
                                     </div>
@@ -83,6 +83,13 @@ function ShowProfile() {
                                         <div className="col-md-6">
                                             <p>{ profile.gender }</p>
                                         </div> */}
+                                         <div className="col-md-4">
+                                            <h6>Email</h6>                                     
+                                        </div>
+
+                                        <div className="col-md-6">
+                                            <p>{ profile.email }</p>
+                                        </div>
 
                                         <div className="col-md-6">
                                             <h6>About me</h6>                                     

@@ -402,7 +402,7 @@ function CreateListingsCopy() {
           </div>
         </Paper>
 
-        <div className={"mt-2 d-flex justify-content-between"}>
+        <div className={"mt-2 d-flex justify-content-evenly"}>
           <Button
             onClick={handleCancel}
             variant={"contained"}
