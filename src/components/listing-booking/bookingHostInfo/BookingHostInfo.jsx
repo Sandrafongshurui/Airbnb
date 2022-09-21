@@ -13,12 +13,15 @@ const BookingHostInfo = (props) => {
                     <div className="bookingHostInfo">
 
                             <div className="hostedBy">
-                                <h2>Hosted By: {`${firstname} ${lastname}`}</h2>
+                                <h2>Hosted By:</h2>
                             </div>
 
                             <div className="container-fluid mt-4 mb-1">
                                 <div className="row">
-                                        <p className="ps-0">Contact: {email}</p>
+                                    <p className="ps-0">Name: {`${firstname} ${lastname}`}</p>
+                                </div>
+                                <div className="row">
+                                    <p className="ps-0">Contact: {email}</p>
                                 </div>
 
                                 <div className="row">
