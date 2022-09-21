@@ -105,10 +105,10 @@ const TripsCard = (props) => {
                     </h5>
                 </div>
             )}
-            <table className="table table-borderless">
-                <tbody>
-                    <tr className={style.listingName}>
-                        <td
+            <div>
+                <div>
+                    <div className={style.listingName}>
+                        <div
                             className={
                                 "ms-2 mt-2 d-flex justify-content-between"
                             }
@@ -118,22 +118,22 @@ const TripsCard = (props) => {
                                     {props.data.listing.name}
                                 </strong>
                             </div>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <td>
+                    <div>
+                        <div>
                             <div className={style.locationHeight}>
                                 <span>Location: </span>
                                 <strong className={"ms-2 me-2"}>
                                     {props.data.listing.state}
                                 </strong>
                             </div>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <td>
+                    <div>
+                        <div>
                             <span>Checkin date: </span>
                             <strong className={"ms-2 me-2"}>
                                 {format(
@@ -141,11 +141,11 @@ const TripsCard = (props) => {
                                     "dd-MM-yyyy"
                                 )}
                             </strong>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <td>
+                    <div>
+                        <div>
                             <span>Checkout date: </span>
                             <strong className={"ms-2 me-2"}>
                                 {format(
@@ -153,28 +153,28 @@ const TripsCard = (props) => {
                                     "dd-MM-yyyy"
                                 )}
                             </strong>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <td>
+                    <div>
+                        <div>
                             <span>No of Guest: </span>
                             <strong className={"ms-2 me-2"}>
                                 {props.data.total_guests}
                             </strong>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <td>
+                    <div>
+                        <div>
                             <span>Total Price: </span>
                             <strong className={"ms-2 me-2"}>
                                 ${props.data.total_price} SGD
                             </strong>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             {!checkDate ? (
                 <div className="container text-center">
