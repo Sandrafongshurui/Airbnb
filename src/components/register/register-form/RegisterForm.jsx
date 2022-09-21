@@ -1,19 +1,19 @@
-import React from "react";
+import React,{useState} from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   TextField,
   Button,
   Box,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Select,
-  MenuItem
+  InputAdornment
 } from "@mui/material";
 import "bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { FormControl } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import style from "./LoginForm.module.css"
+const eye = <FontAwesomeIcon icon={faEye} />;
 
 const RegisterForm = (props) => {
   // form validation rules
@@ -32,6 +32,15 @@ const RegisterForm = (props) => {
       .oneOf([yup.ref("password")], "Passwords must match"),
     about_me: yup.string().required("About Me is required"),
   });
+
+  const [passwordShow, setPasswordShow] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setPasswordShow(passwordShow ? false : true);
+  };
+  const [confirmpasswordShow, setConfirmPasswordShow] = useState(false);
+  const toggleConfirmPasswordVisiblity = () => {
+    setConfirmPasswordShow(confirmpasswordShow ? false : true);
+  };
 
   //actual input names
   const defaultValues = {
@@ -156,7 +165,15 @@ const RegisterForm = (props) => {
                 // helperText={error ? error.message : null}
                 error={errors.password ? true : false}
                 helperText={errors.password?.message}
+                type={passwordShow ? "text" : "password"}
                 {...field}
+                InputProps={{ // <-- This is where the toggle button is added.
+                  endAdornment: (
+                    <InputAdornment position="end">
+                     <i onClick={togglePasswordVisiblity}>{eye}</i>{" "}
+                    </InputAdornment>
+                  )
+                }}
               />
             )}
           />
@@ -177,6 +194,14 @@ const RegisterForm = (props) => {
                 error={errors.confirmpassword ? true : false}
                 helperText={errors.confirmpassword?.message}
                 {...field}
+                type={confirmpasswordShow? "text" : "confirmpassword"}
+                InputProps={{ // <-- This is where the toggle button is added.
+                  endAdornment: (
+                    <InputAdornment position="end">
+                     <i onClick={toggleConfirmPasswordVisiblity}>{eye}</i>{" "}
+                    </InputAdornment>
+                  )
+                }}
               />
             )}
           />

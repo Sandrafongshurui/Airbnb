@@ -38,7 +38,6 @@ function CreateListingsCopy() {
     },
   });
 
-
   const handleSelectImage = async (e) => {
     const images = e.target.files;
     console.log(images);
@@ -86,7 +85,7 @@ function CreateListingsCopy() {
           position: toast.POSITION.TOP_CENTER,
         });
       }
-      navigate("/users/my/listings")
+      navigate("/users/my/listings");
     } catch (error) {
       console.log(error);
       toast.error(error.message, {
@@ -108,26 +107,33 @@ function CreateListingsCopy() {
 
       {/* select photo and upload it */}
 
-      <div className={"container-xxl mt-4"}>
-        <h4>Add photos to your listing</h4>
-
-        {selectedImages.map((image) => {
-          return (
-            <div
-              style={{
-                width: "200px",
-                marginRight: "20px",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <img src={image} key={image} width={"200px"} />
-              <Button onClick={() => handleDeleteImage(image)} color={"error"}>
-                Delete
-              </Button>
-            </div>
-          );
-        })}
+      <div className={"container-xxl mt-4 "}>
+        <div className={"text-center"}>
+          <h4 >Add photos to your listing</h4>
+        </div>
+        <div className={style.imagesDiv}>
+          {selectedImages.map((image) => {
+            return (
+              <div
+                style={{
+                  width: "200px",
+                  marginRight: "20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  borderRadius: "25px",
+                }}
+              >
+                <img src={image} key={image} width={"200px"} alt={"listing"} />
+                <Button
+                  onClick={() => handleDeleteImage(image)}
+                  color={"error"}
+                >
+                  Delete
+                </Button>
+              </div>
+            );
+          })}
+        </div>
 
         <p className={"text-secondary"}> Tips: png/jpeg only </p>
 
@@ -135,35 +141,33 @@ function CreateListingsCopy() {
           <Paper
             className={
               style.photoBox +
-              " d-flex align-items-center justify-content-center"
+              " d-flex align-items-center justify-content-center m-auto"
             }
           >
-
-              <label>
-                <p>Select images to upload</p>
-                <input
-                    {...register("files")}
-                    onChange={handleSelectImage}
-                    name="files"
-                    multiple
-                    accept={"image/jpeg, image/png"}
-                    type="file"
-                    fullwidth
-                    //hidden
-                />
-                {/* Upload */}
+            <label>
+              <p>Select images to upload</p>
+              <input
+                {...register("files")}
+                onChange={handleSelectImage}
+                name="files"
+                multiple
+                accept={"image/jpeg, image/png"}
+                type="file"
+                fullwidth
+                //hidden
+              />
+              {/* Upload */}
             </label>
-
           </Paper>
         }
       </div>
 
-      <div className={"container-xxl mt-4"}>
-        <h4>Basic info</h4>
+      <div className={"container-xxl mt-4 text-center"}>
+        <h4>Listing Information</h4>
 
         <Paper
           className={
-            style.photoBox + " d-flex align-items-center justify-content-center"
+            style.photoBox + " d-flex align-items-center justify-content-center m-auto"
           }
         >
           <div className={"row w-100 mt-2"}>
@@ -188,7 +192,7 @@ function CreateListingsCopy() {
                 render={({ field }) => (
                   <TextField
                     className={"mb-2"}
-                    label={"Name"}
+                    label={"Listing Name"}
                     variant={"standard"}
                     fullWidth
                     error={errors.name ? true : false}
@@ -398,7 +402,7 @@ function CreateListingsCopy() {
           </div>
         </Paper>
 
-        <div className={"mt-2 d-flex justify-content-end"}>
+        <div className={"mt-2 d-flex justify-content-between"}>
           <Button
             onClick={handleCancel}
             variant={"contained"}

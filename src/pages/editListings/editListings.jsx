@@ -136,7 +136,7 @@ function EditListing() {
                 flexDirection: "column",
               }}
             >
-              <img src={image} key={image} width={"200px"} />
+              <img src={image} key={image} width={"200px"} alt={"listing"}/>
               <Button disabled onClick={() => handleDeleteImage(image)} color={"error"}>
                 Delete
               </Button>
@@ -360,9 +360,9 @@ function EditListing() {
                     variant={"standard"}
                     fullWidth
                   >
-                    <MenuItem value={1}>Singapore</MenuItem>
-                    <MenuItem value={2}>China</MenuItem>
-                    <MenuItem value={3}>India</MenuItem>
+                    <MenuItem value={"Singapore"}>Singapore</MenuItem>
+                    <MenuItem value={"China"}>China</MenuItem>
+                    <MenuItem value={"India"}>India</MenuItem>
                   </TextField>
                 )}
               />
