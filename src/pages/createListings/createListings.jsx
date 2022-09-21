@@ -101,22 +101,17 @@ function CreateListingsCopy() {
       onSubmit={handleSubmit(handleFormSubmit)}
       className={"container-fluid p-0"}
     >
-
       <div className={"container-xxl mt-4 "}>
         <div className={"text-center"}>
-          <h3 >Add photos to your listing</h3>
+          <h3>Add photos to your listing</h3>
         </div>
-       
-
-        
 
         {
           <Paper
             className={
-              style.photoBox +
-              " m-auto d-flex justify-content-center mt-4"
+              style.photoBox + " m-auto d-flex justify-content-center mt-4"
             }
-          >            
+          >
             <div className="my-auto text-start filesInput">
               <h4>Select images to upload</h4>
               <div>
@@ -135,43 +130,48 @@ function CreateListingsCopy() {
               {/* Upload */}
             </div>
             {/* <div className={style.imagesDiv}> */}
-          {selectedImages.map((image) => {
-            return (
-              <div className="my-auto text-center">
-                <div
-                style={{
-                  width: "200px",
-                  marginRight: "20px",
-                  display: "flex",
-                  flexDirection: "column",
-                  borderRadius: "25px",
-                }}
-              >
-                <img src={image} key={image} width={"200px"} alt={"listing"} object-fit={"cover"}/>
-                <Button
-                  onClick={() => handleDeleteImage(image)}
-                  color={"error"}
-                >
-                  Delete
-                </Button>
-              </div>
-             
-              </div>
-              
-            );
-          })}
-             {/* </div> */}
+            {selectedImages.map((image) => {
+              return (
+                <div className="my-auto text-center">
+                  <div
+                    style={{
+                      width: "200px",
+                      marginRight: "20px",
+                      display: "flex",
+                      flexDirection: "column",
+                      borderRadius: "25px",
+                    }}
+                  >
+                    <img
+                      src={image}
+                      key={image}
+                      width={"200px"}
+                      alt={"listing"}
+                      object-fit={"cover"}
+                    />
+                    <Button
+                      onClick={() => handleDeleteImage(image)}
+                      color={"error"}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </div>
+              );
+            })}
+            {/* </div> */}
           </Paper>
         }
       </div>
 
       <div className={"container-xxl mt-4 "}>
         <div className={"text-center"}>
-        <h3>Listing Information</h3>
+          <h3>Listing Information</h3>
         </div>
         <Paper
           className={
-            style.photoBox + " d-flex align-items-center justify-content-center m-auto"
+            style.photoBox +
+            " d-flex align-items-center justify-content-center m-auto"
           }
         >
           <div className={"row w-100 mt-2"}>
@@ -268,7 +268,9 @@ function CreateListingsCopy() {
                     type={Number}
                     error={errors.bedrooms ? true : false}
                     {...field}
-                    helperText={errors.bedrooms && <p>{errors.bedrooms.message}</p>}
+                    helperText={
+                      errors.bedrooms && <p>{errors.bedrooms.message}</p>
+                    }
                   >
                     {/* <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>2</MenuItem>
@@ -303,7 +305,9 @@ function CreateListingsCopy() {
                     type={Number}
                     error={errors.bathrooms ? true : false}
                     {...field}
-                    helperText={errors.bathrooms && <p>{errors.bathrooms.message}</p>}
+                    helperText={
+                      errors.bathrooms && <p>{errors.bathrooms.message}</p>
+                    }
                   >
                     {/* <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>2</MenuItem>
@@ -355,10 +359,8 @@ function CreateListingsCopy() {
                     value: /^0|[1-9]\d*$/,
                     message: "Numbers only",
                   },
-                  min:{ value: 1,
-                  message: "Min $50",},
-                  max:{ value: 1000,
-                    message: "Max $1000",},
+                  min: { value: 1, message: "Min $50" },
+                  max: { value: 1000, message: "Max $1000" },
                 }}
                 render={({ field }) => (
                   <TextField
@@ -406,7 +408,9 @@ function CreateListingsCopy() {
                     fullWidth
                     error={errors.address_1 ? true : false}
                     {...field}
-                    helperText={errors.address_1 && <p>{errors.address_1.message}</p>}
+                    helperText={
+                      errors.address_1 && <p>{errors.address_1.message}</p>
+                    }
                   />
                 )}
               />
@@ -435,7 +439,9 @@ function CreateListingsCopy() {
                     fullWidth
                     error={errors.address_2 ? true : false}
                     {...field}
-                    helperText={errors.address_2 && <p>{errors.address_2.message}</p>}
+                    helperText={
+                      errors.address_2 && <p>{errors.address_2.message}</p>
+                    }
                   />
                 )}
               />
@@ -461,7 +467,9 @@ function CreateListingsCopy() {
                     fullWidth
                     error={errors.country ? true : false}
                     {...field}
-                    helperText={errors.country && <p>{errors.country.message}</p>}
+                    helperText={
+                      errors.country && <p>{errors.country.message}</p>
+                    }
                   >
                     <MenuItem value={"Singapore"}>Singapore</MenuItem>
                     <MenuItem value={"Canada"}>Canada</MenuItem>
@@ -481,7 +489,7 @@ function CreateListingsCopy() {
                   pattern: {
                     value: /^0|[1-9]\d*$/,
                     message: "Numbers only",
-                  }
+                  },
                 }}
                 render={({ field }) => (
                   <TextField
@@ -495,7 +503,9 @@ function CreateListingsCopy() {
                     fullWidth
                     error={errors.postal_code ? true : false}
                     {...field}
-                    helperText={errors.postal_code && <p>{errors.postal_code.message}</p>}
+                    helperText={
+                      errors.postal_code && <p>{errors.postal_code.message}</p>
+                    }
                   />
                 )}
               />
@@ -529,7 +539,9 @@ function CreateListingsCopy() {
                     variant={"standard"}
                     error={errors.description ? true : false}
                     {...field}
-                    helperText={errors.description && <p>{errors.description.message}</p>}
+                    helperText={
+                      errors.description && <p>{errors.description.message}</p>
+                    }
                   />
                 )}
               />
@@ -538,7 +550,9 @@ function CreateListingsCopy() {
         </Paper>
 
         <div className={"mt-2 d-flex justify-content-evenly"}>
-          <Button className={style.confirmButton} style={{margin:"30px"}}
+          <Button
+            className={style.confirmButton}
+            style={{ margin: "30px" }}
             onClick={handleCancel}
             variant={"contained"}
             // className={"me-2"}
@@ -546,7 +560,21 @@ function CreateListingsCopy() {
           >
             Cancel
           </Button>
-          <Button type={"submit"} variant={"contained"} color={"primary"} className={style.confirmButton} style={{margin:"30px"}}> 
+          <Button
+            sx={{
+              color: "white",
+              backgroundColor: "#FD5B61",
+              fontWeight: "600",
+              "&:hover": {
+                backgroundColor: "#FD5B61",
+              },
+            }}
+            type={"submit"}
+            variant={"contained"}
+            color={"primary"}
+            className={style.confirmButton}
+            style={{ margin: "30px" }}
+          >
             Confirm
           </Button>
         </div>

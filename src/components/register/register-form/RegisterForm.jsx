@@ -68,7 +68,7 @@ const RegisterForm = (props) => {
   // ];
 
   return (
-    <div style={{width:"600px"}}>
+    <div>
       <div>
         <h1 className="text-center pb-3 m-0 mb-3">Register</h1>
       </div>

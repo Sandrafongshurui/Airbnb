@@ -22,7 +22,7 @@ const LoginPage = () => {
 
       if (res.status === 200 || res.status === 201) {
         //navigate to home
-        if (location.pathname === "/Register") {
+        if (location.pathname === "/register") {
           navigate("/");
         }
       }

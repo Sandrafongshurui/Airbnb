@@ -39,7 +39,7 @@ function EditProfile() {
       );
       // const res = await fetch(`http://localhost:8000/api/v1/user/profile`, {headers:headerOptions})
       const data = await res.json();
-    //   console.log(data);
+      //   console.log(data);
       setProfile(data);
       reset({
         firstname: data.firstname,
@@ -190,6 +190,14 @@ function EditProfile() {
 
         <div className={"mt-4 mb-4 d-flex justify-content-end"}>
           <Button
+            onClick={handleCancel}
+            variant={"contained"}
+            className={"me-2"}
+            color={"inherit"}
+          >
+            Cancel
+          </Button>
+          <Button
             sx={{
               color: "white",
               backgroundColor: "#FD5B61",
@@ -198,14 +206,9 @@ function EditProfile() {
                 backgroundColor: "#FD5B61",
               },
             }}
-            onClick={handleCancel}
+            type={"submit"}
             variant={"contained"}
-            className={"me-2"}
-            color={"inherit"}
           >
-            Cancel
-          </Button>
-          <Button type={"submit"} variant={"contained"} color={"primary"}>
             Confirm
           </Button>
         </div>

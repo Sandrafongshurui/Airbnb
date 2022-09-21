@@ -17,10 +17,10 @@ h3 {
     transition: transform 100ms ease-in;
     cursor: pointer;
 }
-
+/* 
 span {
     margin-left: 1rem;
-}
+} */
 
 .cardHeader {
     color: #fd5b61;

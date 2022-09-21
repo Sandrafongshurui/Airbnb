@@ -122,7 +122,7 @@ function EditListing() {
 
   return (
     <form
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleFormSubmit}
       className={"container-fluid p-0"}
     >
       {/* <SiteHeader /> */}
@@ -131,7 +131,7 @@ function EditListing() {
 
       <div className={"container-xxl mt-4 "}>
         <div className={"text-center"}>
-          <h4 >Add photos to your listing</h4>
+          <h3>Edit photos is currently unavailable</h3>
         </div>
        
 
@@ -155,6 +155,7 @@ function EditListing() {
                   accept={"image/jpeg, image/png"}
                   type="file"
                   fullwidth
+                  disabled
                   //hidden
                 />
               </div>
@@ -175,8 +176,8 @@ function EditListing() {
                 }}
               >
                 <img src={image} key={image} width={"200px"} alt={"listing"} object-fit={"cover"}/>
-                <Button
-                  onClick={() => handleDeleteImage(image)}
+                <Button disabled
+                  // onClick={() => handleDeleteImage(image)}
                   color={"error"}
                 >
                   Delete
@@ -194,7 +195,7 @@ function EditListing() {
 
       <div className={"container-xxl mt-4 "}>
         <div className={"text-center"}>
-        <h4>Listing Information</h4>
+        <h3>Listing Information</h3>
         </div>
         <Paper
           className={
