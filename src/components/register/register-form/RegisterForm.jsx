@@ -1,12 +1,7 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  TextField,
-  Button,
-  Box,
-  InputAdornment
-} from "@mui/material";
+import { TextField, Button, Box, InputAdornment } from "@mui/material";
 import "bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -84,7 +79,7 @@ const RegisterForm = (props) => {
             control={control} //take place of the register RHF
             render={({
               //takes a function and rturn a react element
-              field//this error will be displyed in formstate errors
+              field, //this error will be displyed in formstate errors
             }) => (
               <TextField
                 // onChange={onChange} // send value to hook form
@@ -97,7 +92,7 @@ const RegisterForm = (props) => {
                 // error={!!error} //convert obj into a bool
                 // helperText={error ? error.message : null}
                 error={errors.firstname ? true : false}
-                helperText = {errors.firstname?.message}
+                helperText={errors.firstname?.message}
                 {...field}
               />
             )}
@@ -108,7 +103,7 @@ const RegisterForm = (props) => {
             name="lastname" //actual input
             control={control} //take place of the register RHF
             render={({
-              field//this error will be displyed in formstate errors
+              field, //this error will be displyed in formstate errors
             }) => (
               <TextField
                 label={"Last Name"} //label in the box
@@ -118,8 +113,8 @@ const RegisterForm = (props) => {
                 autoFocus
                 // error={!!error} //convert obj into a bool
                 // helperText={error ? error.message : null}
-                error={errors.lastname? true : false}
-                helperText = {errors.lastname?.message}
+                error={errors.lastname ? true : false}
+                helperText={errors.lastname?.message}
                 {...field}
               />
             )}
@@ -130,7 +125,7 @@ const RegisterForm = (props) => {
             name="email" //actual input
             control={control} //take place of the register RHF
             render={({
-              field //this error will be displyed in formstate errors
+              field, //this error will be displyed in formstate errors
             }) => (
               <TextField
                 label={"Email"} //label in the box
@@ -141,7 +136,7 @@ const RegisterForm = (props) => {
                 // error={!!error} //convert obj into a bool
                 // helperText={error ? error.message : null}
                 error={errors.email ? true : false}
-                helperText = {errors.email?.message}
+                helperText={errors.email?.message}
                 {...field}
               />
             )}
@@ -166,12 +161,13 @@ const RegisterForm = (props) => {
                 helperText={errors.password?.message}
                 type={passwordShow ? "text" : "password"}
                 {...field}
-                InputProps={{ // <-- This is where the toggle button is added.
+                InputProps={{
+                  // <-- This is where the toggle button is added.
                   endAdornment: (
                     <InputAdornment position="end">
-                     <i onClick={togglePasswordVisiblity}>{eye}</i>{" "}
+                      <i onClick={togglePasswordVisiblity}>{eye}</i>{" "}
                     </InputAdornment>
-                  )
+                  ),
                 }}
               />
             )}
@@ -193,13 +189,14 @@ const RegisterForm = (props) => {
                 error={errors.confirmpassword ? true : false}
                 helperText={errors.confirmpassword?.message}
                 {...field}
-                type={confirmpasswordShow? "text" : "confirmpassword"}
-                InputProps={{ // <-- This is where the toggle button is added.
+                type={confirmpasswordShow ? "text" : "confirmpassword"}
+                InputProps={{
+                  // <-- This is where the toggle button is added.
                   endAdornment: (
                     <InputAdornment position="end">
-                     <i onClick={toggleConfirmPasswordVisiblity}>{eye}</i>{" "}
+                      <i onClick={toggleConfirmPasswordVisiblity}>{eye}</i>{" "}
                     </InputAdornment>
-                  )
+                  ),
                 }}
               />
             )}
@@ -279,7 +276,20 @@ const RegisterForm = (props) => {
             )}
           />
         </Box>
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+        <Button
+          sx={{
+            color: "white",
+            backgroundColor: "#FD5B61",
+            fontWeight: "600",
+            "&:hover": {
+              backgroundColor: "#FD5B61",
+            },
+          }}
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+        >
           Register
         </Button>
       </form>

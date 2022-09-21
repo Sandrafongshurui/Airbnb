@@ -6,7 +6,7 @@ import "bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import style from "./LoginForm.module.css"
+import style from "./LoginForm.module.css";
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 const LoginForm = (props) => {
@@ -85,23 +85,35 @@ const LoginForm = (props) => {
                 error={errors.password ? true : false}
                 helperText={errors.password?.message}
                 {...field}
-                InputProps={{ // <-- This is where the toggle button is added.
+                InputProps={{
+                  // <-- This is where the toggle button is added.
                   endAdornment: (
                     <InputAdornment position="end">
-                     <i onClick={togglePasswordVisiblity}>{eye}</i>{" "}
+                      <i onClick={togglePasswordVisiblity}>{eye}</i>{" "}
                     </InputAdornment>
-                  )
+                  ),
                 }}
               />
-              
             )}
-          
           />
           {/* <div className={style.eye}>
             <i onClick={togglePasswordVisiblity}>{eye}</i>{" "}
           </div>       */}
         </Box>
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+        <Button
+          sx={{
+            color: "white",
+            backgroundColor: "#FD5B61",
+            fontWeight: "600",
+            "&:hover": {
+              backgroundColor: "#FD5B61",
+            },
+          }}
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+        >
           Login
         </Button>
       </form>

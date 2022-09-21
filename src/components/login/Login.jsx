@@ -34,12 +34,12 @@ const Login = (props) => {
                     position: toast.POSITION.TOP_CENTER,
                 });
                
-                navigate(location.pathname);
+                navigate(-1)
             }
         } catch (error) {
             console.log(error);
             // display an error
-            console.log(error.response.data.error);
+            // console.log(error.response.data.error);
             setCatchError(error.response.data.error);
         }
     };

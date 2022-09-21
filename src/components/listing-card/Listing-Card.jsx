@@ -53,7 +53,9 @@ function ListingCard(props) {
 
       <div>
         {/* <Swiper modules={[Pagination]} pagination={{ clickable: true }}> */}
-          {renderImages()}
+            
+              <img className={style.listingImages} src={images_url[0]} alt="" />
+           
         {/* </Swiper> */}
       </div>
 
