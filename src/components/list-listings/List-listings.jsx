@@ -8,8 +8,8 @@ function ListListings({ isHost }) {
 
     // const userUrl = "http://localhost:8000/api/v1";
     // const hostUrl = "http://localhost:8000/api/v1/user/listings"
-    const userUrl = "https://ourairbnb.herokuapp.com/api/v1";
-    const hostUrl = "https://ourairbnb.herokuapp.com/api/v1/user/listings";
+    const userUrl = "https://land-bnb.onrender.com/api/v1";
+    const hostUrl = "https://land-bnb.onrender.com/api/v1/user/listings";
 
     const headerOptions = {
         "Content-Type": "application/json",

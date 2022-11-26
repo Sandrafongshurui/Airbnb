@@ -12,7 +12,7 @@ const ListingBooking = () => {
     useEffect(() => {
         const fetchApi = async () => {
             const res = await fetch(
-                `https://ourairbnb.herokuapp.com/api/v1/listings/${params.listingID}`
+                `https://land-bnb.onrender.com/api/v1/listings/${params.listingID}`
             );
             const data = await res.json();
             setListing(data);

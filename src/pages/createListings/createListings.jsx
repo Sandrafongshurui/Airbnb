@@ -72,7 +72,7 @@ function CreateListingsCopy() {
         formData.append(element, data.files[element]);
       });
       const res = await axios.post(
-        "https://ourairbnb.herokuapp.com/api/v1/user/listing",
+        "https://land-bnb.onrender.com/api/v1/user/listing",
         // "http://localhost:8000/api/v1/user/listing",
         formData,
         { headers: headerOptions }

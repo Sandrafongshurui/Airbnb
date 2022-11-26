@@ -34,7 +34,7 @@ function EditProfile() {
   useEffect(() => {
     const fetchApi = async () => {
       const res = await fetch(
-        `https://ourairbnb.herokuapp.com/api/v1/user/profile`,
+        `https://land-bnb.onrender.com/api/v1/user/profile`,
         { headers: headerOptions }
       );
       // const res = await fetch(`http://localhost:8000/api/v1/user/profile`, {headers:headerOptions})
@@ -56,7 +56,7 @@ function EditProfile() {
     // console.log(JSON.stringify(getValues()))
 
     fetch(
-      `https://ourairbnb.herokuapp.com/api/v1/user/profile`,
+      `https://land-bnb.onrender.com/api/v1/user/profile`,
       // fetch(`http://localhost:8000/api/v1/user/profile`,
       {
         method: "PATCH",

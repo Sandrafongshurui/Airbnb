@@ -14,7 +14,7 @@ const LoginPage = () => {
     setCatchError(null);
     try {
       const res = await axios.post(
-        "https://ourairbnb.herokuapp.com/api/v1/user/login",
+        "https://land-bnb.onrender.com/api/v1/user/login",
         data
       );
       // console.log("Server Respond:", res);

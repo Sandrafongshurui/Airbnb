@@ -38,7 +38,7 @@ const TripsCard = (props) => {
     const handleDelete = async () => {
         try {
             const response = await axios.delete(
-                `https://ourairbnb.herokuapp.com/api/v1/user/trip/${props.data._id}`,
+                `https://land-bnb.onrender.com/api/v1/user/trip/${props.data._id}`,
                 { headers: headerOptions }
             );
 
@@ -74,7 +74,7 @@ const TripsCard = (props) => {
 
     const handleEdit = async () => {
         const response = await axios.get(
-            `https://ourairbnb.herokuapp.com/api/v1/user/trip/${props.data._id}`,
+            `https://land-bnb.onrender.com/api/v1/user/trip/${props.data._id}`,
             { headers: headerOptions }
         );
         const data = await response.data;

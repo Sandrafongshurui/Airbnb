@@ -17,7 +17,7 @@ const Trips = () => {
     useEffect(() => {
         const fetchApi = async () => {
             const response = await axios.get(
-                "https://ourairbnb.herokuapp.com/api/v1/user/trips",
+                "https://land-bnb.onrender.com/api/v1/user/trips",
                 { headers: headerOptions }
             );
             const data = await response.data;
