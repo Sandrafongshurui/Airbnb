@@ -13,6 +13,7 @@ function ListListings({ isHost }) {
 
     const headerOptions = {
         "Content-Type": "application/json",
+        'Accept': 'application/json'
         Authorization: `Bearer ${localStorage.getItem("user_token")}`,
     };
 
