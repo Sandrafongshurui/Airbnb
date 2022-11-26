@@ -17,8 +17,8 @@ const LoginPage = () => {
         "https://ourairbnb.herokuapp.com/api/v1/user/login",
         data
       );
-      console.log("Server Respond:", res);
-      console.log("token", res.data.token);
+      // console.log("Server Respond:", res);
+      // console.log("token", res.data.token);
 
       if (res.status === 200 || res.status === 201) {
         // store the token into localstorage / cookie
